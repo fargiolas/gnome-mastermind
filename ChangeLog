@@ -1,3 +1,12 @@
+19 Apr 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* configure.ac: Version set to 0.2 to not conflict with previous
+	release when testing svn checkouts.
+	* src/gnome-mastermind.c: Added #else fall back to disable i18n if
+	ENABLE_NLS is not set, so building will not fail even if intltool is
+	not found.
+	* po/Changelog
+	* po/pl.po: Added Polish translation
+
 18 Apr 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
 	
 	* Everything: First public release 0.1

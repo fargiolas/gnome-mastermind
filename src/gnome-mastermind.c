@@ -39,6 +39,9 @@
 
 #ifdef ENABLE_NLS
 #include <glib/gi18n.h>
+#else /* !ENABLE_NLS */
+#define _(String) (String)
+#define N_(String) (String)
 #endif /* ENABLE_NLS */
 
 #define BS 30
