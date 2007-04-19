@@ -1,0 +1,25 @@
+<ui>
+  <menubar>
+    <menu name="GameMenu" action="GameMenuAction">
+      <menuitem name="New" action="NewAction" />
+      <menuitem name="Quit" action="QuitAction" />
+      <placeholder name="FileMenuAdditions" />
+    </menu>
+    <menu name="SettingsMenu" action="SettingsMenuAction">
+      <menuitem name="ShowToolbar" action="ShowToolbarAction"/>
+      <menuitem name="Preferences" action="PrefAction" />
+    </menu>
+    <menu name="HelpMenu" action="HelpMenuAction">
+      <menuitem name="About" action="AboutAction" />
+    </menu>
+  </menubar>
+  
+  <toolbar name="MainMenuBar" action="MainMenuBarAction">
+    <placeholder name="ToolItems">
+      <separator/>
+      <toolitem name="New Game" action="NewAction"/>
+      <toolitem name="Quit" action="QuitAction"/>
+      <separator/>
+    </placeholder>
+  </toolbar>
+</ui>

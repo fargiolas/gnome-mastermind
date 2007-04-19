@@ -1,0 +1,47 @@
+<gconfschemafile>
+    <schemalist>
+
+      <schema>
+        <key>/schemas/apps/gnome-mastermind/theme</key>
+        <applyto>/apps/gnome-mastermind/theme</applyto>
+        <owner>gnome-mastermind</owner>
+        <type>string</type>
+        <default>simple</default>
+        <locale name="C">
+          <short>Set gnome-mastermind ball theme</short>
+          <long>
+	  set gnome-mastermind theme. it's the base dir name of the theme without prefix of the data dir. take care that it points to a dir with 8 files named 0-7.svg since i don't care of invalid dirs.
+          </long>
+        </locale>
+	</schema>
+     <schema>
+        <key>/schemas/apps/gnome-mastermind/maximum_tries</key>
+        <applyto>/apps/gnome-mastermind/maximum_tries</applyto>
+        <owner>gnome-mastermind</owner>
+        <type>int</type>
+        <default>10</default>
+        <locale name="C">
+          <short>Set possibile attempts to guess the solution</short>
+          <long>
+	Sets the maximum number of possibile attempts to guess the right solution. 
+	Please don't set it to high to keep the window of the game smaller than screen height.
+          </long>
+        </locale>
+
+      </schema>
+     <schema>
+        <key>/schemas/apps/gnome-mastermind/gtkstyle_colors</key>
+        <applyto>/apps/gnome-mastermind/gtkstyle_colors</applyto>
+        <owner>gnome-mastermind</owner>
+        <type>bool</type>
+        <default>TRUE</default>
+        <locale name="C">
+          <short>Try to get colors from system theme</short>
+          <long>
+	If true tries to take colorscheme from current gtk theme (from selected text color)
+          </long>
+        </locale>
+
+      </schema>
+  </schemalist>
+</gconfschemafile>
