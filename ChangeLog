@@ -1,3 +1,11 @@
+20 Apr 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* icons/ and subdirs: Thanks to Ulisse Perusin now gnome-mastermind
+	has a beautiful icon :D
+	* desktop/: Now that we have an icon we can also ship desktop files :D
+	* po/: Added stuff to translate .desktop item comments.
+	* src/gnome-mastermind.c: added icon to about dialog and application
+	default icon. Updated "artwork" section of about dialog.
+
 19 Apr 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
 	* configure.ac: Version set to 0.2 to not conflict with previous
 	release when testing svn checkouts.

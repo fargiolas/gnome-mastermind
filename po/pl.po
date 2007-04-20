@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-mastermind 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-04-19 14:13+0200\n"
+"POT-Creation-Date: 2007-04-20 12:27+0200\n"
 "PO-Revision-Date: 2007-04-19 11:41+0100\n"
 "Last-Translator: Tomasz Dominikowski <dominikowski@gmail.com>\n"
 "Language-Team: Tomasz Dominikowski <dominikowski@gmail.com>\n"
@@ -80,7 +80,7 @@ msgid "That was the right solution:"
 msgstr "To jest poprawne rozwiązanie:"
 
 #: ../src/gnome-mastermind.c:911 ../src/gnome-mastermind.c:978
-#: ../src/gnome-mastermind.c:1625
+#: ../src/gnome-mastermind.c:1628
 msgid "Select a color!"
 msgstr "Wybierz kolor!"
 
@@ -97,90 +97,99 @@ msgid "A Mastermind clone for gnome"
 msgstr "Klon gry Mastermind dla GNOME"
 
 #. GtkWidget *hbox;
-#: ../src/gnome-mastermind.c:1261
+#: ../src/gnome-mastermind.c:1263
 msgid "Preferences"
 msgstr "Preferencje"
 
-#: ../src/gnome-mastermind.c:1285
+#: ../src/gnome-mastermind.c:1287
 msgid "<b>Tileset theme</b>"
 msgstr "<b>Motyw</b>"
 
-#: ../src/gnome-mastermind.c:1297
+#: ../src/gnome-mastermind.c:1299
 msgid "Theme:"
 msgstr "Motyw:"
 
-#: ../src/gnome-mastermind.c:1320
+#: ../src/gnome-mastermind.c:1322
 msgid "<b>Color settings</b>"
 msgstr "<b>Ustawienia kolorów</b>"
 
-#: ../src/gnome-mastermind.c:1332
+#: ../src/gnome-mastermind.c:1334
 msgid "Foreground Color:"
 msgstr "Kolor na pierwszym planie:"
 
-#: ../src/gnome-mastermind.c:1344
+#: ../src/gnome-mastermind.c:1346
 msgid "Background Color:"
 msgstr "Kolor tła:"
 
-#: ../src/gnome-mastermind.c:1356
+#: ../src/gnome-mastermind.c:1358
 msgid "Try to get colors from system theme"
 msgstr "Pobieranie kolorów z motywu systemowego"
 
-#: ../src/gnome-mastermind.c:1383
+#: ../src/gnome-mastermind.c:1385
 msgid "<b>Game settings</b>"
 msgstr "<b>Ustawienia gry</b>"
 
-#: ../src/gnome-mastermind.c:1395
+#: ../src/gnome-mastermind.c:1397
 msgid "Maximum number of tries allowed:"
 msgstr "Maksymalna dozwolona liczba prób:"
 
-#: ../src/gnome-mastermind.c:1438
+#: ../src/gnome-mastermind.c:1440
 msgid "_Game"
 msgstr "_Gra"
 
-#: ../src/gnome-mastermind.c:1442
+#: ../src/gnome-mastermind.c:1444
 msgid "_New game"
 msgstr "_Nowa gra"
 
-#: ../src/gnome-mastermind.c:1443
+#: ../src/gnome-mastermind.c:1445
 msgid "Start a new game"
 msgstr "Rozpoczęcie nowej gry"
 
-#: ../src/gnome-mastermind.c:1447
+#: ../src/gnome-mastermind.c:1449
 msgid "_Quit"
 msgstr "_Zakończ"
 
-#: ../src/gnome-mastermind.c:1448
+#: ../src/gnome-mastermind.c:1450
 msgid "Quit the game"
 msgstr "Zakończenie gry"
 
-#: ../src/gnome-mastermind.c:1451
+#: ../src/gnome-mastermind.c:1453
 msgid "_Settings"
 msgstr "_Ustawienia"
 
-#: ../src/gnome-mastermind.c:1454
+#: ../src/gnome-mastermind.c:1456
 msgid "_Preferences"
 msgstr "_Preferencje"
 
-#: ../src/gnome-mastermind.c:1455
+#: ../src/gnome-mastermind.c:1457
 msgid "Change game settings"
 msgstr "Zmiany ustawień gry"
 
-#: ../src/gnome-mastermind.c:1458
+#: ../src/gnome-mastermind.c:1460
 msgid "_Help"
 msgstr "P_omoc"
 
-#: ../src/gnome-mastermind.c:1461
+#: ../src/gnome-mastermind.c:1463
 msgid "_About"
 msgstr "O p_rogramie"
 
-#: ../src/gnome-mastermind.c:1463
+#: ../src/gnome-mastermind.c:1465
 msgid "About"
 msgstr "Informacje o programie"
 
-#: ../src/gnome-mastermind.c:1483
+#: ../src/gnome-mastermind.c:1485
 msgid "_Show Toolbar"
 msgstr "_Wyświetlanie paska narzędzi"
 
-#: ../src/gnome-mastermind.c:1483
+#: ../src/gnome-mastermind.c:1485
 msgid "Show or hide the toolbar"
 msgstr "Wyświetlenie lub ukrycie paska narzędzi"
+
+#: ../desktop/gnome-mastermind.desktop.in.h:1
+#, fuzzy
+msgid "A mastermind-like game for Gnome"
+msgstr "Klon gry Mastermind dla GNOME"
+
+#: ../desktop/gnome-mastermind.desktop.in.h:2
+msgid "Mastermind"
+msgstr ""

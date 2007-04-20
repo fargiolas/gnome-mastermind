@@ -1136,7 +1136,12 @@ static void destroy (GtkWidget *widget, gpointer data) {
 
 static void about_action (void) {
 	gchar *authors[] = { "Filippo Argiolas <filippo.argiolas@gmail.com>", NULL };
-	gchar *artists[] = { "Filippo Argiolas", "Isabella Piredda", "Enrica Argiolas", NULL };
+	gchar *artists[] = { 
+		"Filippo Argiolas <filippo.argiolas@gmail.com, me ;)",
+		"Ulisse Perusin <uli.peru@gmail.com>, for that beautiful icon!", "and..",
+		"..some other people for their hints and suggestions", 
+		"Isabella Piredda, grazie amore mio!", 
+		"Enrica Argiolas, my lil sister and beta tester", NULL };
 	gtk_show_about_dialog (GTK_WINDOW (window),
 			       "name", "GNOME Mastermind",
 			       "authors", authors,
@@ -1145,6 +1150,8 @@ static void about_action (void) {
 			       "copyright", "gnome-mastermind, copyright (c) 2007 Filippo Argiolas\n"
 			       "mastermind, copyright (c) 1971 Invicta Plastics, Ltd. UK",
 			       "version", VERSION,
+			       "logo-icon-name", "gnome-mastermind",
+			       "website", "http://www.autistici.org/gnome-mastermind/",
 			       NULL);
 }
 
@@ -1520,6 +1527,8 @@ int main ( int argc, char *argv[] )
 
 	gtk_init (&argc, &argv);
  
+	gtk_window_set_default_icon_name("gnome-mastermind");
+	
 	window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
 	gtk_window_set_title(GTK_WINDOW(window), "GNOME Mastermind");
  

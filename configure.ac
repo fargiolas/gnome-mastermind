@@ -99,6 +99,8 @@ AC_CONFIG_FILES([  po/Makefile.in
     src/Makefile
     themes/Makefile
     ui/Makefile
+    desktop/Makefile
+    icons/Makefile
 ])
 
 AC_OUTPUT

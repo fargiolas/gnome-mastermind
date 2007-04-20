@@ -1,4 +1,4 @@
-SUBDIRS = src themes ui po
+SUBDIRS = src themes ui po desktop icons
 
 EXTRA_DIST = config.rpath 	\
 	    AUTHORS	\

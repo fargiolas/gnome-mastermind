@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Icon=gnome-mastermind
+Name=Mastermind
+Name[it]=Mastermind
+Comment=A mastermind-like game for Gnome
+Comment[it]=Un gioco di Mastermind per Gnome
+Exec=gnome-mastermind
+Terminal=false
+Type=Application
+Categories=GNOME;GTK;Game;BoardGame
+StartupNotify=true
