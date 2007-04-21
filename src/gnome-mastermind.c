@@ -88,6 +88,7 @@ gchar *gc_fgcolor;
 gchar *gc_bgcolor;
 gint gc_max_tries;
 gboolean gc_gtkstyle_colors = TRUE;
+gboolean gc_show_toolbar = TRUE;
 
 gint confcount = 0;
 
@@ -140,9 +141,11 @@ void reset_default_settings (void) {
 /* gconf_client_set_int (settings, "/apps/gnome-mastermind/big_ball_size", 38, NULL);
    gconf_client_set_int (settings, "/apps/gnome-mastermind/small_ball_size", 30, NULL); */
 	gconf_client_set_int (settings, "/apps/gnome-mastermind/maximum_tries", 10, NULL);
+	
 	gconf_client_set_bool (settings, "/apps/gnome-mastermind/gtkstyle_colors", TRUE, NULL);
 	gconf_client_set_string (settings, "/apps/gnome-mastermind/bgcolor", "#e4dfed", NULL);
 	gconf_client_set_string (settings, "/apps/gnome-mastermind/fgcolor", "#3d2b78", NULL);
+	gconf_client_set_bool (settings, "/apps/gnome-mastermind/show_toolbar", TRUE, NULL);
 }
 
 
@@ -240,6 +243,25 @@ color_notify_func (GConfClient *client,
 	redraw_current_game();
 }
 
+static void
+toolbar_notify_func (GConfClient *client,
+		   guint cnxn_id,
+		   GConfEntry *entry,
+		   gpointer user_data)
+{
+	GConfValue *value;
+	gchar *key;
+
+	key = g_strdup ( gconf_entry_get_key (entry) );
+	value = gconf_entry_get_value (entry);
+	gc_show_toolbar = gconf_value_get_bool (value);
+	if (gc_show_toolbar)
+		gtk_widget_show (toolbar);
+	else
+		gtk_widget_hide (toolbar);
+	
+}
+
 void init_gconf (void) {
 	gchar *tmp;
 	gchar *tmp2;
@@ -278,12 +300,14 @@ void init_gconf (void) {
 		gc_gtkstyle_colors = gconf_client_get_bool (settings, "/apps/gnome-mastermind/gtkstyle_colors", NULL);
 		gc_bgcolor = gconf_client_get_string (settings, "/apps/gnome-mastermind/bgcolor", NULL);
 		gc_fgcolor = gconf_client_get_string (settings, "/apps/gnome-mastermind/fgcolor", NULL);
+		gc_show_toolbar = gconf_client_get_bool (settings, "/apps/gnome-mastermind/show_toolbar", NULL);
 		gm_debug ("settings: \n");
 		gm_debug ("theme: %s\n", gc_theme);
 		gm_debug ("gc_max_tries: %d\n", gc_max_tries);
 		gm_debug ("gc_gtkstyle_colors: %d\n", gc_gtkstyle_colors);
 		gm_debug ("gc_fgcolor: %s\n", gc_fgcolor);
 		gm_debug ("gc_bgcolor: %s\n", gc_bgcolor);
+		gm_debug ("gc_show_toolbar: %d\n", gc_show_toolbar);
 		gconf_client_add_dir (settings,
 				      "/apps/gnome-mastermind",
 				      GCONF_CLIENT_PRELOAD_NONE,
@@ -298,6 +322,8 @@ void init_gconf (void) {
 					 color_notify_func, NULL, NULL, NULL);
 		gconf_client_notify_add (settings, "/apps/gnome-mastermind/fgcolor",
 					 color_notify_func, NULL, NULL, NULL);
+		gconf_client_notify_add (settings, "/apps/gnome-mastermind/show_toolbar",
+					 toolbar_notify_func, NULL, NULL, NULL);
 	}
 	else {
 		gm_debug ("dir not exists\n");
@@ -545,16 +571,16 @@ gboolean start_new_gameboard (GtkWidget *widget) {
 		/* sfondo della finestra di gioco */
 
 		bgcolor = widget->style->base[GTK_STATE_SELECTED];
-		bgcolor.red = (bgcolor.red + (widget->style->white).red * 6.2 ) / 8; //brighten and desaturate
-		bgcolor.green = (bgcolor.green + (widget->style->white).green * 6.2 ) / 8;
-		bgcolor.blue = (bgcolor.blue + (widget->style->white).blue * 6.2 ) / 8;
+		bgcolor.red = (bgcolor.red + (widget->style->white).red * 2 ) / 3; //brighten and desaturate
+		bgcolor.green = (bgcolor.green + (widget->style->white).green * 2 ) / 3;
+		bgcolor.blue = (bgcolor.blue + (widget->style->white).blue * 2 ) / 3;
 	 
 		/* bordo delle griglie */
 	 
 		fgcolor = widget->style->base[GTK_STATE_SELECTED];
-		fgcolor.red = (fgcolor.red + (widget->style->black).red) / 2;
-		fgcolor.green = (fgcolor.green + (widget->style->black).green) / 2;
-		fgcolor.blue = (fgcolor.blue + (widget->style->black).blue) / 2;
+		fgcolor.red = (fgcolor.red + (widget->style->black).red ) / 2;
+		fgcolor.green = (fgcolor.green + (widget->style->black).green ) / 2;
+		fgcolor.blue = (fgcolor.blue + (widget->style->black).blue ) / 2;
 
 	} else {
 		gdk_color_parse (gc_bgcolor, &bgcolor);
@@ -1035,10 +1061,9 @@ static gboolean tray_press_event ( GtkWidget *widget,
 							      BS/8, x+TRAY_SZ/2-0.5,
 							      y+TRAY_SZ/2-0.5,
 							      BS/2-6);
-			cairo_pattern_add_color_stop_rgba (radial, 0, 1.0, 1.0, 1.0, 0.5);
+			cairo_pattern_add_color_stop_rgba (radial, 0, 1.0, 1.0, 1.0, 0.4);
 			cairo_pattern_add_color_stop_rgba (radial, 1, 0.2, 0.2, 0.0, 0.0);
 			cairo_set_line_width (cr, 0);
-//	 cairo_rectangle (cr, x, y, TRAY_SZ-2, TRAY_SZ-2);
 			cairo_arc (cr,
 				   x+TRAY_SZ/2-0.5,
 				   y+TRAY_SZ/2-0.5,
@@ -1472,17 +1497,15 @@ static GtkActionEntry entries[] =
 
 };
 
-static void show_tb_callback (void) // lil piece of code stolen from mahjongg ; )
-{
+static void show_tb_callback (void) {
 	gboolean state;
 
 	state =
 		gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (show_toolbar_action));
+	
+	gm_debug ("gc_show_toolbar: %d state: %d\n", gc_show_toolbar, state);
  
-	if (state)
-		gtk_widget_show (toolbar);
-	else
-		gtk_widget_hide (toolbar);
+	gconf_client_set_bool (settings, "/apps/gnome-mastermind/show_toolbar", state , NULL);
 }
 
 
@@ -1567,9 +1590,12 @@ int main ( int argc, char *argv[] )
 			vbox
 			);
 
+	init_gconf();
+
 	toolbar = gtk_ui_manager_get_widget (menu_manager, "/MainMenuBar");
+
 	show_toolbar_action = gtk_action_group_get_action (action_group, "ShowToolbarAction");
-	gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (show_toolbar_action), TRUE);
+	gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (show_toolbar_action), gc_show_toolbar);
 
 	accel_group = gtk_ui_manager_get_accel_group (menu_manager);
 	gtk_window_add_accel_group (GTK_WINDOW (window), accel_group);
@@ -1610,8 +1636,6 @@ int main ( int argc, char *argv[] )
 	gridframe = gtk_frame_new (NULL);
 	trayframe = gtk_frame_new (NULL);
 
-	init_gconf();
-
 	grid_rows = gc_max_tries;
 
 	movearray = g_try_malloc (grid_rows * sizeof ( gint * ));
@@ -1639,6 +1663,11 @@ int main ( int argc, char *argv[] )
 	gtk_window_set_resizable (GTK_WINDOW (window), FALSE);
 
 	gtk_widget_show_all (window);
+
+	if (!gconf_client_get_bool
+	    (settings, "/apps/gnome-mastermind/show_toolbar", NULL))
+		gtk_widget_hide (toolbar);
+
  
 	gtk_main();
 
