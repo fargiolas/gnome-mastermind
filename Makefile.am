@@ -1,4 +1,4 @@
-SUBDIRS = src themes ui po desktop icons
+SUBDIRS = src themes ui po desktop icons help
 
 EXTRA_DIST = config.rpath 	\
 	    AUTHORS	\
@@ -14,11 +14,16 @@ EXTRA_DIST = config.rpath 	\
 	    configure.ac\
 	    intltool-extract.in\
 	    intltool-merge.in\
-	    intltool-update.in
+	    intltool-update.in \
+	    gnome-doc-utils.make 
+	
 DISTCLEANFILES = \
 	         intltool-extract \
 	         intltool-merge \
-	         intltool-update
+	         intltool-update \
+                 gnome-doc-utils.make
+
+DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper
 
 pkgdata_DATA =  AUTHORS    \
 	   	BUGS       \

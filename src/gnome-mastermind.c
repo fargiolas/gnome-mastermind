@@ -571,9 +571,9 @@ gboolean start_new_gameboard (GtkWidget *widget) {
 		/* sfondo della finestra di gioco */
 
 		bgcolor = widget->style->base[GTK_STATE_SELECTED];
-		bgcolor.red = (bgcolor.red + (widget->style->white).red * 2 ) / 3; //brighten and desaturate
-		bgcolor.green = (bgcolor.green + (widget->style->white).green * 2 ) / 3;
-		bgcolor.blue = (bgcolor.blue + (widget->style->white).blue * 2 ) / 3;
+		bgcolor.red = (bgcolor.red + (widget->style->white).red * 6.2 ) / 8;
+		bgcolor.green = (bgcolor.green + (widget->style->white).green * 6.2 ) / 8;
+		bgcolor.blue = (bgcolor.blue + (widget->style->white).blue * 6.2 ) / 8;
 	 
 		/* bordo delle griglie */
 	 
@@ -1159,6 +1159,24 @@ static void destroy (GtkWidget *widget, gpointer data) {
 	gtk_main_quit();
 }
 
+static void help_action (void) {
+	#ifndef G_OS_WIN32
+	gchar   *argv[] = { "yelp",
+			    "ghelp:gnome-mastermind",
+			    NULL };
+	GError *error = NULL;
+
+	g_spawn_async (NULL, argv, NULL, G_SPAWN_SEARCH_PATH,
+		NULL, NULL, NULL, &error);
+	if (error) 
+	{
+		g_message ("Error while launching yelp %s", error->message);
+		g_error_free (error);
+		error = NULL;
+	}
+	#endif
+}
+
 static void about_action (void) {
 	gchar *authors[] = { "Filippo Argiolas <filippo.argiolas@gmail.com>", NULL };
 	gchar *artists[] = { 
@@ -1493,8 +1511,13 @@ static GtkActionEntry entries[] =
 	  N_("_About"), 
 	  NULL,
 	  N_("About"),
-	  G_CALLBACK (about_action) }
+	  G_CALLBACK (about_action) },
 
+	{ "HelpAction", GTK_STOCK_HELP, 
+	  N_("_Contents"),
+	  "F1",
+	  N_("_Contents"),
+	  G_CALLBACK (help_action) }
 };
 
 static void show_tb_callback (void) {

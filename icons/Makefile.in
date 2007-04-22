@@ -40,8 +40,8 @@ target_triplet = @target@
 subdir = icons
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/m4/isc-posix.m4 \
-	$(top_srcdir)/configure.ac
+am__aclocal_m4_deps = $(top_srcdir)/m4/gnome-doc-utils.m4 \
+	$(top_srcdir)/m4/isc-posix.m4 $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
@@ -57,14 +57,16 @@ am__vpath_adj = case $$p in \
 am__strip_dir = `echo $$p | sed -e 's|^.*/||'`;
 am__installdirs = "$(DESTDIR)$(gm16icondir)" \
 	"$(DESTDIR)$(gm22icondir)" "$(DESTDIR)$(gm32icondir)" \
-	"$(DESTDIR)$(gm48icondir)" "$(DESTDIR)$(scalableicondir)"
+	"$(DESTDIR)$(gm48icondir)" "$(DESTDIR)$(pixmapsdir)" \
+	"$(DESTDIR)$(scalableicondir)"
 gm16iconDATA_INSTALL = $(INSTALL_DATA)
 gm22iconDATA_INSTALL = $(INSTALL_DATA)
 gm32iconDATA_INSTALL = $(INSTALL_DATA)
 gm48iconDATA_INSTALL = $(INSTALL_DATA)
+pixmapsDATA_INSTALL = $(INSTALL_DATA)
 scalableiconDATA_INSTALL = $(INSTALL_DATA)
 DATA = $(gm16icon_DATA) $(gm22icon_DATA) $(gm32icon_DATA) \
-	$(gm48icon_DATA) $(scalableicon_DATA)
+	$(gm48icon_DATA) $(pixmaps_DATA) $(scalableicon_DATA)
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
 ALL_LINGUAS = @ALL_LINGUAS@
@@ -88,11 +90,14 @@ CYGPATH_W = @CYGPATH_W@
 DATADIRNAME = @DATADIRNAME@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
+DOC_USER_FORMATS = @DOC_USER_FORMATS@
 ECHO = @ECHO@
 ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
 EGREP = @EGREP@
+ENABLE_SK_FALSE = @ENABLE_SK_FALSE@
+ENABLE_SK_TRUE = @ENABLE_SK_TRUE@
 EXEEXT = @EXEEXT@
 GCONF_CFLAGS = @GCONF_CFLAGS@
 GCONF_LIBS = @GCONF_LIBS@
@@ -107,6 +112,9 @@ GTK_CFLAGS = @GTK_CFLAGS@
 GTK_DEP_CFLAGS = @GTK_DEP_CFLAGS@
 GTK_DEP_LIBS = @GTK_DEP_LIBS@
 GTK_LIBS = @GTK_LIBS@
+HAVE_GNOME_DOC_UTILS_FALSE = @HAVE_GNOME_DOC_UTILS_FALSE@
+HAVE_GNOME_DOC_UTILS_TRUE = @HAVE_GNOME_DOC_UTILS_TRUE@
+HELP_DIR = @HELP_DIR@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_SCRIPT = @INSTALL_SCRIPT@
@@ -150,6 +158,7 @@ MKINSTALLDIRS = @MKINSTALLDIRS@
 MSGFMT = @MSGFMT@
 MSGFMT_OPTS = @MSGFMT_OPTS@
 OBJEXT = @OBJEXT@
+OMF_DIR = @OMF_DIR@
 PACKAGE = @PACKAGE@
 PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
 PACKAGE_NAME = @PACKAGE_NAME@
@@ -233,13 +242,16 @@ gm48icondir = $(datadir)/icons/hicolor/48x48/apps
 gm48icon_DATA = scalable/gnome-mastermind.svg
 scalableicondir = $(datadir)/icons/hicolor/scalable/apps
 scalableicon_DATA = scalable/gnome-mastermind.svg
+pixmapsdir = $(datadir)/pixmaps
+pixmaps_DATA = scalable/gnome-mastermind.svg
 gtk_update_icon_cache = gtk-update-icon-cache -f -t $(datadir)/icons/hicolor
 EXTRA_DIST = \
 	$(gm16icon_DATA) \
 	$(gm22icon_DATA) \
 	$(gm32icon_DATA) \
 	$(gm48icon_DATA) \
-	$(scalableicon_DATA)
+	$(scalableicon_DATA)\
+	$(pixmaps_DATA)
 
 all: all-am
 
@@ -351,6 +363,23 @@ uninstall-gm48iconDATA:
 	  echo " rm -f '$(DESTDIR)$(gm48icondir)/$$f'"; \
 	  rm -f "$(DESTDIR)$(gm48icondir)/$$f"; \
 	done
+install-pixmapsDATA: $(pixmaps_DATA)
+	@$(NORMAL_INSTALL)
+	test -z "$(pixmapsdir)" || $(mkdir_p) "$(DESTDIR)$(pixmapsdir)"
+	@list='$(pixmaps_DATA)'; for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  f=$(am__strip_dir) \
+	  echo " $(pixmapsDATA_INSTALL) '$$d$$p' '$(DESTDIR)$(pixmapsdir)/$$f'"; \
+	  $(pixmapsDATA_INSTALL) "$$d$$p" "$(DESTDIR)$(pixmapsdir)/$$f"; \
+	done
+
+uninstall-pixmapsDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(pixmaps_DATA)'; for p in $$list; do \
+	  f=$(am__strip_dir) \
+	  echo " rm -f '$(DESTDIR)$(pixmapsdir)/$$f'"; \
+	  rm -f "$(DESTDIR)$(pixmapsdir)/$$f"; \
+	done
 install-scalableiconDATA: $(scalableicon_DATA)
 	@$(NORMAL_INSTALL)
 	test -z "$(scalableicondir)" || $(mkdir_p) "$(DESTDIR)$(scalableicondir)"
@@ -407,7 +436,7 @@ check-am: all-am
 check: check-am
 all-am: Makefile $(DATA)
 installdirs:
-	for dir in "$(DESTDIR)$(gm16icondir)" "$(DESTDIR)$(gm22icondir)" "$(DESTDIR)$(gm32icondir)" "$(DESTDIR)$(gm48icondir)" "$(DESTDIR)$(scalableicondir)"; do \
+	for dir in "$(DESTDIR)$(gm16icondir)" "$(DESTDIR)$(gm22icondir)" "$(DESTDIR)$(gm32icondir)" "$(DESTDIR)$(gm48icondir)" "$(DESTDIR)$(pixmapsdir)" "$(DESTDIR)$(scalableicondir)"; do \
 	  test -z "$$dir" || $(mkdir_p) "$$dir"; \
 	done
 install: install-am
@@ -453,7 +482,7 @@ info: info-am
 info-am:
 
 install-data-am: install-gm16iconDATA install-gm22iconDATA \
-	install-gm32iconDATA install-gm48iconDATA \
+	install-gm32iconDATA install-gm48iconDATA install-pixmapsDATA \
 	install-scalableiconDATA
 	@$(NORMAL_INSTALL)
 	$(MAKE) $(AM_MAKEFLAGS) install-data-hook
@@ -484,7 +513,8 @@ ps-am:
 
 uninstall-am: uninstall-gm16iconDATA uninstall-gm22iconDATA \
 	uninstall-gm32iconDATA uninstall-gm48iconDATA \
-	uninstall-info-am uninstall-scalableiconDATA
+	uninstall-info-am uninstall-pixmapsDATA \
+	uninstall-scalableiconDATA
 
 .PHONY: all all-am check check-am clean clean-generic clean-libtool \
 	distclean distclean-generic distclean-libtool distdir dvi \
@@ -492,13 +522,14 @@ uninstall-am: uninstall-gm16iconDATA uninstall-gm22iconDATA \
 	install-data install-data-am install-data-hook install-exec \
 	install-exec-am install-gm16iconDATA install-gm22iconDATA \
 	install-gm32iconDATA install-gm48iconDATA install-info \
-	install-info-am install-man install-scalableiconDATA \
-	install-strip installcheck installcheck-am installdirs \
-	maintainer-clean maintainer-clean-generic mostlyclean \
-	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
-	uninstall uninstall-am uninstall-gm16iconDATA \
-	uninstall-gm22iconDATA uninstall-gm32iconDATA \
-	uninstall-gm48iconDATA uninstall-info-am \
+	install-info-am install-man install-pixmapsDATA \
+	install-scalableiconDATA install-strip installcheck \
+	installcheck-am installdirs maintainer-clean \
+	maintainer-clean-generic mostlyclean mostlyclean-generic \
+	mostlyclean-libtool pdf pdf-am ps ps-am uninstall uninstall-am \
+	uninstall-gm16iconDATA uninstall-gm22iconDATA \
+	uninstall-gm32iconDATA uninstall-gm48iconDATA \
+	uninstall-info-am uninstall-pixmapsDATA \
 	uninstall-scalableiconDATA
 
 

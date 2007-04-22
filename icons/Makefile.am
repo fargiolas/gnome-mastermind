@@ -13,6 +13,9 @@ gm48icon_DATA = scalable/gnome-mastermind.svg
 scalableicondir = $(datadir)/icons/hicolor/scalable/apps
 scalableicon_DATA = scalable/gnome-mastermind.svg
 
+pixmapsdir = $(datadir)/pixmaps
+pixmaps_DATA = scalable/gnome-mastermind.svg
+
 gtk_update_icon_cache = gtk-update-icon-cache -f -t $(datadir)/icons/hicolor
 
 install-data-hook:
@@ -29,4 +32,5 @@ EXTRA_DIST = \
 	$(gm22icon_DATA) \
 	$(gm32icon_DATA) \
 	$(gm48icon_DATA) \
-	$(scalableicon_DATA)
+	$(scalableicon_DATA)\
+	$(pixmaps_DATA)

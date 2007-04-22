@@ -1,0 +1,441 @@
+<?xml version="1.0"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+  <!ENTITY appname          "GNOME Mastermind">
+  <!ENTITY app "<application>GNOME Mastermind</application>">
+  <!ENTITY appversion   "0.2">
+  <!ENTITY manrevision  "0.1">
+  <!ENTITY date "April 2007">
+  <!-- Information about the entities
+       Use the app and appname entities to specify the name of the application.  
+       Use the appversion entity to specify the version of the application.
+       Use the manrevision entity to specify the revision number of this manual.
+       Use the date entity to specify the release date of this manual.
+-->
+]>
+<!-- 
+  This is a GNOME documentation template, designed by the GNOME
+  Documentation Project Team. Please use it for writing GNOME
+  documentation, making obvious changes, such as:
+  - all the words written in UPPERCASE (with the exception of GNOME) 
+    should be replaced. As for "legalnotice", please leave the reference
+    unchanged.
+  - all id attributes should have 'myapp' replaced
+
+  Remember that this is a guide, rather than a perfect model to follow
+  slavishly. Make your manual logical and readable: see the GDP Style Guide for
+  more on this.
+-->
+<!--
+      (Do not remove this comment block.)
+  Maintained by the GNOME Documentation Project
+  http://live.gnome.org/DocumentationProject
+  Template version: 3.0 beta
+  Template last modified 2006-11-21
+
+-->
+<!-- =============Document Header ============================= -->
+<article id="index" lang="en">
+  <articleinfo> 
+    <title>&app; Manual</title>
+    <abstract role="description">
+      <para>&app; is ... <!-- insert brief description -->.</para>
+    </abstract>         
+
+    <copyright> 
+      <year>2007</year> 
+      <holder>Filippo Argiolas</holder> 
+    </copyright> 
+
+    <!-- An address can be added to the publisher information. -->
+    <publisher role="maintainer"> 
+      <publishername>Filippo Argiolas</publishername> 
+    </publisher> 
+
+	  <xi:include href="legal.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <!-- The file legal.xml contains link to license for the documentation, 
+        and other legal stuff such as "NO WARRANTY" statement. 
+        Please do not change any of this. -->
+
+    <authorgroup> 
+      <author> 
+    		<firstname>Filippo</firstname> 
+    		<surname>Argiolas</surname> 
+    			<address> <email>filippo.argiolas@gmail.com</email> </address> 
+      </author> 
+      <corpauthor> 
+    		<firstname>Filippo</firstname> 
+    		<surname>Argiolas</surname> 
+    			<address> <email>filippo.argiolas@gmail.com</email> </address> 
+      </corpauthor> 
+    </authorgroup>
+    
+
+<!-- According to GNU FDL, revision history is mandatory if you are -->
+<!-- modifying/reusing someone else's document.  If not, you can omit it. -->
+<!-- Remember to remove the &manrevision; entity from the revision entries other
+-->
+<!-- than the current revision. -->
+<!-- The revision numbering system for GNOME manuals is as follows: -->
+<!-- * the revision number consists of two components -->
+<!-- * the first component of the revision number reflects the release version of the GNOME desktop. -->
+<!-- * the second component of the revision number is a decimal unit that is incremented with each revision of the manual. -->
+<!-- For example, if the GNOME desktop release is V2.x, the first version of the manual that -->
+<!-- is written in that desktop timeframe is V2.0, the second version of the manual is V2.1, etc. -->
+<!-- When the desktop release version changes to V3.x, the revision number of the manual changes -->
+<!-- to V3.0, and so on. -->  
+    <revhistory>
+      <revision> 
+		<revnumber>&appname; Manual V&manrevision;</revnumber> 
+		<date>&date;</date> 
+		<revdescription> 
+	  		<para role="author">Filippo Argiolas
+        <!-- The email address of the author is optional and is commented out by default.  
+	    	<email>docwriter2@gnome.org</email> -->
+	  		</para>
+	  		<para role="publisher">Filippo Argiolas</para>
+		</revdescription> 
+      </revision> 
+    </revhistory> 
+
+    <releaseinfo>This manual describes version &appversion; of &app;.
+    </releaseinfo> 
+    <legalnotice> 
+      <title>Feedback</title> 
+    <para>
+      Please report any bug at
+      <ulink
+      url="https://gna.org/bugs/?func=additem&amp;group=gnome-mastermind">Bug
+      tracker at gna.org</ulink> or sign-up to the public mailing-list
+      listed in the project homepage to give us feedback.
+      </para>
+    <!-- Translators may also add here feedback address for translations -->
+    </legalnotice> 
+  </articleinfo> 
+
+  <indexterm zone="index"> 
+    <primary>&app;</primary> 
+  </indexterm> 
+
+<!-- ============= Document Body ============================= -->
+<!-- ============= Introduction ============================== -->
+<!-- Use the Introduction section to give a brief overview of what
+     the application is and what it does. -->
+  <sect1 id="myapp-introduction"> 
+    <title>Introduction</title> 
+    <sect2 id="the-game">
+      <title>The Game</title>
+      <para>
+	At first here's a brief introduction about the classic game
+	that this one resembles (source: wikipedia).
+      </para>
+      <para>
+	<guilabel>Mastermind&trade;</guilabel> is a code-breaking game for
+	two players, invented in 1970 by Mordecai Meirowitz that has
+	been very popular during the 80s.
+      </para>
+      <para>
+	One of the 2 players, the codemaker, places in its side of the
+	board (hidden from the other, the codebreaker), a combination
+	of 4 colors.  The codebreaker has to guess that pattern (both
+	order and colors) with the least number of tries. At each turn
+	(12 in the most common version), the codebreaker tries a
+	pattern and the codemaker gives him feedback placing a white
+	peg for each right color with wrong position and a colored peg
+	for each both color and position right item of the combination
+	guessed, in the score grid.
+      </para>™
+      <para>
+	Once he got feedback, the codebreaker tries another guess
+	following codemaker hints. Obviously the game is won by
+	codemaker if the codebreaker fails every guess.
+      </para>
+    </sect2>
+    <sect2 id="this-game">
+      <title>This Game</title>
+      <para>
+	&app; is a solitaire version that resembles the classic
+	game. The codemaker role is taken by computer.
+      </para>
+      <para> 
+	  The player has to guess a four colors combination (note
+	  that each color can be repeated). Computer prints (with
+	  default theme selected) a red peg for each right color and
+	  position guess and a white peg for each right color and missed
+	  position guess.
+      </para>
+    </sect2>
+    <sect2 id="get-started">
+      <title>Getting Started</title>
+      <para>You can start &app; in the following ways:
+      </para> 
+      <variablelist>
+    	<varlistentry>
+    	  <term>From <guimenu>Applications</guimenu> menu,</term>
+    	  <listitem>
+    	    <para>Choose 
+    	      <menuchoice>
+    		<guisubmenu>Games</guisubmenu>
+    		<guimenuitem>Mastermind</guimenuitem>
+    	      </menuchoice>. </para>
+    	  </listitem>
+    	</varlistentry>
+    	<varlistentry>
+    	  <term>Command line</term>
+    	  <listitem>
+    	    <para>To start &app; from a command line, type the following command, 
+    	      then press <keycap>Return</keycap>:</para>
+    	    <para> 
+	      <command>gnome-mastermind</command> 
+    		</para> 
+    	  </listitem>
+    	</varlistentry>
+      </variablelist>
+
+    <para>Here follows a screenshot of &app;, tipical play session</para>
+
+    <!-- ==== Figure ==== -->
+      <figure id="mainwindow-fig"> 
+	<title>&app; Start Up Window</title> 
+	<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+		fileref="figures/mainwindow.png" format="PNG"/> 
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/image.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>Shows &app; main window. Contains titlebar, menubar, toolbar, display area, and
+	      scrollbars. Menubar contains File, View, Settings, and Help menus. </phrase> 
+	    </textobject>
+	  </mediaobject> 
+	</screenshot> 
+      </figure>
+    <!-- ==== End of Figure ==== -->
+
+    <!-- Include any descriptions of the GUI immediately after the screenshot of the main UI, -->
+    <!-- for example, the items on the menubar and on the toolbar. This section is optional. -->
+
+    <para>At first let's investigate on the game interface. From top to bottom:
+    </para>
+      <variablelist>
+	<varlistentry>
+	<term>Menubar. </term>
+	<listitem>
+	<para>The menus on the menubar contain all of the commands you
+	need to work with &app;.</para>
+	</listitem>
+	</varlistentry>
+	<varlistentry>
+	<term>Toolbar. </term>
+	<listitem>
+	<para> The toolbar contains a subset of the commands that you usually will access more often.</para>
+	</listitem>
+	</varlistentry>
+	<varlistentry>
+	<term>Main game area. </term>
+	<listitem>
+	<para>From left to right you can see main grid where pegs are
+	placed, and score grid where computer gives us feedback</para>
+	</listitem>
+	</varlistentry>
+	<varlistentry>
+	<term>Tray area. </term>
+	<listitem>
+	<para>That's the colored pegs tray. Click here with first
+	mouse button to select a ball. Click then in a main grid
+	active cell to place the peg.</para>
+	<para>Middle click on a peg in the tray area places it in the first available cell.</para>
+	</listitem>
+	</varlistentry>
+	</variablelist>
+      <sect3 id="scuts">
+	<title>Shortcuts</title>
+	    <itemizedlist> 
+	      <listitem> 
+		<para> 
+		  <guilabel>First button click</guilabel> </para> 
+		<para>Select peg if done in tray area. Place it if
+		done in main grid cells.</para>
+	      </listitem> 
+	      <listitem> 
+		<para> 
+		  <guilabel>Middle button click</guilabel> </para> 
+		<para>Available only in tray area, place ball to
+		first free active cell.</para>
+	      </listitem> 
+	      <listitem> 
+		<para> 
+		  <guilabel>Ctrl + N</guilabel> </para> 
+		<para>Start a new game.</para> 
+	      </listitem> 
+	      <listitem> 
+		<para> 
+		  <guilabel>Ctrl + Q</guilabel> </para> 
+		<para>Quit game window.</para> 
+	      </listitem> 
+	      <listitem> 
+		<para> 
+		  <guilabel>Ctrl + P</guilabel> </para> 
+		<para>Open preferences dialog.</para> 
+	      </listitem> 
+	      <listitem> 
+		<para> 
+		  <guilabel>F1</guilabel> </para> 
+		<para>Show this manual.</para> 
+	      </listitem> 
+	    </itemizedlist> 
+      </sect3>
+    </sect2>
+    <sect2>
+    <title id="walkthrough">Walk through a game session</title>
+    <para>Let's now take a look at the previous session screen step by step:</para>
+    <!-- ==== Figure ==== -->
+      <figure id="row1-fig"> 
+	<title>&app; First row</title> 
+	<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+		fileref="figures/row1.png" format="PNG"/> 
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/image.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>First row</phrase>
+	    </textobject>
+	  </mediaobject> 
+	</screenshot> 
+      </figure>
+    <!-- ==== End of Figure ==== -->
+    <para>This is the first guess. As you can see the score grid is empty because no right peg has been chosen.</para>
+    <!-- ==== Figure ==== -->
+      <figure id="row2-fig"> 
+	<title>&app; Second row</title> 
+	<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+		fileref="figures/row2.png" format="PNG"/> 
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/image.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>Second row</phrase>
+	    </textobject>
+	  </mediaobject> 
+	</screenshot> 
+      </figure>
+    <!-- ==== End of Figure ==== -->
+    <para>Here we have 3 white score pegs. It means that we catched 3 right colors but placed them in wrong order. We are following the good path.</para>
+    <!-- ==== Figure ==== -->
+      <figure id="row3-fig"> 
+	<title>&app; Third row</title> 
+	<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+		fileref="figures/row3.png" format="PNG"/> 
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/image.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>Third row</phrase>
+	    </textobject>
+	  </mediaobject> 
+	</screenshot> 
+      </figure>
+    <!-- ==== End of Figure ==== -->
+    <para>Leaving the same color combination and changing order leads us to the solution. But we still have to understand which one is wrong!</para>
+    <!-- ==== Figure ==== -->
+      <figure id="row4-fig"> 
+	<title>&app; Fourth row</title> 
+	<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+		fileref="figures/row4.png" format="PNG"/> 
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/image.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>Fourth row</phrase>
+	    </textobject>
+	  </mediaobject> 
+	</screenshot> 
+      </figure>
+    <!-- ==== End of Figure ==== -->
+    <para>Inserting a random color make a white score peg come out. Since we didn't change other color pegs order we've just found the missing color!</para>
+    <!-- ==== Figure ==== -->
+      <figure id="row5-fig"> 
+	<title>&app; Last row</title> 
+	<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+		fileref="figures/row5.png" format="PNG"/> 
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/image.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>Last row</phrase>
+	    </textobject>
+	  </mediaobject> 
+	</screenshot> 
+      </figure>
+    <!-- ==== End of Figure ==== -->
+    <para>Yeah! Restoring removed peg and replacing another one with the new right color makes everything turn right. We won :D!</para>
+    </sect2>
+  </sect1>
+
+<!-- ============= About ================================== -->
+<!-- This section contains info about the program (not docs), such as
+      author's name(s), web page, license, feedback address. This
+      section is optional: primary place for this info is "About.." box of
+      the program. However, if you do wish to include this info in the
+      manual, this is the place to put it. Alternatively, you can put this information in the title page.-->
+  <sect1 id="myapp-about"> 
+    <title>About &app;</title> 
+    <para> &app; was written by Filippo Argiolas
+    </para>
+    <para>
+      (<email>filippo.argiolas@gmail.com</email>). To find more information about
+      &app;, please visit the 
+      <ulink url="http://www.autistici.org/gnome-mastermind" type="http">&app; webpage</ulink>. </para>
+    <para>
+      For copyright issues check tha about dialog and, most of all, copyright and copyright-artwork files in source tree or in the package data dir (usually /usr/share/gnome-mastermind).
+    </para>
+    <para>
+      Please report any bug at 
+      <ulink url="https://gna.org/bugs/?func=additem&amp;group=gnome-mastermind">Bug tracker at gna.org</ulink>
+      or sign-up to the public mailing-list listed in the project homepage to give us feedback.
+    </para>
+    <para> This program is distributed under the terms of the GNU
+      General Public license as published by the Free Software
+      Foundation; either version 2 of the License, or (at your option)
+      any later version. A 
+      <ulink url="ghelp:gpl" type="help">copy of this license</ulink>
+      is included with this documentation; another can be found in the file
+      COPYING included with the source code of this program. </para>
+
+  </sect1> 
+</article>
