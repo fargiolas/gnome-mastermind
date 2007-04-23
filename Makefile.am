@@ -20,8 +20,7 @@ EXTRA_DIST = config.rpath 	\
 DISTCLEANFILES = \
 	         intltool-extract \
 	         intltool-merge \
-	         intltool-update \
-                 gnome-doc-utils.make
+	         intltool-update 
 
 DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper
 

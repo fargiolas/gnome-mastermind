@@ -405,6 +405,14 @@
     <!-- ==== End of Figure ==== -->
     <para>Yeah! Restoring removed peg and replacing another one with the new right color makes everything turn right. We won :D!</para>
     </sect2>
+    <sect2 id="cmsoon">
+      <title>Coming Soon</title> 
+      <para>
+	Next releases will hopefully contain a more detailed manual
+	that better explains each settings in the preferences menu. It
+	will also contain a simple guide to draw and submit new themes.
+      </para>
+    </sect2>
   </sect1>
 
 <!-- ============= About ================================== -->

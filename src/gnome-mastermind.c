@@ -46,6 +46,7 @@
 
 #define BS 30
 #define BM 40
+
 #define TRAY_SZ 32
 #define TRAY_ROWS 1
 #define TRAY_COLS 8
@@ -104,8 +105,8 @@ static GdkPixmap *traymap = NULL;
 static GdkPixbuf *pixbuf = NULL;
 static GError *error = 0;
 
-static GdkPixbuf *tileset_bg = NULL;
-static GdkPixbuf *tileset_sm = NULL;
+static GdkPixbuf *tileset_bg = NULL; /* main tileset */
+static GdkPixbuf *tileset_sm = NULL; /* small tileset */
 
 GList *theme_list = NULL;
 
@@ -553,14 +554,14 @@ void draw_main_grid (GtkWidget *widget) {
 gboolean start_new_gameboard (GtkWidget *widget) {
 
 	cairo_t *cr;
-
+	
 	if (tileset_sm) g_object_unref (tileset_sm);
 	if (tileset_bg) g_object_unref (tileset_bg);
  
 	tileset_sm = gdk_pixbuf_new_from_file_at_size (gc_theme,
-						       BS*10, BS, &error);
+						       BS*8+BS/2, BS, &error);
 	tileset_bg = gdk_pixbuf_new_from_file_at_size (gc_theme,
-						       BM*10, BM, &error);
+						       BM*8+BM/2, BM, &error);
 	if (error) {
 		g_warning ("Failed to load '%s': %s", gc_theme, error->message);
 		g_error_free (error);
@@ -737,20 +738,22 @@ void draw_score_pegs (int line, int b, int c, GtkWidget *widget) {
 		if (pixbuf) 
 			g_object_unref (pixbuf);
 		if (i<b){ 
-			offset = 8;
+			offset = 0;
 		}
 		else {
-			offset = 9;
+			offset = 1;
 		}
 		pixbuf = gdk_pixbuf_new_subpixbuf (tileset_bg,
-						   BM*offset,
-						   0,
-						   BM, BM);
+						   BM*8,
+						   BM/2*offset,
+						   BM/2, BM/2);
 		tmp = pixbuf;
+
 		pixbuf = gdk_pixbuf_scale_simple (pixbuf,
-						  BS/2+2,
-						  BS/2+2,
+						  BM/2-1,
+						  BM/2-1,
 						  GDK_INTERP_BILINEAR);
+
 		g_object_unref (tmp);
 
 		x = GRID_XPAD+GRID_SZ* (GRID_COLS+1)+ (GRID_SZ/2* (i%2));
@@ -761,8 +764,8 @@ void draw_score_pegs (int line, int b, int c, GtkWidget *widget) {
 				 NULL,
 				 pixbuf,
 				 0, 0,
-				 x+BS/8-1,
-				 y+BS/8-1,
+				 x+BS/8-2,
+				 y+BS/8-2,
 				 -1, -1, GDK_RGB_DITHER_MAX, 0, 0);
 		gtk_widget_queue_draw_area (drawing_area, x, y, GRID_SZ/2, GRID_SZ/2);
 	}

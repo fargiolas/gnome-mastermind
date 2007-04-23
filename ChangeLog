@@ -1,3 +1,10 @@
+23 Apr 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* src/gnome-mastermind.c: Changed theme image format to 320x40 (8 pegs
+	of 40x40 and 2 of 20x20)
+	* themes/: Added new tileset tango.svg from Ulisse Perusin (thanks!);
+	Removed old style themes and replaced them with new versions following
+	the previous described format.
+
 22 Apr 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
 	* help/: Added a manual to use with yelp system. Using gnome-doc-utils
 	to do the installing and scrollkeeper stuff.
