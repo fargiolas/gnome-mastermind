@@ -58,16 +58,16 @@
         Please do not change any of this. -->
 
     <authorgroup> 
-      <author> 
+      <author role="maintainer"> 
     		<firstname>Filippo</firstname> 
     		<surname>Argiolas</surname> 
-    			<address> <email>filippo.argiolas@gmail.com</email> </address> 
+		<affiliation>
+		  <address>
+		    <email>filippo.argiolas@gmail.com></email>
+		  </address>
+		</affiliation>
       </author> 
-      <corpauthor> 
-    		<firstname>Filippo</firstname> 
-    		<surname>Argiolas</surname> 
-    			<address> <email>filippo.argiolas@gmail.com</email> </address> 
-      </corpauthor> 
+      <corpauthor>Filippo Argiolas</corpauthor> 
     </authorgroup>
     
 
@@ -98,7 +98,7 @@
       </revision> 
     </revhistory> 
 
-    <releaseinfo>This manual describes version &appversion; of &app;.
+    <releaseinfo>This manual describes version &appversion; of GNOME Mastermind.
     </releaseinfo> 
     <legalnotice> 
       <title>Feedback</title> 
@@ -130,7 +130,8 @@
 	that this one resembles (source: wikipedia).
       </para>
       <para>
-	<guilabel>Mastermind&trade;</guilabel> is a code-breaking game for
+	<trademark class="trade">Mastermind</trademark> is a code-breaking game
+for
 	two players, invented in 1970 by Mordecai Meirowitz that has
 	been very popular during the 80s.
       </para>
@@ -144,7 +145,7 @@
 	peg for each right color with wrong position and a colored peg
 	for each both color and position right item of the combination
 	guessed, in the score grid.
-      </para>™
+      </para>
       <para>
 	Once he got feedback, the codebreaker tries another guess
 	following codemaker hints. Obviously the game is won by

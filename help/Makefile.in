@@ -64,8 +64,7 @@ DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
 	$(top_srcdir)/gnome-doc-utils.make ChangeLog
 subdir = help
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/m4/gnome-doc-utils.m4 \
-	$(top_srcdir)/m4/isc-posix.m4 $(top_srcdir)/configure.ac
+am__aclocal_m4_deps = $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
@@ -75,6 +74,7 @@ SOURCES =
 DIST_SOURCES =
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
+ACLOCAL_AMFLAGS = @ACLOCAL_AMFLAGS@
 ALL_LINGUAS = @ALL_LINGUAS@
 AMDEP_FALSE = @AMDEP_FALSE@
 AMDEP_TRUE = @AMDEP_TRUE@
@@ -338,10 +338,10 @@ _clean_dir = $(if $(DOC_MODULE),clean-doc-dir)
 # # as your app name 
 DOC_MODULE = gnome-mastermind
 # #Any entities you use (?)
-# DOC_ENTITIES = gnome-mastermind.xml
+DOC_ENTITIES = legal.xml
 # # If your file is split into different files, list all the files that
 # # are included here.  Paths are relative to the C/ subdir
-DOC_INCLUDES = legal.xml
+DOC_INCLUDES = 
 #
 # # List of figures to include.  Paths are relative to the C/ subdir
 DOC_FIGURES = \
@@ -350,8 +350,9 @@ DOC_FIGURES = \
 	      figures/row2.png \
 	      figures/row3.png \
 	      figures/row4.png \
-	      figures/row5.png 
+	      figures/row5.png
 
+DOC_LINGUAS = 
 all: all-am
 
 .SUFFIXES:
@@ -429,6 +430,9 @@ distdir: $(DISTFILES)
 	    || exit 1; \
 	  fi; \
 	done
+	$(MAKE) $(AM_MAKEFLAGS) \
+	  top_distdir="$(top_distdir)" distdir="$(distdir)" \
+	  dist-hook
 check-am: all-am
 check: check-am
 all-am: Makefile
@@ -507,16 +511,16 @@ ps-am:
 uninstall-am: uninstall-info-am uninstall-local
 
 .PHONY: all all-am check check-am clean clean-generic clean-libtool \
-	clean-local distclean distclean-generic distclean-libtool \
-	distclean-local distdir dvi dvi-am html html-am info info-am \
-	install install-am install-data install-data-am \
-	install-data-local install-exec install-exec-am install-info \
-	install-info-am install-man install-strip installcheck \
-	installcheck-am installdirs maintainer-clean \
-	maintainer-clean-generic maintainer-clean-local mostlyclean \
-	mostlyclean-generic mostlyclean-libtool mostlyclean-local pdf \
-	pdf-am ps ps-am uninstall uninstall-am uninstall-info-am \
-	uninstall-local
+	clean-local dist-hook distclean distclean-generic \
+	distclean-libtool distclean-local distdir dvi dvi-am html \
+	html-am info info-am install install-am install-data \
+	install-data-am install-data-local install-exec \
+	install-exec-am install-info install-info-am install-man \
+	install-strip installcheck installcheck-am installdirs \
+	maintainer-clean maintainer-clean-generic \
+	maintainer-clean-local mostlyclean mostlyclean-generic \
+	mostlyclean-libtool mostlyclean-local pdf pdf-am ps ps-am \
+	uninstall uninstall-am uninstall-info-am uninstall-local
 
 
 DOC_H_FILE ?=
@@ -875,7 +879,7 @@ uninstall-doc-omf:
 	done
 
 # First off
- dist-hook: doc-dist-hook
+dist-hook: doc-dist-hook
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

@@ -40,8 +40,7 @@ target_triplet = @target@
 subdir = desktop
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/m4/gnome-doc-utils.m4 \
-	$(top_srcdir)/m4/isc-posix.m4 $(top_srcdir)/configure.ac
+am__aclocal_m4_deps = $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
@@ -60,6 +59,7 @@ desktopDATA_INSTALL = $(INSTALL_DATA)
 DATA = $(desktop_DATA)
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
+ACLOCAL_AMFLAGS = @ACLOCAL_AMFLAGS@
 ALL_LINGUAS = @ALL_LINGUAS@
 AMDEP_FALSE = @AMDEP_FALSE@
 AMDEP_TRUE = @AMDEP_TRUE@
@@ -220,7 +220,8 @@ target_vendor = @target_vendor@
 desktopdir = $(datadir)/applications
 desktop_in_files = gnome-mastermind.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
-EXTRA_DIST = $(desktop_DATA)
+EXTRA_DIST = $(desktop_in_files)
+DISTCLEANFILES = $(desktop_DATA)
 all: all-am
 
 .SUFFIXES:
@@ -341,6 +342,7 @@ clean-generic:
 
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
+	-test -z "$(DISTCLEANFILES)" || rm -f $(DISTCLEANFILES)
 
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"

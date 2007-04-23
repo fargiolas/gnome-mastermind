@@ -4,6 +4,12 @@
 	* themes/: Added new tileset tango.svg from Ulisse Perusin (thanks!);
 	Removed old style themes and replaced them with new versions following
 	the previous described format.
+	* autogen.sh: moved gnome autogen.sh
+	* help/Makefile.am: fixed everything to have a proper distcheck
+	* help: fixed xml files to pass make check and fixed omf file name
+	typo to work with gnome-doc-utils and scrollkeeper. Maybe fixed
+	something else i don't remember (thanks ebassi for your hints on irc)
+	* desktop/Makefile.am: fixed everything to have a proper distcheck
 
 22 Apr 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
 	* help/: Added a manual to use with yelp system. Using gnome-doc-utils

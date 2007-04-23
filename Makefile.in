@@ -44,8 +44,7 @@ DIST_COMMON = README $(am__configure_deps) $(srcdir)/Makefile.am \
 	depcomp install-sh ltmain.sh missing mkinstalldirs
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/m4/gnome-doc-utils.m4 \
-	$(top_srcdir)/m4/isc-posix.m4 $(top_srcdir)/configure.ac
+am__aclocal_m4_deps = $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
@@ -85,6 +84,7 @@ GZIP_ENV = --best
 distuninstallcheck_listfiles = find . -type f -print
 distcleancheck_listfiles = find . -type f -print
 ACLOCAL = @ACLOCAL@
+ACLOCAL_AMFLAGS = -I m4
 ALL_LINGUAS = @ALL_LINGUAS@
 AMDEP_FALSE = @AMDEP_FALSE@
 AMDEP_TRUE = @AMDEP_TRUE@
@@ -263,7 +263,8 @@ EXTRA_DIST = config.rpath 	\
 DISTCLEANFILES = \
 	         intltool-extract \
 	         intltool-merge \
-	         intltool-update 
+	         intltool-update \
+		 gnome-doc-utils.make 
 
 DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper
 pkgdata_DATA = AUTHORS    \
@@ -275,7 +276,6 @@ pkgdata_DATA = AUTHORS    \
 	README     \
 	TODO       
 
-ACLOCAL_AMFLAGS = -I m4
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
 
@@ -493,7 +493,7 @@ distclean-tags:
 distdir: $(DISTFILES)
 	$(am__remove_distdir)
 	mkdir $(distdir)
-	$(mkdir_p) $(distdir)/m4 $(distdir)/po
+	$(mkdir_p) $(distdir)/po
 	@srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`; \
 	topsrcdirstrip=`echo "$(top_srcdir)" | sed 's|.|.|g'`; \
 	list='$(DISTFILES)'; for file in $$list; do \

@@ -900,13 +900,6 @@ INTLTOOL_MSGMERGE
 INTLTOOL_XGETTEXT
 ALL_LINGUAS
 DATADIRNAME
-HELP_DIR
-OMF_DIR
-DOC_USER_FORMATS
-ENABLE_SK_TRUE
-ENABLE_SK_FALSE
-HAVE_GNOME_DOC_UTILS_TRUE
-HAVE_GNOME_DOC_UTILS_FALSE
 GETTEXT_PACKAGE
 USE_NLS
 MSGFMT
@@ -924,6 +917,14 @@ POFILES
 POSUB
 MKINSTALLDIRS
 gmlocaledir
+ACLOCAL_AMFLAGS
+HELP_DIR
+OMF_DIR
+DOC_USER_FORMATS
+ENABLE_SK_TRUE
+ENABLE_SK_FALSE
+HAVE_GNOME_DOC_UTILS_TRUE
+HAVE_GNOME_DOC_UTILS_FALSE
 LTLIBOBJS'
 ac_subst_files=''
       ac_precious_vars='build_alias
@@ -3694,14 +3695,12 @@ fi
 
 
 
-
-        { echo "$as_me:$LINENO: checking for strerror in -lcposix" >&5
-echo $ECHO_N "checking for strerror in -lcposix... $ECHO_C" >&6; }
-if test "${ac_cv_lib_cposix_strerror+set}" = set; then
+{ echo "$as_me:$LINENO: checking for library containing strerror" >&5
+echo $ECHO_N "checking for library containing strerror... $ECHO_C" >&6; }
+if test "${ac_cv_search_strerror+set}" = set; then
   echo $ECHO_N "(cached) $ECHO_C" >&6
 else
-  ac_check_lib_save_LIBS=$LIBS
-LIBS="-lcposix  $LIBS"
+  ac_func_search_save_LIBS=$LIBS
 cat >conftest.$ac_ext <<_ACEOF
 /* confdefs.h.  */
 _ACEOF
@@ -3724,7 +3723,14 @@ return strerror ();
   return 0;
 }
 _ACEOF
-rm -f conftest.$ac_objext conftest$ac_exeext
+for ac_lib in '' cposix; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
+  fi
+  rm -f conftest.$ac_objext conftest$ac_exeext
 if { (ac_try="$ac_link"
 case "(($ac_try" in
   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
@@ -3742,25 +3748,35 @@ eval "echo \"\$as_me:$LINENO: $ac_try_echo\"") >&5
 	 test ! -s conftest.err
        } && test -s conftest$ac_exeext &&
        $as_test_x conftest$ac_exeext; then
-  ac_cv_lib_cposix_strerror=yes
+  ac_cv_search_strerror=$ac_res
 else
   echo "$as_me: failed program was:" >&5
 sed 's/^/| /' conftest.$ac_ext >&5
 
-	ac_cv_lib_cposix_strerror=no
+
 fi
 
 rm -f core conftest.err conftest.$ac_objext conftest_ipa8_conftest.oo \
-      conftest$ac_exeext conftest.$ac_ext
-LIBS=$ac_check_lib_save_LIBS
+      conftest$ac_exeext
+  if test "${ac_cv_search_strerror+set}" = set; then
+  break
 fi
-{ echo "$as_me:$LINENO: result: $ac_cv_lib_cposix_strerror" >&5
-echo "${ECHO_T}$ac_cv_lib_cposix_strerror" >&6; }
-if test $ac_cv_lib_cposix_strerror = yes; then
-  LIBS="$LIBS -lcposix"
+done
+if test "${ac_cv_search_strerror+set}" = set; then
+  :
+else
+  ac_cv_search_strerror=no
 fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ echo "$as_me:$LINENO: result: $ac_cv_search_strerror" >&5
+echo "${ECHO_T}$ac_cv_search_strerror" >&6; }
+ac_res=$ac_cv_search_strerror
+if test "$ac_res" != no; then
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
 
-
+fi
 
 
 # Find a good install program.  We prefer a C program (faster),
@@ -7357,7 +7373,7 @@ ia64-*-hpux*)
   ;;
 *-*-irix6*)
   # Find out which ABI we are using.
-  echo '#line 7360 "configure"' > conftest.$ac_ext
+  echo '#line 7376 "configure"' > conftest.$ac_ext
   if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   (eval $ac_compile) 2>&5
   ac_status=$?
@@ -8879,11 +8895,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:8882: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:8898: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:8886: \$? = $ac_status" >&5
+   echo "$as_me:8902: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -9147,11 +9163,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:9150: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:9166: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:9154: \$? = $ac_status" >&5
+   echo "$as_me:9170: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -9251,11 +9267,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:9254: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:9270: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:9258: \$? = $ac_status" >&5
+   echo "$as_me:9274: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -11548,7 +11564,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<EOF
-#line 11551 "configure"
+#line 11567 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -11648,7 +11664,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<EOF
-#line 11651 "configure"
+#line 11667 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -13984,11 +14000,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:13987: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:14003: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:13991: \$? = $ac_status" >&5
+   echo "$as_me:14007: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -14088,11 +14104,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:14091: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:14107: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:14095: \$? = $ac_status" >&5
+   echo "$as_me:14111: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -15649,11 +15665,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:15652: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:15668: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:15656: \$? = $ac_status" >&5
+   echo "$as_me:15672: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -15753,11 +15769,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:15756: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:15772: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:15760: \$? = $ac_status" >&5
+   echo "$as_me:15776: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -17940,11 +17956,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:17943: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:17959: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:17947: \$? = $ac_status" >&5
+   echo "$as_me:17963: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -18208,11 +18224,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:18211: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:18227: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:18215: \$? = $ac_status" >&5
+   echo "$as_me:18231: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -18312,11 +18328,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:18315: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:18331: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:18319: \$? = $ac_status" >&5
+   echo "$as_me:18335: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -22025,93 +22041,6 @@ ac_config_commands="$ac_config_commands intltool"
 
 
 
-gdu_cv_version_required=0.3.2
-
-if test -n "$PKG_CONFIG" && \
-    { (echo "$as_me:$LINENO: \$PKG_CONFIG --exists --print-errors \"gnome-doc-utils >= \$gdu_cv_version_required\"") >&5
-  ($PKG_CONFIG --exists --print-errors "gnome-doc-utils >= $gdu_cv_version_required") 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; then
-  gdu_cv_have_gdu=yes
-else
-  gdu_cv_have_gdu=no
-fi
-
-if test "$gdu_cv_have_gdu" = "yes"; then
-	:
-else
-	{ { echo "$as_me:$LINENO: error: gnome-doc-utils >= $gdu_cv_version_required not found" >&5
-echo "$as_me: error: gnome-doc-utils >= $gdu_cv_version_required not found" >&2;}
-   { (exit 1); exit 1; }; }
-fi
-
-
-
-# Check whether --with-help-dir was given.
-if test "${with_help_dir+set}" = set; then
-  withval=$with_help_dir;
-else
-  with_help_dir='${datadir}/gnome/help'
-fi
-
-HELP_DIR="$with_help_dir"
-
-
-
-# Check whether --with-omf-dir was given.
-if test "${with_omf_dir+set}" = set; then
-  withval=$with_omf_dir;
-else
-  with_omf_dir='${datadir}/omf'
-fi
-
-OMF_DIR="$with_omf_dir"
-
-
-
-# Check whether --with-help-formats was given.
-if test "${with_help_formats+set}" = set; then
-  withval=$with_help_formats;
-else
-  with_help_formats=''
-fi
-
-DOC_USER_FORMATS="$with_help_formats"
-
-
-# Check whether --enable-scrollkeeper was given.
-if test "${enable_scrollkeeper+set}" = set; then
-  enableval=$enable_scrollkeeper;
-else
-  enable_scrollkeeper=yes
-fi
-
-
-
-if test "$gdu_cv_have_gdu" = "yes" -a "$enable_scrollkeeper" = "yes"; then
-  ENABLE_SK_TRUE=
-  ENABLE_SK_FALSE='#'
-else
-  ENABLE_SK_TRUE='#'
-  ENABLE_SK_FALSE=
-fi
-
-
-
-
-if test "$gdu_cv_have_gdu" = "yes"; then
-  HAVE_GNOME_DOC_UTILS_TRUE=
-  HAVE_GNOME_DOC_UTILS_FALSE='#'
-else
-  HAVE_GNOME_DOC_UTILS_TRUE='#'
-  HAVE_GNOME_DOC_UTILS_FALSE=
-fi
-
-
-
-
-
 cat >>confdefs.h <<\_ACEOF
 #define GETTEXT_PACKAGE
 _ACEOF
@@ -23646,6 +23575,103 @@ gmlocaledir='${prefix}/${DATADIRNAME}/locale'
 ALL_LINGUAS="it"
 
 
+
+
+
+      ACLOCAL_AMFLAGS="\${ACLOCAL_FLAGS}"
+  if test -n "$ac_macro_dir"; then
+    ACLOCAL_AMFLAGS="-I $ac_macro_dir $ACLOCAL_AMFLAGS"
+  fi
+
+
+
+
+gdu_cv_version_required=0.3.2
+
+if test -n "$PKG_CONFIG" && \
+    { (echo "$as_me:$LINENO: \$PKG_CONFIG --exists --print-errors \"gnome-doc-utils >= \$gdu_cv_version_required\"") >&5
+  ($PKG_CONFIG --exists --print-errors "gnome-doc-utils >= $gdu_cv_version_required") 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; then
+  gdu_cv_have_gdu=yes
+else
+  gdu_cv_have_gdu=no
+fi
+
+if test "$gdu_cv_have_gdu" = "yes"; then
+	:
+else
+	{ { echo "$as_me:$LINENO: error: gnome-doc-utils >= $gdu_cv_version_required not found" >&5
+echo "$as_me: error: gnome-doc-utils >= $gdu_cv_version_required not found" >&2;}
+   { (exit 1); exit 1; }; }
+fi
+
+
+
+# Check whether --with-help-dir was given.
+if test "${with_help_dir+set}" = set; then
+  withval=$with_help_dir;
+else
+  with_help_dir='${datadir}/gnome/help'
+fi
+
+HELP_DIR="$with_help_dir"
+
+
+
+# Check whether --with-omf-dir was given.
+if test "${with_omf_dir+set}" = set; then
+  withval=$with_omf_dir;
+else
+  with_omf_dir='${datadir}/omf'
+fi
+
+OMF_DIR="$with_omf_dir"
+
+
+
+# Check whether --with-help-formats was given.
+if test "${with_help_formats+set}" = set; then
+  withval=$with_help_formats;
+else
+  with_help_formats=''
+fi
+
+DOC_USER_FORMATS="$with_help_formats"
+
+
+# Check whether --enable-scrollkeeper was given.
+if test "${enable_scrollkeeper+set}" = set; then
+  enableval=$enable_scrollkeeper;
+else
+  enable_scrollkeeper=yes
+fi
+
+
+
+if test "$gdu_cv_have_gdu" = "yes" -a "$enable_scrollkeeper" = "yes"; then
+  ENABLE_SK_TRUE=
+  ENABLE_SK_FALSE='#'
+else
+  ENABLE_SK_TRUE='#'
+  ENABLE_SK_FALSE=
+fi
+
+
+
+
+if test "$gdu_cv_have_gdu" = "yes"; then
+  HAVE_GNOME_DOC_UTILS_TRUE=
+  HAVE_GNOME_DOC_UTILS_FALSE='#'
+else
+  HAVE_GNOME_DOC_UTILS_TRUE='#'
+  HAVE_GNOME_DOC_UTILS_FALSE=
+fi
+
+
+
+
 ac_config_files="$ac_config_files po/Makefile.in Makefile src/Makefile themes/Makefile ui/Makefile desktop/Makefile icons/Makefile help/Makefile"
 
 
@@ -24499,13 +24525,6 @@ INTLTOOL_MSGMERGE!$INTLTOOL_MSGMERGE$ac_delim
 INTLTOOL_XGETTEXT!$INTLTOOL_XGETTEXT$ac_delim
 ALL_LINGUAS!$ALL_LINGUAS$ac_delim
 DATADIRNAME!$DATADIRNAME$ac_delim
-HELP_DIR!$HELP_DIR$ac_delim
-OMF_DIR!$OMF_DIR$ac_delim
-DOC_USER_FORMATS!$DOC_USER_FORMATS$ac_delim
-ENABLE_SK_TRUE!$ENABLE_SK_TRUE$ac_delim
-ENABLE_SK_FALSE!$ENABLE_SK_FALSE$ac_delim
-HAVE_GNOME_DOC_UTILS_TRUE!$HAVE_GNOME_DOC_UTILS_TRUE$ac_delim
-HAVE_GNOME_DOC_UTILS_FALSE!$HAVE_GNOME_DOC_UTILS_FALSE$ac_delim
 GETTEXT_PACKAGE!$GETTEXT_PACKAGE$ac_delim
 USE_NLS!$USE_NLS$ac_delim
 MSGFMT!$MSGFMT$ac_delim
@@ -24523,10 +24542,18 @@ POFILES!$POFILES$ac_delim
 POSUB!$POSUB$ac_delim
 MKINSTALLDIRS!$MKINSTALLDIRS$ac_delim
 gmlocaledir!$gmlocaledir$ac_delim
+ACLOCAL_AMFLAGS!$ACLOCAL_AMFLAGS$ac_delim
+HELP_DIR!$HELP_DIR$ac_delim
+OMF_DIR!$OMF_DIR$ac_delim
+DOC_USER_FORMATS!$DOC_USER_FORMATS$ac_delim
+ENABLE_SK_TRUE!$ENABLE_SK_TRUE$ac_delim
+ENABLE_SK_FALSE!$ENABLE_SK_FALSE$ac_delim
+HAVE_GNOME_DOC_UTILS_TRUE!$HAVE_GNOME_DOC_UTILS_TRUE$ac_delim
+HAVE_GNOME_DOC_UTILS_FALSE!$HAVE_GNOME_DOC_UTILS_FALSE$ac_delim
 LTLIBOBJS!$LTLIBOBJS$ac_delim
 _ACEOF
 
-  if test `sed -n "s/.*$ac_delim\$/X/p" conf$$subs.sed | grep -c X` = 62; then
+  if test `sed -n "s/.*$ac_delim\$/X/p" conf$$subs.sed | grep -c X` = 63; then
     break
   elif $ac_last_try; then
     { { echo "$as_me:$LINENO: error: could not make $CONFIG_STATUS" >&5

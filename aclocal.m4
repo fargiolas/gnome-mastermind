@@ -445,6 +445,103 @@ sed 's/^/| /' conftest.foo >&AS_MESSAGE_LOG_FD
 fi])
 
 
+# gnome-common.m4
+# 
+
+dnl GNOME_COMMON_INIT
+
+AC_DEFUN([GNOME_COMMON_INIT],
+[
+  dnl this macro should come after AC_CONFIG_MACRO_DIR
+  AC_BEFORE([AC_CONFIG_MACRO_DIR], [$0])
+
+  dnl ensure that when the Automake generated makefile calls aclocal,
+  dnl it honours the $ACLOCAL_FLAGS environment variable
+  ACLOCAL_AMFLAGS="\${ACLOCAL_FLAGS}"
+  if test -n "$ac_macro_dir"; then
+    ACLOCAL_AMFLAGS="-I $ac_macro_dir $ACLOCAL_AMFLAGS"
+  fi
+
+  AC_SUBST([ACLOCAL_AMFLAGS])
+])
+
+AC_DEFUN([GNOME_DEBUG_CHECK],
+[
+	AC_ARG_ENABLE([debug],
+                      AC_HELP_STRING([--enable-debug],
+                                     [turn on debugging]),,
+                      [enable_debug=no])
+
+	if test x$enable_debug = xyes ; then
+	    AC_DEFINE(GNOME_ENABLE_DEBUG, 1,
+		[Enable additional debugging at the expense of performance and size])
+	fi
+])
+
+dnl GNOME_MAINTAINER_MODE_DEFINES ()
+dnl define DISABLE_DEPRECATED
+dnl
+AC_DEFUN([GNOME_MAINTAINER_MODE_DEFINES],
+[
+	AC_REQUIRE([AM_MAINTAINER_MODE])
+
+	if test $USE_MAINTAINER_MODE = yes; then
+		DISABLE_DEPRECATED="-DG_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED -DGDK_PIXBUF_DISABLE_DEPRECATED -DPANGO_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED -DGCONF_DISABLE_DEPRECATED -DBONOBO_DISABLE_DEPRECATED -DBONOBO_UI_DISABLE_DEPRECATED -DGNOME_VFS_DISABLE_DEPRECATED -DGNOME_DISABLE_DEPRECATED -DLIBGLADE_DISABLE_DEPRECATED"
+	else
+		DISABLE_DEPRECATED=""
+	fi
+	AC_SUBST(DISABLE_DEPRECATED)
+])
+
+dnl Do not call GNOME_DOC_DEFINES directly.  It is split out from
+dnl GNOME_DOC_INIT to allow gnome-doc-utils to bootstrap off itself.
+AC_DEFUN([GNOME_DOC_DEFINES],
+[
+AC_ARG_WITH([help-dir],
+  AC_HELP_STRING([--with-help-dir=DIR], [path to help docs]),,
+  [with_help_dir='${datadir}/gnome/help'])
+HELP_DIR="$with_help_dir"
+AC_SUBST(HELP_DIR)
+
+AC_ARG_WITH([omf-dir],
+  AC_HELP_STRING([--with-omf-dir=DIR], [path to OMF files]),,
+  [with_omf_dir='${datadir}/omf'])
+OMF_DIR="$with_omf_dir"
+AC_SUBST(OMF_DIR)
+
+AC_ARG_WITH([help-formats],
+  AC_HELP_STRING([--with-help-formats=FORMATS], [list of formats]),,
+  [with_help_formats=''])
+DOC_USER_FORMATS="$with_help_formats"
+AC_SUBST(DOC_USER_FORMATS)
+
+AC_ARG_ENABLE([scrollkeeper],
+	[AC_HELP_STRING([--disable-scrollkeeper],
+			[do not make updates to the scrollkeeper database])],,
+	enable_scrollkeeper=yes)
+AM_CONDITIONAL([ENABLE_SK],[test "$gdu_cv_have_gdu" = "yes" -a "$enable_scrollkeeper" = "yes"])
+
+AM_CONDITIONAL([HAVE_GNOME_DOC_UTILS],[test "$gdu_cv_have_gdu" = "yes"])
+])
+
+# GNOME_DOC_INIT ([MINIMUM-VERSION],[ACTION-IF-FOUND],[ACTION-IF-NOT-FOUND])
+#
+AC_DEFUN([GNOME_DOC_INIT],
+[
+ifelse([$1],,[gdu_cv_version_required=0.3.2],[gdu_cv_version_required=$1])
+
+PKG_CHECK_EXISTS([gnome-doc-utils >= $gdu_cv_version_required],
+	[gdu_cv_have_gdu=yes],[gdu_cv_have_gdu=no])
+
+if test "$gdu_cv_have_gdu" = "yes"; then
+	ifelse([$2],,[:],[$2])
+else
+	ifelse([$3],,[AC_MSG_ERROR([gnome-doc-utils >= $gdu_cv_version_required not found])],[$3])
+fi
+
+GNOME_DOC_DEFINES
+])
+
 
 dnl IT_PROG_INTLTOOL([MINIMUM-VERSION], [no-xml])
 # serial 35 IT_PROG_INTLTOOL
@@ -8014,5 +8111,3 @@ AC_SUBST([am__tar])
 AC_SUBST([am__untar])
 ]) # _AM_PROG_TAR
 
-m4_include([m4/gnome-doc-utils.m4])
-m4_include([m4/isc-posix.m4])

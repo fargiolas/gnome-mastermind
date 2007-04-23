@@ -81,8 +81,6 @@ CFLAGS="$CFLAGS -Wall -pedantic -std=c99 -fno-strict-aliasing -fmessage-length=0
 #AM_GNU_GETTEXT_VERSION([0.16.1])
 AC_PROG_INTLTOOL([0.23])
 
-GNOME_DOC_INIT
-
 AC_DEFINE([GETTEXT_PACKAGE], [], [gnome-mastermind])
 GETTEXT_PACKAGE=gnome-mastermind
 AC_SUBST(GETTEXT_PACKAGE)
@@ -95,6 +93,9 @@ AC_SUBST(gmlocaledir)
 
 ALL_LINGUAS="it"
 AC_SUBST(ALL_LINGUAS)
+
+GNOME_COMMON_INIT
+GNOME_DOC_INIT
 
 AC_CONFIG_FILES([  po/Makefile.in
     Makefile
