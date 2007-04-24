@@ -431,7 +431,7 @@ for
       &app;, please visit the 
       <ulink url="http://www.autistici.org/gnome-mastermind" type="http">&app; webpage</ulink>. </para>
     <para>
-      For copyright issues check tha about dialog and, most of all, copyright and copyright-artwork files in source tree or in the package data dir (usually /usr/share/gnome-mastermind).
+      For copyright issues check the about dialog and, most of all, copyright and copyright-artwork files in source tree or in the package data dir (usually /usr/share/gnome-mastermind).
     </para>
     <para>
       Please report any bug at 
