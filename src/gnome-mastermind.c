@@ -112,6 +112,7 @@ GList *theme_list = NULL;
 
 GdkColor fgcolor;
 GdkColor bgcolor;
+GdkColor savedcolor;
 
 GConfClient *settings;
 
@@ -478,6 +479,9 @@ void draw_main_grid (GtkWidget *widget) {
 
 	int i, j;
 	cairo_t *cr;
+	GdkImage *sv = NULL;
+	guint32 pixel;
+	GdkColormap *cmap = gdk_drawable_get_colormap (pixmap);	
 
 	cr = gdk_cairo_create (pixmap);
 
@@ -549,6 +553,12 @@ void draw_main_grid (GtkWidget *widget) {
 	cairo_fill (cr);
 	cairo_stroke (cr); 
 	cairo_destroy (cr);
+	sv = gdk_drawable_copy_to_image(pixmap, NULL, GRID_XPAD + 2, GRID_YPAD+ (GRID_SZ* (grid_rows- (grid_rows-ypos)))+2, 0,0, 1,1);
+
+	pixel = gdk_image_get_pixel(sv, 0, 0);
+	gdk_colormap_query_color (cmap, pixel, &savedcolor);	
+	g_object_unref(cmap);
+	g_object_unref(sv);
 }
 
 gboolean start_new_gameboard (GtkWidget *widget) {
@@ -834,10 +844,19 @@ static gboolean clean_next_row (void) {
 
 static gboolean place_grid_color (int c, int l) {
 	gint x, y;
-
+	cairo_t *cr;
+	
 	gm_debug ("placing c:%d l:%d\n", c, l);
 	gm_debug ("movecount: %d\n", movecount);
 	gridcl2xy (c, l, &x, &y, drawing_area);
+
+	cr = gdk_cairo_create (pixmap);
+	gdk_cairo_set_source_color(cr, &savedcolor);
+	cairo_set_line_width (cr, 0);
+	cairo_rectangle (cr, x+1, y+1, BM-1, BM-2);
+	cairo_fill (cr);
+	cairo_stroke(cr);
+	cairo_destroy(cr);
 
 	gdk_draw_pixbuf (pixmap,
 			 NULL,
@@ -848,7 +867,6 @@ static gboolean place_grid_color (int c, int l) {
 			 GDK_RGB_DITHER_MAX, 0, 0);
 
 	gdk_window_invalidate_rect (drawing_area->window, NULL, FALSE); 
-
 	return TRUE;
 }
 
@@ -921,11 +939,15 @@ static gboolean button_press_event ( GtkWidget *widget,
 
 		gridxy2cl (event->x, event->y, &c, &l, widget);
 
-		if (l == ypos && filled[c] == 0) {
-			if ((xpos == GRID_COLS-1)&& (ypos>0)) clean_next_row();
+		if (l == ypos) {
+			if(filled[c] == 0) {
+				xpos++;
+				xpos = xpos%GRID_COLS;
+			}
+
+			if (xpos == 0 && movecount > 1 && ypos > 0) clean_next_row();
 	 
 			draw_tray_grid (tray_area); // clean tray selection redrawing tray_area
-
 			place_grid_color (c, l);
 	 
 			movearray[l][c] = selectedcolor;
@@ -939,7 +961,7 @@ static gboolean button_press_event ( GtkWidget *widget,
 			gtk_statusbar_pop (GTK_STATUSBAR (status), gtk_statusbar_get_context_id (GTK_STATUSBAR (status), "mmind"));
 			gtk_statusbar_push (GTK_STATUSBAR (status), gtk_statusbar_get_context_id (GTK_STATUSBAR (status), "mmind"), _("Select a color!"));
 
-			if (xpos == GRID_COLS-1) {
+			if (xpos == 0 && movecount > 1) {
 				gm_debug ("calling checkscores\n");
 				checkscores();
 				for (i = 0; i<GRID_COLS; i++) filled[i] = 0;
@@ -963,8 +985,7 @@ static gboolean button_press_event ( GtkWidget *widget,
 				ypos = grid_rows-1;
 			}
 			else {
-				xpos++;
-				xpos = xpos%GRID_COLS;
+
 			}
 			selectedcolor = -1;
 		}

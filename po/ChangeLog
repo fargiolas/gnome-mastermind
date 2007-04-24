@@ -1,3 +1,7 @@
+2007-04-23  gettextize  <bug-gnu-gettext@gnu.org>
+
+	* Makefile.in.in: Upgrade to gettext-0.16.1.
+
 19 Apr 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
 	
 	* pl.po: Added Polish by Tomasz Dominikowski (thanks ;))
