@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-mastermind 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-04-24 18:37+0200\n"
-"PO-Revision-Date: 2007-04-19 11:41+0100\n"
+"POT-Creation-Date: 2007-04-24 21:31+0200\n"
+"PO-Revision-Date: 2007-04-24 20:40+0100\n"
 "Last-Translator: Tomasz Dominikowski <dominikowski@gmail.com>\n"
 "Language-Team: Tomasz Dominikowski <dominikowski@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -179,7 +179,7 @@ msgstr "Informacje o programie"
 
 #: ../src/gnome-mastermind.c:1541 ../src/gnome-mastermind.c:1543
 msgid "_Contents"
-msgstr ""
+msgstr "_Zawartość"
 
 #: ../src/gnome-mastermind.c:1560
 msgid "_Show Toolbar"
@@ -191,11 +191,11 @@ msgstr "Wyświetlenie lub ukrycie paska narzędzi"
 
 #: ../desktop/gnome-mastermind.desktop.in.h:1
 msgid "Break the hidden code!"
-msgstr ""
+msgstr "Złam ukryty kod!"
 
 #: ../desktop/gnome-mastermind.desktop.in.h:2
 msgid "Mastermind"
-msgstr ""
+msgstr "Mastermind"
 
 #, fuzzy
 #~ msgid "A mastermind-like game for Gnome"
