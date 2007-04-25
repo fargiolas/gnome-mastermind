@@ -64,10 +64,10 @@ GtkWidget *tray_area = NULL;
 GtkWidget *toolbar;
 GtkAction *show_toolbar_action;
 
-
 gboolean gm_debug_on;
 
 GtkWidget *status;
+
 gint solution[4];
 gint tmp[4];
 gint guess[4];
@@ -121,10 +121,11 @@ GtkWidget *pref_dialog;
 GtkWidget *fg_colorbutton = NULL;
 GtkWidget *bg_colorbutton = NULL;
 
+
+
 static gboolean redraw_current_game();
 gboolean start_new_gameboard (GtkWidget *widget);
 void new_game (void);
-
 
 gint gm_debug (const gchar *format, ...) {
 	va_list args;
@@ -136,7 +137,6 @@ gint gm_debug (const gchar *format, ...) {
 	}
 	return 0;
 }
-
 
 void reset_default_settings (void) {
 	gconf_client_set_string (settings, "/apps/gnome-mastermind/theme", "simple.svg", NULL);
@@ -649,6 +649,7 @@ void new_game (void) {
 	gdk_window_invalidate_rect (drawing_area->window, NULL, FALSE); 
 	gtk_statusbar_pop (GTK_STATUSBAR (status), gtk_statusbar_get_context_id (GTK_STATUSBAR (status), "mmind"));
 	gtk_statusbar_push (GTK_STATUSBAR (status), gtk_statusbar_get_context_id (GTK_STATUSBAR (status), "mmind"), _("Ready for a new game!"));
+
 	newgame = 0;
 }
 
@@ -718,8 +719,9 @@ static gboolean configure_event ( GtkWidget *widget,
 	/* if (pixmap)
 	   g_object_unref (pixmap); */
 	// new_game = 0;
-	if (confcount == 0)
+	if (confcount == 0) {
 		new_game();
+	}
 	else {
 		old_xpos = xpos;
 		old_ypos = ypos;
@@ -781,10 +783,32 @@ void draw_score_pegs (int line, int b, int c, GtkWidget *widget) {
 	}
 }
 
+static gboolean clean_next_row (void) {
+	cairo_t *cr;
+	cr = gdk_cairo_create (pixmap);
+	cairo_set_operator (cr, CAIRO_OPERATOR_ADD);
+	cairo_set_line_width (cr, 0);
+	cairo_rectangle (cr, 
+			 GRID_XPAD+1,
+			 GRID_YPAD+ (GRID_SZ* (grid_rows- (grid_rows-ypos+1)))+1,
+			 GRID_SZ*GRID_COLS-1,
+			 GRID_SZ-2);
+	cairo_rectangle (cr, 
+			 GRID_XPAD+GRID_SZ* (GRID_COLS+1)+1,
+			 GRID_YPAD+ (GRID_SZ* (grid_rows- (grid_rows-ypos+1)))+1, 
+			 GRID_SZ-1, GRID_SZ-2);
+	cairo_set_source_rgba (cr, 1, 1, 1, 0.35);
+	cairo_fill_preserve (cr);
+	cairo_stroke (cr); 
+	cairo_destroy (cr);
+	gdk_window_invalidate_rect (drawing_area->window, NULL, FALSE); 
+	return TRUE;
+}
+
 static gboolean checkscores() {
 	gchar *statusmessage;
 	int i, j;
-
+	gm_debug("[checkscores]\n");
 	for (i = 0; i < GRID_COLS; i++) tmp[i] = solution[i];
 	bulls = cows = 0;
 	gm_debug ("solution: ");
@@ -817,28 +841,31 @@ static gboolean checkscores() {
 	gtk_statusbar_pop (GTK_STATUSBAR (status), gtk_statusbar_get_context_id (GTK_STATUSBAR (status), "mmind"));
 	gtk_statusbar_push (GTK_STATUSBAR (status), gtk_statusbar_get_context_id (GTK_STATUSBAR (status), "mmind"), statusmessage);
 	g_free (statusmessage);
- 
-	return TRUE;
-}
 
-static gboolean clean_next_row (void) {
-	cairo_t *cr;
-	cr = gdk_cairo_create (pixmap);
-	cairo_set_operator (cr, CAIRO_OPERATOR_ADD);
-	cairo_set_line_width (cr, 0);
-	cairo_rectangle (cr, 
-			 GRID_XPAD+1,
-			 GRID_YPAD+ (GRID_SZ* (grid_rows- (grid_rows-ypos+1)))+1,
-			 GRID_SZ*GRID_COLS-1,
-			 GRID_SZ-2);
-	cairo_rectangle (cr, 
-			 GRID_XPAD+GRID_SZ* (GRID_COLS+1)+1,
-			 GRID_YPAD+ (GRID_SZ* (grid_rows- (grid_rows-ypos+1)))+1, 
-			 GRID_SZ-1, GRID_SZ-2);
-	cairo_set_source_rgba (cr, 1, 1, 1, 0.35);
-	cairo_fill_preserve (cr);
-	cairo_stroke (cr); 
-	cairo_destroy (cr);
+	for (i = 0; i < GRID_COLS; i++) filled[i] = 0;
+	movearray[ypos][GRID_COLS] = bulls;
+	movearray[ypos][GRID_COLS+1] = cows;
+
+	for (i = grid_rows-1; i >= 0; i--){
+		for (j = 0; j<GRID_COLS+2; j++)
+			gm_debug (" %d ", movearray[i][j]);
+		gm_debug ("\n");
+	}
+	if (bulls == 4) {
+		win_dialog (grid_rows-ypos-1);
+		xpos = 0;
+		ypos = grid_rows-1;
+	} 
+	else if (ypos == 0) {
+		lose_dialog (grid_rows);
+		xpos = 0;
+		ypos = grid_rows-1;
+	}
+	else {
+		clean_next_row();
+		ypos--;
+	}
+	
 	return TRUE;
 }
 
@@ -932,7 +959,6 @@ static gboolean button_press_event ( GtkWidget *widget,
 				     GdkEventButton *event )
 {
 	int c, l;
-	int i, j;
 
 	if (event->type != GDK_BUTTON_PRESS) return TRUE;
 	if (event->button == 1 && pixmap != NULL && selectedcolor >= 0) {
@@ -940,13 +966,11 @@ static gboolean button_press_event ( GtkWidget *widget,
 		gridxy2cl (event->x, event->y, &c, &l, widget);
 
 		if (l == ypos) {
-			if(filled[c] == 0) {
+			if(!filled[c]) {
 				xpos++;
 				xpos = xpos%GRID_COLS;
 			}
 
-			if (xpos == 0 && movecount > 1 && ypos > 0) clean_next_row();
-	 
 			draw_tray_grid (tray_area); // clean tray selection redrawing tray_area
 			place_grid_color (c, l);
 	 
@@ -961,33 +985,12 @@ static gboolean button_press_event ( GtkWidget *widget,
 			gtk_statusbar_pop (GTK_STATUSBAR (status), gtk_statusbar_get_context_id (GTK_STATUSBAR (status), "mmind"));
 			gtk_statusbar_push (GTK_STATUSBAR (status), gtk_statusbar_get_context_id (GTK_STATUSBAR (status), "mmind"), _("Select a color!"));
 
+			gm_debug ("[button_press_event]xpos:%d ypos:%d\n", xpos, ypos);
 			if (xpos == 0 && movecount > 1) {
-				gm_debug ("calling checkscores\n");
 				checkscores();
-				for (i = 0; i<GRID_COLS; i++) filled[i] = 0;
-				movearray[l][GRID_COLS] = bulls;
-				movearray[l][GRID_COLS+1] = cows;
-				ypos--;
-				for (i = grid_rows-1; i >= 0; i--){
-					for (j = 0; j < GRID_COLS+2; j++)
-						gm_debug (" %d ", movearray[i][j]);
-					gm_debug ("\n");
-				}
-			}
-			if (bulls == 4) {
-				win_dialog (grid_rows-ypos-1);
-				xpos = 0;
-				ypos = grid_rows-1;
-			}
-			else if (ypos < 0) {
-				lose_dialog (grid_rows);
-				xpos = 0;
-				ypos = grid_rows-1;
-			}
-			else {
-
 			}
 			selectedcolor = -1;
+			
 		}
 		else {
 			gtk_statusbar_pop (GTK_STATUSBAR (status), gtk_statusbar_get_context_id (GTK_STATUSBAR (status), "mmind"));
@@ -999,61 +1002,40 @@ static gboolean button_press_event ( GtkWidget *widget,
 }
 
 static gboolean tray_mid_click(){
-	int i;
-	int j, k;
+	int c;
 	int found = 0;
-	for (i = 0; i < GRID_COLS; i++) {
-		if (!filled[i] && !found) { 
+	for (c = 0; c < GRID_COLS; c++) {
+		if (!filled[c] && !found) { 
 //	 gm_debug ("found %d\n", i);
 			found = 1;
-			if ((xpos == GRID_COLS-1) && (ypos>0)) clean_next_row();
+
+			xpos++;
+			xpos = xpos%GRID_COLS;
+
 //	 gm_debug ("i:%d ypos:%d c: %d l:%d\n", i, ypos, c, l);
+
 			if (timeout_id > 0) {
 				g_source_remove (timeout_id);
 			}
 			timeout_id = g_timeout_add (200, 
 						    (GSourceFunc) draw_tray_grid, 
 						    tray_area);
-//	 draw_tray_grid (tray_area); // clean tray selection redrawing tray_area
 
-			place_grid_color (i, ypos);
-			movearray[ypos][i] = selectedcolor;
+			place_grid_color (c, ypos);
+			
+			movearray[ypos][c] = selectedcolor;
 
 			movecount++;
 
-			filled[i] = 1; // set current position as filled
+			filled[c] = 1; // set current position as filled
 
-			guess[i] = selectedcolor; // fill guessed solution array with current color
+			guess[c] = selectedcolor; // fill guessed solution array with current color
 			gtk_statusbar_pop (GTK_STATUSBAR (status), gtk_statusbar_get_context_id (GTK_STATUSBAR (status), "mmind"));
 			gtk_statusbar_push (GTK_STATUSBAR (status), gtk_statusbar_get_context_id (GTK_STATUSBAR (status), "mmind"), _("Select a color!"));
 
 			gm_debug ("[tray_mid_click]xpos:%d ypos:%d\n", xpos, ypos);
-			if (xpos == GRID_COLS-1) {
-				gm_debug ("calling checkscores\n");
+			if (xpos == 0 && movecount > 1) {
 				checkscores();
-				for (i = 0; i < GRID_COLS; i++) filled[i] = 0;
-				movearray[ypos][GRID_COLS] = bulls;
-				movearray[ypos][GRID_COLS+1] = cows;
-				for (j = grid_rows-1; j >= 0; j--){
-					for (k = 0; k<GRID_COLS+2; k++)
-						gm_debug (" %d ", movearray[j][k]);
-					gm_debug ("\n");
-				}
-				ypos--;
-			}
-			if (bulls == 4) {
-				win_dialog (grid_rows-ypos-1);
-				xpos = 0;
-				ypos = grid_rows-1;
-			} 
-			else if (ypos < 0) {
-				lose_dialog (grid_rows);
-				xpos = 0;
-				ypos = grid_rows-1;
-			}
-			else {
-				xpos++;
-				xpos = xpos%GRID_COLS;
 			}
 			selectedcolor = -1;
 		}
@@ -1582,7 +1564,7 @@ int main ( int argc, char *argv[] )
 	GtkUIManager *menu_manager; 
 	GtkAccelGroup *accel_group;
 	const gchar *debug_env = NULL;
- 
+
 	bindtextdomain (GETTEXT_PACKAGE, GMLOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE); 
@@ -1699,8 +1681,9 @@ int main ( int argc, char *argv[] )
 
 	status = gtk_statusbar_new();
 	gtk_statusbar_set_has_resize_grip (GTK_STATUSBAR (status), FALSE);
+
 	gtk_box_pack_end (GTK_BOX (vbox), status, FALSE, FALSE, 0);
- 
+
 	gtk_statusbar_pop (GTK_STATUSBAR (status), gtk_statusbar_get_context_id (GTK_STATUSBAR (status), "mmind"));
 	gtk_statusbar_push (GTK_STATUSBAR (status), gtk_statusbar_get_context_id (GTK_STATUSBAR (status), "mmind"), _("Select a color!"));
 

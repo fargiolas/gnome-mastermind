@@ -1,3 +1,9 @@
+25 Apr 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* src/gnome-mastermind.c: rewritten a bit button press callbacks to
+	not clean next row if the game is won or over.
+	Moved part of redundant code from tray_mid_click and
+	button_press_event to checkscores().
+
 24 Apr 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
 	* src/gnome-mastermind.c: Added the code to replace a color peg
 	already placed with a new one. Obviously when 4 pegs are placed
