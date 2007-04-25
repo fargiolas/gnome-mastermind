@@ -39,7 +39,8 @@
   <articleinfo> 
     <title>&app; Manual</title>
     <abstract role="description">
-      <para>&app; is ... <!-- insert brief description -->.</para>
+      <para>&app; is a <trademark class="trade">Mastermind</trademark> like
+game for GNOME Desktop.</para>
     </abstract>         
 
     <copyright> 
@@ -132,19 +133,22 @@
       <para>
 	<trademark class="trade">Mastermind</trademark> is a code-breaking game
 for
-	two players, invented in 1970 by Mordecai Meirowitz that has
+	two players, invented in 1970 by Mordecai Meirowitz, that has
 	been very popular during the 80s.
       </para>
       <para>
-	One of the 2 players, the codemaker, places in its side of the
-	board (hidden from the other, the codebreaker), a combination
-	of 4 colors.  The codebreaker has to guess that pattern (both
-	order and colors) with the least number of tries. At each turn
-	(12 in the most common version), the codebreaker tries a
-	pattern and the codemaker gives him feedback placing a white
-	peg for each right color with wrong position and a colored peg
-	for each both color and position right item of the combination
-	guessed, in the score grid.
+	The game is played by 2 players:
+	the <emphasis>codemaker</emphasis> and
+	the <emphasis>codebreaker</emphasis>.  
+
+	The codemaker, places in its side of the board (hidden from
+	the other), a combination of 4 colors.  The codebreaker has to
+	guess that pattern (both order and colors) with the least
+	number of tries. At each turn (12 in the most common version),
+	the codebreaker tries a pattern and the codemaker gives him
+	feedback placing a white peg for each right color with wrong
+	position and a colored peg for each both color and position
+	right item of the combination guessed, in the score grid.
       </para>
       <para>
 	Once he got feedback, the codebreaker tries another guess
@@ -158,12 +162,11 @@ for
 	&app; is a solitaire version that resembles the classic
 	game. The codemaker role is taken by computer.
       </para>
-      <para> 
-	  The player has to guess a four colors combination (note
+      <para> The player has to guess a four color combination (note
 	  that each color can be repeated). Computer prints (with
-	  default theme selected) a red peg for each right color and
-	  position guess and a white peg for each right color and missed
-	  position guess.
+	  default theme selected) a red peg for each right color in
+	  the right position and a white peg for each right color
+	  misplaced.
       </para>
     </sect2>
     <sect2 id="get-started">
@@ -254,43 +257,43 @@ for
 	</listitem>
 	</varlistentry>
 	</variablelist>
-      <sect3 id="scuts">
-	<title>Shortcuts</title>
-	    <itemizedlist> 
-	      <listitem> 
-		<para> 
-		  <guilabel>First button click</guilabel> </para> 
-		<para>Select peg if done in tray area. Place it if
-		done in main grid cells.</para>
-	      </listitem> 
-	      <listitem> 
-		<para> 
-		  <guilabel>Middle button click</guilabel> </para> 
-		<para>Available only in tray area, place ball to
-		first free active cell.</para>
-	      </listitem> 
-	      <listitem> 
-		<para> 
-		  <guilabel>Ctrl + N</guilabel> </para> 
-		<para>Start a new game.</para> 
-	      </listitem> 
-	      <listitem> 
-		<para> 
-		  <guilabel>Ctrl + Q</guilabel> </para> 
-		<para>Quit game window.</para> 
-	      </listitem> 
-	      <listitem> 
-		<para> 
-		  <guilabel>Ctrl + P</guilabel> </para> 
-		<para>Open preferences dialog.</para> 
-	      </listitem> 
-	      <listitem> 
-		<para> 
-		  <guilabel>F1</guilabel> </para> 
-		<para>Show this manual.</para> 
-	      </listitem> 
-	    </itemizedlist> 
-      </sect3>
+    </sect2>
+    <sect2 id="scuts">
+      <title>Shortcuts</title>
+      <itemizedlist> 
+	<listitem> 
+	  <para> 
+	    <guilabel>First button click</guilabel> </para> 
+	  <para>Select peg if done in tray area. Place it if
+	    done in main grid cells.</para>
+	</listitem> 
+	<listitem> 
+	  <para> 
+	    <guilabel>Middle button click</guilabel> </para> 
+	  <para>Available only in tray area, place ball to
+	    first free active cell.</para>
+	</listitem> 
+	<listitem> 
+	  <para> 
+	    <guilabel>Ctrl + N</guilabel> </para> 
+	  <para>Start a new game.</para> 
+	</listitem> 
+	<listitem> 
+	  <para> 
+	    <guilabel>Ctrl + Q</guilabel> </para> 
+	  <para>Quit game window.</para> 
+	</listitem> 
+	<listitem> 
+	  <para> 
+	    <guilabel>Ctrl + P</guilabel> </para> 
+	  <para>Open preferences dialog.</para> 
+	</listitem> 
+	<listitem> 
+	  <para> 
+	    <guilabel>F1</guilabel> </para> 
+	  <para>Show this manual.</para> 
+	</listitem> 
+      </itemizedlist> 
     </sect2>
     <sect2>
     <title id="walkthrough">Walk through a game session</title>
