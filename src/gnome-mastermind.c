@@ -1191,10 +1191,12 @@ static void about_action (void) {
 		"..some other people for their hints and suggestions", 
 		"Isabella Piredda, grazie amore mio!", 
 		"Enrica Argiolas, my lil sister and beta tester", NULL };
+
 	gtk_show_about_dialog (GTK_WINDOW (window),
 			       "name", "GNOME Mastermind",
 			       "authors", authors,
 			       "artists", artists,
+			       "translator-credits", _("Filippo Argiolas <filippo.argiolas@gmail.com>"),
 			       "comments", _("A Mastermind clone for gnome"),
 			       "copyright", "gnome-mastermind, copyright (c) 2007 Filippo Argiolas\n"
 			       "mastermind, copyright (c) 1971 Invicta Plastics, Ltd. UK",

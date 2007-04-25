@@ -3,6 +3,7 @@
 	not clean next row if the game is won or over.
 	Moved part of redundant code from tray_mid_click and
 	button_press_event to checkscores().
+	* configure.ac: Added fr to ALL_LINGUAS
 
 24 Apr 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
 	* src/gnome-mastermind.c: Added the code to replace a color peg

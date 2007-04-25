@@ -23571,7 +23571,7 @@ echo "${ECHO_T}$LINGUAS" >&6; }
 gmlocaledir='${prefix}/${DATADIRNAME}/locale'
 
 
-ALL_LINGUAS="it pl"
+ALL_LINGUAS="it pl fr"
 
 
 
