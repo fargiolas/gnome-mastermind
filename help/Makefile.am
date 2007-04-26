@@ -9,7 +9,7 @@ DOC_MODULE = gnome-mastermind
 DOC_ENTITIES = legal.xml
 # # If your file is split into different files, list all the files that
 # # are included here.  Paths are relative to the C/ subdir
-DOC_INCLUDES = 
+DOC_INCLUDES = legal.xml
 #
 # # List of figures to include.  Paths are relative to the C/ subdir
 DOC_FIGURES = \
