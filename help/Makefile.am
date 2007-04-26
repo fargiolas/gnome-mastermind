@@ -20,4 +20,4 @@ DOC_FIGURES = \
 	      figures/row4.png \
 	      figures/row5.png
 
-DOC_LINGUAS = 
+DOC_LINGUAS = fr it 

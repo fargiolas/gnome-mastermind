@@ -1,0 +1,319 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2007-04-26 09:22+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../C/gnome-mastermind.xml:40(title) 
+msgid "<application>GNOME Mastermind</application> Manual"
+msgstr "<application>GNOME Mastermind</application> Manuel"
+
+#: ../C/gnome-mastermind.xml:42(para) 
+msgid "<application>GNOME Mastermind</application> is a <trademark class=\"trade\">Mastermind</trademark> like game for GNOME Desktop."
+msgstr "<application>GNOME Mastermind</application> est un jeu similaire à <trademark class=\"trade\">Mastermind</trademark> pour le bureau GNOME."
+
+#: ../C/gnome-mastermind.xml:47(year) 
+msgid "2007"
+msgstr ""
+
+#: ../C/gnome-mastermind.xml:48(holder) ../C/gnome-mastermind.xml:53(publishername) ../C/gnome-mastermind.xml:71(corpauthor) ../C/gnome-mastermind.xml:93(para) ../C/gnome-mastermind.xml:97(para) 
+msgid "Filippo Argiolas"
+msgstr ""
+
+#: ../C/gnome-mastermind.xml:63(firstname) 
+msgid "Filippo"
+msgstr ""
+
+#: ../C/gnome-mastermind.xml:64(surname) 
+msgid "Argiolas"
+msgstr ""
+
+#: ../C/gnome-mastermind.xml:67(email) 
+msgid "filippo.argiolas@gmail.com&gt;"
+msgstr ""
+
+#: ../C/gnome-mastermind.xml:90(revnumber) 
+msgid "GNOME Mastermind Manual V0.1"
+msgstr "GNOME Mastermind Manuel V0.1"
+
+#: ../C/gnome-mastermind.xml:102(releaseinfo) 
+msgid "This manual describes version 0.2 of GNOME Mastermind."
+msgstr "Ce manuel présente la version 0.2 de GNOME Mastermind."
+
+#: ../C/gnome-mastermind.xml:105(title) 
+msgid "Feedback"
+msgstr "Commentaires et corrections"
+
+#: ../C/gnome-mastermind.xml:106(para) ../C/gnome-mastermind.xml:439(para) 
+msgid "Please report any bug at <ulink url=\"https://gna.org/bugs/?func=additem&amp;group=gnome-mastermind\">Bug tracker at gna.org</ulink> or sign-up to the public mailing-list listed in the project homepage to give us feedback."
+msgstr "Veuillez rapporter n'importe quelle anomalie au <ulink url=\"https://gna.org/bugs/?func=additem&amp;group=gnome-mastermind\">traqueur d'anomalie de gna.org</ulink> ou inscrivez-vous sur la liste de diffusion publique sur la page web du projet pour nous faire part de vos commentaires et corrections."
+
+#: ../C/gnome-mastermind.xml:126(title) 
+msgid "Introduction"
+msgstr ""
+
+#: ../C/gnome-mastermind.xml:128(title) 
+msgid "The Game"
+msgstr "Le jeu"
+
+#: ../C/gnome-mastermind.xml:129(para) 
+msgid "At first here's a brief introduction about the classic game that this one resembles (source: wikipedia)."
+msgstr "Voici pour débuter une brève introduction à propos du jeu classique auquel celui-ci ressemble (source : wikipedia)."
+
+#: ../C/gnome-mastermind.xml:133(para) 
+msgid "<trademark class=\"trade\">Mastermind</trademark> is a code-breaking game for two players, invented in 1970 by Mordecai Meirowitz, that has been very popular during the 80s."
+msgstr "<trademark class=\"trade\">Mastermind</trademark> est un jeu de cassage de code pour deux joueurs, inventé en 1970 par Mordecai Meirowitz, qui a été très populaire durant les années 80."
+
+#: ../C/gnome-mastermind.xml:139(para) 
+msgid "The game is played by 2 players: the <emphasis>codemaker</emphasis> and the <emphasis>codebreaker</emphasis>. The codemaker, places in its side of the board (hidden from the other), a combination of 4 colors. The codebreaker has to guess that pattern (both order and colors) with the least number of tries. At each turn (12 in the most common version), the codebreaker tries a pattern and the codemaker gives him feedback placing a white peg for each right color with wrong position and a colored peg for each both color and position right item of the combination guessed, in the score grid."
+msgstr "Le jeu se joue avec deux joueurs : le <emphasis>créateur de code</emphasis> et le <emphasis>casseur de code</emphasis>. Le créateur de code, place de son côté du plateau (caché de l'autre), une combinaison de 4 couleurs. Le casseur de code doit deviner ce motif (à la fois l'ordre et les couleurs) en un nombre minimal de coups. À chaque tour (12 dans la version la plus typique), le casseur de code tente un motif et le créateur de code lui donne un retour dans la grille de score en plaçant un plot blanc pour chaque élément de bonne couleur mais mal placé et un plot coloré pour les éléments à la fois de bonne couleur et bien placé."
+
+#: ../C/gnome-mastermind.xml:153(para) 
+msgid "Once he got feedback, the codebreaker tries another guess following codemaker hints. Obviously the game is won by codemaker if the codebreaker fails every guess."
+msgstr "Une fois qu'il a eu le retour, le casseur de code essaye à nouveau de deviner la séquence en suivant les astuces du créateur de code. Le jeu est évidemment gagné par le créateur de code si le casseur de code n'a réussi aucune tentative."
+
+#: ../C/gnome-mastermind.xml:160(title) 
+msgid "This Game"
+msgstr "Ce jeu"
+
+#: ../C/gnome-mastermind.xml:161(para) 
+msgid "<application>GNOME Mastermind</application> is a solitaire version that resembles the classic game. The codemaker role is taken by computer."
+msgstr "<application>GNOME Mastermind</application> est une version solitaire qui ressemble à la version classique. Le rôle du créateur de code est pris par l'ordinateur."
+
+#: ../C/gnome-mastermind.xml:165(para) 
+msgid "The player has to guess a four color combination (note that each color can be repeated). Computer prints (with default theme selected) a red peg for each right color in the right position and a white peg for each right color misplaced."
+msgstr "Le joueur doit deviner une combinaison de quatre couleurs (notez que chaque couleur peut être répétée). L'ordinateur affiche (avec le thème par défaut sélectionné) un plot rouge pour chaque bonne couleur correctement placée et un plot blanc pour chaque bonne couleur mal placée."
+
+#: ../C/gnome-mastermind.xml:173(title) 
+msgid "Getting Started"
+msgstr "Bien débuter"
+
+#: ../C/gnome-mastermind.xml:174(para) 
+msgid "You can start <application>GNOME Mastermind</application> in the following ways:"
+msgstr "Vous pouvez lancer <application>GNOME Mastermind</application> des manières suivantes :"
+
+#: ../C/gnome-mastermind.xml:178(term) 
+msgid "From <guimenu>Applications</guimenu> menu,"
+msgstr "Depuis le menu <guimenu>Applications</guimenu>,"
+
+#: ../C/gnome-mastermind.xml:180(para) 
+msgid "Choose <menuchoice><guisubmenu>Games</guisubmenu><guimenuitem>Mastermind</guimenuitem></menuchoice>."
+msgstr "Choisissez <menuchoice><guisubmenu>Jeux</guisubmenu><guimenuitem>Mastermind</guimenuitem></menuchoice>."
+
+#: ../C/gnome-mastermind.xml:188(term) 
+msgid "Command line"
+msgstr "Ligne de commande"
+
+#: ../C/gnome-mastermind.xml:190(para) 
+msgid "To start <application>GNOME Mastermind</application> from a command line, type the following command, then press <keycap>Return</keycap>:"
+msgstr "Pour démarrer <application>GNOME Mastermind</application> depuis la ligne de commande, saisissez la commande suivante, puis appuyez sur <keycap>Entrée</keycap>:"
+
+#: ../C/gnome-mastermind.xml:193(command) 
+msgid "gnome-mastermind"
+msgstr ""
+
+#: ../C/gnome-mastermind.xml:199(para) 
+msgid "Here follows a screenshot of <application>GNOME Mastermind</application>, typical play session"
+msgstr "Voici une capture d'écran de <application>GNOME Mastermind</application>, au cours d'une partie classique"
+
+#: ../C/gnome-mastermind.xml:203(title) 
+msgid "<application>GNOME Mastermind</application> Start Up Window"
+msgstr "<application>GNOME Mastermind</application> Fenêtre de démarrage"
+
+#: ../C/gnome-mastermind.xml:216(phrase) 
+msgid "Shows <application>GNOME Mastermind</application> main window. Contains titlebar, menubar, toolbar, display area, and scrollbars. Menubar contains File, View, Settings, and Help menus."
+msgstr "Affiche la fenêtre principale de <application>GNOME Mastermind</application>. Contient la barre de titre, la barre de menu, la barre d'outils, la zone d'affichage et les barres de défilement. La barre de menu contient les menus Jeu, Réglages et Aide."
+
+#: ../C/gnome-mastermind.xml:227(para) 
+msgid "At first let's investigate on the game interface. From top to bottom:"
+msgstr "Jetons tout d'abord un œil à l'interface de jeu. De haut en bas :"
+
+#: ../C/gnome-mastermind.xml:231(term) 
+msgid "Menubar."
+msgstr "Barre de menu."
+
+#: ../C/gnome-mastermind.xml:233(para) 
+msgid "The menus on the menubar contain all of the commands you need to work with <application>GNOME Mastermind</application>."
+msgstr "Le menu contient toutes les commandes dont vous avez besoin pour utiliser <application>GNOME Mastermind</application>."
+
+#: ../C/gnome-mastermind.xml:238(term) 
+msgid "Toolbar."
+msgstr "Barre d'outils."
+
+#: ../C/gnome-mastermind.xml:240(para) 
+msgid "The toolbar contains a subset of the commands that you usually will access more often."
+msgstr "La barre d'outils contient un jeu de commandes auxquelles vous accédez généralement le plus souvent."
+
+#: ../C/gnome-mastermind.xml:244(term) 
+msgid "Main game area."
+msgstr "Zone de jeu principale."
+
+#: ../C/gnome-mastermind.xml:246(para) 
+msgid "From left to right you can see main grid where pegs are placed, and score grid where computer gives us feedback"
+msgstr "De gauche à droite vous pouvez voir la grille principale où les plots sont placés, et la grille de score où l'ordinateur renvoie les résultats"
+
+#: ../C/gnome-mastermind.xml:251(term) 
+msgid "Tray area."
+msgstr "Zone de plots."
+
+#: ../C/gnome-mastermind.xml:253(para) 
+msgid "That's the colored pegs tray. Click here with first mouse button to select a ball. Click then in a main grid active cell to place the peg."
+msgstr "C'est la zone des plots colorés. Cliquez ici avec le bouton gauche de la souris pour sélectionner un plot. Cliquez ensuite dans une case libre de la grille principale pour placer le plot."
+
+#: ../C/gnome-mastermind.xml:256(para) 
+msgid "Middle click on a peg in the tray area places it in the first available cell."
+msgstr "Un clic du milieu sur un plot dans la zone des plot place ce dernier dans la première case disponible."
+
+#: ../C/gnome-mastermind.xml:262(title) 
+msgid "Shortcuts"
+msgstr "Raccourcis"
+
+#: ../C/gnome-mastermind.xml:266(guilabel) 
+msgid "First button click"
+msgstr "Clic gauche"
+
+#: ../C/gnome-mastermind.xml:267(para) 
+msgid "Select peg if done in tray area. Place it if done in main grid cells."
+msgstr "Sélectionne un plot si effectué dans la zone de plots. Le positionne si effectué dans les cases de la grille principale."
+
+#: ../C/gnome-mastermind.xml:272(guilabel) 
+msgid "Middle button click"
+msgstr "Clic milieu"
+
+#: ../C/gnome-mastermind.xml:273(para) 
+msgid "Available only in tray area, place ball to first free active cell."
+msgstr "Disponible dans la zone de plots, place un plot dans la première case libre."
+
+#: ../C/gnome-mastermind.xml:278(guilabel) 
+msgid "Ctrl + N"
+msgstr ""
+
+#: ../C/gnome-mastermind.xml:279(para) 
+msgid "Start a new game."
+msgstr "Démarre une nouvelle partie."
+
+#: ../C/gnome-mastermind.xml:283(guilabel) 
+msgid "Ctrl + Q"
+msgstr ""
+
+#: ../C/gnome-mastermind.xml:284(para) 
+msgid "Quit game window."
+msgstr "Quitte la fenêtre de jeu."
+
+#: ../C/gnome-mastermind.xml:288(guilabel) 
+msgid "Ctrl + P"
+msgstr ""
+
+#: ../C/gnome-mastermind.xml:289(para) 
+msgid "Open preferences dialog."
+msgstr "Oouvre la boîte de dialogue des préférences."
+
+#: ../C/gnome-mastermind.xml:293(guilabel) 
+msgid "F1"
+msgstr ""
+
+#: ../C/gnome-mastermind.xml:294(para) 
+msgid "Show this manual."
+msgstr "Affiche ce manuel."
+
+#: ../C/gnome-mastermind.xml:299(title) 
+msgid "Walk through a game session"
+msgstr "Exemple d'une partie"
+
+#: ../C/gnome-mastermind.xml:300(para) 
+msgid "Let's now take a look at the previous session screen step by step:"
+msgstr "Regardons maintenant la précédente partie pas à pas :"
+
+#: ../C/gnome-mastermind.xml:303(title) 
+msgid "<application>GNOME Mastermind</application> First row"
+msgstr "<application>GNOME Mastermind</application> Première rangée"
+
+#: ../C/gnome-mastermind.xml:316(phrase) 
+msgid "First row"
+msgstr "Première rangée"
+
+#: ../C/gnome-mastermind.xml:322(para) 
+msgid "This is the first guess. As you can see the score grid is empty because no right peg has been chosen."
+msgstr "C'est le premier coup d'essai. Comme vous pouvez le voir la grille de score est vide car aucun bon plot n'a été trouvé."
+
+#: ../C/gnome-mastermind.xml:325(title) 
+msgid "<application>GNOME Mastermind</application> Second row"
+msgstr "<application>GNOME Mastermind</application> Deuxième rangée"
+
+#: ../C/gnome-mastermind.xml:338(phrase) 
+msgid "Second row"
+msgstr "Deuxième rangée"
+
+#: ../C/gnome-mastermind.xml:344(para) 
+msgid "Here we have 3 white score pegs. It means that we catched 3 right colors but placed them in wrong order. We are following the good path."
+msgstr "Nous avons ici trois plots de score blancs. Ceci signifie que nous avons trouvé trois bonnes couleurs mais qu'elles sont placées dans le mauvais ordre. Nous suivons le bon chemin."
+
+#: ../C/gnome-mastermind.xml:347(title) 
+msgid "<application>GNOME Mastermind</application> Third row"
+msgstr "<application>GNOME Mastermind</application> Troisième rangée"
+
+#: ../C/gnome-mastermind.xml:360(phrase) 
+msgid "Third row"
+msgstr "Troisième rangée"
+
+#: ../C/gnome-mastermind.xml:366(para) 
+msgid "Leaving the same color combination and changing order leads us to the solution. But we still have to understand which one is wrong!"
+msgstr "Laisser la même combinaison de couleurs mais changer l'ordre nous mène à la solution. Mais nous devons toujours chercher lequel est mauvais !"
+
+#: ../C/gnome-mastermind.xml:369(title) 
+msgid "<application>GNOME Mastermind</application> Fourth row"
+msgstr "<application>GNOME Mastermind</application> Quatrième rangée"
+
+#: ../C/gnome-mastermind.xml:382(phrase) 
+msgid "Fourth row"
+msgstr "Quatrième rangée"
+
+#: ../C/gnome-mastermind.xml:388(para) 
+msgid "Inserting a random color make a white score peg come out. Since we didn't change other color pegs order we've just found the missing color!"
+msgstr "Insérer une couleur aléatoire affiche un plot de score blanc. Comme nous n'avons pas changé les autres plots colorés, nous avons donc trouvé la couleur manquante !"
+
+#: ../C/gnome-mastermind.xml:391(title) 
+msgid "<application>GNOME Mastermind</application> Last row"
+msgstr "<application>GNOME Mastermind</application> Dernière rangée"
+
+#: ../C/gnome-mastermind.xml:404(phrase) 
+msgid "Last row"
+msgstr "Dernière rangée"
+
+#: ../C/gnome-mastermind.xml:410(para) 
+msgid "Yeah! Restoring removed peg and replacing another one with the new right color makes everything turn right. We won :D!"
+msgstr "Oui ! Remettre le plot enlevé et remplacer un autre par la nouvelle bonne couleur résout tout. Nous avons gagné :D !"
+
+#: ../C/gnome-mastermind.xml:413(title) 
+msgid "Coming Soon"
+msgstr "Et bientôt"
+
+#: ../C/gnome-mastermind.xml:414(para) 
+msgid "Next releases will hopefully contain a more detailed manual that better explains each settings in the preferences menu. It will also contain a simple guide to draw and submit new themes."
+msgstr "Les prochaines versions contiendront un manuel plus détaillé qui expliquera mieux chaque réglages du menu préférences. Il présentera aussi un guide simple pour dessiner et envoyer de nouveaux thèmes."
+
+#: ../C/gnome-mastermind.xml:429(title) 
+msgid "About <application>GNOME Mastermind</application>"
+msgstr "À propos <application>GNOME Mastermind</application>"
+
+#: ../C/gnome-mastermind.xml:430(para) 
+msgid "<application>GNOME Mastermind</application> was written by Filippo Argiolas"
+msgstr "<application>GNOME Mastermind</application> a été écrit par Filippo Argiolas"
+
+#: ../C/gnome-mastermind.xml:432(para) 
+msgid "(<email>filippo.argiolas@gmail.com</email>). To find more information about <application>GNOME Mastermind</application>, please visit the <ulink url=\"http://www.autistici.org/gnome-mastermind\" type=\"http\"><application>GNOME Mastermind</application> webpage</ulink>."
+msgstr "(<email>filippo.argiolas@gmail.com</email>). Pour davantage d'information à propos <application>GNOME Mastermind</application>, visitez la <ulink url=\"http://www.autistici.org/gnome-mastermind\" type=\"http\">page web <application>GNOME Mastermind</application></ulink>(en anglais)."
+
+#: ../C/gnome-mastermind.xml:436(para) 
+msgid "For copyright issues check the about dialog and, most of all, copyright and copyright-artwork files in source tree or in the package data dir (usually /usr/share/gnome-mastermind)."
+msgstr "Pour les problèmes de droits d'utilisation vérifiez la boîte de dialogue À propos et également les fichiers copyright et copyright-artwork dans les sources du programme ou dans le répertoire des données du jeu (typiquement /usr/share/gnome-mastermind)."
+
+#: ../C/gnome-mastermind.xml:444(para) 
+msgid "This program is distributed under the terms of the GNU General Public license as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version. A <ulink url=\"ghelp:gpl\" type=\"help\">copy of this license</ulink> is included with this documentation; another can be found in the file COPYING included with the source code of this program."
+msgstr ""
+

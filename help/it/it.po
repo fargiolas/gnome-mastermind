@@ -1,0 +1,526 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2007-04-25 22:08+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: ../C/gnome-mastermind.xml:207(None)
+msgid "@@image: 'figures/mainwindow.png'; md5=7178cb82941667492461f4b0d0dcb5ee"
+msgstr ""
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: ../C/gnome-mastermind.xml:307(None)
+msgid "@@image: 'figures/row1.png'; md5=3b0527f07b80cef14da1f507c069d377"
+msgstr ""
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: ../C/gnome-mastermind.xml:329(None)
+msgid "@@image: 'figures/row2.png'; md5=41d3169bdddd795f3c832938e9ba1df2"
+msgstr ""
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: ../C/gnome-mastermind.xml:351(None)
+msgid "@@image: 'figures/row3.png'; md5=ca977464f2699e93f66e343f65e5d4b5"
+msgstr ""
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: ../C/gnome-mastermind.xml:373(None)
+msgid "@@image: 'figures/row4.png'; md5=a4fcf5f0af13d781305e115aa8c9d3c3"
+msgstr ""
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: ../C/gnome-mastermind.xml:395(None)
+msgid "@@image: 'figures/row5.png'; md5=3fcd2b33b8ae55bf029fd79ed36fde1c"
+msgstr ""
+
+#: ../C/gnome-mastermind.xml:40(title)
+msgid "<application>GNOME Mastermind</application> Manual"
+msgstr "Manuale di <application>GNOME Mastermind</application>"
+
+#: ../C/gnome-mastermind.xml:42(para)
+msgid ""
+"<application>GNOME Mastermind</application> is a <trademark class=\"trade"
+"\">Mastermind</trademark> like game for GNOME Desktop."
+msgstr ""
+"<application>GNOME Mastermind</application> è un gioco simile a <trademark class=\"trade"
+"\">Mastermind</trademark> per GNOME."
+
+
+#: ../C/gnome-mastermind.xml:47(year)
+msgid "2007"
+msgstr ""
+
+#: ../C/gnome-mastermind.xml:48(holder)
+#: ../C/gnome-mastermind.xml:53(publishername)
+#: ../C/gnome-mastermind.xml:71(corpauthor) ../C/gnome-mastermind.xml:93(para)
+#: ../C/gnome-mastermind.xml:97(para)
+msgid "Filippo Argiolas"
+msgstr ""
+
+#: ../C/gnome-mastermind.xml:63(firstname)
+msgid "Filippo"
+msgstr ""
+
+#: ../C/gnome-mastermind.xml:64(surname)
+msgid "Argiolas"
+msgstr ""
+
+#: ../C/gnome-mastermind.xml:67(email)
+msgid "filippo.argiolas@gmail.com&gt;"
+msgstr ""
+
+#: ../C/gnome-mastermind.xml:90(revnumber)
+msgid "GNOME Mastermind Manual V0.1"
+msgstr "Manuale di GNOME Mastermind V0.1"
+
+#: ../C/gnome-mastermind.xml:102(releaseinfo)
+msgid "This manual describes version 0.2 of GNOME Mastermind."
+msgstr "Questo manuale descrive la versione 0.2 di GNOME Mastermind"
+
+#: ../C/gnome-mastermind.xml:105(title)
+msgid "Feedback"
+msgstr ""
+
+#: ../C/gnome-mastermind.xml:106(para) ../C/gnome-mastermind.xml:439(para)
+msgid ""
+"Please report any bug at <ulink url=\"https://gna.org/bugs/?func=additem&amp;"
+"group=gnome-mastermind\">Bug tracker at gna.org</ulink> or sign-up to the "
+"public mailing-list listed in the project homepage to give us feedback."
+msgstr ""
+"Per favore, riporta qualsiasi problema al <ulink url=\"https://gna.org/bugs/?func=additem&amp;"
+"group=gnome-mastermind\">Bug tracker di gna.org</ulink> o iscriviti alla "
+"mailing-list pubblica (vedi l'homepage del progetto) per qualsiasi consiglio, impressione, suggerimento."
+
+#: ../C/gnome-mastermind.xml:126(title)
+msgid "Introduction"
+msgstr "Introduzione"
+
+#: ../C/gnome-mastermind.xml:128(title)
+msgid "The Game"
+msgstr "Il Gioco"
+
+#: ../C/gnome-mastermind.xml:129(para)
+msgid ""
+"At first here's a brief introduction about the classic game that this one "
+"resembles (source: wikipedia)."
+msgstr ""
+"Per prima cosa una breve introduzione sulla versione classica del gioco "
+"a cui questo è ispirato (da wikipedia)."
+
+#: ../C/gnome-mastermind.xml:133(para)
+msgid ""
+"<trademark class=\"trade\">Mastermind</trademark> is a code-breaking game "
+"for two players, invented in 1970 by Mordecai Meirowitz, that has been very "
+"popular during the 80s."
+msgstr ""
+"<trademark class=\"trade\">Mastermind</trademark> è un gioco di "
+"<emphasis>decodifica</emphasis> per due giocatori inventato nel 1970 da "
+"Mordecai Meirowitz e molto popolare negli anni '80"
+
+#: ../C/gnome-mastermind.xml:139(para)
+msgid ""
+"The game is played by 2 players: the <emphasis>codemaker</emphasis> and the "
+"<emphasis>codebreaker</emphasis>. The codemaker, places in its side of the "
+"board (hidden from the other), a combination of 4 colors. The codebreaker "
+"has to guess that pattern (both order and colors) with the least number of "
+"tries. At each turn (12 in the most common version), the codebreaker tries a "
+"pattern and the codemaker gives him feedback placing a white peg for each "
+"right color with wrong position and a colored peg for each both color and "
+"position right item of the combination guessed, in the score grid."
+msgstr ""
+"Nel gioco ci sono due giocatori: il <emphasis>codificatore</emphasis> e il "
+"<emphasis>decodificatore</emphasis>. Il codificatore sistema nel suo lato "
+"della tavola da gioco (nascosta all'avversario), una combinazione di pezzi "
+"di quattro colori diversi: il codice segreto. Il decodificatore deve "
+"indovinare la combinazione (sia l'ordine che il colore dei pezzi) nel minor "
+"numero di tentativi possibile. Ad ogni turno di gioco (12 nelle versioni più "
+"comuni del gioco), il decodificatore prova una combinazione e il "
+"codificatore risponde piazzando nella griglia del punteggio un "
+"<emphasis>piolino</emphasis> bianco per ogni pezzo del giusto colore ma "
+"nella posizione sbagliata, e un <emphasis>piolino</emphasis> colorato per "
+"ogni pezzo di colore e posizione esatta."
+
+#: ../C/gnome-mastermind.xml:153(para)
+msgid ""
+"Once he got feedback, the codebreaker tries another guess following "
+"codemaker hints. Obviously the game is won by codemaker if the codebreaker "
+"fails every guess."
+msgstr ""
+"Una volta che il decodificatore ha ricevuto il responso effettua un altro "
+"tentativo seguendo le indicazioni ricevute dal codificatore. La partita è "
+"vinta dal codificatore se l'altro fallisce ogni tentativo di soluzione."
+
+#: ../C/gnome-mastermind.xml:160(title)
+msgid "This Game"
+msgstr "Questo Gioco"
+
+#: ../C/gnome-mastermind.xml:161(para)
+msgid ""
+"<application>GNOME Mastermind</application> is a solitaire version that "
+"resembles the classic game. The codemaker role is taken by computer."
+msgstr ""
+"<application>GNOME Mastermind</application> è una versione per un solo "
+"giocatore che si rifà al gioco classico. Il ruolo del codificatore è svolto "
+"dal computer."
+
+#: ../C/gnome-mastermind.xml:165(para)
+msgid ""
+"The player has to guess a four color combination (note that each color can "
+"be repeated). Computer prints (with default theme selected) a red peg for "
+"each right color in the right position and a white peg for each right color "
+"misplaced."
+msgstr ""
+"Il giocatore deve indovinare una combinazione di quattro colori (notare che "
+"un colore si può anche ripetere). Il computer stampa (col tema predefinito "
+"selezionato) un <emphasis>piolino</emphasis> rosso per ogni colore giusto "
+"nella giusta posizione e un <emphasis>piolino</emphasis> bianco per ogni "
+"colore giusto nella posizione sbagliata."
+
+#: ../C/gnome-mastermind.xml:173(title)
+msgid "Getting Started"
+msgstr "Per Iniziare"
+
+#: ../C/gnome-mastermind.xml:174(para)
+msgid ""
+"You can start <application>GNOME Mastermind</application> in the following "
+"ways:"
+msgstr ""
+"Puoi avviare <application>GNOME Mastermind</application> nei seguenti modi:"
+
+#: ../C/gnome-mastermind.xml:178(term)
+msgid "From <guimenu>Applications</guimenu> menu,"
+msgstr "Dal menu <guimenu>Applicazioni</guimenu>"
+
+#: ../C/gnome-mastermind.xml:180(para)
+msgid ""
+"Choose <menuchoice><guisubmenu>Games</guisubmenu><guimenuitem>Mastermind</"
+"guimenuitem></menuchoice>."
+msgstr ""
+"Scegli <menuchoice><guisubmenu>Giochi</guisubmenu><guimenuitem>Mastermind</"
+"guimenuitem></menuchoice>."
+
+#: ../C/gnome-mastermind.xml:188(term)
+msgid "Command line"
+msgstr "Da riga di comando"
+
+#: ../C/gnome-mastermind.xml:190(para)
+msgid ""
+"To start <application>GNOME Mastermind</application> from a command line, "
+"type the following command, then press <keycap>Invio</keycap>:"
+msgstr ""
+"Per avviare <application>GNOME Mastermind</application> da riga di comando "
+"inserisci il seguente comando e poi premi <keycap>Return</keycap>:"
+
+#: ../C/gnome-mastermind.xml:193(command)
+msgid "gnome-mastermind"
+msgstr "gnome-mastermind"
+
+#: ../C/gnome-mastermind.xml:199(para)
+msgid ""
+"Here follows a screenshot of <application>GNOME Mastermind</application>, "
+"typical play session"
+msgstr ""
+"Di seguito alcune schermate di una tipica sessione di gioco di "
+"<application>GNOME Mastermind</application>."
+
+#: ../C/gnome-mastermind.xml:203(title)
+msgid "<application>GNOME Mastermind</application> Start Up Window"
+msgstr "<application>GNOME Mastermind</application> Finestra di avvio"
+
+#: ../C/gnome-mastermind.xml:216(phrase)
+msgid ""
+"Shows <application>GNOME Mastermind</application> main window. Contains "
+"titlebar, menubar, toolbar, display area, and scrollbars. Menubar contains "
+"File, View, Settings, and Help menus."
+msgstr ""
+"Mostra la finestra principale di <application>GNOME Mastermind</"
+"application>. Contiene le barre del titolo, dei menu, degli strumenti, "
+"l'area di visualizzazione e le barre di scorrimento. La barra dei menu è "
+"composta da File, Visualizza, Impostazioni e Aiuto."
+
+#. for example, the items on the menubar and on the toolbar. This section is optional.
+#: ../C/gnome-mastermind.xml:227(para)
+msgid "At first let's investigate on the game interface. From top to bottom:"
+msgstr "Esaminiamo l'interfaccia di gioco. Dall'alto verso il basso:"
+
+#: ../C/gnome-mastermind.xml:231(term)
+msgid "Menubar."
+msgstr "Barra dei menu."
+
+#: ../C/gnome-mastermind.xml:233(para)
+msgid ""
+"The menus on the menubar contain all of the commands you need to work with "
+"<application>GNOME Mastermind</application>."
+msgstr ""
+"I menu di questa barra contengono tutti i comandi di cui hai bisogno per "
+"giocare con <application>GNOME Mastermind</application>."
+
+#: ../C/gnome-mastermind.xml:238(term)
+msgid "Toolbar."
+msgstr "Barra degli strumenti."
+
+#: ../C/gnome-mastermind.xml:240(para)
+msgid ""
+"The toolbar contains a subset of the commands that you usually will access "
+"more often."
+msgstr ""
+"La barra degli strumenti contiene un sottoinsieme dei comandi di cui avrai "
+"bisogno più spesso."
+
+#: ../C/gnome-mastermind.xml:244(term)
+msgid "Main game area."
+msgstr "Area di gioco principale."
+
+#: ../C/gnome-mastermind.xml:246(para)
+msgid ""
+"From left to right you can see main grid where pegs are placed, and score "
+"grid where computer gives us feedback"
+msgstr ""
+"Da sinistra a destra puoi vedere la griglia principale dove vengono piazzati "
+"i <emphasis>piolini</emphasis> e la griglia del punteggio dove il computer "
+"ci da i responsi."
+
+#: ../C/gnome-mastermind.xml:251(term)
+msgid "Tray area."
+msgstr "Vassoio"
+
+#: ../C/gnome-mastermind.xml:253(para)
+msgid ""
+"That's the colored pegs tray. Click here with first mouse button to select a "
+"ball. Click then in a main grid active cell to place the peg."
+msgstr ""
+"Il vassoio contiene i <emphasis>piolini</emphasis> colorati. Clicca qui col "
+"primo tasto del mouse per selezionare un colore e poi clicca in una cella "
+"della griglia principale per piazzare il <emphasis>piolino</emphasis>."
+
+#: ../C/gnome-mastermind.xml:256(para)
+msgid ""
+"Middle click on a peg in the tray area places it in the first available cell."
+msgstr ""
+"Un click col tasto centrale del mouse nel vassoio piazza un "
+"<emphasis>piolino</emphasis> nella prima cella disponibile."
+
+#: ../C/gnome-mastermind.xml:262(title)
+msgid "Shortcuts"
+msgstr "Scorciatoie"
+
+#: ../C/gnome-mastermind.xml:266(guilabel)
+msgid "First button click"
+msgstr "Click del primo tasto del mouse"
+
+#: ../C/gnome-mastermind.xml:267(para)
+msgid "Select peg if done in tray area. Place it if done in main grid cells."
+msgstr ""
+"Seleziona un <emphasis>piolino</emphasis> se fatto nel vassoio. Lo piazza se "
+"fatto in una cella della griglia principale."
+
+#: ../C/gnome-mastermind.xml:272(guilabel)
+msgid "Middle button click"
+msgstr "Click del tasto centrale del mouse"
+
+#: ../C/gnome-mastermind.xml:273(para)
+msgid "Available only in tray area, place ball to first free active cell."
+msgstr ""
+"Funziona soltanto se cliccato nel vassoio. Piazza un <emphasis>piolino</"
+"emphasis> nella prima cella attiva."
+
+#: ../C/gnome-mastermind.xml:278(guilabel)
+msgid "Ctrl + N"
+msgstr "Ctrl + N"
+
+#: ../C/gnome-mastermind.xml:279(para)
+msgid "Start a new game."
+msgstr "Avvia una nuova partita."
+
+#: ../C/gnome-mastermind.xml:283(guilabel)
+msgid "Ctrl + Q"
+msgstr "Ctrl + Q"
+
+#: ../C/gnome-mastermind.xml:284(para)
+msgid "Quit game window."
+msgstr "Chiude la finestra di gioco."
+
+#: ../C/gnome-mastermind.xml:288(guilabel)
+msgid "Ctrl + P"
+msgstr "Ctrl + P"
+
+#: ../C/gnome-mastermind.xml:289(para)
+msgid "Open preferences dialog."
+msgstr "Apre la finestra delle preferenze."
+
+#: ../C/gnome-mastermind.xml:293(guilabel)
+msgid "F1"
+msgstr "F1"
+
+#: ../C/gnome-mastermind.xml:294(para)
+msgid "Show this manual."
+msgstr "Mostra questo manuale"
+
+#: ../C/gnome-mastermind.xml:299(title)
+msgid "Walk through a game session"
+msgstr "Una sessione di gioco"
+
+#: ../C/gnome-mastermind.xml:300(para)
+msgid "Let's now take a look at the previous session screen step by step:"
+msgstr "Seguiamo passo passo la sessione della schermata precedente:"
+
+#: ../C/gnome-mastermind.xml:303(title)
+msgid "<application>GNOME Mastermind</application> First row"
+msgstr "<application>GNOME Mastermind</application> Prima riga"
+
+#: ../C/gnome-mastermind.xml:316(phrase)
+msgid "First row"
+msgstr "Prima riga"
+
+#. ==== End of Figure ====
+#: ../C/gnome-mastermind.xml:322(para)
+msgid ""
+"This is the first guess. As you can see the score grid is empty because no "
+"right peg has been chosen."
+msgstr ""
+"Questo è il primo tentativo. Come puoi vedere la griglia del punteggio è "
+"vuota perchè nessun <emphasis>piolino</emphasis> è ancora giusto."
+
+#: ../C/gnome-mastermind.xml:325(title)
+msgid "<application>GNOME Mastermind</application> Second row"
+msgstr "<application>GNOME Mastermind</application> Seconda riga"
+
+#: ../C/gnome-mastermind.xml:338(phrase)
+msgid "Second row"
+msgstr "Seconda riga"
+
+#. ==== End of Figure ====
+#: ../C/gnome-mastermind.xml:344(para)
+msgid ""
+"Here we have 3 white score pegs. It means that we catched 3 right colors but "
+"placed them in wrong order. We are following the good path."
+msgstr ""
+"Qui abbiamo 3 <emphasis>piolini</emphasis> bianchi di punteggio. Significa "
+"che abbiamo indovinato 3 colori giusti ma li abbiamo messi nel posto "
+"sbagliato. Siamo sulla buona strada."
+
+#: ../C/gnome-mastermind.xml:347(title)
+msgid "<application>GNOME Mastermind</application> Third row"
+msgstr "<application>GNOME Mastermind</application> Terza riga"
+
+#: ../C/gnome-mastermind.xml:360(phrase)
+msgid "Third row"
+msgstr "Terza riga"
+
+#. ==== End of Figure ====
+#: ../C/gnome-mastermind.xml:366(para)
+msgid ""
+"Leaving the same color combination and changing order leads us to the "
+"solution. But we still have to understand which one is wrong!"
+msgstr ""
+"Lasciare la stessa combinazione ma cambiare l'ordine ci conduce verso la "
+"soluzione. Ma dobbiamo ancora capire quale colore è sbagliato!"
+
+#: ../C/gnome-mastermind.xml:369(title)
+msgid "<application>GNOME Mastermind</application> Fourth row"
+msgstr "<application>GNOME Mastermind</application> Quarta riga"
+
+#: ../C/gnome-mastermind.xml:382(phrase)
+msgid "Fourth row"
+msgstr "Quarta riga"
+
+#. ==== End of Figure ====
+#: ../C/gnome-mastermind.xml:388(para)
+msgid ""
+"Inserting a random color make a white score peg come out. Since we didn't "
+"change other color pegs order we've just found the missing color!"
+msgstr ""
+"Inserendo un colore a caso fa apparire un <emphasis>piolino</emphasis> "
+"bianco. Siccome non abbiamo cambiato gli altri colori abbiamo appena trovato "
+"il colore mancante."
+
+#: ../C/gnome-mastermind.xml:391(title)
+msgid "<application>GNOME Mastermind</application> Last row"
+msgstr "<application>GNOME Mastermind</application> Ultima riga"
+
+#: ../C/gnome-mastermind.xml:404(phrase)
+msgid "Last row"
+msgstr "Ultima riga"
+
+#. ==== End of Figure ====
+#: ../C/gnome-mastermind.xml:410(para)
+msgid ""
+"Yeah! Restoring removed peg and replacing another one with the new right "
+"color makes everything turn right. We won :D!"
+msgstr ""
+"Fatto! Rimettendo il <emphasis>piolino</emphasis> rimosso e rimpiazzando un "
+"altro col giusto colore si sistema tutto al posto giusto. Abbiamo vinto :D!"
+
+#: ../C/gnome-mastermind.xml:413(title)
+msgid "Coming Soon"
+msgstr ""
+
+#: ../C/gnome-mastermind.xml:414(para)
+msgid ""
+"Next releases will hopefully contain a more detailed manual that better "
+"explains each settings in the preferences menu. It will also contain a "
+"simple guide to draw and submit new themes."
+msgstr ""
+"I prossimi rilasci conterranno un manuale più dettagliato che spiegherà "
+"meglio ogni impostazione del menu delle preferenze. Conterra anche una "
+"semplice guida su come creare nuovi temi."
+
+#: ../C/gnome-mastermind.xml:429(title)
+msgid "About <application>GNOME Mastermind</application>"
+msgstr "A proposito di <application>GNOME Mastermind</application>"
+
+#: ../C/gnome-mastermind.xml:430(para)
+msgid ""
+"<application>GNOME Mastermind</application> was written by Filippo Argiolas"
+msgstr ""
+"<application>GNOME Mastermind</application> è scritto da Filippo Argiolas"
+
+#: ../C/gnome-mastermind.xml:432(para)
+msgid ""
+"(<email>filippo.argiolas@gmail.com</email>). To find more information about "
+"<application>GNOME Mastermind</application>, please visit the <ulink url="
+"\"http://www.autistici.org/gnome-mastermind\" type=\"http"
+"\"><application>GNOME Mastermind</application> webpage</ulink>."
+msgstr ""
+"(<email>filippo.argiolas@gmail.com</email>). Per maggiori informazioni su "
+"<application>GNOME Mastermind</application>, visita la pagina web di <ulink "
+"url=\"http://www.autistici.org/gnome-mastermind\" type=\"http"
+"\"><application>GNOME Mastermind</application></ulink>."
+
+#: ../C/gnome-mastermind.xml:436(para)
+msgid ""
+"For copyright issues check the about dialog and, most of all, copyright and "
+"copyright-artwork files in source tree or in the package data dir (usually /"
+"usr/share/gnome-mastermind)."
+msgstr ""
+"Per le questioni relative al copyright, vedi la finestra di About dai menu "
+"del gioco e soprattutto i file copyright e copyright-artwork nell'albero dei "
+"sorgenti o nella directory dei dati del gioco (di solito /usr/share/gnome-"
+"mastermind)."
+
+#: ../C/gnome-mastermind.xml:444(para)
+msgid ""
+"This program is distributed under the terms of the GNU General Public "
+"license as published by the Free Software Foundation; either version 2 of "
+"the License, or (at your option) any later version. A <ulink url=\"ghelp:gpl"
+"\" type=\"help\">copy of this license</ulink> is included with this "
+"documentation; another can be found in the file COPYING included with the "
+"source code of this program."
+msgstr ""
+
+#. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2.
+#: ../C/gnome-mastermind.xml:0(None)
+msgid "translator-credits"
+msgstr "Edoardo Batini"

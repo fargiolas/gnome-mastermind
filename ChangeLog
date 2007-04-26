@@ -1,3 +1,6 @@
+26 Apr 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* help/: added french and italian translations
+
 25 Apr 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
 	* src/gnome-mastermind.c: rewritten a bit button press callbacks to
 	not clean next row if the game is won or over.
