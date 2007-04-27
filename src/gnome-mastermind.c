@@ -852,7 +852,7 @@ static gboolean checkscores() {
 		gm_debug ("\n");
 	}
 	if (bulls == 4) {
-		win_dialog (grid_rows-ypos-1);
+		win_dialog (grid_rows-ypos);
 		xpos = 0;
 		ypos = grid_rows-1;
 	} 

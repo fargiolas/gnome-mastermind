@@ -1,3 +1,7 @@
+27 Apr 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* src/gnome-mastermind.c: fixed little bug that caused printing a
+	wrong number of tries taken to guess the code.
+
 26 Apr 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
 	* help/: added french and italian translations
 
