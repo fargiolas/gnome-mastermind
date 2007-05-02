@@ -1,3 +1,12 @@
+02 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* po/: Added more translations 
+
+28 Apr 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* src/gnome-mastermind.c: added email and url hook for about dialog,
+	at the moment i don't want to rely on libgnome or gnome_vfs so I'm
+	looking in the path for xdg-open or gnome-open and some other
+	fallback.
+
 27 Apr 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
 	* src/gnome-mastermind.c: fixed little bug that caused printing a
 	wrong number of tries taken to guess the code.

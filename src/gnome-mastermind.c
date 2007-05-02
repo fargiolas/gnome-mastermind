@@ -1173,7 +1173,7 @@ static void help_action (void) {
 	GError *error = NULL;
 
 	g_spawn_async (NULL, argv, NULL, G_SPAWN_SEARCH_PATH,
-		NULL, NULL, NULL, &error);
+		       NULL, NULL, NULL, &error);
 	if (error) 
 	{
 		g_message ("Error while launching yelp %s", error->message);
@@ -1183,14 +1183,74 @@ static void help_action (void) {
 	#endif
 }
 
+void about_url_show (GtkAboutDialog *about,
+		     const gchar *link,
+		     gpointer data) {
+	GError *error = NULL;
+	gchar *launcher = NULL;
+
+	if ((launcher = g_find_program_in_path("xdg-open"))) {} 
+	else if ((launcher = g_find_program_in_path("gnome-open"))) {} 
+	else if ((launcher = g_find_program_in_path("epiphany"))) {} 
+	else if ((launcher = g_find_program_in_path("firefox"))) {} 
+	else if ((launcher = g_find_program_in_path("konqueror"))) {} 
+	else return;
+		
+	gchar   *argv[] = { launcher,
+			    g_strdup(link),
+			    NULL };
+
+	gm_debug("%s: %s\n", launcher, link);
+
+	g_spawn_async (NULL, argv, NULL, 
+		       G_SPAWN_STDOUT_TO_DEV_NULL | G_SPAWN_STDERR_TO_DEV_NULL,
+		       NULL, NULL, NULL, &error);
+	if (error) 
+	{
+		g_message ("Error while launching gnome-open %s", error->message);
+		g_error_free (error);
+		error = NULL;
+	}
+}
+
+void about_email_show (GtkAboutDialog *about,
+		     const gchar *link,
+		     gpointer data) {
+	GError *error = NULL;
+	gchar *launcher = NULL;
+
+	if ((launcher = g_find_program_in_path("xdg-open"))) {} 
+	else if ((launcher = g_find_program_in_path("gnome-open"))) {} 
+	else if ((launcher = g_find_program_in_path("evolution"))) {} 
+	else if ((launcher = g_find_program_in_path("kmail"))) {} 
+	else return;
+		
+	gchar   *argv[] = { launcher,
+			    g_strdup_printf("mailto:%s",link),
+			    NULL };
+
+	gm_debug("%s: mailto:%s\n", launcher, link);
+
+	g_spawn_async (NULL, argv, NULL, 
+		       G_SPAWN_STDOUT_TO_DEV_NULL | G_SPAWN_STDERR_TO_DEV_NULL,
+		       NULL, NULL, NULL, &error);
+	if (error) 
+	{
+		g_message ("Error while launching gnome-open %s", error->message);
+		g_error_free (error);
+		error = NULL;
+	}
+}
+
 static void about_action (void) {
 	gchar *authors[] = { "Filippo Argiolas <filippo.argiolas@gmail.com>", NULL };
 	gchar *artists[] = { 
-		"Filippo Argiolas <filippo.argiolas@gmail.com, me ;)",
+		"Filippo Argiolas <filippo.argiolas@gmail.com>, me ;)",
 		"Ulisse Perusin <uli.peru@gmail.com>, for that beautiful icon!", "and..",
 		"..some other people for their hints and suggestions", 
 		"Isabella Piredda, grazie amore mio!", 
 		"Enrica Argiolas, my lil sister and beta tester", NULL };
+	
 
 	gtk_show_about_dialog (GTK_WINDOW (window),
 			       "name", "GNOME Mastermind",
@@ -1700,6 +1760,8 @@ int main ( int argc, char *argv[] )
 	    (settings, "/apps/gnome-mastermind/show_toolbar", NULL))
 		gtk_widget_hide (toolbar);
 
+	gtk_about_dialog_set_url_hook (about_url_show, NULL, NULL);
+	gtk_about_dialog_set_email_hook (about_email_show, NULL, NULL);
  
 	gtk_main();
 

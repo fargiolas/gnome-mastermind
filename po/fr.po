@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-mastermind 0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-04-25 21:44+0200\n"
+"POT-Creation-Date: 2007-05-02 08:17+0200\n"
 "PO-Revision-Date: 2007-04-25 20:51+0200\n"
 "Last-Translator: Robert-André Mauchin <zebob.m@gmail.com>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
@@ -81,7 +81,7 @@ msgid "That was the right solution:"
 msgstr "Voici la bonne solution :"
 
 #: ../src/gnome-mastermind.c:986 ../src/gnome-mastermind.c:1034
-#: ../src/gnome-mastermind.c:1690
+#: ../src/gnome-mastermind.c:1750
 msgid "Select a color!"
 msgstr "Sélectionnez une couleur."
 
@@ -93,104 +93,104 @@ msgstr "Sélectionnez un emplacement valide."
 msgid "Now click on the right place!"
 msgstr "Cliquez maintenant sur le bon emplacement."
 
-#: ../src/gnome-mastermind.c:1199
+#: ../src/gnome-mastermind.c:1259
 msgid "Filippo Argiolas <filippo.argiolas@gmail.com>"
 msgstr "Robert-André Mauchin <zebob.m@gmail.com>"
 
-#: ../src/gnome-mastermind.c:1200
+#: ../src/gnome-mastermind.c:1260
 msgid "A Mastermind clone for gnome"
 msgstr "Un clone de Mastermind pour GNOME"
 
 #. GtkWidget *hbox;
-#: ../src/gnome-mastermind.c:1319
+#: ../src/gnome-mastermind.c:1379
 msgid "Preferences"
 msgstr "Préferences"
 
-#: ../src/gnome-mastermind.c:1343
+#: ../src/gnome-mastermind.c:1403
 msgid "<b>Tileset theme</b>"
 msgstr "<b>Thème des plots</b>"
 
-#: ../src/gnome-mastermind.c:1355
+#: ../src/gnome-mastermind.c:1415
 msgid "Theme:"
 msgstr "Thème :"
 
-#: ../src/gnome-mastermind.c:1378
+#: ../src/gnome-mastermind.c:1438
 msgid "<b>Color settings</b>"
 msgstr "<b>Réglages des couleurs</b>"
 
-#: ../src/gnome-mastermind.c:1390
+#: ../src/gnome-mastermind.c:1450
 msgid "Foreground Color:"
 msgstr "Couleur de premier plan :"
 
-#: ../src/gnome-mastermind.c:1402
+#: ../src/gnome-mastermind.c:1462
 msgid "Background Color:"
 msgstr "Couleur d'arrière plan :"
 
-#: ../src/gnome-mastermind.c:1414
+#: ../src/gnome-mastermind.c:1474
 msgid "Try to get colors from system theme"
 msgstr "Tentative d'obtenir les couleurs depuis le thème du système"
 
-#: ../src/gnome-mastermind.c:1441
+#: ../src/gnome-mastermind.c:1501
 msgid "<b>Game settings</b>"
 msgstr "<b>Réglages du jeu</b>"
 
-#: ../src/gnome-mastermind.c:1453
+#: ../src/gnome-mastermind.c:1513
 msgid "Maximum number of tries allowed:"
 msgstr "Nombre maximal de coups permis :"
 
-#: ../src/gnome-mastermind.c:1496
+#: ../src/gnome-mastermind.c:1556
 msgid "_Game"
 msgstr "_Jeu"
 
-#: ../src/gnome-mastermind.c:1500
+#: ../src/gnome-mastermind.c:1560
 msgid "_New game"
 msgstr "_Nouvelle partie"
 
-#: ../src/gnome-mastermind.c:1501
+#: ../src/gnome-mastermind.c:1561
 msgid "Start a new game"
 msgstr "Démarre une nouvelle partie"
 
-#: ../src/gnome-mastermind.c:1505
+#: ../src/gnome-mastermind.c:1565
 msgid "_Quit"
 msgstr "_Quitter"
 
-#: ../src/gnome-mastermind.c:1506
+#: ../src/gnome-mastermind.c:1566
 msgid "Quit the game"
 msgstr "Quitte le jeu"
 
-#: ../src/gnome-mastermind.c:1509
+#: ../src/gnome-mastermind.c:1569
 msgid "_Settings"
 msgstr "_Réglages"
 
-#: ../src/gnome-mastermind.c:1512
+#: ../src/gnome-mastermind.c:1572
 msgid "_Preferences"
 msgstr "_Préférences"
 
-#: ../src/gnome-mastermind.c:1513
+#: ../src/gnome-mastermind.c:1573
 msgid "Change game settings"
 msgstr "Modifie les réglages du jeu"
 
-#: ../src/gnome-mastermind.c:1516
+#: ../src/gnome-mastermind.c:1576
 msgid "_Help"
 msgstr "Aid_e"
 
-#: ../src/gnome-mastermind.c:1519
+#: ../src/gnome-mastermind.c:1579
 msgid "_About"
 msgstr "À _propos"
 
-#: ../src/gnome-mastermind.c:1521
+#: ../src/gnome-mastermind.c:1581
 msgid "About"
 msgstr "À propos"
 
-#: ../src/gnome-mastermind.c:1525 ../src/gnome-mastermind.c:1527
+#: ../src/gnome-mastermind.c:1585 ../src/gnome-mastermind.c:1587
 msgid "_Contents"
 msgstr "_Sommaire"
 
-#: ../src/gnome-mastermind.c:1544
+#: ../src/gnome-mastermind.c:1604
 msgid "_Show Toolbar"
 msgstr "_Afficher la barre d'outils"
 
-#: ../src/gnome-mastermind.c:1544
+#: ../src/gnome-mastermind.c:1604
 msgid "Show or hide the toolbar"
 msgstr "Afficher ou masquer la barre d'outil"
 

@@ -54,9 +54,8 @@ msgid ""
 "<application>GNOME Mastermind</application> is a <trademark class=\"trade"
 "\">Mastermind</trademark> like game for GNOME Desktop."
 msgstr ""
-"<application>GNOME Mastermind</application> è un gioco simile a <trademark class=\"trade"
-"\">Mastermind</trademark> per GNOME."
-
+"<application>GNOME Mastermind</application> è un gioco simile a <trademark "
+"class=\"trade\">Mastermind</trademark> per GNOME."
 
 #: ../C/gnome-mastermind.xml:47(year)
 msgid "2007"
@@ -99,9 +98,10 @@ msgid ""
 "group=gnome-mastermind\">Bug tracker at gna.org</ulink> or sign-up to the "
 "public mailing-list listed in the project homepage to give us feedback."
 msgstr ""
-"Per favore, riporta qualsiasi problema al <ulink url=\"https://gna.org/bugs/?func=additem&amp;"
-"group=gnome-mastermind\">Bug tracker di gna.org</ulink> o iscriviti alla "
-"mailing-list pubblica (vedi l'homepage del progetto) per qualsiasi consiglio, impressione, suggerimento."
+"Per favore, riporta qualsiasi problema al <ulink url=\"https://gna.org/bugs/?"
+"func=additem&amp;group=gnome-mastermind\">Bug tracker di gna.org</ulink> o "
+"iscriviti alla mailing-list pubblica (vedi l'homepage del progetto) per "
+"qualsiasi consiglio, impressione, suggerimento."
 
 #: ../C/gnome-mastermind.xml:126(title)
 msgid "Introduction"
@@ -116,8 +116,8 @@ msgid ""
 "At first here's a brief introduction about the classic game that this one "
 "resembles (source: wikipedia)."
 msgstr ""
-"Per prima cosa una breve introduzione sulla versione classica del gioco "
-"a cui questo è ispirato (da wikipedia)."
+"Per prima cosa una breve introduzione sulla versione classica del gioco a "
+"cui questo è ispirato (da wikipedia)."
 
 #: ../C/gnome-mastermind.xml:133(para)
 msgid ""
@@ -481,24 +481,6 @@ msgstr ""
 msgid "About <application>GNOME Mastermind</application>"
 msgstr "A proposito di <application>GNOME Mastermind</application>"
 
-#: ../C/gnome-mastermind.xml:430(para)
-msgid ""
-"<application>GNOME Mastermind</application> was written by Filippo Argiolas"
-msgstr ""
-"<application>GNOME Mastermind</application> è scritto da Filippo Argiolas"
-
-#: ../C/gnome-mastermind.xml:432(para)
-msgid ""
-"(<email>filippo.argiolas@gmail.com</email>). To find more information about "
-"<application>GNOME Mastermind</application>, please visit the <ulink url="
-"\"http://www.autistici.org/gnome-mastermind\" type=\"http"
-"\"><application>GNOME Mastermind</application> webpage</ulink>."
-msgstr ""
-"(<email>filippo.argiolas@gmail.com</email>). Per maggiori informazioni su "
-"<application>GNOME Mastermind</application>, visita la pagina web di <ulink "
-"url=\"http://www.autistici.org/gnome-mastermind\" type=\"http"
-"\"><application>GNOME Mastermind</application></ulink>."
-
 #: ../C/gnome-mastermind.xml:436(para)
 msgid ""
 "For copyright issues check the about dialog and, most of all, copyright and "
@@ -520,7 +502,21 @@ msgid ""
 "source code of this program."
 msgstr ""
 
-#. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2.
 #: ../C/gnome-mastermind.xml:0(None)
 msgid "translator-credits"
 msgstr "Edoardo Batini"
+
+#: ../C/gnome-mastermind.xml:430(para)
+msgid ""
+"<application>GNOME Mastermind</application> was written by Filippo Argiolas "
+"(<email>filippo.argiolas@gmail.com</email>). To find more information about "
+"<application>GNOME Mastermind</application>, please visit the <ulink url="
+"\"http://www.autistici.org/gnome-mastermind\" type=\"http"
+"\"><application>GNOME Mastermind</application> webpage</ulink>."
+msgstr ""
+"<application>GNOME Mastermind</application> è scritto da Filippo Argiolas "
+"(<email>filippo.argiolas@gmail.com</email>). Per maggiori informazioni su "
+"<application>GNOME Mastermind</application>, visita la pagina web di <ulink "
+"url=\"http://www.autistici.org/gnome-mastermind\" type=\"http"
+"\"><application>GNOME Mastermind</application></ulink>."
+

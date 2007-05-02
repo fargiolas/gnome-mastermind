@@ -24,7 +24,7 @@
 
   Remember that this is a guide, rather than a perfect model to follow
   slavishly. Make your manual logical and readable: see the GDP Style Guide for
-  more on this.
+ more on this.
 -->
 <!--
       (Do not remove this comment block.)
@@ -428,8 +428,6 @@ for
   <sect1 id="myapp-about"> 
     <title>About &app;</title> 
     <para> &app; was written by Filippo Argiolas
-    </para>
-    <para>
       (<email>filippo.argiolas@gmail.com</email>). To find more information about
       &app;, please visit the 
       <ulink url="http://www.autistici.org/gnome-mastermind" type="http">&app; webpage</ulink>. </para>
