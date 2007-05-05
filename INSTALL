@@ -1,0 +1,4 @@
+$ tar -zxvf gnome-mastermind-X.Y.tar.gz
+$ ./configure --prefix=/usr
+$ make
+# make install
