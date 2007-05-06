@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT([gnome-mastermind], [0.2])
+AC_INIT([gnome-mastermind], [0.3])
 AC_PREREQ([2.5])
 AC_CANONICAL_BUILD
 AC_CANONICAL_HOST
@@ -91,7 +91,7 @@ AM_GLIB_GNU_GETTEXT
 gmlocaledir='${prefix}/${DATADIRNAME}/locale'
 AC_SUBST(gmlocaledir)
 
-ALL_LINGUAS="it pl fr sv de"
+ALL_LINGUAS="it pl fr sv de en_GB eu"
 AC_SUBST(ALL_LINGUAS)
 
 GNOME_DOC_INIT

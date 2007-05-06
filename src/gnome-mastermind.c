@@ -1256,6 +1256,9 @@ static void about_action (void) {
 			       "name", "GNOME Mastermind",
 			       "authors", authors,
 			       "artists", artists,
+			       /* Note for translators: Replace this
+				* string with your name and email
+				* address */
 			       "translator-credits", _("Filippo Argiolas <filippo.argiolas@gmail.com>"),
 			       "comments", _("A Mastermind clone for gnome"),
 			       "copyright", "gnome-mastermind, copyright (c) 2007 Filippo Argiolas\n"
