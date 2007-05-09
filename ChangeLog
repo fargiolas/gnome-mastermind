@@ -1,3 +1,12 @@
+09 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* src/gnome-mastermind.c:
+	Removed gtk drawing area for the tray and moved everything in the main
+	drawing area drawing stuff. Moved redraw current game calls to
+	configure_event. Added button release and button motion sensitivity.
+	Implemented a first draft of drag and drop :D. Replaced colored
+	selection square with a cleaner zoom effect. Removed a ugly hack using
+	taking color from a gdkimage pixel to clean cell when placing balls.
+
 06 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
 	* configure.ac: switch to 0.3
 	* po/: Added more translations 

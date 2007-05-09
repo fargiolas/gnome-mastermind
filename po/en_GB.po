@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-mastermind\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-06 21:29+0200\n"
+"POT-Creation-Date: 2007-05-09 16:50+0200\n"
 "PO-Revision-Date: 2007-05-06 16:49-0000\n"
 "Last-Translator: David Lodge <dave@cirt.net>\n"
 "Language-Team: en_GB <en@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../src/gnome-mastermind.c:170
+#: ../src/gnome-mastermind.c:177
 msgid ""
 "<span size=\"medium\" weight=\"bold\">Settings have changed!</span>\n"
 "\n"
@@ -31,7 +31,7 @@ msgstr ""
 "\n"
 "Start a new game?"
 
-#: ../src/gnome-mastermind.c:201 ../src/gnome-mastermind.c:288
+#: ../src/gnome-mastermind.c:208 ../src/gnome-mastermind.c:289
 #, c-format
 msgid ""
 "<span size=\"medium\" weight=\"bold\">Unable to load theme!</span>\n"
@@ -46,11 +46,11 @@ msgstr ""
 "\n"
 "The default theme will be loaded instead."
 
-#: ../src/gnome-mastermind.c:651
+#: ../src/gnome-mastermind.c:684
 msgid "Ready for a new game!"
 msgstr "Ready for a new game!"
 
-#: ../src/gnome-mastermind.c:668
+#: ../src/gnome-mastermind.c:701
 #, c-format
 msgid ""
 "<span size=\"large\" weight=\"bold\">Great!!!</span>\n"
@@ -61,7 +61,7 @@ msgstr ""
 "You found the solution with <b>%d</b> tries!\n"
 "Do you want to play again?"
 
-#: ../src/gnome-mastermind.c:690
+#: ../src/gnome-mastermind.c:724
 #, c-format
 msgid ""
 "<span size=\"large\" weight=\"bold\">I'm sorry, you lose!</span>\n"
@@ -72,124 +72,121 @@ msgstr ""
 "With just <b>%d</b> tries you didn't find the solution!\n"
 "Do you want to play again?"
 
-#: ../src/gnome-mastermind.c:695
-msgid "That was the right solution:"
-msgstr "That was the right solution:"
+#: ../src/gnome-mastermind.c:729
+#, fuzzy
+msgid "This was the right solution:"
+msgstr "This was the right solution:"
 
-#: ../src/gnome-mastermind.c:986 ../src/gnome-mastermind.c:1034
-#: ../src/gnome-mastermind.c:1753
+#: ../src/gnome-mastermind.c:1119 ../src/gnome-mastermind.c:1175
+#: ../src/gnome-mastermind.c:1223 ../src/gnome-mastermind.c:1850
 msgid "Select a color!"
 msgstr "Select a colour!"
 
-#: ../src/gnome-mastermind.c:997
+#: ../src/gnome-mastermind.c:1129 ../src/gnome-mastermind.c:1186
 msgid "Select a valid place!"
 msgstr "Select a valid place!"
-
-#: ../src/gnome-mastermind.c:1106
-msgid "Now click on the right place!"
-msgstr "Now click on the right place!"
 
 #. Note for translators: Replace this
 #. * string with your name and email
 #. * address
-#: ../src/gnome-mastermind.c:1262
+#: ../src/gnome-mastermind.c:1370
 msgid "Filippo Argiolas <filippo.argiolas@gmail.com>"
 msgstr "David Lodge <dave@cirt.net>"
 
-#: ../src/gnome-mastermind.c:1263
+#: ../src/gnome-mastermind.c:1371
 msgid "A Mastermind clone for gnome"
 msgstr "A Mastermind clone for gnome"
 
 #. GtkWidget *hbox;
-#: ../src/gnome-mastermind.c:1382
+#: ../src/gnome-mastermind.c:1490
 msgid "Preferences"
 msgstr "Preferences"
 
-#: ../src/gnome-mastermind.c:1406
+#: ../src/gnome-mastermind.c:1514
 msgid "<b>Tileset theme</b>"
 msgstr "<b>Tileset theme</b>"
 
-#: ../src/gnome-mastermind.c:1418
+#: ../src/gnome-mastermind.c:1526
 msgid "Theme:"
 msgstr "Theme:"
 
-#: ../src/gnome-mastermind.c:1441
+#: ../src/gnome-mastermind.c:1549
 msgid "<b>Color settings</b>"
 msgstr "<b>Colour settings</b>"
 
-#: ../src/gnome-mastermind.c:1453
+#: ../src/gnome-mastermind.c:1561
 msgid "Foreground Color:"
 msgstr "Foreground Colour:"
 
-#: ../src/gnome-mastermind.c:1465
+#: ../src/gnome-mastermind.c:1573
 msgid "Background Color:"
 msgstr "Background Colour:"
 
-#: ../src/gnome-mastermind.c:1477
+#: ../src/gnome-mastermind.c:1585
 msgid "Try to get colors from system theme"
 msgstr "Try to get colours from system theme"
 
-#: ../src/gnome-mastermind.c:1504
+#: ../src/gnome-mastermind.c:1612
 msgid "<b>Game settings</b>"
 msgstr "<b>Game settings</b>"
 
-#: ../src/gnome-mastermind.c:1516
+#: ../src/gnome-mastermind.c:1624
 msgid "Maximum number of tries allowed:"
 msgstr "Maximum number of tries allowed:"
 
-#: ../src/gnome-mastermind.c:1559
+#: ../src/gnome-mastermind.c:1667
 msgid "_Game"
 msgstr "_Game"
 
-#: ../src/gnome-mastermind.c:1563
+#: ../src/gnome-mastermind.c:1671
 msgid "_New game"
 msgstr "_New game"
 
-#: ../src/gnome-mastermind.c:1564
+#: ../src/gnome-mastermind.c:1672
 msgid "Start a new game"
 msgstr "Start a new game"
 
-#: ../src/gnome-mastermind.c:1568
+#: ../src/gnome-mastermind.c:1676
 msgid "_Quit"
 msgstr "_Quit"
 
-#: ../src/gnome-mastermind.c:1569
+#: ../src/gnome-mastermind.c:1677
 msgid "Quit the game"
 msgstr "Quit the game"
 
-#: ../src/gnome-mastermind.c:1572
+#: ../src/gnome-mastermind.c:1680
 msgid "_Settings"
 msgstr "_Settings"
 
-#: ../src/gnome-mastermind.c:1575
+#: ../src/gnome-mastermind.c:1683
 msgid "_Preferences"
 msgstr "_Preferences"
 
-#: ../src/gnome-mastermind.c:1576
+#: ../src/gnome-mastermind.c:1684
 msgid "Change game settings"
 msgstr "Change game settings"
 
-#: ../src/gnome-mastermind.c:1579
+#: ../src/gnome-mastermind.c:1687
 msgid "_Help"
 msgstr "_Help"
 
-#: ../src/gnome-mastermind.c:1582
+#: ../src/gnome-mastermind.c:1690
 msgid "_About"
 msgstr "_About"
 
-#: ../src/gnome-mastermind.c:1584
+#: ../src/gnome-mastermind.c:1692
 msgid "About"
 msgstr "About"
 
-#: ../src/gnome-mastermind.c:1588 ../src/gnome-mastermind.c:1590
+#: ../src/gnome-mastermind.c:1696 ../src/gnome-mastermind.c:1698
 msgid "_Contents"
 msgstr "_Contents"
 
-#: ../src/gnome-mastermind.c:1607
+#: ../src/gnome-mastermind.c:1715
 msgid "_Show Toolbar"
 msgstr "_Show Toolbar"
 
-#: ../src/gnome-mastermind.c:1607
+#: ../src/gnome-mastermind.c:1715
 msgid "Show or hide the toolbar"
 msgstr "Show or hide the toolbar"
 
@@ -200,3 +197,6 @@ msgstr "Break the hidden code!"
 #: ../desktop/gnome-mastermind.desktop.in.h:2
 msgid "Mastermind"
 msgstr "Mastermind"
+
+#~ msgid "Now click on the right place!"
+#~ msgstr "Now click on the right place!"
