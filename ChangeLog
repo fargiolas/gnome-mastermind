@@ -1,7 +1,11 @@
 06 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* configure.ac: switch to 0.3
 	* po/: Added more translations 
 	* themes/tango2.svg: Added new shiny tango-ish tileset. (Thanks again
 	to Ulisse Perusin)
+
+05 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* all: 0.2 release
 
 02 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
 	* po/: Added more translations 
