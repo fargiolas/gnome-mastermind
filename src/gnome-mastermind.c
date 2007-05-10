@@ -693,13 +693,21 @@ static void quit_action (void) {
 
 void win_dialog (int tries) {
 	GtkWidget *dialog;
+	GtkWidget *button;
  
 	dialog = gtk_message_dialog_new_with_markup (GTK_WINDOW (window),
 						     GTK_DIALOG_DESTROY_WITH_PARENT,
 						     GTK_MESSAGE_INFO,
-						     GTK_BUTTONS_YES_NO,
+						     GTK_BUTTONS_NONE,
 						     _("<span size=\"large\" weight=\"bold\">Great!!!</span>\nYou found the solution with <b>%d</b> tries!\n" 
 						       "Do you want to play again?"), tries);
+
+
+	gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_QUIT, GTK_RESPONSE_NO);
+	button = gtk_dialog_add_button (GTK_DIALOG (dialog), _("Play again"), GTK_RESPONSE_YES);
+	gtk_button_set_image (GTK_BUTTON (button), gtk_image_new_from_stock (GTK_STOCK_YES, GTK_ICON_SIZE_BUTTON)); 
+
+	
 	gint response = gtk_dialog_run (GTK_DIALOG (dialog));
 	if ( response == GTK_RESPONSE_YES)
 		new_game();
@@ -708,8 +716,9 @@ void win_dialog (int tries) {
 }
 
 static void 
-	lose_dialog (int tries) {
+lose_dialog (int tries) {
 	GtkWidget *dialog;
+	GtkWidget *button;
 	GtkWidget *image[4];
 	GtkWidget *shbox;
 	GdkPixbuf *sbuf = NULL;
@@ -720,11 +729,15 @@ static void
 	dialog = gtk_message_dialog_new_with_markup (GTK_WINDOW (window),
 						     GTK_DIALOG_DESTROY_WITH_PARENT,
 						     GTK_MESSAGE_WARNING,
-						     GTK_BUTTONS_YES_NO,
+						     GTK_BUTTONS_NONE,
 						     _("<span size=\"large\" weight=\"bold\">I'm sorry, you lose!</span>\n"
 						       "With just <b>%d</b> tries you didn't find the solution yet?!\n"
 						       "Do you want to play again?"), tries);
- 
+
+	gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_QUIT, GTK_RESPONSE_NO);
+	button = gtk_dialog_add_button (GTK_DIALOG (dialog), _("Play again"), GTK_RESPONSE_YES);
+	gtk_button_set_image (GTK_BUTTON (button), gtk_image_new_from_stock (GTK_STOCK_YES, GTK_ICON_SIZE_BUTTON)); 
+
 	shbox = gtk_hbox_new (FALSE, 0);
 	slabel = gtk_label_new (_("This was the right solution:"));
 	gtk_box_pack_start (GTK_BOX (shbox), slabel, FALSE, FALSE, 20);
@@ -988,12 +1001,12 @@ static gboolean redraw_current_game() {
 
 static gboolean tray_mid_click();
 
-static gboolean parse_tray_event (gdouble ex, gdouble ey, guint button, GtkWidget *widget)
+static gboolean parse_tray_event (GdkEventButton *event, GtkWidget *widget)
 {
 	int x, y;
 	int c, l;
 
-	trayxy2cl (ex, ey, &c, &l, widget); //rescaling operations
+	trayxy2cl (event->x, event->y, &c, &l, widget); //rescaling operations
 	traycl2xy (c, l, &x, &y, widget);
 	
 	gm_debug("c: %d, l: %d\n", c, l);
@@ -1012,8 +1025,11 @@ static gboolean parse_tray_event (gdouble ex, gdouble ey, guint button, GtkWidge
 				 GDK_RGB_DITHER_MAX, 0, 0);
 		gdk_window_invalidate_rect (widget->window, NULL, FALSE); 
 
-		if (button == 2) {
-				tray_mid_click();
+		gm_debug ("type: %d\n", event->type);
+
+		if ((event->button == 2 && event->type == GDK_BUTTON_PRESS) || 
+		    (event->button == 1 && event->type == GDK_2BUTTON_PRESS)) {
+			tray_mid_click();
 		}
 	}
 	
@@ -1076,6 +1092,7 @@ static gboolean button_press_event ( GtkWidget *widget,
 {
 	int c, l;
 
+
 	if (event->type == GDK_BUTTON_RELEASE) {
 		if (stx == event->x && sty == event->y) {
 
@@ -1136,13 +1153,13 @@ static gboolean button_press_event ( GtkWidget *widget,
 		}
 	}
 
-	if (event->type != GDK_BUTTON_PRESS || pixmap == NULL) 
+	if ((event->type != GDK_BUTTON_PRESS && event->type != GDK_2BUTTON_PRESS) || pixmap == NULL) 
 		return TRUE;
 	
 	if (event->y > (widget->allocation.height - tray_h)) {
 		stx = event->x;
 		sty = event->y;
-		parse_tray_event (event->x, event->y, event->button, widget);
+		parse_tray_event (event, widget);
 	}
 	else 
 		gm_debug ("parse_grid_event\n");
@@ -1261,15 +1278,6 @@ static gboolean delete_event (GtkWidget *widget, GdkEvent *event, gpointer data)
 }
 
 static void destroy (GtkWidget *widget, gpointer data) {
-	if (pixmap)
-		g_object_unref (pixmap);
-	if (traymapbk)
-		g_object_unref (traymapbk);
-	if (cellbk)
-		g_object_unref (cellbk);
-	if (motionbk)
-		g_object_unref (motionbk);
-
 	gtk_main_quit();
 }
 
@@ -1440,10 +1448,6 @@ static void populate_theme_combo (GtkWidget *combo) {
 	g_free (dir_name);
 }
 
-static void max_tries_changed (GtkWidget *spin, GtkWidget *button) {
-	gtk_widget_set_sensitive (button, TRUE);
-}
-
 static void use_style_toggled (GtkWidget *toggle, GtkWidget *table) {
 	gboolean state;
 	state = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (toggle));
@@ -1481,7 +1485,6 @@ static void preferences_action (void){
 	GtkWidget *frame;
 	GtkWidget *align;
 	GtkWidget *pango_label;
-	GtkWidget *apply_button;
 
 	GtkWidget *use_style_check;
 	GtkWidget *max_tries_spin;
@@ -1494,13 +1497,6 @@ static void preferences_action (void){
 
 	gtk_dialog_set_has_separator (GTK_DIALOG (pref_dialog), FALSE);
 
-	apply_button = gtk_dialog_add_button (GTK_DIALOG (pref_dialog),
-					      GTK_STOCK_APPLY,
-					      GTK_RESPONSE_APPLY);
-	gtk_widget_set_sensitive (apply_button, FALSE);
-/* gtk_dialog_add_button (pref_dialog,
-   GTK_STOCK_REVERT_TO_SAVED,
-   GTK_RESPONSE_YES); */
 	gtk_dialog_add_button (GTK_DIALOG (pref_dialog),
 			       GTK_STOCK_CLOSE,
 			       GTK_RESPONSE_CLOSE);
@@ -1630,9 +1626,6 @@ static void preferences_action (void){
 	max_tries_spin = gtk_spin_button_new_with_range (2, 14, 1);
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (max_tries_spin), gc_max_tries);
 
-	g_signal_connect (G_OBJECT (max_tries_spin), "value-changed",
-			  G_CALLBACK (max_tries_changed), apply_button);
-
 	gtk_table_attach_defaults (GTK_TABLE (table), max_tries_spin, 1, 2, 0, 1);
 
 	gtk_container_add (GTK_CONTAINER (align), table);
@@ -1643,14 +1636,13 @@ static void preferences_action (void){
 
 	gtk_widget_show_all (pref_dialog);
 
-	gint response = gtk_dialog_run (GTK_DIALOG (pref_dialog));
+	gtk_dialog_run (GTK_DIALOG (pref_dialog));
 
-	if (response == GTK_RESPONSE_APPLY) {
-		gconf_client_set_int (settings, "/apps/gnome-mastermind/maximum_tries",
-				      gtk_spin_button_get_value (
-					      GTK_SPIN_BUTTON (max_tries_spin)),
-				      NULL);
-	}
+	gconf_client_set_int (settings, "/apps/gnome-mastermind/maximum_tries",
+			      gtk_spin_button_get_value (
+				      GTK_SPIN_BUTTON (max_tries_spin)),
+			      NULL);
+
 /*
   else if (response == GTK_RESPONSE_YES) {
   reset_default_settings();
