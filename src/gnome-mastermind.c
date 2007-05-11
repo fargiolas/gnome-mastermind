@@ -61,6 +61,7 @@ GtkWidget *vbox; //main vbox
 GtkWidget *drawing_area = NULL;
 GtkWidget *toolbar;
 GtkAction *show_toolbar_action;
+GtkAction *undo_action = NULL;
 
 gboolean gm_debug_on;
 
@@ -102,7 +103,11 @@ guint timeout_id = 0;
 
 gint movecount;
 
-gint **movearray;
+gint **movearray = NULL;
+gint *lastmove = NULL;
+GList *undolist = NULL;
+
+
 
 /* Backing pixmap for drawing area */
 static GdkPixmap *pixmap = NULL;
@@ -127,8 +132,6 @@ GtkWidget *pref_dialog;
 
 GtkWidget *fg_colorbutton = NULL;
 GtkWidget *bg_colorbutton = NULL;
-
-
 
 static gboolean redraw_current_game();
 gboolean start_new_gameboard (GtkWidget *widget);
@@ -246,9 +249,9 @@ color_notify_func (GConfClient *client,
 
 static void
 toolbar_notify_func (GConfClient *client,
-		   guint cnxn_id,
-		   GConfEntry *entry,
-		   gpointer user_data)
+		     guint cnxn_id,
+		     GConfEntry *entry,
+		     gpointer user_data)
 {
 	GConfValue *value;
 	gchar *key;
@@ -335,6 +338,18 @@ void init_gconf (void) {
 	}
 }
 
+gint * init_lastmove (void) {
+	
+	gint *lm = NULL;
+	int i;
+
+	lm = g_try_malloc (GRID_COLS * sizeof (gint));
+	for (i = 0; i < GRID_COLS; i++)
+		lm[i] = -1;
+	
+	return lm;
+}
+
 void init_game (void) {
 	int i, j;
 	GRand *rand;
@@ -348,6 +363,16 @@ void init_game (void) {
 		for (j = 0; j < GRID_COLS+2; j++) 
 			movearray[i][j] = -1;
 	gm_debug ("after\n");
+
+	if (undolist) {
+		undolist = g_list_first (undolist);
+		g_list_foreach (undolist, (GFunc) g_free, NULL);
+		g_list_free (undolist);
+	}
+
+	undolist = NULL;
+
+	undolist = g_list_append (undolist, init_lastmove());
 
 	frame_min_w = GRID_SZ* (GRID_COLS+2) + GRID_XPAD*2;
 	frame_min_h = GRID_SZ*grid_rows+2*GRID_YPAD+TRAY_ROWS*TRAY_SZ+TRAY_PAD*2;
@@ -662,6 +687,8 @@ gboolean start_new_gameboard (GtkWidget *widget) {
 	return TRUE;
 }
 
+
+
 void new_game (void) {
 	gint i;
 	newgame = 1;
@@ -780,7 +807,7 @@ static gboolean configure_event ( GtkWidget *widget,
 		start_new_gameboard (widget);
 		newgame = 0;
 		xpos = 0;
-		ypos = grid_rows-1; 
+		ypos = grid_rows; 
 		gdk_window_invalidate_rect (widget->window, NULL, FALSE); 
 		redraw_current_game();
 	}
@@ -917,13 +944,25 @@ static gboolean checkscores() {
 		ypos--;
 	}
 	
+	if (undolist) {
+		undolist = g_list_first (undolist);
+		g_list_foreach (undolist, (GFunc) g_free, NULL);
+		g_list_free (undolist);
+	}
+
+	undolist = NULL;
+
+	undolist = g_list_append (undolist, init_lastmove());
+
+	gtk_action_set_sensitive (GTK_ACTION (undo_action), FALSE);
+	
 	return TRUE;
 }
 
 static gboolean place_grid_color (int c, int l) {
 	gint x, y;
 	
-	gm_debug ("placing c:%d l:%d\n", c, l);
+	gm_debug ("placing c:%d l:%d s:%d\n", c, l, selectedcolor);
 	gm_debug ("movecount: %d\n", movecount);
 	gridcl2xy (c, l, &x, &y, drawing_area);
 
@@ -933,17 +972,56 @@ static gboolean place_grid_color (int c, int l) {
 			  0, 0,
 			  x + 1, y + 1,
 			  -1, -1);
-
-	gdk_draw_pixbuf (pixmap,
-			 NULL,
-			 tileset_bg,
-			 BM*selectedcolor, 0,
-			 x, y,
-			 BM, BM, 
-			 GDK_RGB_DITHER_MAX, 0, 0);
+	if (selectedcolor >=0 ) {
+		gdk_draw_pixbuf (pixmap,
+				 NULL,
+				 tileset_bg,
+				 BM*selectedcolor, 0,
+				 x, y,
+				 BM, BM, 
+				 GDK_RGB_DITHER_MAX, 0, 0);
+	}
+	
+	gtk_action_set_sensitive (GTK_ACTION (undo_action), TRUE);
 
 	gdk_window_invalidate_rect (drawing_area->window, NULL, FALSE); 
 	return TRUE;
+}
+
+
+static void undo_action_cb (void) {
+	gint i;
+
+	if ((movecount == 0) || (xpos == 0)) {
+		return;
+	} 
+	
+	undolist = undolist->prev;
+	lastmove = undolist->data;
+
+	g_free (undolist->next->data);
+	undolist = g_list_remove_link (undolist, undolist->next);
+
+	gm_debug ("[undo] xpos:%d, ypos:%d, movecount:%d, selectedcolor:%d\n", xpos, ypos, movecount, selectedcolor);
+	old_xpos = 0;
+	movecount--;
+
+	for (xpos = 0; xpos < GRID_COLS; xpos ++) {
+		selectedcolor = lastmove [xpos];
+		movearray[ypos][xpos] = lastmove[xpos];
+		if (selectedcolor < 0) filled[xpos] = 0;
+		else old_xpos++;
+		place_grid_color (xpos, ypos);
+	}
+
+	xpos = old_xpos;
+
+	for (i = 0; i < GRID_COLS; i++)  {
+		gm_debug("%d\n", lastmove[i]);
+	}
+	
+	if ((movecount == 0) || (xpos == 0))
+		gtk_action_set_sensitive (GTK_ACTION (undo_action), FALSE);
 }
 
 static gboolean redraw_current_game() {
@@ -955,18 +1033,20 @@ static gboolean redraw_current_game() {
 	if (movecount == 0) {
 		return FALSE;
 	}
-
+/*
 	for (ypos = grid_rows-1; ypos >= 0; ypos--) {
 		for (xpos = 0; xpos<GRID_COLS+2; xpos++)
 			gm_debug (" %d ", movearray[ypos][xpos]);
 		gm_debug ("\n");
 	}
+
+*/
 	ypos = grid_rows;
 
 	limit = (movecount % GRID_COLS) ? 
 		((int)movecount/GRID_COLS+1)*GRID_COLS : movecount;
 
-	gm_debug ("movecount: %d limit:%d", movecount, limit);
+	gm_debug ("movecount: %d limit:%d ypos: %d\n", movecount, limit, ypos);
 
 	while (count < limit) {
 		xpos = count % GRID_COLS;
@@ -977,7 +1057,7 @@ static gboolean redraw_current_game() {
 	 
 		if ((xpos == GRID_COLS-1) && (ypos>0) && !dummy) clean_next_row();
 
-		if (selectedcolor >= 0)
+//		if (selectedcolor >= 0)
 			place_grid_color (xpos, ypos);
 
 		if (xpos == GRID_COLS-1){
@@ -995,6 +1075,8 @@ static gboolean redraw_current_game() {
 
 	xpos = old_xpos;
 	ypos = old_ypos;
+
+	gdk_window_invalidate_rect (drawing_area->window, NULL, FALSE); 
 
 	return TRUE;
 }
@@ -1045,8 +1127,8 @@ static gboolean motion_event (GtkWidget *widget,
 		motion_y_shift = (y - event->y) - (BM - BS)/2;
 		gm_debug("motion start\n");
 /*
-		gtk_statusbar_pop (GTK_STATUSBAR (status), gtk_statusbar_get_context_id (GTK_STATUSBAR (status), "mmind"));
-		gtk_statusbar_push (GTK_STATUSBAR (status), gtk_statusbar_get_context_id (GTK_STATUSBAR (status), "mmind"), _("Drag the ball to an empty cell!"));
+  gtk_statusbar_pop (GTK_STATUSBAR (status), gtk_statusbar_get_context_id (GTK_STATUSBAR (status), "mmind"));
+  gtk_statusbar_push (GTK_STATUSBAR (status), gtk_statusbar_get_context_id (GTK_STATUSBAR (status), "mmind"), _("Drag the ball to an empty cell!"));
 
 */
 		clean_tray(widget);
@@ -1062,9 +1144,9 @@ static gboolean motion_event (GtkWidget *widget,
 			g_object_unref (motionbk);
 		}
 		motionbk = gdk_pixmap_new (widget->window,
-					 BM,
-					 BM,
-					 -1);
+					   BM,
+					   BM,
+					   -1);
 		gdk_draw_drawable(motionbk,
 				  widget->style->white_gc,
 				  pixmap,
@@ -1090,12 +1172,11 @@ static gboolean motion_event (GtkWidget *widget,
 static gboolean button_press_event ( GtkWidget *widget,
 				     GdkEventButton *event )
 {
-	int c, l;
-
+	gint c, l;
+	gint i;
 
 	if (event->type == GDK_BUTTON_RELEASE) {
 		if (stx == event->x && sty == event->y) {
-
 		}
 		pressed = 0;
 		if (mstarted) {
@@ -1103,33 +1184,39 @@ static gboolean button_press_event ( GtkWidget *widget,
 				gdk_draw_drawable(pixmap,
 						  widget->style->white_gc,
 						  motionbk,
-						  0, 0,
-						  xbk, ybk,
-						  BM, BM);
+						  0, 0, xbk, ybk, BM, BM);
 				g_object_unref (motionbk);
 				motionbk = NULL;
 			}
 			
-			// FIXME //
+			// FIXME  (duplicated code - move to function) //
 			
 			gridxy2cl (event->x, event->y, &c, &l, widget);
 		      
 			if (l == ypos) {
+				clean_tray(widget);
+				
 				if(!filled[c]) {
 					xpos++;
 					xpos = xpos%GRID_COLS;
 				}
 				
-				clean_tray(widget);
 				
 				place_grid_color (c, l);
 				
-				movearray[l][c] = selectedcolor;
-				
-				movecount++;
-				
-				filled[c] = 1; // set current position as filled
+				undolist = g_list_append (undolist, init_lastmove ());
+				undolist = g_list_last (undolist);
+				lastmove = undolist->data; 
+				for (i = 0; i < GRID_COLS; i++) {
+					lastmove[i] = movearray[ypos][i];
+					gm_debug(":: %d ", lastmove[i]);
+				}
+				gm_debug ("\n");
+				lastmove[c] = selectedcolor;
 
+				movearray[l][c] = selectedcolor; 				
+				movecount++; 				
+				filled[c] = 1; // set current position as filled
 				guess[c] = selectedcolor; // fill guessed solution array with current color
 				
 				gtk_statusbar_pop (GTK_STATUSBAR (status), gtk_statusbar_get_context_id (GTK_STATUSBAR (status), "mmind"));
@@ -1137,15 +1224,17 @@ static gboolean button_press_event ( GtkWidget *widget,
 				
 				gm_debug ("[button_press_event]xpos:%d ypos:%d\n", xpos, ypos);
 				if (xpos == 0 && movecount > 1) {
+					undolist = g_list_append (undolist, init_lastmove ());
+					undolist = g_list_last (undolist);
 					checkscores();
 				}
 				selectedcolor = -1;
-		}
-		else {
-			gtk_statusbar_pop (GTK_STATUSBAR (status), gtk_statusbar_get_context_id (GTK_STATUSBAR (status), "mmind"));
-			gtk_statusbar_push (GTK_STATUSBAR (status), gtk_statusbar_get_context_id (GTK_STATUSBAR (status), "mmind"), _("Select a valid place!"));
-		}
-
+			}
+			else {
+				gtk_statusbar_pop (GTK_STATUSBAR (status), gtk_statusbar_get_context_id (GTK_STATUSBAR (status), "mmind"));
+				gtk_statusbar_push (GTK_STATUSBAR (status), gtk_statusbar_get_context_id (GTK_STATUSBAR (status), "mmind"), _("Select a valid place!"));
+			}
+			
 			gdk_window_invalidate_rect (widget->window, NULL, FALSE); 
 			gm_debug("motion stop\n");
 			selectedcolor = -1;
@@ -1160,32 +1249,38 @@ static gboolean button_press_event ( GtkWidget *widget,
 		stx = event->x;
 		sty = event->y;
 		parse_tray_event (event, widget);
-	}
+	} 
+       
 	else 
 		gm_debug ("parse_grid_event\n");
 
 /* consider moving the rest in a separate function */
-	
-
 	if (event->button == 1 && pixmap != NULL && selectedcolor >= 0) {
 
 		gridxy2cl (event->x, event->y, &c, &l, widget);
 
 		if (l == ypos) {
+			clean_tray (widget);
 			if(!filled[c]) {
 				xpos++;
 				xpos = xpos%GRID_COLS;
 			}
 
-			clean_tray (widget);
 			place_grid_color (c, l);
-	 
+
+			undolist = g_list_append (undolist, init_lastmove ());
+			undolist = g_list_last (undolist);
+			lastmove = undolist->data; 
+			for (i = 0; i < GRID_COLS; i++) {
+				lastmove[i] = movearray[ypos][i];
+				gm_debug(":: %d ", lastmove[i]);
+			}
+			gm_debug ("\n");
+			lastmove[c] = selectedcolor;
+			
 			movearray[l][c] = selectedcolor;
-
 			movecount++;
-	 
 			filled[c] = 1; // set current position as filled
-
 			guess[c] = selectedcolor; // fill guessed solution array with current color
 
 			gtk_statusbar_pop (GTK_STATUSBAR (status), gtk_statusbar_get_context_id (GTK_STATUSBAR (status), "mmind"));
@@ -1198,6 +1293,7 @@ static gboolean button_press_event ( GtkWidget *widget,
 			selectedcolor = -1;
 			
 		}
+
 		else {
 			gtk_statusbar_pop (GTK_STATUSBAR (status), gtk_statusbar_get_context_id (GTK_STATUSBAR (status), "mmind"));
 			gtk_statusbar_push (GTK_STATUSBAR (status), gtk_statusbar_get_context_id (GTK_STATUSBAR (status), "mmind"), _("Select a valid place!"));
@@ -1207,9 +1303,12 @@ static gboolean button_press_event ( GtkWidget *widget,
 	return TRUE;
 }
 
+
+
 static gboolean tray_mid_click(){
-	int c;
-	int found = 0;
+	gint c;
+	gint i;
+	gint found = 0;
 	for (c = 0; c < GRID_COLS; c++) {
 		if (!filled[c] && !found) { 
 //	 gm_debug ("found %d\n", i);
@@ -1228,7 +1327,13 @@ static gboolean tray_mid_click(){
 						    drawing_area);
 
 			place_grid_color (c, ypos);
-			
+
+			undolist = g_list_append (undolist, init_lastmove ());
+			undolist = g_list_last (undolist);
+			lastmove = undolist->data;
+			for (i = 0; i < GRID_COLS; i++) 
+				lastmove[i] = movearray[ypos][i];
+			lastmove[c] = selectedcolor;
 			movearray[ypos][c] = selectedcolor;
 
 			movecount++;
@@ -1241,6 +1346,8 @@ static gboolean tray_mid_click(){
 
 			gm_debug ("[tray_mid_click]xpos:%d ypos:%d\n", xpos, ypos);
 			if (xpos == 0 && movecount > 1) {
+				undolist = g_list_append (undolist, init_lastmove ());
+				undolist = g_list_last (undolist);
 				checkscores();
 			}
 			selectedcolor = -1;
@@ -1282,7 +1389,7 @@ static void destroy (GtkWidget *widget, gpointer data) {
 }
 
 static void help_action (void) {
-	#ifndef G_OS_WIN32
+#ifndef G_OS_WIN32
 	gchar   *argv[] = { "yelp",
 			    "ghelp:gnome-mastermind",
 			    NULL };
@@ -1296,7 +1403,7 @@ static void help_action (void) {
 		g_error_free (error);
 		error = NULL;
 	}
-	#endif
+#endif
 }
 
 void about_url_show (GtkAboutDialog *about,
@@ -1330,8 +1437,8 @@ void about_url_show (GtkAboutDialog *about,
 }
 
 void about_email_show (GtkAboutDialog *about,
-		     const gchar *link,
-		     gpointer data) {
+		       const gchar *link,
+		       gpointer data) {
 	GError *error = NULL;
 	gchar *launcher = NULL;
 
@@ -1663,6 +1770,11 @@ static GtkActionEntry entries[] =
 	  N_("_New game"), "<control>N", 
 	  N_("Start a new game"),
 	  G_CALLBACK (new_game) },
+
+	{ "UndoAction", GTK_STOCK_UNDO,
+	  N_("_Undo Move"), "<control>Z", 
+	  N_("Undo last move"),
+	  G_CALLBACK (undo_action_cb) },
  
 	{ "QuitAction", GTK_STOCK_QUIT,
 	  N_("_Quit"), "<control>Q", 
@@ -1790,13 +1902,16 @@ int main ( int argc, char *argv[] )
 	show_toolbar_action = gtk_action_group_get_action (action_group, "ShowToolbarAction");
 	gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (show_toolbar_action), gc_show_toolbar);
 
+	undo_action = gtk_action_group_get_action (action_group, "UndoAction");
+	gtk_action_set_sensitive (GTK_ACTION (undo_action), FALSE);
+
 	accel_group = gtk_ui_manager_get_accel_group (menu_manager);
 	gtk_window_add_accel_group (GTK_WINDOW (window), accel_group);
 
 	drawing_area = gtk_drawing_area_new();
 
 /* gtk_widget_set_size_request (GTK_WIDGET (drawing_area), frame_min_w, frame_min_h);
-*/
+ */
 
 	g_signal_connect (G_OBJECT (drawing_area), "expose_event",
 			  G_CALLBACK (expose_event), NULL);
@@ -1814,7 +1929,7 @@ int main ( int argc, char *argv[] )
 	g_signal_connect (G_OBJECT (drawing_area), "button_release_event",
 			  G_CALLBACK (button_press_event), NULL);
 	g_signal_connect (G_OBJECT (drawing_area), "motion-notify-event",
-		  G_CALLBACK (motion_event), NULL);
+			  G_CALLBACK (motion_event), NULL);
 
 
 

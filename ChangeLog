@@ -1,3 +1,7 @@
+11 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* src/gnome-mastermind.c: Added Undo last move feature (still needs
+	some deep testing)
+
 10 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
 	* src/gnome-mastermind.c: Removed Apply button from preferences and
 	apply settings on quit. Changed yes and no buttons on lose and win

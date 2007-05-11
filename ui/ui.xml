@@ -2,6 +2,9 @@
   <menubar>
     <menu name="GameMenu" action="GameMenuAction">
       <menuitem name="New" action="NewAction" />
+	<separator />
+	<menuitem name="Undo" action="UndoAction" />
+	<separator />
       <menuitem name="Quit" action="QuitAction" />
       <placeholder name="FileMenuAdditions" />
     </menu>
@@ -19,8 +22,9 @@
     <placeholder name="ToolItems">
       <separator/>
       <toolitem name="New Game" action="NewAction"/>
-      <toolitem name="Quit" action="QuitAction"/>
+	<toolitem name="Undo" action="UndoAction" />
       <separator/>
+	<toolitem name="Quit" action="QuitAction" />
     </placeholder>
   </toolbar>
 </ui>
