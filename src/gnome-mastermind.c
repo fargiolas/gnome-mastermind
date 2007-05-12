@@ -1247,11 +1247,14 @@ static gboolean button_press_event ( GtkWidget *widget,
 				place_grid_color (c, l);
 				
 				gm_debug ("POSITION: %d\n", g_list_position (g_list_first (undolist), undolist));
+
 				while ((current = g_list_next(undolist))) {
 					gm_debug ("ooo\n");
 					g_free (current->data);
 					undolist = g_list_remove_link (undolist, current);
 				}
+
+				gtk_action_set_sensitive (GTK_ACTION (redo_action), FALSE);
 				
 				undolist = g_list_append (undolist, init_lastmove ());
 				undolist = g_list_last (undolist);
@@ -1323,7 +1326,9 @@ static gboolean button_press_event ( GtkWidget *widget,
 				g_free (current->data);
 				undolist = g_list_remove_link (undolist, current);
 			}
-			
+
+			gtk_action_set_sensitive (GTK_ACTION (redo_action), FALSE);
+						
 			undolist = g_list_append (undolist, init_lastmove ());
 			undolist = g_list_last (undolist);
 			lastmove = undolist->data; 
@@ -1390,6 +1395,8 @@ static gboolean tray_mid_click(){
 				g_free (current->data);
 				undolist = g_list_remove_link (undolist, current);
 			}
+
+			gtk_action_set_sensitive (GTK_ACTION (redo_action), FALSE);
 
 			undolist = g_list_append (undolist, init_lastmove ());
 			undolist = g_list_last (undolist);
