@@ -61,7 +61,8 @@ GtkWidget *vbox; //main vbox
 GtkWidget *drawing_area = NULL;
 GtkWidget *toolbar;
 GtkAction *show_toolbar_action;
-GtkAction *undo_action = NULL;
+GtkAction *undo_action;
+GtkAction *redo_action;
 
 gboolean gm_debug_on;
 
@@ -106,6 +107,7 @@ gint movecount;
 gint **movearray = NULL;
 gint *lastmove = NULL;
 GList *undolist = NULL;
+GList *current = NULL;
 
 
 
@@ -955,6 +957,7 @@ static gboolean checkscores() {
 	undolist = g_list_append (undolist, init_lastmove());
 
 	gtk_action_set_sensitive (GTK_ACTION (undo_action), FALSE);
+	gtk_action_set_sensitive (GTK_ACTION (redo_action), FALSE);
 	
 	return TRUE;
 }
@@ -995,33 +998,72 @@ static void undo_action_cb (void) {
 	if ((movecount == 0) || (xpos == 0)) {
 		return;
 	} 
-	
-	undolist = undolist->prev;
+
+	undolist = g_list_previous (undolist);
 	lastmove = undolist->data;
 
-	g_free (undolist->next->data);
-	undolist = g_list_remove_link (undolist, undolist->next);
-
-	gm_debug ("[undo] xpos:%d, ypos:%d, movecount:%d, selectedcolor:%d\n", xpos, ypos, movecount, selectedcolor);
+	gm_debug ("POSITION: %d\n", g_list_position (g_list_first (undolist), undolist));
+	
+	gm_debug ("[undo] xpos:%d, ypos:%d, movecount:%d, selectedcolor:%d\n",
+		  xpos, ypos, movecount, selectedcolor);
 	old_xpos = 0;
 	movecount--;
 
 	for (xpos = 0; xpos < GRID_COLS; xpos ++) {
 		selectedcolor = lastmove [xpos];
 		movearray[ypos][xpos] = lastmove[xpos];
+		filled[xpos] = 1; // set current position as filled
+		guess[xpos] = selectedcolor; // fill guessed solution array with current color
 		if (selectedcolor < 0) filled[xpos] = 0;
 		else old_xpos++;
 		place_grid_color (xpos, ypos);
 	}
 
 	xpos = old_xpos;
-
-	for (i = 0; i < GRID_COLS; i++)  {
-		gm_debug("%d\n", lastmove[i]);
-	}
+	
+	gtk_action_set_sensitive (GTK_ACTION (redo_action), TRUE);
 	
 	if ((movecount == 0) || (xpos == 0))
 		gtk_action_set_sensitive (GTK_ACTION (undo_action), FALSE);
+}
+
+static void redo_action_cb (void) {
+
+	current = g_list_next (undolist);
+	if (!current) {
+		gm_debug ("che succede? qui non dovevi mica arrivarci!\n");
+		return;
+	}
+	
+	undolist = current;
+	lastmove = undolist->data;
+
+	gm_debug ("POSITION: %d\n", g_list_position (g_list_first (undolist), undolist));
+
+	gm_debug ("[redo] xpos:%d, ypos:%d, movecount:%d, selectedcolor:%d\n",
+		  xpos, ypos, movecount, selectedcolor);
+	old_xpos = 0;
+	movecount++;
+
+	for (xpos = 0; xpos < GRID_COLS; xpos ++) {
+		selectedcolor = lastmove [xpos];
+		movearray[ypos][xpos] = lastmove[xpos];
+		filled[xpos] = 1; // set current position as filled
+		guess[xpos] = selectedcolor; // fill guessed solution array with current color
+		if (selectedcolor < 0) filled[xpos] = 0;
+		else old_xpos++;
+		place_grid_color (xpos, ypos);
+	}
+
+	xpos = old_xpos;
+	current = g_list_next (undolist);
+	if (!current) {
+		gm_debug ("end of the list\n");
+		gtk_action_set_sensitive (GTK_ACTION (redo_action), FALSE);
+	}
+
+	gm_debug ("XPOS is %d\n", xpos);
+
 }
 
 static gboolean redraw_current_game() {
@@ -1204,6 +1246,13 @@ static gboolean button_press_event ( GtkWidget *widget,
 				
 				place_grid_color (c, l);
 				
+				gm_debug ("POSITION: %d\n", g_list_position (g_list_first (undolist), undolist));
+				while ((current = g_list_next(undolist))) {
+					gm_debug ("ooo\n");
+					g_free (current->data);
+					undolist = g_list_remove_link (undolist, current);
+				}
+				
 				undolist = g_list_append (undolist, init_lastmove ());
 				undolist = g_list_last (undolist);
 				lastmove = undolist->data; 
@@ -1268,6 +1317,13 @@ static gboolean button_press_event ( GtkWidget *widget,
 
 			place_grid_color (c, l);
 
+			gm_debug ("POSITION: %d\n", g_list_position (g_list_first (undolist), undolist));
+			while ((current = g_list_next(undolist))) {
+				gm_debug ("ooo\n");
+				g_free (current->data);
+				undolist = g_list_remove_link (undolist, current);
+			}
+			
 			undolist = g_list_append (undolist, init_lastmove ());
 			undolist = g_list_last (undolist);
 			lastmove = undolist->data; 
@@ -1327,6 +1383,13 @@ static gboolean tray_mid_click(){
 						    drawing_area);
 
 			place_grid_color (c, ypos);
+
+			gm_debug ("POSITION: %d\n", g_list_position (g_list_first (undolist), undolist));
+			while ((current = g_list_next(undolist))) {
+				gm_debug ("ooo\n");
+				g_free (current->data);
+				undolist = g_list_remove_link (undolist, current);
+			}
 
 			undolist = g_list_append (undolist, init_lastmove ());
 			undolist = g_list_last (undolist);
@@ -1775,6 +1838,11 @@ static GtkActionEntry entries[] =
 	  N_("_Undo Move"), "<control>Z", 
 	  N_("Undo last move"),
 	  G_CALLBACK (undo_action_cb) },
+	
+	{ "RedoAction", GTK_STOCK_REDO,
+	  N_("_Redo Move"), "<shift><control>Z", 
+	  N_("Redo last move"),
+	  G_CALLBACK (redo_action_cb) },
  
 	{ "QuitAction", GTK_STOCK_QUIT,
 	  N_("_Quit"), "<control>Q", 
@@ -1904,6 +1972,9 @@ int main ( int argc, char *argv[] )
 
 	undo_action = gtk_action_group_get_action (action_group, "UndoAction");
 	gtk_action_set_sensitive (GTK_ACTION (undo_action), FALSE);
+	redo_action = gtk_action_group_get_action (action_group, "RedoAction");
+	gtk_action_set_sensitive (GTK_ACTION (redo_action), FALSE);
+	
 
 	accel_group = gtk_ui_manager_get_accel_group (menu_manager);
 	gtk_window_add_accel_group (GTK_WINDOW (window), accel_group);
