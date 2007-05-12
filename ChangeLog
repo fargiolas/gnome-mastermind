@@ -2,6 +2,7 @@
 	* src/gnome-mastermind.c: Fixed a bug causing the code validated being
 	different from the displayed one after undos. Added Redo last move
 	feature (still testing but seems to work).
+	Fixed little bug causing drawing errors if show_toolbar unset. 
 
 11 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
 	* src/gnome-mastermind.c: Added Undo last move feature (still needs

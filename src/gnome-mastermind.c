@@ -798,7 +798,7 @@ static gboolean configure_event ( GtkWidget *widget,
 
 	grid_xpad = (widget->allocation.width-GRID_SZ*(GRID_COLS+2))/2;
 	grid_ypad = (widget->allocation.height - tray_h - GRID_SZ*(grid_rows))/2;
-
+	
 	if (confcount == 0) {
 		new_game();
 	}
@@ -809,7 +809,7 @@ static gboolean configure_event ( GtkWidget *widget,
 		start_new_gameboard (widget);
 		newgame = 0;
 		xpos = 0;
-		ypos = grid_rows; 
+		ypos = grid_rows - 1; 
 		gdk_window_invalidate_rect (widget->window, NULL, FALSE); 
 		redraw_current_game();
 	}
@@ -992,8 +992,8 @@ static gboolean place_grid_color (int c, int l) {
 }
 
 
-static void undo_action_cb (void) {
-	gint i;
+static void 
+undo_action_cb (void) {
 
 	if ((movecount == 0) || (xpos == 0)) {
 		return;
@@ -1027,7 +1027,8 @@ static void undo_action_cb (void) {
 		gtk_action_set_sensitive (GTK_ACTION (undo_action), FALSE);
 }
 
-static void redo_action_cb (void) {
+static void 
+redo_action_cb (void) {
 
 	current = g_list_next (undolist);
 	if (!current) {
@@ -2036,7 +2037,7 @@ int main ( int argc, char *argv[] )
 
 	gtk_box_pack_end (GTK_BOX (vbox), gridframe, TRUE, TRUE, 0);
 
-//	gtk_window_set_resizable (GTK_WINDOW (window), FALSE);
+	gtk_window_set_resizable (GTK_WINDOW (window), FALSE);
 
 	gtk_widget_show_all (window);
 
