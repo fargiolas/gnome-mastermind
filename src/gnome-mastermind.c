@@ -465,7 +465,7 @@ void draw_main_grid (GtkWidget *widget) {
 	gint x, y;
 	cairo_t *cr;
 
-	GdkPixbuf *fil = NULL;
+//	GdkPixbuf *fil = NULL;
 	
 	gdouble wah, waw;
 
@@ -836,14 +836,15 @@ static gboolean configure_event ( GtkWidget *widget,
 	gr2 = (widget->allocation.width - GRID_XPAD*2) / (GRID_COLS+2);
 	if (gr1 < gr2) {
 		grid_sz = gr1;
-		grid_xpad = (widget->allocation.width - grid_sz*(GRID_COLS+2)) / 2;
 	} else  {
 		grid_sz = gr2;
-		grid_ypad = (widget->allocation.height - tray_h - grid_sz*grid_rows) / 2;
 	}
-	
+
 	tray_sz = grid_sz*0.8;
 	tray_h = TRAY_ROWS*tray_sz+TRAY_PAD*2;
+
+	grid_xpad = (widget->allocation.width - grid_sz * (GRID_COLS+2)) / 2;	
+	grid_ypad = (widget->allocation.height - tray_h - grid_sz*grid_rows) / 2;
 	
 	ballmed = grid_sz;
 	ballsm = ballmed*0.75;

@@ -2,6 +2,13 @@
 	* src/gnome-masterminc.c: Made everything resizeable keeping grid
 	aspect ratio. Removed all those gdk_invalidate_rect with NULL
 	rectangle that were slowing everything down at big sizes.
+	* themes/simple.svg: Replaced the tileset based on media-record.svg
+	from tango-icon-theme and made a new similar but quite different gpl
+	one. (There was an incompatibility between cc-by-sa license of
+	media-record.svg and gpl).
+	* themes/star.svg: Updated metadata.
+	* copyright-artwork: Removed disclaimer for simple.svg since now is
+	gpl and compatible with the game licensing.
 
 12 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
 	* src/gnome-mastermind.c: Fixed a bug causing the code validated being
