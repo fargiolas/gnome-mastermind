@@ -1,3 +1,8 @@
+14 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* src/gnome-masterminc.c: Made everything resizeable keeping grid
+	aspect ratio. Removed all those gdk_invalidate_rect with NULL
+	rectangle that were slowing everything down at big sizes.
+
 12 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
 	* src/gnome-mastermind.c: Fixed a bug causing the code validated being
 	different from the displayed one after undos. Added Redo last move

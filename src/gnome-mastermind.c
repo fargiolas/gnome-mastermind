@@ -43,15 +43,14 @@
 #define N_(String) (String)
 #endif /* ENABLE_NLS */
 
-#define BS 30
-#define BM 40
-
-#define TRAY_SZ 32
 #define TRAY_ROWS 1
 #define TRAY_COLS 8
 #define TRAY_PAD 4
 #define GRID_COLS 4
-#define GRID_SZ BM
+#define GRID_SZ 40
+#define BM GRID_SZ
+#define BS BM*0.75
+#define TRAY_SZ 32
 #define GRID_XPAD 40
 #define GRID_YPAD 10
 
@@ -89,6 +88,9 @@ gint frame_min_w;
 gint frame_min_h;
 gint grid_xpad;
 gint grid_ypad;
+gint grid_sz;
+gint ballmed, ballsm;
+gint tray_sz;
 gint tray_w, tray_h;
 
 gchar *gc_theme;
@@ -117,6 +119,7 @@ static GdkPixmap *traymapbk = NULL; // quick way to store clean tray
 static GdkPixmap *motionbk = NULL; // save pixmap to redrawing it after motion
 static GdkPixmap *cellbk = NULL;
 static GdkPixbuf *pixbuf = NULL;
+static GdkRectangle rect;
 static GError *error = 0;
 
 static GdkPixbuf *tileset_bg = NULL; /* main tileset */
@@ -377,7 +380,7 @@ void init_game (void) {
 	undolist = g_list_append (undolist, init_lastmove());
 
 	frame_min_w = GRID_SZ* (GRID_COLS+2) + GRID_XPAD*2;
-	frame_min_h = GRID_SZ*grid_rows+2*GRID_YPAD+TRAY_ROWS*TRAY_SZ+TRAY_PAD*2;
+	frame_min_h = GRID_SZ*grid_rows+2*GRID_YPAD+TRAY_ROWS*tray_sz+TRAY_PAD*2;
 	tray_h = TRAY_ROWS*TRAY_SZ+TRAY_PAD*2;
 	gtk_widget_set_size_request (GTK_WIDGET (drawing_area), frame_min_w, frame_min_h);
 
@@ -395,28 +398,28 @@ void init_game (void) {
 
 
 void traycl2xy (int c, int l, int *x, int *y, GtkWidget *widget) {
-	*x = widget->allocation.width/2 -TRAY_SZ*TRAY_COLS/2+TRAY_SZ*c+1; // questo +1 mi sa che serve perchè 
-	*y = widget->allocation.height - tray_h/2-TRAY_SZ*TRAY_ROWS/2+TRAY_SZ*l; // le palline non sono centrate
+	*x = widget->allocation.width/2 -tray_sz*TRAY_COLS/2+tray_sz*c+1; // questo +1 mi sa che serve perchè 
+	*y = widget->allocation.height - tray_h/2-tray_sz*TRAY_ROWS/2+tray_sz*l; // le palline non sono centrate
 }
 
 void gridcl2xy (int c, int l, int *x, int *y, GtkWidget *widget) {
 	gm_debug ("!!! c:%d l:%d\n", c, l);
-	*x = grid_xpad+GRID_SZ*c;
-	*y = grid_ypad+GRID_SZ*l;
+	*x = grid_xpad+grid_sz*c;
+	*y = grid_ypad+grid_sz*l;
 }
 
 void trayxy2cl (int x, int y, int *c, int *l, GtkWidget *widget) {
 	int x1, y1;
-	x1 = x - (widget->allocation.width/2-TRAY_SZ*TRAY_COLS/2);
-	y1 = y - (widget->allocation.height - tray_h/2-TRAY_SZ*TRAY_ROWS/2);
+	x1 = x - (widget->allocation.width/2-tray_sz*TRAY_COLS/2);
+	y1 = y - (widget->allocation.height - tray_h/2-tray_sz*TRAY_ROWS/2);
 	if ((x1 >= 0) &&
-	    (x1 <= TRAY_SZ*TRAY_COLS) &&
+	    (x1 <= tray_sz*TRAY_COLS) &&
 	    (y1 >= 0) && 
-	    (y1 <= TRAY_SZ*TRAY_ROWS) &&
-	    ((x1%TRAY_SZ) != 0) &&
-	    ((y1%TRAY_SZ) != 0)) {
-		*c= (int) x1 / TRAY_SZ;
-		*l= (int) y1 / TRAY_SZ;
+	    (y1 <= tray_sz*TRAY_ROWS) &&
+	    ((x1%tray_sz) != 0) &&
+	    ((y1%tray_sz) != 0)) {
+		*c= (int) x1 / tray_sz;
+		*l= (int) y1 / tray_sz;
 	}
 	else *c = *l = -1;
 }
@@ -428,13 +431,13 @@ void gridxy2cl (int x, int y, int *c, int *l, GtkWidget *widget) {
 // gm_debug ("x1: %d y1:%d\n", x1, y1);
 	if ((x1 >= 0) &&
 	    (y1 >= 0) &&
-	    (x1 <= GRID_SZ*GRID_COLS) &&
-	    (y1 <= GRID_SZ*grid_rows) &&
-	    ((x1%GRID_SZ) != 0) &&
-	    ((y1%GRID_SZ) != 0)) {
+	    (x1 <= grid_sz*GRID_COLS) &&
+	    (y1 <= grid_sz*grid_rows) &&
+	    ((x1%grid_sz) != 0) &&
+	    ((y1%grid_sz) != 0)) {
 //	 gm_debug ("clicked into the grid\n");
-		*c = (int) x1 / GRID_SZ;
-		*l = (int) y1 / GRID_SZ;
+		*c = (int) x1 / grid_sz;
+		*l = (int) y1 / grid_sz;
 //	 gm_debug ("c:%d l:%d\n", *c, *l);
 	} 
 }
@@ -448,7 +451,11 @@ static gboolean clean_tray (GtkWidget *widget) {
 			  0, 0,
 			  0, widget->allocation.height - tray_h,
 			  -1, -1);
-	gdk_window_invalidate_rect (widget->window, NULL, FALSE); 
+	rect.x = 0;
+	rect.y = widget->allocation.height - tray_h;
+	rect.width = widget->allocation.width;
+	rect.height = tray_h;
+	gdk_window_invalidate_rect (widget->window, &rect, FALSE);
 	return FALSE;
 }
 
@@ -458,6 +465,8 @@ void draw_main_grid (GtkWidget *widget) {
 	gint x, y;
 	cairo_t *cr;
 
+	GdkPixbuf *fil = NULL;
+	
 	gdouble wah, waw;
 
 	waw = widget->allocation.width;
@@ -474,19 +483,19 @@ void draw_main_grid (GtkWidget *widget) {
 	cairo_set_line_width (cr, 1);
 	for (i = 0; i <= GRID_COLS; i++) {
 		cairo_move_to (cr, 
-			       grid_xpad+GRID_SZ*i+1,
+			       grid_xpad+grid_sz*i+1,
 			       grid_ypad);
 		cairo_line_to (cr,
-			       grid_xpad+GRID_SZ*i+1,
-			       grid_ypad+GRID_SZ*grid_rows);
+			       grid_xpad+grid_sz*i+1,
+			       grid_ypad+grid_sz*grid_rows);
 	}
 	for (i = 0; i <= 2; i++) {
 		cairo_move_to (cr,
-			       grid_xpad+GRID_SZ* (GRID_COLS+1)+GRID_SZ/2*i+1,
+			       grid_xpad+grid_sz* (GRID_COLS+1)+grid_sz/2*i+1,
 			       grid_ypad);
 		cairo_line_to (cr,
-			       grid_xpad+GRID_SZ* (GRID_COLS+1)+GRID_SZ/2*i+1,
-			       grid_ypad+GRID_SZ*grid_rows);
+			       grid_xpad+grid_sz* (GRID_COLS+1)+grid_sz/2*i+1,
+			       grid_ypad+grid_sz*grid_rows);
 
 	}
 	cairo_stroke (cr);
@@ -494,10 +503,10 @@ void draw_main_grid (GtkWidget *widget) {
 	for (j = 0; j <= grid_rows; j++) {
 		cairo_move_to (cr, 
 			       grid_xpad+1,
-			       grid_ypad+GRID_SZ*j);
+			       grid_ypad+grid_sz*j);
 		cairo_line_to (cr,
-			       grid_xpad+GRID_SZ*GRID_COLS,
-			       grid_ypad+GRID_SZ*j);
+			       grid_xpad+grid_sz*GRID_COLS,
+			       grid_ypad+grid_sz*j);
 
 	}
 	cairo_stroke (cr);
@@ -508,19 +517,19 @@ void draw_main_grid (GtkWidget *widget) {
 		else
 			cairo_set_line_width (cr, 2);
 		cairo_move_to (cr, 
-			       grid_xpad+GRID_SZ* (GRID_COLS+1)+1,
-			       grid_ypad+GRID_SZ*j/2);
+			       grid_xpad+grid_sz* (GRID_COLS+1)+1,
+			       grid_ypad+grid_sz*j/2);
 		cairo_line_to (cr,
-			       grid_xpad+GRID_SZ* (GRID_COLS+2),
-			       grid_ypad+GRID_SZ*j/2);
+			       grid_xpad+grid_sz* (GRID_COLS+2),
+			       grid_ypad+grid_sz*j/2);
 		cairo_stroke (cr);
 	}
 	/* brighten grid */
 
 	cairo_set_operator (cr, CAIRO_OPERATOR_XOR);
 	cairo_set_line_width (cr, 0);
-	cairo_rectangle (cr, grid_xpad+1, grid_ypad+1, GRID_SZ*GRID_COLS-1, GRID_SZ* (grid_rows)-2);
-	cairo_rectangle (cr, grid_xpad+GRID_SZ* (GRID_COLS+1)+1, grid_ypad+1, GRID_SZ-1, GRID_SZ* (grid_rows)-2);
+	cairo_rectangle (cr, grid_xpad+1, grid_ypad+1, grid_sz*GRID_COLS-1, grid_sz* (grid_rows)-2);
+	cairo_rectangle (cr, grid_xpad+grid_sz* (GRID_COLS+1)+1, grid_ypad+1, grid_sz-1, grid_sz* (grid_rows)-2);
 	cairo_set_source_rgba (cr, 1, 1, 1, 0.3);
 	cairo_fill (cr);
 	cairo_stroke (cr);
@@ -529,8 +538,8 @@ void draw_main_grid (GtkWidget *widget) {
 
 	cairo_set_operator (cr, CAIRO_OPERATOR_ADD);
 	cairo_set_line_width (cr, 0);
-	cairo_rectangle (cr, grid_xpad+1, grid_ypad+ (GRID_SZ* (grid_rows- (grid_rows-ypos)))+1, GRID_SZ*GRID_COLS-1, GRID_SZ-2);
-	cairo_rectangle (cr, grid_xpad+GRID_SZ* (GRID_COLS+1)+1, grid_ypad+ (GRID_SZ* (grid_rows- (grid_rows-ypos)))+1, GRID_SZ-1, GRID_SZ-2);
+	cairo_rectangle (cr, grid_xpad+1, grid_ypad+ (grid_sz* (grid_rows- (grid_rows-ypos)))+1, grid_sz*GRID_COLS-1, grid_sz-2);
+	cairo_rectangle (cr, grid_xpad+grid_sz* (GRID_COLS+1)+1, grid_ypad+ (grid_sz* (grid_rows- (grid_rows-ypos)))+1, grid_sz-1, grid_sz-2);
 	cairo_set_source_rgba (cr, 1, 1, 1, 0.35);
 	cairo_fill (cr);
 	cairo_stroke (cr); 
@@ -584,9 +593,9 @@ void draw_main_grid (GtkWidget *widget) {
 			gdk_draw_pixbuf (pixmap,
 					 NULL,
 					 tileset_sm,
-					 BS * (i+ ((j)*TRAY_COLS)), 0,
+					 ballsm * (i+ ((j)*TRAY_COLS)), 0,
 					 x, y,
-					 BS, BS, 
+					 ballsm, ballsm, 
 					 GDK_RGB_DITHER_MAX, 0, 0);
 		}
 	if (traymapbk) g_object_unref (traymapbk);
@@ -605,20 +614,42 @@ void draw_main_grid (GtkWidget *widget) {
 
 	if (cellbk) g_object_unref (cellbk);
 	cellbk = gdk_pixmap_new (widget->window,
-				 BM-2,
-				 BM-2,
+				 ballmed-2,
+				 ballmed-2,
 
 				 -1);
 	
-	g_print ("%d %d\n", x, y);
-
 	gdk_draw_drawable (cellbk,
 			   widget->style->white_gc,
 			   pixmap,
 			   x + 1, y + 1,
 			   0, 0,
-			   BM - 1, BM -1);
+			   ballmed - 1, ballmed -1);
+/*
+	rect.x = grid_xpad+grid_sz* (GRID_COLS+1)+1;
+	rect.y = grid_ypad+ (grid_sz* (grid_rows- (grid_rows-ypos+1)))+1;
+	rect.width = grid_sz - 1;
+	rect.height = grid_sz - 2;
 
+	gtk_paint_box (drawing_area->style, pixmap,
+		       GTK_STATE_NORMAL, GTK_SHADOW_IN,
+		       NULL, NULL, "button",
+		       rect.x, rect.y, grid_sz - 1, grid_sz - 2);
+
+
+	if (fil)
+		g_object_unref (fil);
+	
+	fil = gdk_pixbug_new_from_file_at_scale ("/usr/share/icons/gartoon/scalable/stock/gtk-apply.svg", ballsm, ballsm, TRUE, NULL);
+
+	gdk_draw_pixbuf (pixmap,
+			 NULL,
+			 fil,
+			 0, 0,
+			 rect.x, rect.y,
+			 -1, -1,
+			 GDK_RGB_DITHER_MAX, 0, 0);
+*/
 }
 
 gboolean start_new_gameboard (GtkWidget *widget) {
@@ -629,9 +660,9 @@ gboolean start_new_gameboard (GtkWidget *widget) {
 	if (tileset_bg) g_object_unref (tileset_bg);
  
 	tileset_sm = gdk_pixbuf_new_from_file_at_size (gc_theme,
-						       BS*8+BS/2, BS, &error);
+						       ballsm*8+ballsm/2, ballsm, &error);
 	tileset_bg = gdk_pixbuf_new_from_file_at_size (gc_theme,
-						       BM*8+BM/2, BM, &error);
+						       ballmed*8+ballmed/2, ballmed, &error);
 	if (error) {
 		g_warning ("Failed to load '%s': %s", gc_theme, error->message);
 		g_error_free (error);
@@ -684,7 +715,8 @@ gboolean start_new_gameboard (GtkWidget *widget) {
 
 		draw_main_grid (widget);
 	}
-	gdk_window_invalidate_rect (widget->window, NULL, FALSE); 
+
+	gdk_window_invalidate_rect (widget->window, NULL, FALSE); // ogni tanto va bene anche ridisegnare tutto
 
 	return TRUE;
 }
@@ -708,7 +740,7 @@ void new_game (void) {
 
 	xpos = 0;
 	ypos = grid_rows-1; 
-	gdk_window_invalidate_rect (drawing_area->window, NULL, FALSE); 
+
 	gtk_statusbar_pop (GTK_STATUSBAR (status), gtk_statusbar_get_context_id (GTK_STATUSBAR (status), "mmind"));
 	gtk_statusbar_push (GTK_STATUSBAR (status), gtk_statusbar_get_context_id (GTK_STATUSBAR (status), "mmind"), _("Ready for a new game!"));
 
@@ -772,9 +804,9 @@ lose_dialog (int tries) {
 	gtk_box_pack_start (GTK_BOX (shbox), slabel, FALSE, FALSE, 20);
 	for (i = 0; i < 4; i++) {
 		sbuf = gdk_pixbuf_new_subpixbuf (tileset_bg,
-						 BM*solution[i],
+						 ballmed*solution[i],
 						 0,
-						 BM, BM);
+						 ballmed, ballmed);
 		image[i] = gtk_image_new_from_pixbuf (sbuf);
 		g_object_unref (sbuf);
 		gtk_box_pack_start (GTK_BOX (shbox), image[i], FALSE, FALSE, 0);
@@ -795,9 +827,32 @@ static gboolean configure_event ( GtkWidget *widget,
 	/* if (pixmap)
 	   g_object_unref (pixmap); */
 	// new_game = 0;
-
+	gint gr1, gr2;
 	grid_xpad = (widget->allocation.width-GRID_SZ*(GRID_COLS+2))/2;
-	grid_ypad = (widget->allocation.height - tray_h - GRID_SZ*(grid_rows))/2;
+//	grid_ypad = (widget->allocation.height - tray_h - grid_sz*(grid_rows))/2;
+	grid_ypad = GRID_YPAD;
+	grid_xpad = GRID_XPAD;
+	gr1 = (widget->allocation.height - (GRID_YPAD)*2) / (grid_rows+0.8);
+	gr2 = (widget->allocation.width - GRID_XPAD*2) / (GRID_COLS+2);
+	if (gr1 < gr2) {
+		grid_sz = gr1;
+		grid_xpad = (widget->allocation.width - grid_sz*(GRID_COLS+2)) / 2;
+	} else  {
+		grid_sz = gr2;
+		grid_ypad = (widget->allocation.height - tray_h - grid_sz*grid_rows) / 2;
+	}
+	
+	tray_sz = grid_sz*0.8;
+	tray_h = TRAY_ROWS*tray_sz+TRAY_PAD*2;
+	
+	ballmed = grid_sz;
+	ballsm = ballmed*0.75;
+
+//	grid_xpad = (widget->allocation.width-grid_sz*(GRID_COLS+2))/2;
+//	grid_xpad = grid_sz;
+
+	gm_debug ("1: %d 2:%d\n", grid_sz, grid_xpad);
+
 	
 	if (confcount == 0) {
 		new_game();
@@ -810,7 +865,7 @@ static gboolean configure_event ( GtkWidget *widget,
 		newgame = 0;
 		xpos = 0;
 		ypos = grid_rows - 1; 
-		gdk_window_invalidate_rect (widget->window, NULL, FALSE); 
+
 		redraw_current_game();
 	}
 	gm_debug ("\nconfigure event\n\n");
@@ -836,30 +891,30 @@ void draw_score_pegs (int line, int b, int c, GtkWidget *widget) {
 			offset = 1;
 		}
 		pixbuf = gdk_pixbuf_new_subpixbuf (tileset_bg,
-						   BM*8,
-						   BM/2*offset,
-						   BM/2, BM/2);
+						   ballmed*8,
+						   ballmed/2*offset,
+						   ballmed/2, ballmed/2);
 		tmp = pixbuf;
 
 		pixbuf = gdk_pixbuf_scale_simple (pixbuf,
-						  BM/2-1,
-						  BM/2-1,
+						  ballmed/2-1,
+						  ballmed/2-1,
 						  GDK_INTERP_BILINEAR);
 
 		g_object_unref (tmp);
 
-		x = grid_xpad+GRID_SZ* (GRID_COLS+1)+ (GRID_SZ/2* (i%2));
+		x = grid_xpad + grid_sz * (GRID_COLS+1) + (grid_sz/2 * (i%2));
 
-		y = grid_ypad+GRID_SZ* (line+1)-GRID_SZ+ ((int)i/2)*GRID_SZ/2-0.5;
+		y = grid_ypad + grid_sz * line + ((int)i/2)*grid_sz/2-0.5;
 
 		gdk_draw_pixbuf (pixmap,
 				 NULL,
 				 pixbuf,
 				 0, 0,
-				 x+BS/8-2,
-				 y+BS/8-2,
+				 x+1,
+				 y+1,
 				 -1, -1, GDK_RGB_DITHER_MAX, 0, 0);
-		gtk_widget_queue_draw_area (widget, x, y, GRID_SZ/2, GRID_SZ/2);
+		gtk_widget_queue_draw_area (widget, x, y, grid_sz/2, grid_sz/2);
 	}
 }
 
@@ -868,20 +923,40 @@ static gboolean clean_next_row (void) {
 	cr = gdk_cairo_create (pixmap);
 	cairo_set_operator (cr, CAIRO_OPERATOR_ADD);
 	cairo_set_line_width (cr, 0);
+	cairo_save (cr);
 	cairo_rectangle (cr, 
 			 grid_xpad+1,
-			 grid_ypad+ (GRID_SZ* (grid_rows- (grid_rows-ypos+1)))+1,
-			 GRID_SZ*GRID_COLS-1,
-			 GRID_SZ-2);
+			 grid_ypad+ (grid_sz* (grid_rows- (grid_rows-ypos+1)))+1,
+			 grid_sz*GRID_COLS-1,
+			 grid_sz-2);
+
+	rect.x = grid_xpad+1;
+	rect.y = grid_ypad+ (grid_sz* (grid_rows- (grid_rows-ypos+1)))+1;
+	rect.width =  grid_sz*GRID_COLS-1;
+	rect.height = grid_sz-2;
+
+	gdk_window_invalidate_rect (drawing_area->window, &rect, FALSE);
+
 	cairo_rectangle (cr, 
-			 grid_xpad+GRID_SZ* (GRID_COLS+1)+1,
-			 grid_ypad+ (GRID_SZ* (grid_rows- (grid_rows-ypos+1)))+1, 
-			 GRID_SZ-1, GRID_SZ-2);
+			 grid_xpad+grid_sz* (GRID_COLS+1)+1,
+			 grid_ypad+ (grid_sz* (grid_rows- (grid_rows-ypos+1)))+1, 
+			 grid_sz-1, grid_sz-2);
 	cairo_set_source_rgba (cr, 1, 1, 1, 0.35);
 	cairo_fill_preserve (cr);
 	cairo_stroke (cr); 
 	cairo_destroy (cr);
-	gdk_window_invalidate_rect (drawing_area->window, NULL, FALSE); 
+
+	rect.x = grid_xpad+grid_sz* (GRID_COLS+1)+1;
+	rect.y = grid_ypad+ (grid_sz* (grid_rows- (grid_rows-ypos+1)))+1;
+	rect.width = grid_sz - 1;
+	rect.height = grid_sz - 2;
+
+/*	gtk_paint_focus (drawing_area->style, pixmap,
+			 GTK_STATE_NORMAL, NULL, NULL, "button",
+			 rect.x + 1, rect.y + 1, grid_sz - 3, grid_sz - 4);
+*/
+	gdk_window_invalidate_rect (drawing_area->window, &rect, FALSE);
+
 	return TRUE;
 }
 
@@ -975,19 +1050,26 @@ static gboolean place_grid_color (int c, int l) {
 			  0, 0,
 			  x + 1, y + 1,
 			  -1, -1);
+
+
 	if (selectedcolor >=0 ) {
 		gdk_draw_pixbuf (pixmap,
 				 NULL,
 				 tileset_bg,
-				 BM*selectedcolor, 0,
+				 ballmed*selectedcolor, 0,
 				 x, y,
-				 BM, BM, 
+				 ballmed, ballmed, 
 				 GDK_RGB_DITHER_MAX, 0, 0);
 	}
 	
 	gtk_action_set_sensitive (GTK_ACTION (undo_action), TRUE);
 
-	gdk_window_invalidate_rect (drawing_area->window, NULL, FALSE); 
+	rect.x = x;
+	rect.y = y;
+	rect.width = ballmed;
+	rect.height = ballmed;
+	gdk_window_invalidate_rect (drawing_area->window, &rect, TRUE);
+
 	return TRUE;
 }
 
@@ -1100,7 +1182,7 @@ static gboolean redraw_current_game() {
 	 
 		if ((xpos == GRID_COLS-1) && (ypos>0) && !dummy) clean_next_row();
 
-//		if (selectedcolor >= 0)
+		if (selectedcolor >= 0)
 			place_grid_color (xpos, ypos);
 
 		if (xpos == GRID_COLS-1){
@@ -1118,8 +1200,6 @@ static gboolean redraw_current_game() {
 
 	xpos = old_xpos;
 	ypos = old_ypos;
-
-	gdk_window_invalidate_rect (drawing_area->window, NULL, FALSE); 
 
 	return TRUE;
 }
@@ -1144,11 +1224,11 @@ static gboolean parse_tray_event (GdkEventButton *event, GtkWidget *widget)
 		gdk_draw_pixbuf (pixmap,
 				 NULL,
 				 tileset_bg,
-				 BM * selectedcolor, 0,
-				 x+BS/2-BM/2, y+BS/2-BM/2,
-				 BM, BM, 
+				 ballmed * selectedcolor, 0,
+				 x+ballsm/2-ballmed/2, y+ballsm/2-ballmed/2,
+				 ballmed, ballmed, 
 				 GDK_RGB_DITHER_MAX, 0, 0);
-		gdk_window_invalidate_rect (widget->window, NULL, FALSE); 
+//		gdk_window_invalidate_rect (widget->window, NULL, FALSE); 
 
 		gm_debug ("type: %d\n", event->type);
 
@@ -1163,11 +1243,12 @@ static gboolean parse_tray_event (GdkEventButton *event, GtkWidget *widget)
 
 static gboolean motion_event (GtkWidget *widget,
 			      GdkEventButton *event) {
+
 	if (pressed && !mstarted) {
 		gint x,y;
 		traycl2xy(selectedcolor, 0, &x, &y, widget);
-		motion_x_shift =  (x - event->x) - (BM - BS)/2;
-		motion_y_shift = (y - event->y) - (BM - BS)/2;
+		motion_x_shift =  (x - event->x) - (ballmed - ballsm)/2;
+		motion_y_shift = (y - event->y) - (ballmed - ballsm)/2;
 		gm_debug("motion start\n");
 /*
   gtk_statusbar_pop (GTK_STATUSBAR (status), gtk_statusbar_get_context_id (GTK_STATUSBAR (status), "mmind"));
@@ -1183,30 +1264,42 @@ static gboolean motion_event (GtkWidget *widget,
 					  motionbk,
 					  0, 0,
 					  xbk, ybk,
-					  BM, BM);
+					  ballmed, ballmed);
+			rect.x = xbk;
+			rect.y = ybk;
+			rect.width = ballmed;
+			rect.height = ballmed;
+			gdk_window_invalidate_rect (widget->window, &rect, FALSE);
 			g_object_unref (motionbk);
+			motionbk = NULL;
 		}
 		motionbk = gdk_pixmap_new (widget->window,
-					   BM,
-					   BM,
+					   ballmed,
+					   ballmed,
 					   -1);
 		gdk_draw_drawable(motionbk,
 				  widget->style->white_gc,
 				  pixmap,
 				  event->x+motion_x_shift, event->y+motion_y_shift,
 				  0, 0,
-				  BM, BM);
+				  ballmed, ballmed);
 		xbk = event->x+motion_x_shift;
 		ybk = event->y+motion_y_shift;
+		
 		mstarted = 1;
 		gdk_draw_pixbuf (pixmap,
 				 NULL,
 				 tileset_bg,
-				 BM * selectedcolor, 0,
+				 ballmed * selectedcolor, 0,
 				 event->x+motion_x_shift, event->y+motion_y_shift,
-				 BM, BM, 
+				 ballmed, ballmed, 
 				 GDK_RGB_DITHER_MAX, 0, 0);
-		gdk_window_invalidate_rect (widget->window, NULL, FALSE); 
+		rect.x = xbk;
+		rect.y = ybk;
+		rect.width = ballmed;
+		rect.height = ballmed;
+		gdk_window_invalidate_rect (widget->window, &rect, FALSE);
+//		gdk_window_invalidate_rect (widget->window, NULL, FALSE); 
 	}
 
 	return FALSE;
@@ -1227,7 +1320,12 @@ static gboolean button_press_event ( GtkWidget *widget,
 				gdk_draw_drawable(pixmap,
 						  widget->style->white_gc,
 						  motionbk,
-						  0, 0, xbk, ybk, BM, BM);
+						  0, 0, xbk, ybk, ballmed, ballmed);
+				rect.x = xbk;
+				rect.y = ybk;
+				rect.width = ballmed;
+				rect.height = ballmed;
+				gdk_window_invalidate_rect (widget->window, &rect, FALSE);
 				g_object_unref (motionbk);
 				motionbk = NULL;
 			}
@@ -1288,7 +1386,6 @@ static gboolean button_press_event ( GtkWidget *widget,
 				gtk_statusbar_push (GTK_STATUSBAR (status), gtk_statusbar_get_context_id (GTK_STATUSBAR (status), "mmind"), _("Select a valid place!"));
 			}
 			
-			gdk_window_invalidate_rect (widget->window, NULL, FALSE); 
 			gm_debug("motion stop\n");
 			selectedcolor = -1;
 			mstarted = 0;
@@ -1437,6 +1534,8 @@ static gboolean expose_event ( GtkWidget *widget,
 			   event->area.x, event->area.y,
 			   event->area.x, event->area.y,
 			   event->area.width, event->area.height);
+
+
 
 	return FALSE;
 }
@@ -1941,7 +2040,6 @@ int main ( int argc, char *argv[] )
 	g_signal_connect (G_OBJECT (window), "destroy",
 			  G_CALLBACK (destroy), NULL); 
 
-
 	vbox = gtk_vbox_new (FALSE, 0); 
 // gtk_box_set_homogeneous (GTK_BOX (vbox), FALSE);
 	action_group = gtk_action_group_new ("TestActions");
@@ -1989,9 +2087,6 @@ int main ( int argc, char *argv[] )
 
 	drawing_area = gtk_drawing_area_new();
 
-/* gtk_widget_set_size_request (GTK_WIDGET (drawing_area), frame_min_w, frame_min_h);
- */
-
 	g_signal_connect (G_OBJECT (drawing_area), "expose_event",
 			  G_CALLBACK (expose_event), NULL);
 	g_signal_connect (G_OBJECT (drawing_area), "configure_event",
@@ -2037,7 +2132,7 @@ int main ( int argc, char *argv[] )
 
 	gtk_box_pack_end (GTK_BOX (vbox), gridframe, TRUE, TRUE, 0);
 
-	gtk_window_set_resizable (GTK_WINDOW (window), FALSE);
+//	gtk_window_set_resizable (GTK_WINDOW (window), FALSE);
 
 	gtk_widget_show_all (window);
 
