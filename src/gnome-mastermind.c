@@ -465,8 +465,6 @@ void draw_main_grid (GtkWidget *widget) {
 	gint x, y;
 	cairo_t *cr;
 
-//	GdkPixbuf *fil = NULL;
-	
 	gdouble wah, waw;
 
 	waw = widget->allocation.width;
@@ -625,31 +623,6 @@ void draw_main_grid (GtkWidget *widget) {
 			   x + 1, y + 1,
 			   0, 0,
 			   ballmed - 1, ballmed -1);
-/*
-	rect.x = grid_xpad+grid_sz* (GRID_COLS+1)+1;
-	rect.y = grid_ypad+ (grid_sz* (grid_rows- (grid_rows-ypos+1)))+1;
-	rect.width = grid_sz - 1;
-	rect.height = grid_sz - 2;
-
-	gtk_paint_box (drawing_area->style, pixmap,
-		       GTK_STATE_NORMAL, GTK_SHADOW_IN,
-		       NULL, NULL, "button",
-		       rect.x, rect.y, grid_sz - 1, grid_sz - 2);
-
-
-	if (fil)
-		g_object_unref (fil);
-	
-	fil = gdk_pixbug_new_from_file_at_scale ("/usr/share/icons/gartoon/scalable/stock/gtk-apply.svg", ballsm, ballsm, TRUE, NULL);
-
-	gdk_draw_pixbuf (pixmap,
-			 NULL,
-			 fil,
-			 0, 0,
-			 rect.x, rect.y,
-			 -1, -1,
-			 GDK_RGB_DITHER_MAX, 0, 0);
-*/
 }
 
 gboolean start_new_gameboard (GtkWidget *widget) {
@@ -952,10 +925,6 @@ static gboolean clean_next_row (void) {
 	rect.width = grid_sz - 1;
 	rect.height = grid_sz - 2;
 
-/*	gtk_paint_focus (drawing_area->style, pixmap,
-			 GTK_STATE_NORMAL, NULL, NULL, "button",
-			 rect.x + 1, rect.y + 1, grid_sz - 3, grid_sz - 4);
-*/
 	gdk_window_invalidate_rect (drawing_area->window, &rect, FALSE);
 
 	return TRUE;
