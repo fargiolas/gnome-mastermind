@@ -379,9 +379,7 @@ void init_game (void) {
 
 	undolist = g_list_append (undolist, init_lastmove());
 
-	frame_min_w = GRID_SZ* (GRID_COLS+2) + GRID_XPAD*2;
-	frame_min_h = GRID_SZ*grid_rows+2*GRID_YPAD+TRAY_ROWS*tray_sz+TRAY_PAD*2;
-	tray_h = TRAY_ROWS*TRAY_SZ+TRAY_PAD*2;
+
 	gtk_widget_set_size_request (GTK_WIDGET (drawing_area), frame_min_w, frame_min_h);
 
 	selectedcolor = -1;
@@ -2091,6 +2089,10 @@ int main ( int argc, char *argv[] )
 		movearray[i] = g_try_malloc ((GRID_COLS+2) * sizeof (gint));
 		if (movearray[i] == FALSE) gm_debug ("alloc 2 failed\n");
 	}
+
+	frame_min_w = GRID_SZ* (GRID_COLS+2) + GRID_XPAD*2;
+	frame_min_h = GRID_SZ*grid_rows+2*GRID_YPAD+TRAY_ROWS*TRAY_SZ+TRAY_PAD*2;
+	tray_h = TRAY_ROWS*TRAY_SZ+TRAY_PAD*2;
 
 	init_game();
 

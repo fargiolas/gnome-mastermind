@@ -2,6 +2,7 @@
 	* src/gnome-mastermind.c: Added some variations on simple tileset.
 	Updated score pegs on simple tileset series.
 	Added updated shiny icons from Ulisse Perusin.
+	Size request bug fix.
 
 14 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
 	* src/gnome-masterminc.c: Made everything resizeable keeping grid
