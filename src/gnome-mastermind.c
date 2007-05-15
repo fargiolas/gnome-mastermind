@@ -879,7 +879,11 @@ void draw_score_pegs (int line, int b, int c, GtkWidget *widget) {
 
 		x = grid_xpad + grid_sz * (GRID_COLS+1) + (grid_sz/2 * (i%2));
 
-		y = grid_ypad + grid_sz * line + ((int)i/2)*grid_sz/2-0.5;
+		y = grid_ypad + grid_sz * line + ((int)i/2)*grid_sz/2;
+	       
+		if (i>1) y-=0.5;
+
+		gm_debug ("line: %d, i:%d\n",line,i);
 
 		gdk_draw_pixbuf (pixmap,
 				 NULL,

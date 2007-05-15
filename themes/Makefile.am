@@ -2,7 +2,8 @@ themedir = $(pkgdatadir)/themes/
 
 theme_DATA =	    \
 	simple.svg  \
-	simple2.svg \
+	simple-glossy.svg \
+	simple-flat.svg \
 	star.svg    \
 	tango.svg   \
 	tango2.svg 

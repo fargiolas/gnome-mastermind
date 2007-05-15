@@ -13,18 +13,19 @@
    height="16"
    id="svg2"
    sodipodi:version="0.32"
-   inkscape:version="0.45.1"
+   inkscape:version="0.45"
    version="1.0"
    sodipodi:docbase="/home/ulisse/Desktop/gnome-mastermind/16x16"
    sodipodi:docname="gnome-mastermind.svg"
-   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   sodipodi:modified="true">
   <defs
      id="defs4">
     <linearGradient
        inkscape:collect="always"
        id="linearGradient3290">
       <stop
-         style="stop-color:#d1a9cd;stop-opacity:1"
+         style="stop-color:#dab8d7;stop-opacity:1"
          offset="0"
          id="stop3292" />
       <stop
@@ -309,8 +310,8 @@
        id="linearGradient3314"
        x1="11.920895"
        y1="1.799654"
-       x2="14.512626"
-       y2="6.2503233"
+       x2="14.321465"
+       y2="5.8653226"
        gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
@@ -320,9 +321,9 @@
      borderopacity="1"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="12.631241"
-     inkscape:cy="6.2020215"
+     inkscape:zoom="32"
+     inkscape:cx="12.497529"
+     inkscape:cy="8.9181863"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      width="16px"
@@ -411,7 +412,7 @@
          sodipodi:cy="26.5"
          sodipodi:cx="9.5"
          id="path4424"
-         style="opacity:0.6;fill:none;fill-opacity:1;stroke:url(#linearGradient4434);stroke-width:5.97912884;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         style="opacity:0.71372549;fill:none;fill-opacity:1;stroke:url(#linearGradient4434);stroke-width:5.97912884;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          sodipodi:type="arc" />
     </g>
     <g
@@ -435,7 +436,7 @@
          sodipodi:cy="26.5"
          sodipodi:cx="9.5"
          id="path2264"
-         style="opacity:0.6;fill:none;fill-opacity:1;stroke:url(#linearGradient2272);stroke-width:5.97912884;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         style="opacity:0.71372549;fill:none;fill-opacity:1;stroke:url(#linearGradient2272);stroke-width:5.97912884;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          sodipodi:type="arc" />
     </g>
     <g
@@ -459,7 +460,7 @@
          sodipodi:cy="26.5"
          sodipodi:cx="9.5"
          id="path2280"
-         style="opacity:0.6;fill:none;fill-opacity:1;stroke:url(#linearGradient2288);stroke-width:5.97912884;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         style="opacity:0.71372549;fill:none;fill-opacity:1;stroke:url(#linearGradient2288);stroke-width:5.97912884;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          sodipodi:type="arc" />
     </g>
     <path
@@ -493,7 +494,7 @@
          sodipodi:cy="26.5"
          sodipodi:cx="9.5"
          id="path3302"
-         style="opacity:0.80800003;fill:none;fill-opacity:1;stroke:url(#linearGradient3310);stroke-width:5.97912884;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         style="opacity:0.90196078;fill:none;fill-opacity:1;stroke:url(#linearGradient3310);stroke-width:5.97912884;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          sodipodi:type="arc" />
     </g>
   </g>
