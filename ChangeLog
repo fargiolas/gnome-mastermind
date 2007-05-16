@@ -1,6 +1,9 @@
 16 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
 	* themes/*: restyling of simple and simple-glossy themes.
 	* icons/Makefile.am: added gtk-update-icon-cache as uninstall-hook.
+	* src/gnome-mastermind.c: now the tray rectangle keeps the same aspect
+	ratio when resizing instead of growing to window width. Fixed a
+	graphic bug caused by an integer division supposed to return a double.
 
 15 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
 	* src/gnome-mastermind.c: Added some variations on simple tileset.

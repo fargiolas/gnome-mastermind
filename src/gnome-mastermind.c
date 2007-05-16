@@ -487,13 +487,14 @@ void draw_main_grid (GtkWidget *widget) {
 	}
 	for (i = 0; i <= 2; i++) {
 		cairo_move_to (cr,
-			       grid_xpad+grid_sz* (GRID_COLS+1)+grid_sz/2*i+1,
+			       grid_xpad+grid_sz*(GRID_COLS+1)+grid_sz*i/2+1,
 			       grid_ypad);
 		cairo_line_to (cr,
-			       grid_xpad+grid_sz* (GRID_COLS+1)+grid_sz/2*i+1,
+			       grid_xpad+grid_sz* (GRID_COLS+1)+grid_sz*i/2+1,
 			       grid_ypad+grid_sz*grid_rows);
 
 	}
+
 	cairo_stroke (cr);
 	cairo_set_line_width (cr, 2);
 	for (j = 0; j <= grid_rows; j++) {
@@ -504,7 +505,7 @@ void draw_main_grid (GtkWidget *widget) {
 			       grid_xpad+grid_sz*GRID_COLS,
 			       grid_ypad+grid_sz*j);
 
-	}
+			       }
 	cairo_stroke (cr);
 
 	for (j = 0; j <= grid_rows*2; j++) {
@@ -548,27 +549,27 @@ void draw_main_grid (GtkWidget *widget) {
 	cairo_set_line_width (cr, 0);
 	gdk_cairo_set_source_color (cr, &bgcolor);
 	cairo_rectangle (cr, 
-			 0, 
+			 grid_xpad-grid_sz, 
 			 wah - tray_h,
-			 widget->allocation.width, tray_h);
+			 widget->allocation.width-grid_xpad*2+grid_sz*2, tray_h);
 	cairo_fill_preserve (cr);
 
 	cairo_set_fill_rule (cr, CAIRO_FILL_RULE_EVEN_ODD);
 	cairo_set_operator (cr, CAIRO_OPERATOR_ADD);
 	cairo_set_source_rgba (cr, 1, 1, 1, 0.25);
 
-	cairo_move_to (cr, 3, wah - tray_h + 2);
+	cairo_move_to (cr, 3 + grid_xpad - grid_sz, wah - tray_h + 2);
 	cairo_rel_curve_to (cr,
 			    0, 0,
 			    0, tray_h / 2,
 			    30, tray_h / 2);
-	cairo_rel_line_to (cr, widget->allocation.width-66, 0);
+	cairo_rel_line_to (cr, widget->allocation.width-66-grid_xpad*2+grid_sz*2, 0);
 	cairo_rel_curve_to (cr,
 			    0, 0,
 			    30, 0,
 			    30, - tray_h / 2);
 	cairo_rel_line_to (cr, 0, tray_h - 5);
-	cairo_rel_line_to (cr, -widget->allocation.width+6, 0);
+	cairo_rel_line_to (cr, -widget->allocation.width+6+grid_xpad*2-grid_sz*2, 0);
 	cairo_close_path (cr);
 
 	cairo_fill (cr);
@@ -577,7 +578,10 @@ void draw_main_grid (GtkWidget *widget) {
 	/* draw border */
 	cairo_restore (cr);
 	gdk_cairo_set_source_color (cr, &fgcolor);
-	cairo_rectangle (cr, 1, wah - tray_h, widget->allocation.width - 2, tray_h - 1);
+	cairo_rectangle (cr, 1 + grid_xpad - grid_sz, 
+			 wah - tray_h, 
+			 widget->allocation.width - 2 - grid_xpad*2 + grid_sz*2,
+			 tray_h - 1);
 	cairo_set_line_width (cr, 2);
 	cairo_stroke (cr);
 
@@ -798,8 +802,8 @@ static gboolean configure_event ( GtkWidget *widget,
 	/* if (pixmap)
 	   g_object_unref (pixmap); */
 	// new_game = 0;
-	gint gr1, gr2;
-	grid_xpad = (widget->allocation.width-GRID_SZ*(GRID_COLS+2))/2;
+	gdouble gr1, gr2;
+//	grid_xpad = (widget->allocation.width-GRID_SZ*(GRID_COLS+2))/2;
 //	grid_ypad = (widget->allocation.height - tray_h - grid_sz*(grid_rows))/2;
 	grid_ypad = GRID_YPAD;
 	grid_xpad = GRID_XPAD;
