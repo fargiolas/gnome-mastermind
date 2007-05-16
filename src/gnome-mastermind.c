@@ -964,7 +964,13 @@ static gboolean checkscores() {
 		}
 	draw_score_pegs (ypos, bulls, cows, drawing_area);
 	gdk_window_process_all_updates(); 
-	statusmessage = g_strdup_printf ("%d bulls, %d cows!", bulls, cows);
+       	/* Note for translators: the following tells the number of
+	 *  right color and position guesses (bulls) and right color
+	 *  only guessed (cows). "Bulls and cows" is a pen and paper
+	 *  game similar to mastermind. I've leaved it untranslated in
+	 *  italian. Translate it if you want or leave it untranslated
+	 *  or feel free to ask my opinion */
+	statusmessage = g_strdup_printf (_("%d bulls, %d cows!"), bulls, cows);
 	gtk_statusbar_pop (GTK_STATUSBAR (status), gtk_statusbar_get_context_id (GTK_STATUSBAR (status), "mmind"));
 	gtk_statusbar_push (GTK_STATUSBAR (status), gtk_statusbar_get_context_id (GTK_STATUSBAR (status), "mmind"), statusmessage);
 	g_free (statusmessage);
