@@ -16,7 +16,7 @@
    inkscape:version="0.45"
    version="1.0"
    sodipodi:docbase="/home/pippo/svn/gnome-mastermind/themes"
-   sodipodi:docname="star.svg"
+   sodipodi:docname="star2.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
    sodipodi:modified="true">
   <defs
@@ -1742,11 +1742,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="5.6568542"
-     inkscape:cx="315.24758"
-     inkscape:cy="-2.8183459"
+     inkscape:zoom="2"
+     inkscape:cx="42.864316"
+     inkscape:cy="-43.406932"
      inkscape:current-layer="layer1"
-     showgrid="true"
+     showgrid="false"
      inkscape:grid-bbox="true"
      inkscape:document-units="px"
      height="40px"
@@ -1755,7 +1755,11 @@
      inkscape:window-width="1280"
      inkscape:window-height="729"
      inkscape:window-x="0"
-     inkscape:window-y="25" />
+     inkscape:window-y="25"
+     inkscape:object-bbox="true"
+     inkscape:grid-points="true"
+     gridspacingx="0.5px"
+     gridspacingy="0.5px" />
   <metadata
      id="metadata2165">
     <rdf:RDF>

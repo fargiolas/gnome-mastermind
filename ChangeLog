@@ -1,3 +1,7 @@
+16 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* themes/*: restyling of simple and simple-glossy themes.
+	* icons/Makefile.am: added gtk-update-icon-cache as uninstall-hook.
+
 15 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
 	* src/gnome-mastermind.c: Added some variations on simple tileset.
 	Updated score pegs on simple tileset series.
