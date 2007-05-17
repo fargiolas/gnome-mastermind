@@ -270,7 +270,8 @@ toolbar_notify_func (GConfClient *client,
 		gtk_widget_show (toolbar);
 	else
 		gtk_widget_hide (toolbar);
-	
+
+	gtk_window_resize (GTK_WINDOW(window), 1, 1);
 }
 
 void init_gconf (void) {
@@ -2123,8 +2124,10 @@ int main ( int argc, char *argv[] )
 	gtk_widget_show_all (window);
 
 	if (!gconf_client_get_bool
-	    (settings, "/apps/gnome-mastermind/show_toolbar", NULL))
+	    (settings, "/apps/gnome-mastermind/show_toolbar", NULL)) {
 		gtk_widget_hide (toolbar);
+		gtk_window_resize (GTK_WINDOW(window), 1, 1);
+	}
 
 	gtk_about_dialog_set_url_hook (about_url_show, NULL, NULL);
 	gtk_about_dialog_set_email_hook (about_email_show, NULL, NULL);
