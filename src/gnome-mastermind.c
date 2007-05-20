@@ -29,6 +29,7 @@
 #include <glib/gprintf.h>
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
+#include <gdk/gdkkeysyms.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gconf/gconf-client.h>
 
@@ -1445,7 +1446,47 @@ static gboolean button_press_event ( GtkWidget *widget,
 	return TRUE;
 }
 
+static gboolean key_press_event ( GtkWidget *widget,
+				  GdkEventKey *event ) {
+	switch (event->keyval) {
+	case GDK_1: 
+		selectedcolor = 0;
+		tray_mid_click ();
+		break;
+	case GDK_2: 
+		selectedcolor = 1;
+		tray_mid_click ();
+		break;
+	case GDK_3: 
+		selectedcolor = 2;
+		tray_mid_click ();
+		break;
+	case GDK_4: 
+		selectedcolor = 3;
+		tray_mid_click ();
+		break;
+	case GDK_5: 
+		selectedcolor = 4;
+		tray_mid_click ();
+		break;
+	case GDK_6: 
+		selectedcolor = 5;
+		tray_mid_click ();
+		break;
+	case GDK_7: 
+		selectedcolor = 6;
+		tray_mid_click ();
+		break;
+	case GDK_8: 
+		selectedcolor = 7;
+		tray_mid_click ();
+		break;
+	default:
+		break;
+	}
 
+	return TRUE;
+}
 
 static gboolean tray_mid_click(){
 	gint c;
@@ -2075,12 +2116,15 @@ int main ( int argc, char *argv[] )
 	g_signal_connect (G_OBJECT (drawing_area), "configure_event",
 			  G_CALLBACK (configure_event), NULL);
 
-	gtk_widget_set_events (drawing_area, GDK_EXPOSURE_MASK
+	gtk_widget_add_events (drawing_area, GDK_EXPOSURE_MASK
 			       | GDK_LEAVE_NOTIFY_MASK
 			       | GDK_BUTTON_PRESS_MASK
+			       | GDK_KEY_PRESS_MASK
 			       | GDK_BUTTON_RELEASE_MASK
 			       | GDK_BUTTON1_MOTION_MASK);
 
+	g_signal_connect (G_OBJECT (drawing_area), "key_press_event",
+			  G_CALLBACK (key_press_event), NULL);
 	g_signal_connect (G_OBJECT (drawing_area), "button_press_event",
 			  G_CALLBACK (button_press_event), NULL);
 	g_signal_connect (G_OBJECT (drawing_area), "button_release_event",
@@ -2088,7 +2132,7 @@ int main ( int argc, char *argv[] )
 	g_signal_connect (G_OBJECT (drawing_area), "motion-notify-event",
 			  G_CALLBACK (motion_event), NULL);
 
-
+	GTK_WIDGET_SET_FLAGS (drawing_area, GTK_CAN_FOCUS);
 
 	gridframe = gtk_frame_new (NULL);
 
@@ -2132,6 +2176,8 @@ int main ( int argc, char *argv[] )
 	gtk_about_dialog_set_url_hook (about_url_show, NULL, NULL);
 	gtk_about_dialog_set_email_hook (about_email_show, NULL, NULL);
  
+	gtk_widget_grab_focus (drawing_area);
+
 	gtk_main();
 
 	return 0;

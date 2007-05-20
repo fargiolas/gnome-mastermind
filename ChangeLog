@@ -1,6 +1,7 @@
 20 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
 	* src/gnome-mastermind.c: don't start d-n-d if no color has been
 	selected!
+	Simple key bindings, GDK_1 places first ball, GDK_2 second and so on..
 
 16 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
 	* themes/*: restyling of simple and simple-glossy themes.
