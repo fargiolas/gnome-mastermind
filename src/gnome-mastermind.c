@@ -419,8 +419,7 @@ void trayxy2cl (int x, int y, int *c, int *l, GtkWidget *widget) {
 	    ((y1%tray_sz) != 0)) {
 		*c= (int) x1 / tray_sz;
 		*l= (int) y1 / tray_sz;
-	}
-	else *c = *l = -1;
+	} else *c = *l = -1;
 }
 
 void gridxy2cl (int x, int y, int *c, int *l, GtkWidget *widget) {
@@ -437,8 +436,7 @@ void gridxy2cl (int x, int y, int *c, int *l, GtkWidget *widget) {
 //	 gm_debug ("clicked into the grid\n");
 		*c = (int) x1 / grid_sz;
 		*l = (int) y1 / grid_sz;
-//	 gm_debug ("c:%d l:%d\n", *c, *l);
-	} 
+	} else *c = *l = -1;
 }
 
 static gboolean clean_tray (GtkWidget *widget) {
@@ -1227,6 +1225,8 @@ static gboolean parse_tray_event (GdkEventButton *event, GtkWidget *widget)
 static gboolean motion_event (GtkWidget *widget,
 			      GdkEventButton *event) {
 
+	if (selectedcolor < 0)
+		return TRUE;
 	if (pressed && !mstarted) {
 		gint x,y;
 		traycl2xy(selectedcolor, 0, &x, &y, widget);
