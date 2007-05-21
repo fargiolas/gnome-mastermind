@@ -42,7 +42,7 @@
 #else /* !ENABLE_NLS */
 #define _(String) (String)
 #define N_(String) (String)
-#endif /* ENABLE_NLS */
+#endif /* ENABLE__NLS */
 
 #define TRAY_ROWS 1
 #define TRAY_COLS 8
@@ -1448,6 +1448,8 @@ static gboolean button_press_event ( GtkWidget *widget,
 
 static gboolean key_press_event ( GtkWidget *widget,
 				  GdkEventKey *event ) {
+	if (pressed)
+		return TRUE;
 	switch (event->keyval) {
 	case GDK_1: 
 		selectedcolor = 0;
