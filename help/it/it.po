@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2007-04-25 22:08+0200\n"
+"POT-Creation-Date: 2007-05-22 22:17+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,31 +17,31 @@ msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/gnome-mastermind.xml:307(None)
+#: ../C/gnome-mastermind.xml:333(None)
 msgid "@@image: 'figures/row1.png'; md5=3b0527f07b80cef14da1f507c069d377"
 msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/gnome-mastermind.xml:329(None)
+#: ../C/gnome-mastermind.xml:355(None)
 msgid "@@image: 'figures/row2.png'; md5=41d3169bdddd795f3c832938e9ba1df2"
 msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/gnome-mastermind.xml:351(None)
+#: ../C/gnome-mastermind.xml:377(None)
 msgid "@@image: 'figures/row3.png'; md5=ca977464f2699e93f66e343f65e5d4b5"
 msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/gnome-mastermind.xml:373(None)
+#: ../C/gnome-mastermind.xml:399(None)
 msgid "@@image: 'figures/row4.png'; md5=a4fcf5f0af13d781305e115aa8c9d3c3"
 msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/gnome-mastermind.xml:395(None)
+#: ../C/gnome-mastermind.xml:421(None)
 msgid "@@image: 'figures/row5.png'; md5=3fcd2b33b8ae55bf029fd79ed36fde1c"
 msgstr ""
 
@@ -80,11 +80,19 @@ msgstr ""
 msgid "filippo.argiolas@gmail.com&gt;"
 msgstr ""
 
+#: ../C/gnome-mastermind.xml:90(revnumber)
+msgid "GNOME Mastermind Manual V0.2"
+msgstr "Manuale di GNOME Mastermind V0.2"
+
+#: ../C/gnome-mastermind.xml:102(releaseinfo)
+msgid "This manual describes version 0.3 of GNOME Mastermind."
+msgstr "Questa guida descrive la versione 0.3 di GNOME Mastermind"
+
 #: ../C/gnome-mastermind.xml:105(title)
 msgid "Feedback"
 msgstr ""
 
-#: ../C/gnome-mastermind.xml:106(para) ../C/gnome-mastermind.xml:439(para)
+#: ../C/gnome-mastermind.xml:106(para) ../C/gnome-mastermind.xml:463(para)
 msgid ""
 "Please report any bug at <ulink url=\"https://gna.org/bugs/?func=additem&amp;"
 "group=gnome-mastermind\">Bug tracker at gna.org</ulink> or sign-up to the "
@@ -210,7 +218,7 @@ msgstr "Da riga di comando"
 #: ../C/gnome-mastermind.xml:190(para)
 msgid ""
 "To start <application>GNOME Mastermind</application> from a command line, "
-"type the following command, then press <keycap>Invio</keycap>:"
+"type the following command, then press <keycap>Return</keycap>:"
 msgstr ""
 "Per avviare <application>GNOME Mastermind</application> da riga di comando "
 "inserisci il seguente comando e poi premi <keycap>Return</keycap>:"
@@ -319,223 +327,28 @@ msgstr ""
 "fatto in una cella della griglia principale."
 
 #: ../C/gnome-mastermind.xml:272(guilabel)
-msgid "Middle button click"
-msgstr "Click del tasto centrale del mouse"
-
-#: ../C/gnome-mastermind.xml:273(para)
-msgid "Available only in tray area, place ball to first free active cell."
-msgstr ""
-"Funziona soltanto se cliccato nel vassoio. Piazza un <emphasis>piolino</"
-"emphasis> nella prima cella attiva."
-
-#: ../C/gnome-mastermind.xml:278(guilabel)
-msgid "Ctrl + N"
-msgstr "Ctrl + N"
-
-#: ../C/gnome-mastermind.xml:279(para)
-msgid "Start a new game."
-msgstr "Avvia una nuova partita."
-
-#: ../C/gnome-mastermind.xml:283(guilabel)
-msgid "Ctrl + Q"
-msgstr "Ctrl + Q"
-
-#: ../C/gnome-mastermind.xml:284(para)
-msgid "Quit game window."
-msgstr "Chiude la finestra di gioco."
-
-#: ../C/gnome-mastermind.xml:288(guilabel)
-msgid "Ctrl + P"
-msgstr "Ctrl + P"
-
-#: ../C/gnome-mastermind.xml:289(para)
-msgid "Open preferences dialog."
-msgstr "Apre la finestra delle preferenze."
-
-#: ../C/gnome-mastermind.xml:293(guilabel)
-msgid "F1"
-msgstr "F1"
-
-#: ../C/gnome-mastermind.xml:294(para)
-msgid "Show this manual."
-msgstr "Mostra questo manuale"
-
-#: ../C/gnome-mastermind.xml:299(title)
-msgid "Walk through a game session"
-msgstr "Una sessione di gioco"
-
-#: ../C/gnome-mastermind.xml:300(para)
-msgid "Let's now take a look at the previous session screen step by step:"
-msgstr "Seguiamo passo passo la sessione della schermata precedente:"
-
-#: ../C/gnome-mastermind.xml:303(title)
-msgid "<application>GNOME Mastermind</application> First row"
-msgstr "<application>GNOME Mastermind</application> Prima riga"
-
-#: ../C/gnome-mastermind.xml:316(phrase)
-msgid "First row"
-msgstr "Prima riga"
-
-#. ==== End of Figure ====
-#: ../C/gnome-mastermind.xml:322(para)
-msgid ""
-"This is the first guess. As you can see the score grid is empty because no "
-"right peg has been chosen."
-msgstr ""
-"Questo è il primo tentativo. Come puoi vedere la griglia del punteggio è "
-"vuota perchè nessun <emphasis>piolino</emphasis> è ancora giusto."
-
-#: ../C/gnome-mastermind.xml:325(title)
-msgid "<application>GNOME Mastermind</application> Second row"
-msgstr "<application>GNOME Mastermind</application> Seconda riga"
-
-#: ../C/gnome-mastermind.xml:338(phrase)
-msgid "Second row"
-msgstr "Seconda riga"
-
-#. ==== End of Figure ====
-#: ../C/gnome-mastermind.xml:344(para)
-msgid ""
-"Here we have 3 white score pegs. It means that we catched 3 right colors but "
-"placed them in wrong order. We are following the good path."
-msgstr ""
-"Qui abbiamo 3 <emphasis>piolini</emphasis> bianchi di punteggio. Significa "
-"che abbiamo indovinato 3 colori giusti ma li abbiamo messi nel posto "
-"sbagliato. Siamo sulla buona strada."
-
-#: ../C/gnome-mastermind.xml:347(title)
-msgid "<application>GNOME Mastermind</application> Third row"
-msgstr "<application>GNOME Mastermind</application> Terza riga"
-
-#: ../C/gnome-mastermind.xml:360(phrase)
-msgid "Third row"
-msgstr "Terza riga"
-
-#. ==== End of Figure ====
-#: ../C/gnome-mastermind.xml:366(para)
-msgid ""
-"Leaving the same color combination and changing order leads us to the "
-"solution. But we still have to understand which one is wrong!"
-msgstr ""
-"Lasciare la stessa combinazione ma cambiare l'ordine ci conduce verso la "
-"soluzione. Ma dobbiamo ancora capire quale colore è sbagliato!"
-
-#: ../C/gnome-mastermind.xml:369(title)
-msgid "<application>GNOME Mastermind</application> Fourth row"
-msgstr "<application>GNOME Mastermind</application> Quarta riga"
-
-#: ../C/gnome-mastermind.xml:382(phrase)
-msgid "Fourth row"
-msgstr "Quarta riga"
-
-#. ==== End of Figure ====
-#: ../C/gnome-mastermind.xml:388(para)
-msgid ""
-"Inserting a random color make a white score peg come out. Since we didn't "
-"change other color pegs order we've just found the missing color!"
-msgstr ""
-"Inserendo un colore a caso fa apparire un <emphasis>piolino</emphasis> "
-"bianco. Siccome non abbiamo cambiato gli altri colori abbiamo appena trovato "
-"il colore mancante."
-
-#: ../C/gnome-mastermind.xml:391(title)
-msgid "<application>GNOME Mastermind</application> Last row"
-msgstr "<application>GNOME Mastermind</application> Ultima riga"
-
-#: ../C/gnome-mastermind.xml:404(phrase)
-msgid "Last row"
-msgstr "Ultima riga"
-
-#. ==== End of Figure ====
-#: ../C/gnome-mastermind.xml:410(para)
-msgid ""
-"Yeah! Restoring removed peg and replacing another one with the new right "
-"color makes everything turn right. We won :D!"
-msgstr ""
-"Fatto! Rimettendo il <emphasis>piolino</emphasis> rimosso e rimpiazzando un "
-"altro col giusto colore si sistema tutto al posto giusto. Abbiamo vinto :D!"
-
-#: ../C/gnome-mastermind.xml:413(title)
-msgid "Coming Soon"
-msgstr ""
-
-#: ../C/gnome-mastermind.xml:414(para)
-msgid ""
-"Next releases will hopefully contain a more detailed manual that better "
-"explains each settings in the preferences menu. It will also contain a "
-"simple guide to draw and submit new themes."
-msgstr ""
-"I prossimi rilasci conterranno un manuale più dettagliato che spiegherà "
-"meglio ogni impostazione del menu delle preferenze. Conterra anche una "
-"semplice guida su come creare nuovi temi."
-
-#: ../C/gnome-mastermind.xml:429(title)
-msgid "About <application>GNOME Mastermind</application>"
-msgstr "A proposito di <application>GNOME Mastermind</application>"
-
-#: ../C/gnome-mastermind.xml:436(para)
-msgid ""
-"For copyright issues check the about dialog and, most of all, copyright and "
-"copyright-artwork files in source tree or in the package data dir (usually /"
-"usr/share/gnome-mastermind)."
-msgstr ""
-"Per le questioni relative al copyright, vedi la finestra di About dai menu "
-"del gioco e soprattutto i file copyright e copyright-artwork nell'albero dei "
-"sorgenti o nella directory dei dati del gioco (di solito /usr/share/gnome-"
-"mastermind)."
-
-#: ../C/gnome-mastermind.xml:444(para)
-msgid ""
-"This program is distributed under the terms of the GNU General Public "
-"license as published by the Free Software Foundation; either version 2 of "
-"the License, or (at your option) any later version. A <ulink url=\"ghelp:gpl"
-"\" type=\"help\">copy of this license</ulink> is included with this "
-"documentation; another can be found in the file COPYING included with the "
-"source code of this program."
-msgstr ""
-
-#: ../C/gnome-mastermind.xml:0(None)
-msgid "translator-credits"
-msgstr "Edoardo Batini"
-
-#: ../C/gnome-mastermind.xml:430(para)
-msgid ""
-"<application>GNOME Mastermind</application> was written by Filippo Argiolas "
-"(<email>filippo.argiolas@gmail.com</email>). To find more information about "
-"<application>GNOME Mastermind</application>, please visit the <ulink url="
-"\"http://www.autistici.org/gnome-mastermind\" type=\"http"
-"\"><application>GNOME Mastermind</application> webpage</ulink>."
-msgstr ""
-"<application>GNOME Mastermind</application> è scritto da Filippo Argiolas "
-"(<email>filippo.argiolas@gmail.com</email>). Per maggiori informazioni su "
-"<application>GNOME Mastermind</application>, visita la pagina web di <ulink "
-"url=\"http://www.autistici.org/gnome-mastermind\" type=\"http"
-"\"><application>GNOME Mastermind</application></ulink>."
-
-#: ../C/gnome-mastermind.xml:90(revnumber)
-msgid "GNOME Mastermind Manual V0.2"
-msgstr "Manuale di GNOME Mastermind V0.2"
-
-#: ../C/gnome-mastermind.xml:102(releaseinfo)
-msgid "This manual describes version 0.3 of GNOME Mastermind."
-msgstr "Questa guida descrive la versione 0.3 di GNOME Mastermind"
-
-#: ../C/gnome-mastermind.xml:272(guilabel)
 msgid "First button Drag and Drop"
 msgstr "Drag and Drop con il primo tasto del mouse"
 
 #: ../C/gnome-mastermind.xml:273(para)
 msgid "Place peg moving it from the tray area to an active cell."
-msgstr "Piazza il <emphasis>piolino</emphasis> spostandolo dal vassoio ad una cella attiva"
+msgstr ""
+"Piazza il <emphasis>piolino</emphasis> spostandolo dal vassoio ad una cella "
+"attiva"
 
 #: ../C/gnome-mastermind.xml:276(para)
 msgid ""
 "<guilabel>First button double click</guilabel> or <guilabel>Middle button "
 "single click</guilabel>"
 msgstr ""
-"<guilabel>Doppio click con il primo tasto del mouse</guilabel> o <guilabel>Click singolo "
-"con il centrale</guilabel>"
+"<guilabel>Doppio click con il primo tasto del mouse</guilabel> o "
+"<guilabel>Click singolo con il centrale</guilabel>"
 
+#: ../C/gnome-mastermind.xml:279(para)
+msgid "Available only in tray area, place ball to first free active cell."
+msgstr ""
+"Funziona soltanto se cliccato nel vassoio. Piazza un <emphasis>piolino</"
+"emphasis> nella prima cella attiva."
 
 #: ../C/gnome-mastermind.xml:284(guilabel)
 msgid "Ctrl + Z"
@@ -553,16 +366,207 @@ msgstr "Maiusc + Ctrl + Z"
 msgid "Repeat last undone move."
 msgstr "Ripeti l'ultima mossa annullata."
 
+#: ../C/gnome-mastermind.xml:294(guilabel)
+msgid "Ctrl + N"
+msgstr "Ctrl + N"
+
+#: ../C/gnome-mastermind.xml:295(para)
+msgid "Start a new game."
+msgstr "Avvia una nuova partita."
+
+#: ../C/gnome-mastermind.xml:299(guilabel)
+msgid "Ctrl + Q"
+msgstr "Ctrl + Q"
+
+#: ../C/gnome-mastermind.xml:300(para)
+msgid "Quit game window."
+msgstr "Chiude la finestra di gioco."
+
+#: ../C/gnome-mastermind.xml:304(guilabel)
+msgid "Ctrl + P"
+msgstr "Ctrl + P"
+
+#: ../C/gnome-mastermind.xml:305(para)
+msgid "Open preferences dialog."
+msgstr "Apre la finestra delle preferenze."
+
+#: ../C/gnome-mastermind.xml:309(guilabel)
+msgid "F1"
+msgstr "F1"
+
+#: ../C/gnome-mastermind.xml:310(para)
+msgid "Show this manual."
+msgstr "Mostra questo manuale"
+
 #: ../C/gnome-mastermind.xml:316(para)
 msgid ""
 "You can also place pegs <emphasis>over</emphasis> already placed pegs (on "
 "the current row)."
-msgstr "Puoi posizionare i piolini anche sopra quelli già piazzati (purchè nella riga corrente)."
+msgstr ""
+"Puoi posizionare i piolini anche sopra quelli già piazzati (purchè nella "
+"riga corrente)."
 
 #: ../C/gnome-mastermind.xml:319(para)
 msgid ""
 "Placing the last peg of a row starts current guess validation (with no "
 "chance to undo or replace it) so be careful if you are not sure."
 msgstr ""
-"Posizionando l'ultimo piolino di una riga la combinazione proposta verrà confrontata con quella giusta"
-"(senza possibilità di annullare o rimpiazzarlo) quindi stai attento se non sei sicuro."
+"Posizionando l'ultimo piolino di una riga la combinazione proposta verrà "
+"confrontata con quella giusta(senza possibilità di annullare o rimpiazzarlo) "
+"quindi stai attento se non sei sicuro."
+
+#: ../C/gnome-mastermind.xml:325(title)
+msgid "Walk through a game session"
+msgstr "Una sessione di gioco"
+
+#: ../C/gnome-mastermind.xml:326(para)
+msgid "Let's now take a look at the previous session screen step by step:"
+msgstr "Seguiamo passo passo la sessione della schermata precedente:"
+
+#: ../C/gnome-mastermind.xml:329(title)
+msgid "<application>GNOME Mastermind</application> First row"
+msgstr "<application>GNOME Mastermind</application> Prima riga"
+
+#: ../C/gnome-mastermind.xml:342(phrase)
+msgid "First row"
+msgstr "Prima riga"
+
+#. ==== End of Figure ====
+#: ../C/gnome-mastermind.xml:348(para)
+msgid ""
+"This is the first guess. As you can see the score grid is empty because no "
+"right peg has been chosen."
+msgstr ""
+"Questo è il primo tentativo. Come puoi vedere la griglia del punteggio è "
+"vuota perchè nessun <emphasis>piolino</emphasis> è ancora giusto."
+
+#: ../C/gnome-mastermind.xml:351(title)
+msgid "<application>GNOME Mastermind</application> Second row"
+msgstr "<application>GNOME Mastermind</application> Seconda riga"
+
+#: ../C/gnome-mastermind.xml:364(phrase)
+msgid "Second row"
+msgstr "Seconda riga"
+
+#. ==== End of Figure ====
+#: ../C/gnome-mastermind.xml:370(para)
+msgid ""
+"Here we have 3 white score pegs. It means that we catched 3 right colors but "
+"placed them in wrong order. We are following the good path."
+msgstr ""
+"Qui abbiamo 3 <emphasis>piolini</emphasis> bianchi di punteggio. Significa "
+"che abbiamo indovinato 3 colori giusti ma li abbiamo messi nel posto "
+"sbagliato. Siamo sulla buona strada."
+
+#: ../C/gnome-mastermind.xml:373(title)
+msgid "<application>GNOME Mastermind</application> Third row"
+msgstr "<application>GNOME Mastermind</application> Terza riga"
+
+#: ../C/gnome-mastermind.xml:386(phrase)
+msgid "Third row"
+msgstr "Terza riga"
+
+#. ==== End of Figure ====
+#: ../C/gnome-mastermind.xml:392(para)
+msgid ""
+"Leaving the same color combination and changing order leads us to the "
+"solution. But we still have to understand which one is wrong!"
+msgstr ""
+"Lasciare la stessa combinazione ma cambiare l'ordine ci conduce verso la "
+"soluzione. Ma dobbiamo ancora capire quale colore è sbagliato!"
+
+#: ../C/gnome-mastermind.xml:395(title)
+msgid "<application>GNOME Mastermind</application> Fourth row"
+msgstr "<application>GNOME Mastermind</application> Quarta riga"
+
+#: ../C/gnome-mastermind.xml:408(phrase)
+msgid "Fourth row"
+msgstr "Quarta riga"
+
+#. ==== End of Figure ====
+#: ../C/gnome-mastermind.xml:414(para)
+msgid ""
+"Inserting a random color make a white score peg come out. Since we didn't "
+"change other color pegs order we've just found the missing color!"
+msgstr ""
+"Inserendo un colore a caso fa apparire un <emphasis>piolino</emphasis> "
+"bianco. Siccome non abbiamo cambiato gli altri colori abbiamo appena trovato "
+"il colore mancante."
+
+#: ../C/gnome-mastermind.xml:417(title)
+msgid "<application>GNOME Mastermind</application> Last row"
+msgstr "<application>GNOME Mastermind</application> Ultima riga"
+
+#: ../C/gnome-mastermind.xml:430(phrase)
+msgid "Last row"
+msgstr "Ultima riga"
+
+#. ==== End of Figure ====
+#: ../C/gnome-mastermind.xml:436(para)
+msgid ""
+"Yeah! Restoring removed peg and replacing another one with the new right "
+"color makes everything turn right. We won :D!"
+msgstr ""
+"Fatto! Rimettendo il <emphasis>piolino</emphasis> rimosso e rimpiazzando un "
+"altro col giusto colore si sistema tutto al posto giusto. Abbiamo vinto :D!"
+
+#: ../C/gnome-mastermind.xml:439(title)
+msgid "Coming Soon"
+msgstr ""
+
+#: ../C/gnome-mastermind.xml:440(para)
+msgid ""
+"Next releases will hopefully contain a more detailed manual that better "
+"explains each settings in the preferences menu. It will also contain a "
+"simple guide to draw and submit new themes."
+msgstr ""
+"I prossimi rilasci conterranno un manuale più dettagliato che spiegherà "
+"meglio ogni impostazione del menu delle preferenze. Conterra anche una "
+"semplice guida su come creare nuovi temi."
+
+#: ../C/gnome-mastermind.xml:455(title)
+msgid "About <application>GNOME Mastermind</application>"
+msgstr "A proposito di <application>GNOME Mastermind</application>"
+
+#: ../C/gnome-mastermind.xml:456(para)
+msgid ""
+"<application>GNOME Mastermind</application> was written by Filippo Argiolas "
+"(<email>filippo.argiolas@gmail.com</email>). To find more information about "
+"<application>GNOME Mastermind</application>, please visit the <ulink url="
+"\"http://www.autistici.org/gnome-mastermind\" type=\"http"
+"\"><application>GNOME Mastermind</application> webpage</ulink>."
+msgstr ""
+"<application>GNOME Mastermind</application> è scritto da Filippo Argiolas "
+"(<email>filippo.argiolas@gmail.com</email>). Per maggiori informazioni su "
+"<application>GNOME Mastermind</application>, visita la pagina web di <ulink "
+"url=\"http://www.autistici.org/gnome-mastermind\" type=\"http"
+"\"><application>GNOME Mastermind</application></ulink>."
+
+#: ../C/gnome-mastermind.xml:460(para)
+msgid ""
+"For copyright issues check the about dialog and, most of all, copyright and "
+"copyright-artwork files in source tree or in the package data dir (usually /"
+"usr/share/gnome-mastermind)."
+msgstr ""
+"Per le questioni relative al copyright, vedi la finestra di About dai menu "
+"del gioco e soprattutto i file copyright e copyright-artwork nell'albero dei "
+"sorgenti o nella directory dei dati del gioco (di solito /usr/share/gnome-"
+"mastermind)."
+
+#: ../C/gnome-mastermind.xml:468(para)
+msgid ""
+"This program is distributed under the terms of the GNU General Public "
+"license as published by the Free Software Foundation; either version 2 of "
+"the License, or (at your option) any later version. A <ulink url=\"ghelp:gpl"
+"\" type=\"help\">copy of this license</ulink> is included with this "
+"documentation; another can be found in the file COPYING included with the "
+"source code of this program."
+msgstr ""
+
+#. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2.
+#: ../C/gnome-mastermind.xml:0(None)
+msgid "translator-credits"
+msgstr "Edoardo Batini"
+
+#~ msgid "Middle button click"
+#~ msgstr "Click del tasto centrale del mouse"
