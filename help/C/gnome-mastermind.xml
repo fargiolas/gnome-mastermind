@@ -3,9 +3,9 @@
 "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
   <!ENTITY appname          "GNOME Mastermind">
   <!ENTITY app "<application>GNOME Mastermind</application>">
-  <!ENTITY appversion   "0.2">
-  <!ENTITY manrevision  "0.1">
-  <!ENTITY date "April 2007">
+  <!ENTITY appversion   "0.3">
+  <!ENTITY manrevision  "0.2">
+  <!ENTITY date "May 2007">
   <!-- Information about the entities
        Use the app and appname entities to specify the name of the application.  
        Use the appversion entity to specify the version of the application.
@@ -267,11 +267,27 @@ for
 	  <para>Select peg if done in tray area. Place it if
 	    done in main grid cells.</para>
 	</listitem> 
+	<listitem>
+	  <para>
+	    <guilabel>First button Drag and Drop</guilabel> </para>
+	  <para>Place peg moving it from the tray area to an active cell.</para>
+	</listitem>
 	<listitem> 
-	  <para> 
-	    <guilabel>Middle button click</guilabel> </para> 
+	  <para>
+	    <guilabel>First button double click</guilabel> or
+	    <guilabel>Middle button single click</guilabel> </para> 
 	  <para>Available only in tray area, place ball to
 	    first free active cell.</para>
+	</listitem> 
+	<listitem> 
+	  <para> 
+	    <guilabel>Ctrl + Z</guilabel> </para> 
+	  <para>Undo last move.</para> 
+	</listitem> 
+	<listitem> 
+	  <para> 
+	    <guilabel>Shift + Ctrl + Z</guilabel> </para> 
+	  <para>Repeat last undone move.</para> 
 	</listitem> 
 	<listitem> 
 	  <para> 
@@ -294,6 +310,16 @@ for
 	  <para>Show this manual.</para> 
 	</listitem> 
       </itemizedlist> 
+      <note>
+	  <itemizedlist>
+	    <listitem>
+	      <para> You can also place pegs <emphasis>over</emphasis> already placed pegs (on the current row). </para>
+	    </listitem>
+	    <listitem>
+	      <para> Placing the last peg of a row starts current guess validation (with no chance to undo or replace it) so be careful if you are not sure. </para>
+	    </listitem>
+	  </itemizedlist>
+      </note>
     </sect2>
     <sect2>
     <title id="walkthrough">Walk through a game session</title>

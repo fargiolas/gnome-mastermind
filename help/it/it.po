@@ -80,14 +80,6 @@ msgstr ""
 msgid "filippo.argiolas@gmail.com&gt;"
 msgstr ""
 
-#: ../C/gnome-mastermind.xml:90(revnumber)
-msgid "GNOME Mastermind Manual V0.1"
-msgstr "Manuale di GNOME Mastermind V0.1"
-
-#: ../C/gnome-mastermind.xml:102(releaseinfo)
-msgid "This manual describes version 0.2 of GNOME Mastermind."
-msgstr "Questo manuale descrive la versione 0.2 di GNOME Mastermind"
-
 #: ../C/gnome-mastermind.xml:105(title)
 msgid "Feedback"
 msgstr ""
@@ -520,3 +512,57 @@ msgstr ""
 "url=\"http://www.autistici.org/gnome-mastermind\" type=\"http"
 "\"><application>GNOME Mastermind</application></ulink>."
 
+#: ../C/gnome-mastermind.xml:90(revnumber)
+msgid "GNOME Mastermind Manual V0.2"
+msgstr "Manuale di GNOME Mastermind V0.2"
+
+#: ../C/gnome-mastermind.xml:102(releaseinfo)
+msgid "This manual describes version 0.3 of GNOME Mastermind."
+msgstr "Questa guida descrive la versione 0.3 di GNOME Mastermind"
+
+#: ../C/gnome-mastermind.xml:272(guilabel)
+msgid "First button Drag and Drop"
+msgstr "Drag and Drop con il primo tasto del mouse"
+
+#: ../C/gnome-mastermind.xml:273(para)
+msgid "Place peg moving it from the tray area to an active cell."
+msgstr "Piazza il <emphasis>piolino</emphasis> spostandolo dal vassoio ad una cella attiva"
+
+#: ../C/gnome-mastermind.xml:276(para)
+msgid ""
+"<guilabel>First button double click</guilabel> or <guilabel>Middle button "
+"single click</guilabel>"
+msgstr ""
+"<guilabel>Doppio click con il primo tasto del mouse</guilabel> o <guilabel>Click singolo "
+"con il centrale</guilabel>"
+
+
+#: ../C/gnome-mastermind.xml:284(guilabel)
+msgid "Ctrl + Z"
+msgstr "Ctrl + Z"
+
+#: ../C/gnome-mastermind.xml:285(para)
+msgid "Undo last move."
+msgstr "Annulla l'ultima mossa"
+
+#: ../C/gnome-mastermind.xml:289(guilabel)
+msgid "Shift + Ctrl + Z"
+msgstr "Maiusc + Ctrl + Z"
+
+#: ../C/gnome-mastermind.xml:290(para)
+msgid "Repeat last undone move."
+msgstr "Ripeti l'ultima mossa annullata."
+
+#: ../C/gnome-mastermind.xml:316(para)
+msgid ""
+"You can also place pegs <emphasis>over</emphasis> already placed pegs (on "
+"the current row)."
+msgstr "Puoi posizionare i piolini anche sopra quelli già piazzati (purchè nella riga corrente)."
+
+#: ../C/gnome-mastermind.xml:319(para)
+msgid ""
+"Placing the last peg of a row starts current guess validation (with no "
+"chance to undo or replace it) so be careful if you are not sure."
+msgstr ""
+"Posizionando l'ultimo piolino di una riga la combinazione proposta verrà confrontata con quella giusta"
+"(senza possibilità di annullare o rimpiazzarlo) quindi stai attento se non sei sicuro."
