@@ -189,8 +189,12 @@ max_tries_notify_func (GConfClient *client,
 							       "Start a new game?"));
 		gint response = gtk_dialog_run (GTK_DIALOG (dialog));
 		if ( response == GTK_RESPONSE_YES) {
-
 			new_game();
+			frame_min_w = GRID_SZ* (GRID_COLS+2) + GRID_XPAD*2;
+			frame_min_h = GRID_SZ*grid_rows+2*GRID_YPAD+TRAY_ROWS*TRAY_SZ+TRAY_PAD*2;
+			gtk_widget_set_size_request (drawing_area, frame_min_w, frame_min_h);
+			gtk_window_resize (GTK_WINDOW(window), 1, 1);
+			
 		}
 
 		gtk_widget_destroy (dialog);
