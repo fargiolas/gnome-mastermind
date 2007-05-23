@@ -1,0 +1,22 @@
+- To create a new translation run from this directory:
+
+mkdir XX (where XX is the code of the language you are going to translate)
+cp C/legal.xml XX/
+xml2po C/gnome-mastermind.xml > XX/XX.po
+edit the po file
+
+- To update a new translation:
+
+backup the old po file (mv XX.po XX.po.bk)
+xml2po C/gnome-mastermind.xml > XX/XX.pot
+msgmerge XX.po.bk XX.pot > XX.po
+edit the new po file
+
+- To make localized screenshots (from top dir) 
+CFLAGS=-DSSHOT ./autogen.sh
+make
+
+LANGUAGE=XX src/gnome-mastermind
+
+A localized window with a completed game will appear, simply take a shot
+of it saving it to XX/figures/mainwindow.png 

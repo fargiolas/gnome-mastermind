@@ -400,6 +400,12 @@ void init_game (void) {
 		solution[i] = g_rand_int_range (rand, 0, TRAY_ROWS*TRAY_COLS);
 		filled[i] = 0;
 	} 
+#ifdef SSHOT
+	solution [0] = 5;
+	solution [1] = 1;
+	solution [2] = 7;
+	solution [3] = 6;
+#endif /* SSHOT */
 	g_free (rand);
 }
 
@@ -725,7 +731,52 @@ void new_game (void) {
 
 	gtk_statusbar_pop (GTK_STATUSBAR (status), gtk_statusbar_get_context_id (GTK_STATUSBAR (status), "mmind"));
 	gtk_statusbar_push (GTK_STATUSBAR (status), gtk_statusbar_get_context_id (GTK_STATUSBAR (status), "mmind"), _("Ready for a new game!"));
-
+#ifdef SSHOT
+	GdkEventKey k;
+	
+	k.type = GDK_KEY_PRESS;
+	k.keyval = GDK_1;
+	g_signal_emit_by_name (drawing_area, "key-press-event", &k, NULL);
+	k.keyval = GDK_1;
+	g_signal_emit_by_name (drawing_area, "key-press-event", &k, NULL);
+	k.keyval = GDK_3;
+	g_signal_emit_by_name (drawing_area, "key-press-event", &k, NULL);
+	k.keyval = GDK_5;
+	g_signal_emit_by_name (drawing_area, "key-press-event", &k, NULL);
+	k.keyval = GDK_7;
+	g_signal_emit_by_name (drawing_area, "key-press-event", &k, NULL);
+	k.keyval = GDK_8;
+	g_signal_emit_by_name (drawing_area, "key-press-event", &k, NULL);	
+	k.keyval = GDK_2;
+	g_signal_emit_by_name (drawing_area, "key-press-event", &k, NULL);
+	k.keyval = GDK_2;
+	g_signal_emit_by_name (drawing_area, "key-press-event", &k, NULL);
+	k.keyval = GDK_2;
+	g_signal_emit_by_name (drawing_area, "key-press-event", &k, NULL);
+	k.keyval = GDK_2;
+	g_signal_emit_by_name (drawing_area, "key-press-event", &k, NULL);
+	k.keyval = GDK_8;
+	g_signal_emit_by_name (drawing_area, "key-press-event", &k, NULL);
+	k.keyval = GDK_7;
+	g_signal_emit_by_name (drawing_area, "key-press-event", &k, NULL);	
+	k.keyval = GDK_2;
+	g_signal_emit_by_name (drawing_area, "key-press-event", &k, NULL);	
+	k.keyval = GDK_2;
+	g_signal_emit_by_name (drawing_area, "key-press-event", &k, NULL);	
+	k.keyval = GDK_6;
+	g_signal_emit_by_name (drawing_area, "key-press-event", &k, NULL);	
+	k.keyval = GDK_7;
+	g_signal_emit_by_name (drawing_area, "key-press-event", &k, NULL);	
+	k.keyval = GDK_6;
+	g_signal_emit_by_name (drawing_area, "key-press-event", &k, NULL);	
+	k.keyval = GDK_2;
+	g_signal_emit_by_name (drawing_area, "key-press-event", &k, NULL);	
+	k.keyval = GDK_8;
+	g_signal_emit_by_name (drawing_area, "key-press-event", &k, NULL);	
+	k.keyval = GDK_7;
+	g_signal_emit_by_name (drawing_area, "key-press-event", &k, NULL);	
+	
+#endif /* SSHOT */
 	newgame = 0;
 }
 
@@ -996,7 +1047,9 @@ static gboolean checkscores() {
 		gm_debug ("\n");
 	}
 	if (bulls == 4) {
+#ifndef SSHOT
 		win_dialog (grid_rows-ypos);
+#endif /* SSHOT */
 		xpos = 0;
 		ypos = grid_rows-1;
 	} 
