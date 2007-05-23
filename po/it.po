@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-mastermind 0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-23 19:32+0200\n"
+"POT-Creation-Date: 2007-05-23 19:42+0200\n"
 "PO-Revision-Date: 2007-02-19 10:49+0100\n"
 "Last-Translator:  <pippolino@anche.no>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -77,7 +77,7 @@ msgid "Play again"
 msgstr "Gioca ancora"
 
 #: ../src/gnome-mastermind.c:832
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "<span size=\"large\" weight=\"bold\">I'm sorry, you lose!</span>\n"
 "With just <b>%d</b> try you didn't find the solution yet?!\n"
@@ -108,7 +108,7 @@ msgstr "Questa era la soluzione corretta:"
 #: ../src/gnome-mastermind.c:1044
 #, c-format
 msgid "%d bull, "
-msgid_plural "%d bulls "
+msgid_plural "%d bulls, "
 msgstr[0] "toro"
 msgstr[1] "tori"
 

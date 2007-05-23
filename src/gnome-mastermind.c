@@ -1041,7 +1041,7 @@ static gboolean checkscores() {
 	 *  game similar to mastermind. I've leaved it untranslated in
 	 *  italian. Translate it if you want or leave it untranslated
 	 *  or feel free to ask my opinion */
-	gchar * bmsg = g_strdup_printf(ngettext("%d bull, ", "%d bulls ", bulls), bulls);
+	gchar * bmsg = g_strdup_printf(ngettext("%d bull, ", "%d bulls, ", bulls), bulls);
 	gchar * cmsg = g_strdup_printf(ngettext("%d cow!", "%d cows!", cows), cows);
 	
 	statusmessage = g_strconcat (bmsg, cmsg, NULL);

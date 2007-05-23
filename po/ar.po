@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-mastermind 0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-23 19:32+0200\n"
+"POT-Creation-Date: 2007-05-23 19:42+0200\n"
 "PO-Revision-Date: 2007-05-23 18:15+0100\n"
 "Last-Translator: Djihed Afifi <djihed@gmail.com>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
@@ -106,7 +106,7 @@ msgstr "كان هذا الحل المناسب:"
 #: ../src/gnome-mastermind.c:1044
 #, c-format
 msgid "%d bull, "
-msgid_plural "%d bulls "
+msgid_plural "%d bulls, "
 msgstr[0] ""
 msgstr[1] ""
 
