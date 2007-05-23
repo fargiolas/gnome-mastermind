@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-mastermind 0.2\n"
+"Project-Id-Version: gnome-mastermind 0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-23 12:12+0200\n"
-"PO-Revision-Date: 2007-04-24 20:40+0100\n"
+"POT-Creation-Date: 2007-05-23 17:35+0200\n"
+"PO-Revision-Date: 2007-05-23 17:12+0100\n"
 "Last-Translator: Tomasz Dominikowski <dominikowski@gmail.com>\n"
 "Language-Team: Tomasz Dominikowski <dominikowski@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -65,7 +65,7 @@ msgstr ""
 
 #: ../src/gnome-mastermind.c:801 ../src/gnome-mastermind.c:832
 msgid "Play again"
-msgstr ""
+msgstr "Ponowna gra"
 
 #: ../src/gnome-mastermind.c:827
 #, c-format
@@ -80,9 +80,8 @@ msgstr ""
 "Czy chcesz zagrać ponownie?"
 
 #: ../src/gnome-mastermind.c:836
-#, fuzzy
 msgid "This was the right solution:"
-msgstr "To jest poprawne rozwiązanie:"
+msgstr "To rozwiązanie było poprawne:"
 
 #. Note for translators: the following tells the number of
 #. *  right color and position guesses (bulls) and right color
@@ -93,7 +92,7 @@ msgstr "To jest poprawne rozwiązanie:"
 #: ../src/gnome-mastermind.c:1035
 #, c-format
 msgid "%d bulls, %d cows!"
-msgstr ""
+msgstr "%d czarnych, %d białych!"
 
 #: ../src/gnome-mastermind.c:1418 ../src/gnome-mastermind.c:1490
 #: ../src/gnome-mastermind.c:1599 ../src/gnome-mastermind.c:2221
@@ -166,19 +165,19 @@ msgstr "Rozpoczęcie nowej gry"
 
 #: ../src/gnome-mastermind.c:2031
 msgid "_Undo Move"
-msgstr ""
+msgstr "_Cofnij ruch"
 
 #: ../src/gnome-mastermind.c:2032
 msgid "Undo last move"
-msgstr ""
+msgstr "Cofnij ostatni ruch"
 
 #: ../src/gnome-mastermind.c:2036
 msgid "_Redo Move"
-msgstr ""
+msgstr "_Powtórz ruch"
 
 #: ../src/gnome-mastermind.c:2037
 msgid "Redo last move"
-msgstr ""
+msgstr "Powtórz ostatni ruch"
 
 #: ../src/gnome-mastermind.c:2041
 msgid "_Quit"
