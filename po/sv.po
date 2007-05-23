@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-mastermind\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-22 22:20+0200\n"
+"POT-Creation-Date: 2007-05-23 12:12+0200\n"
 "PO-Revision-Date: 2007-05-01 19:06+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -31,7 +31,7 @@ msgstr ""
 "\n"
 "Starta ett nytt spel?"
 
-#: ../src/gnome-mastermind.c:217 ../src/gnome-mastermind.c:299
+#: ../src/gnome-mastermind.c:221 ../src/gnome-mastermind.c:303
 #, c-format
 msgid ""
 "<span size=\"medium\" weight=\"bold\">Unable to load theme!</span>\n"
@@ -46,11 +46,11 @@ msgstr ""
 "\n"
 "Standardtemat kommer istället att läsas in."
 
-#: ../src/gnome-mastermind.c:720
+#: ../src/gnome-mastermind.c:733
 msgid "Ready for a new game!"
 msgstr "Redo för ett nytt spel!"
 
-#: ../src/gnome-mastermind.c:738
+#: ../src/gnome-mastermind.c:796
 #, c-format
 msgid ""
 "<span size=\"large\" weight=\"bold\">Great!!!</span>\n"
@@ -61,11 +61,11 @@ msgstr ""
 "Du hittade lösningen på <b>%d</b> försök!\n"
 "Vill du spela igen?"
 
-#: ../src/gnome-mastermind.c:743 ../src/gnome-mastermind.c:774
+#: ../src/gnome-mastermind.c:801 ../src/gnome-mastermind.c:832
 msgid "Play again"
 msgstr ""
 
-#: ../src/gnome-mastermind.c:769
+#: ../src/gnome-mastermind.c:827
 #, c-format
 msgid ""
 "<span size=\"large\" weight=\"bold\">I'm sorry, you lose!</span>\n"
@@ -76,7 +76,7 @@ msgstr ""
 "Du lyckades inte hitta lösningen efter <b>%d</b> försök!\n"
 "Vill du spela igen?"
 
-#: ../src/gnome-mastermind.c:778
+#: ../src/gnome-mastermind.c:836
 #, fuzzy
 msgid "This was the right solution:"
 msgstr "Det var den rätta lösningen:"
@@ -87,17 +87,17 @@ msgstr "Det var den rätta lösningen:"
 #. *  game similar to mastermind. I've leaved it untranslated in
 #. *  italian. Translate it if you want or leave it untranslated
 #. *  or feel free to ask my opinion
-#: ../src/gnome-mastermind.c:977
+#: ../src/gnome-mastermind.c:1035
 #, c-format
 msgid "%d bulls, %d cows!"
 msgstr ""
 
-#: ../src/gnome-mastermind.c:1358 ../src/gnome-mastermind.c:1430
-#: ../src/gnome-mastermind.c:1539 ../src/gnome-mastermind.c:2164
+#: ../src/gnome-mastermind.c:1418 ../src/gnome-mastermind.c:1490
+#: ../src/gnome-mastermind.c:1599 ../src/gnome-mastermind.c:2221
 msgid "Select a color!"
 msgstr "Välj en färg!"
 
-#: ../src/gnome-mastermind.c:1370 ../src/gnome-mastermind.c:1442
+#: ../src/gnome-mastermind.c:1430 ../src/gnome-mastermind.c:1502
 msgid "Select a valid place!"
 msgstr "Välj en giltig plats!"
 
@@ -105,120 +105,120 @@ msgstr "Välj en giltig plats!"
 #. Note for translators: Replace this
 #. * string with your name and email
 #. * address
-#: ../src/gnome-mastermind.c:1681
+#: ../src/gnome-mastermind.c:1741
 msgid "Filippo Argiolas <filippo.argiolas@gmail.com>"
 msgstr "Daniel Nylander <po@danielnylander.se>"
 
-#: ../src/gnome-mastermind.c:1682
+#: ../src/gnome-mastermind.c:1742
 msgid "A Mastermind clone for gnome"
 msgstr "En Mastermind-klon för Gnome"
 
 #. GtkWidget *hbox;
-#: ../src/gnome-mastermind.c:1796
+#: ../src/gnome-mastermind.c:1856
 msgid "Preferences"
 msgstr "Inställningar"
 
-#: ../src/gnome-mastermind.c:1813
+#: ../src/gnome-mastermind.c:1873
 msgid "<b>Tileset theme</b>"
 msgstr "<b>Tema för brickorna</b>"
 
-#: ../src/gnome-mastermind.c:1825
+#: ../src/gnome-mastermind.c:1885
 msgid "Theme:"
 msgstr "Tema:"
 
-#: ../src/gnome-mastermind.c:1848
+#: ../src/gnome-mastermind.c:1908
 msgid "<b>Color settings</b>"
 msgstr "<b>Färginställningar</b>"
 
-#: ../src/gnome-mastermind.c:1860
+#: ../src/gnome-mastermind.c:1920
 msgid "Foreground Color:"
 msgstr "Förgrundsfärg:"
 
-#: ../src/gnome-mastermind.c:1872
+#: ../src/gnome-mastermind.c:1932
 msgid "Background Color:"
 msgstr "Bakgrundsfärg:"
 
-#: ../src/gnome-mastermind.c:1884
+#: ../src/gnome-mastermind.c:1944
 msgid "Try to get colors from system theme"
 msgstr "Försök att ta färger från systemtemat"
 
-#: ../src/gnome-mastermind.c:1911
+#: ../src/gnome-mastermind.c:1971
 msgid "<b>Game settings</b>"
 msgstr "<b>Spelinställningar</b>"
 
-#: ../src/gnome-mastermind.c:1923
+#: ../src/gnome-mastermind.c:1983
 msgid "Maximum number of tries allowed:"
 msgstr "Maximalt antal tillåtna försök:"
 
-#: ../src/gnome-mastermind.c:1962
+#: ../src/gnome-mastermind.c:2022
 msgid "_Game"
 msgstr "_Spel"
 
-#: ../src/gnome-mastermind.c:1966
+#: ../src/gnome-mastermind.c:2026
 msgid "_New game"
 msgstr "_Nytt spel"
 
-#: ../src/gnome-mastermind.c:1967
+#: ../src/gnome-mastermind.c:2027
 msgid "Start a new game"
 msgstr "Starta ett nytt spel"
 
-#: ../src/gnome-mastermind.c:1971
+#: ../src/gnome-mastermind.c:2031
 msgid "_Undo Move"
 msgstr ""
 
-#: ../src/gnome-mastermind.c:1972
+#: ../src/gnome-mastermind.c:2032
 msgid "Undo last move"
 msgstr ""
 
-#: ../src/gnome-mastermind.c:1976
+#: ../src/gnome-mastermind.c:2036
 msgid "_Redo Move"
 msgstr ""
 
-#: ../src/gnome-mastermind.c:1977
+#: ../src/gnome-mastermind.c:2037
 msgid "Redo last move"
 msgstr ""
 
-#: ../src/gnome-mastermind.c:1981
+#: ../src/gnome-mastermind.c:2041
 msgid "_Quit"
 msgstr "_Avsluta"
 
-#: ../src/gnome-mastermind.c:1982
+#: ../src/gnome-mastermind.c:2042
 msgid "Quit the game"
 msgstr "Avsluta spelet"
 
-#: ../src/gnome-mastermind.c:1985
+#: ../src/gnome-mastermind.c:2045
 msgid "_Settings"
 msgstr "_Inställningar"
 
-#: ../src/gnome-mastermind.c:1988
+#: ../src/gnome-mastermind.c:2048
 msgid "_Preferences"
 msgstr "_Inställningar"
 
-#: ../src/gnome-mastermind.c:1989
+#: ../src/gnome-mastermind.c:2049
 msgid "Change game settings"
 msgstr "Ändra spelinställningarna"
 
-#: ../src/gnome-mastermind.c:1992
+#: ../src/gnome-mastermind.c:2052
 msgid "_Help"
 msgstr "_Hjälp"
 
-#: ../src/gnome-mastermind.c:1995
+#: ../src/gnome-mastermind.c:2055
 msgid "_About"
 msgstr "_Om"
 
-#: ../src/gnome-mastermind.c:1997
+#: ../src/gnome-mastermind.c:2057
 msgid "About"
 msgstr "Om"
 
-#: ../src/gnome-mastermind.c:2001 ../src/gnome-mastermind.c:2003
+#: ../src/gnome-mastermind.c:2061 ../src/gnome-mastermind.c:2063
 msgid "_Contents"
 msgstr "_Innehåll"
 
-#: ../src/gnome-mastermind.c:2020
+#: ../src/gnome-mastermind.c:2080
 msgid "_Show Toolbar"
 msgstr "_Visa verktygsraden"
 
-#: ../src/gnome-mastermind.c:2020
+#: ../src/gnome-mastermind.c:2080
 msgid "Show or hide the toolbar"
 msgstr "Visa eller dölj verktygsraden"
 
