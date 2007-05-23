@@ -830,7 +830,7 @@ lose_dialog (int tries) {
 						     GTK_BUTTONS_NONE,
 						     ngettext(
 							     "<span size=\"large\" weight=\"bold\">I'm sorry, you lose!</span>\n"
-							     "With just <b>%d</b> tries you didn't find the solution yet?!\n"
+							     "With just <b>%d</b> try you didn't find the solution yet?!\n"
 							     "Do you want to play again?",
 							     "<span size=\"large\" weight=\"bold\">I'm sorry, you lose!</span>\n"
 							     "With just <b>%d</b> tries you didn't find the solution yet?!\n"

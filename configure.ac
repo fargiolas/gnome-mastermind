@@ -91,7 +91,7 @@ AM_GLIB_GNU_GETTEXT
 gmlocaledir='${prefix}/${DATADIRNAME}/locale'
 AC_SUBST(gmlocaledir)
 
-ALL_LINGUAS="it pl fr sv de en_GB eu id"
+ALL_LINGUAS="it pl fr sv de en_GB eu id ar"
 AC_SUBST(ALL_LINGUAS)
 
 GNOME_DOC_INIT
