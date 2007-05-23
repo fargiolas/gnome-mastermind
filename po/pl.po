@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-mastermind 0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-23 19:29+0200\n"
+"POT-Creation-Date: 2007-05-23 19:32+0200\n"
 "PO-Revision-Date: 2007-05-23 18:25+0100\n"
 "Last-Translator: Tomasz Dominikowski <dominikowski@gmail.com>\n"
 "Language-Team: Tomasz Dominikowski <dominikowski@gmail.com>\n"
@@ -85,7 +85,7 @@ msgstr "Ponowna gra"
 #, fuzzy, c-format
 msgid ""
 "<span size=\"large\" weight=\"bold\">I'm sorry, you lose!</span>\n"
-"With just <b>%d</b> tries you didn't find the solution yet?!\n"
+"With just <b>%d</b> try you didn't find the solution yet?!\n"
 "Do you want to play again?"
 msgid_plural ""
 "<span size=\"large\" weight=\"bold\">I'm sorry, you lose!</span>\n"
@@ -118,12 +118,12 @@ msgstr "To rozwiązanie było poprawne:"
 #. *  italian. Translate it if you want or leave it untranslated
 #. *  or feel free to ask my opinion
 #: ../src/gnome-mastermind.c:1044
-#, fuzzy, c-format
+#, c-format
 msgid "%d bull, "
 msgid_plural "%d bulls "
-msgstr[0] "%d czerwonych, %d białych!"
-msgstr[1] "%d czerwonych, %d białych!"
-msgstr[2] "%d czerwonych, %d białych!"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #: ../src/gnome-mastermind.c:1045
 #, c-format

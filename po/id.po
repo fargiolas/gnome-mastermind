@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome mastermind 0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-23 19:29+0200\n"
+"POT-Creation-Date: 2007-05-23 19:32+0200\n"
 "PO-Revision-Date: 2007-05-23 22:20+0700\n"
 "Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <id@li.org>\n"
@@ -78,7 +78,7 @@ msgstr "Main lagi"
 #, fuzzy, c-format
 msgid ""
 "<span size=\"large\" weight=\"bold\">I'm sorry, you lose!</span>\n"
-"With just <b>%d</b> tries you didn't find the solution yet?!\n"
+"With just <b>%d</b> try you didn't find the solution yet?!\n"
 "Do you want to play again?"
 msgid_plural ""
 "<span size=\"large\" weight=\"bold\">I'm sorry, you lose!</span>\n"
@@ -107,15 +107,15 @@ msgstr "Ini adalah solusi yang benar:"
 #, fuzzy, c-format
 msgid "%d bull, "
 msgid_plural "%d bulls "
-msgstr[0] "%d bull, %d cow!"
-msgstr[1] "%d bull, %d cow!"
+msgstr[0] "%d bull, "
+msgstr[1] "%d bulls, "
 
 #: ../src/gnome-mastermind.c:1045
 #, c-format
 msgid "%d cow!"
 msgid_plural "%d cows!"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d cow!"
+msgstr[1] "%d cows!"
 
 #: ../src/gnome-mastermind.c:1432 ../src/gnome-mastermind.c:1504
 #: ../src/gnome-mastermind.c:1613 ../src/gnome-mastermind.c:2235
