@@ -1,3 +1,7 @@
+23 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* src/gnome-mastermind.c: fixed window resizing when changing
+	max_tries. Fixed Undo sensitiveness when starting a new game.
+
 20 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
 	* src/gnome-mastermind.c: don't start d-n-d if no color has been
 	selected!

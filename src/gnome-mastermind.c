@@ -388,6 +388,9 @@ void init_game (void) {
 
 	gtk_widget_set_size_request (GTK_WIDGET (drawing_area), frame_min_w, frame_min_h);
 
+	gtk_action_set_sensitive (GTK_ACTION (undo_action), FALSE);
+	gtk_action_set_sensitive (GTK_ACTION (redo_action), FALSE);
+
 	selectedcolor = -1;
 // gc_theme = g_strdup_printf ("%s%s", PKGDATA_DIR, "/themes/simple");
 // gm_debug ("%s\n", gc_theme);
@@ -2107,10 +2110,7 @@ int main ( int argc, char *argv[] )
 	gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (show_toolbar_action), gc_show_toolbar);
 
 	undo_action = gtk_action_group_get_action (action_group, "UndoAction");
-	gtk_action_set_sensitive (GTK_ACTION (undo_action), FALSE);
 	redo_action = gtk_action_group_get_action (action_group, "RedoAction");
-	gtk_action_set_sensitive (GTK_ACTION (redo_action), FALSE);
-	
 
 	accel_group = gtk_ui_manager_get_accel_group (menu_manager);
 	gtk_window_add_accel_group (GTK_WINDOW (window), accel_group);

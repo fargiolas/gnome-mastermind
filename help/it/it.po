@@ -403,7 +403,7 @@ msgid ""
 "You can also place pegs <emphasis>over</emphasis> already placed pegs (on "
 "the current row)."
 msgstr ""
-"Puoi posizionare i piolini anche sopra quelli già piazzati (purchè nella "
+"Puoi posizionare i piolini anche <emphasis>sopra</emphasis> quelli già piazzati (purchè nella "
 "riga corrente)."
 
 #: ../C/gnome-mastermind.xml:319(para)
