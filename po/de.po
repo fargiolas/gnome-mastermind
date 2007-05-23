@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-mastermind 0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-23 19:42+0200\n"
-"PO-Revision-Date: 2007-05-23 12:02+0100\n"
+"POT-Creation-Date: 2007-05-23 22:32+0200\n"
+"PO-Revision-Date: 2007-05-23 20:18+0100\n"
 "Last-Translator: ThiloPfennig <thilopfennig@foresightlinux.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -55,7 +55,7 @@ msgid "Ready for a new game!"
 msgstr "Bereit für ein neues Spiel!"
 
 #: ../src/gnome-mastermind.c:797
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "<span size=\"large\" weight=\"bold\">Great!!!</span>\n"
 "You found the solution with <b>%d</b> try!\n"
@@ -66,11 +66,11 @@ msgid_plural ""
 "Do you want to play again?"
 msgstr[0] ""
 "<span size=\"large\" weight=\"bold\">Großartig!!!</span>\n"
-"Sie haben die Lösung gefunden mit <b>%d</b>Versuchen!\n"
+"Sie haben die Lösung gefunden mit <b>%d</b> Versuch!\n"
 "Möchten Sie noch einmal spielen?"
 msgstr[1] ""
 "<span size=\"large\" weight=\"bold\">Großartig!!!</span>\n"
-"Sie haben die Lösung gefunden mit <b>%d</b>Versuchen!\n"
+"Sie haben die Lösung gefunden mit <b>%d</b> Versuchen!\n"
 "Möchten Sie noch einmal spielen?"
 
 #: ../src/gnome-mastermind.c:805 ../src/gnome-mastermind.c:841
@@ -78,7 +78,7 @@ msgid "Play again"
 msgstr "Noch einmal spielen"
 
 #: ../src/gnome-mastermind.c:832
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "<span size=\"large\" weight=\"bold\">I'm sorry, you lose!</span>\n"
 "With just <b>%d</b> try you didn't find the solution yet?!\n"
@@ -90,12 +90,12 @@ msgid_plural ""
 msgstr[0] ""
 "<span size=\"large\" weight=\"bold\">Es tut mir leid, Sie haben verloren!</"
 "span>\n"
-"Mit nur <b>%d</b>Versuchen haben Sie bisher keine Lösung gefunden?!\n"
+"Mit nur <b>%d</b> Versuch haben Sie bisher keine Lösung gefunden?!\n"
 "Möchten Sie noch einmal spielen?"
 msgstr[1] ""
 "<span size=\"large\" weight=\"bold\">Es tut mir leid, Sie haben verloren!</"
 "span>\n"
-"Mit nur <b>%d</b>Versuchen haben Sie bisher keine Lösung gefunden?!\n"
+"Mit nur <b>%d</b> Versuchen haben Sie bisher keine Lösung gefunden?!\n"
 "Möchten Sie noch einmal spielen?"
 
 #: ../src/gnome-mastermind.c:845
@@ -109,18 +109,18 @@ msgstr "Das war die richtige Lösung:"
 #. *  italian. Translate it if you want or leave it untranslated
 #. *  or feel free to ask my opinion
 #: ../src/gnome-mastermind.c:1044
-#, fuzzy, c-format
+#, c-format
 msgid "%d bull, "
 msgid_plural "%d bulls, "
-msgstr[0] "%d Bullen, %d Kühe!"
-msgstr[1] "%d Bullen, %d Kühe!"
+msgstr[0] "%d Bulle,"
+msgstr[1] "%d Bullen,"
 
 #: ../src/gnome-mastermind.c:1045
 #, c-format
 msgid "%d cow!"
 msgid_plural "%d cows!"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d Kuh!"
+msgstr[1] "%d Kühe!"
 
 #: ../src/gnome-mastermind.c:1432 ../src/gnome-mastermind.c:1504
 #: ../src/gnome-mastermind.c:1613 ../src/gnome-mastermind.c:2235

@@ -7,14 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-mastermind 0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-23 19:42+0200\n"
-"PO-Revision-Date: 2007-05-23 18:15+0100\n"
+"POT-Creation-Date: 2007-05-23 22:32+0200\n"
+"PO-Revision-Date: 2007-05-23 20:45+0100\n"
 "Last-Translator: Djihed Afifi <djihed@gmail.com>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Arabic\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 0 : n==2 ? 1 : n>=3 && n<=10 ? 2 : "
+"3\n"
 
 #: ../src/gnome-mastermind.c:186
 msgid ""
@@ -52,7 +54,7 @@ msgid "Ready for a new game!"
 msgstr "مستعد لدورة جديدة!"
 
 #: ../src/gnome-mastermind.c:797
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "<span size=\"large\" weight=\"bold\">Great!!!</span>\n"
 "You found the solution with <b>%d</b> try!\n"
@@ -63,11 +65,19 @@ msgid_plural ""
 "Do you want to play again?"
 msgstr[0] ""
 "<span size=\"large\" weight=\"bold\">جيد!!!</span>\n"
-"لقد وجدت الحل بـ <b>%d</b> تجريبات فقط\n"
+"لقد وجدت الحل بتجريب <b>%d</b> فقط\n"
 "هل تريد اللعب مجددا؟"
 msgstr[1] ""
 "<span size=\"large\" weight=\"bold\">جيد!!!</span>\n"
+"لقد وجدت الحل بتجريبان <b>%d</b> فقط\n"
+"هل تريد اللعب مجددا؟"
+msgstr[2] ""
+"<span size=\"large\" weight=\"bold\">جيد!!!</span>\n"
 "لقد وجدت الحل بـ <b>%d</b> تجريبات فقط\n"
+"هل تريد اللعب مجددا؟"
+msgstr[3] ""
+"<span size=\"large\" weight=\"bold\">جيد!!!</span>\n"
+"لقد وجدت الحل بـ <b>%d</b> تجريب فقط\n"
 "هل تريد اللعب مجددا؟"
 
 #: ../src/gnome-mastermind.c:805 ../src/gnome-mastermind.c:841
@@ -75,7 +85,7 @@ msgid "Play again"
 msgstr "العب مرة أخرى"
 
 #: ../src/gnome-mastermind.c:832
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "<span size=\"large\" weight=\"bold\">I'm sorry, you lose!</span>\n"
 "With just <b>%d</b> try you didn't find the solution yet?!\n"
@@ -86,11 +96,19 @@ msgid_plural ""
 "Do you want to play again?"
 msgstr[0] ""
 "<span size=\"large\" weight=\"bold\">عفوا، لقد خسرت!</span>\n"
-"بـ <b>%d</b> تجريبات فقط لم تعثر على الحل؟!\n"
+"بـتجريب <b>%d</b>  فقط لم تعثر على الحل؟!\n"
 "هل تريد اللعب مجددا؟"
 msgstr[1] ""
 "<span size=\"large\" weight=\"bold\">عفوا، لقد خسرت!</span>\n"
+"بـتجريبان <b>%d</b>  فقط لم تعثر على الحل؟!\n"
+"هل تريد اللعب مجددا؟"
+msgstr[2] ""
+"<span size=\"large\" weight=\"bold\">عفوا، لقد خسرت!</span>\n"
 "بـ <b>%d</b> تجريبات فقط لم تعثر على الحل؟!\n"
+"هل تريد اللعب مجددا؟"
+msgstr[3] ""
+"<span size=\"large\" weight=\"bold\">عفوا، لقد خسرت!</span>\n"
+"بـ <b>%d</b> تجريت فقط لم تعثر على الحل؟!\n"
 "هل تريد اللعب مجددا؟"
 
 #: ../src/gnome-mastermind.c:845
@@ -107,15 +125,19 @@ msgstr "كان هذا الحل المناسب:"
 #, c-format
 msgid "%d bull, "
 msgid_plural "%d bulls, "
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ثور %d ،"
+msgstr[1] "ثوران %d،"
+msgstr[2] "%d ثيران"
+msgstr[3] "%d ثورا،"
 
 #: ../src/gnome-mastermind.c:1045
 #, c-format
 msgid "%d cow!"
 msgid_plural "%d cows!"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "بقرة %d!"
+msgstr[1] "بقرتان %d!"
+msgstr[2] "%d قرات!"
+msgstr[3] "%d بقرة!"
 
 #: ../src/gnome-mastermind.c:1432 ../src/gnome-mastermind.c:1504
 #: ../src/gnome-mastermind.c:1613 ../src/gnome-mastermind.c:2235
