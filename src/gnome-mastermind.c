@@ -793,8 +793,12 @@ void win_dialog (int tries) {
 						     GTK_DIALOG_DESTROY_WITH_PARENT,
 						     GTK_MESSAGE_INFO,
 						     GTK_BUTTONS_NONE,
-						     _("<span size=\"large\" weight=\"bold\">Great!!!</span>\nYou found the solution with <b>%d</b> tries!\n" 
-						       "Do you want to play again?"), tries);
+						     ngettext(
+							     "<span size=\"large\" weight=\"bold\">Great!!!</span>\nYou found the solution with <b>%d</b> try!\n" 
+							     "Do you want to play again?", 
+							     "<span size=\"large\" weight=\"bold\">Great!!!</span>\nYou found the solution with <b>%d</b> tries!\n" 
+							     "Do you want to play again?", tries
+							     ), tries);
 
 
 	gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_QUIT, GTK_RESPONSE_NO);
@@ -824,9 +828,14 @@ lose_dialog (int tries) {
 						     GTK_DIALOG_DESTROY_WITH_PARENT,
 						     GTK_MESSAGE_WARNING,
 						     GTK_BUTTONS_NONE,
-						     _("<span size=\"large\" weight=\"bold\">I'm sorry, you lose!</span>\n"
-						       "With just <b>%d</b> tries you didn't find the solution yet?!\n"
-						       "Do you want to play again?"), tries);
+						     ngettext(
+							     "<span size=\"large\" weight=\"bold\">I'm sorry, you lose!</span>\n"
+							     "With just <b>%d</b> tries you didn't find the solution yet?!\n"
+							     "Do you want to play again?",
+							     "<span size=\"large\" weight=\"bold\">I'm sorry, you lose!</span>\n"
+							     "With just <b>%d</b> tries you didn't find the solution yet?!\n"
+							     "Do you want to play again?", tries
+							     ), tries);
 
 	gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_QUIT, GTK_RESPONSE_NO);
 	button = gtk_dialog_add_button (GTK_DIALOG (dialog), _("Play again"), GTK_RESPONSE_YES);
@@ -1032,7 +1041,12 @@ static gboolean checkscores() {
 	 *  game similar to mastermind. I've leaved it untranslated in
 	 *  italian. Translate it if you want or leave it untranslated
 	 *  or feel free to ask my opinion */
-	statusmessage = g_strdup_printf (_("%d bulls, %d cows!"), bulls, cows);
+	gchar * bmsg = g_strdup_printf(ngettext("%d bull, ", "%d bulls ", bulls), bulls);
+	gchar * cmsg = g_strdup_printf(ngettext("%d cow!", "%d cows!", cows), cows);
+	
+	statusmessage = g_strconcat (bmsg, cmsg, NULL);
+	g_free (bmsg);
+	g_free (cmsg);
 	gtk_statusbar_pop (GTK_STATUSBAR (status), gtk_statusbar_get_context_id (GTK_STATUSBAR (status), "mmind"));
 	gtk_statusbar_push (GTK_STATUSBAR (status), gtk_statusbar_get_context_id (GTK_STATUSBAR (status), "mmind"), statusmessage);
 	g_free (statusmessage);

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome mastermind 0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-23 18:10+0200\n"
+"POT-Creation-Date: 2007-05-23 19:17+0200\n"
 "PO-Revision-Date: 2007-05-23 22:20+0700\n"
 "Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <id@li.org>\n"
@@ -51,33 +51,49 @@ msgstr ""
 msgid "Ready for a new game!"
 msgstr "Bersiap untuk permainan baru!"
 
-#: ../src/gnome-mastermind.c:796
-#, c-format
+#: ../src/gnome-mastermind.c:797
+#, fuzzy, c-format
 msgid ""
+"<span size=\"large\" weight=\"bold\">Great!!!</span>\n"
+"You found the solution with <b>%d</b> try!\n"
+"Do you want to play again?"
+msgid_plural ""
 "<span size=\"large\" weight=\"bold\">Great!!!</span>\n"
 "You found the solution with <b>%d</b> tries!\n"
 "Do you want to play again?"
-msgstr ""
+msgstr[0] ""
+"<span size=\"large\" weight=\"bold\">Hebat!!!</span>\n"
+"Anda menemukan solusinya dengan <b>%d</b> percobaan!\n"
+"Anda ingin bermain lagi?"
+msgstr[1] ""
 "<span size=\"large\" weight=\"bold\">Hebat!!!</span>\n"
 "Anda menemukan solusinya dengan <b>%d</b> percobaan!\n"
 "Anda ingin bermain lagi?"
 
-#: ../src/gnome-mastermind.c:801 ../src/gnome-mastermind.c:832
+#: ../src/gnome-mastermind.c:805 ../src/gnome-mastermind.c:841
 msgid "Play again"
 msgstr "Main lagi"
 
-#: ../src/gnome-mastermind.c:827
-#, c-format
+#: ../src/gnome-mastermind.c:832
+#, fuzzy, c-format
 msgid ""
 "<span size=\"large\" weight=\"bold\">I'm sorry, you lose!</span>\n"
 "With just <b>%d</b> tries you didn't find the solution yet?!\n"
 "Do you want to play again?"
-msgstr ""
+msgid_plural ""
+"<span size=\"large\" weight=\"bold\">I'm sorry, you lose!</span>\n"
+"With just <b>%d</b> tries you didn't find the solution yet?!\n"
+"Do you want to play again?"
+msgstr[0] ""
+"<span size=\"large\" weight=\"bold\">Maaf, anda kalah!</span>\n"
+"Hanya dengan <b>%d</b> coba-coba anda belum menemukan solusinya?!\n"
+"Apakah anda ingin bermain lagi?"
+msgstr[1] ""
 "<span size=\"large\" weight=\"bold\">Maaf, anda kalah!</span>\n"
 "Hanya dengan <b>%d</b> coba-coba anda belum menemukan solusinya?!\n"
 "Apakah anda ingin bermain lagi?"
 
-#: ../src/gnome-mastermind.c:836
+#: ../src/gnome-mastermind.c:845
 msgid "This was the right solution:"
 msgstr "Ini adalah solusi yang benar:"
 
@@ -87,137 +103,146 @@ msgstr "Ini adalah solusi yang benar:"
 #. *  game similar to mastermind. I've leaved it untranslated in
 #. *  italian. Translate it if you want or leave it untranslated
 #. *  or feel free to ask my opinion
-#: ../src/gnome-mastermind.c:1035
-#, c-format
-msgid "%d bulls, %d cows!"
-msgstr "%d bull, %d cow!"
+#: ../src/gnome-mastermind.c:1044
+#, fuzzy, c-format
+msgid "%d bull, "
+msgid_plural "%d bulls "
+msgstr[0] "%d bull, %d cow!"
+msgstr[1] "%d bull, %d cow!"
 
-#: ../src/gnome-mastermind.c:1418 ../src/gnome-mastermind.c:1490
-#: ../src/gnome-mastermind.c:1599 ../src/gnome-mastermind.c:2221
+#: ../src/gnome-mastermind.c:1045
+#, c-format
+msgid "%d cow!"
+msgid_plural "%d cows!"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/gnome-mastermind.c:1432 ../src/gnome-mastermind.c:1504
+#: ../src/gnome-mastermind.c:1613 ../src/gnome-mastermind.c:2235
 msgid "Select a color!"
 msgstr "Pilih sebuah warna!"
 
-#: ../src/gnome-mastermind.c:1430 ../src/gnome-mastermind.c:1502
+#: ../src/gnome-mastermind.c:1444 ../src/gnome-mastermind.c:1516
 msgid "Select a valid place!"
 msgstr "Pilih tempat yang valid!"
 
 #. Note for translators: Replace this
 #. * string with your name and email
 #. * address
-#: ../src/gnome-mastermind.c:1741
+#: ../src/gnome-mastermind.c:1755
 msgid "Filippo Argiolas <filippo.argiolas@gmail.com>"
 msgstr "Andika Triwidada <andika@gmail.com>"
 
-#: ../src/gnome-mastermind.c:1742
+#: ../src/gnome-mastermind.c:1756
 msgid "A Mastermind clone for gnome"
 msgstr "Klon Mastermind bagi Gnome"
 
 #. GtkWidget *hbox;
-#: ../src/gnome-mastermind.c:1856
+#: ../src/gnome-mastermind.c:1870
 msgid "Preferences"
 msgstr "Preferensi"
 
-#: ../src/gnome-mastermind.c:1873
+#: ../src/gnome-mastermind.c:1887
 msgid "<b>Tileset theme</b>"
 msgstr "<b>Tema tileset</b>"
 
-#: ../src/gnome-mastermind.c:1885
+#: ../src/gnome-mastermind.c:1899
 msgid "Theme:"
 msgstr "Tema:"
 
-#: ../src/gnome-mastermind.c:1908
+#: ../src/gnome-mastermind.c:1922
 msgid "<b>Color settings</b>"
 msgstr "<b>Pengaturan warna</b>"
 
-#: ../src/gnome-mastermind.c:1920
+#: ../src/gnome-mastermind.c:1934
 msgid "Foreground Color:"
 msgstr "Warna Latar Depan:"
 
-#: ../src/gnome-mastermind.c:1932
+#: ../src/gnome-mastermind.c:1946
 msgid "Background Color:"
 msgstr "Warna Latar Belakang:"
 
-#: ../src/gnome-mastermind.c:1944
+#: ../src/gnome-mastermind.c:1958
 msgid "Try to get colors from system theme"
 msgstr "Mencoba memperoleh warna dari tema sistem"
 
-#: ../src/gnome-mastermind.c:1971
+#: ../src/gnome-mastermind.c:1985
 msgid "<b>Game settings</b>"
 msgstr "<b>Pengaturan permainan</b>"
 
-#: ../src/gnome-mastermind.c:1983
+#: ../src/gnome-mastermind.c:1997
 msgid "Maximum number of tries allowed:"
 msgstr "Cacah coba-coba maksimum yang diijinkan:"
 
-#: ../src/gnome-mastermind.c:2022
+#: ../src/gnome-mastermind.c:2036
 msgid "_Game"
 msgstr "_Main"
 
-#: ../src/gnome-mastermind.c:2026
+#: ../src/gnome-mastermind.c:2040
 msgid "_New game"
 msgstr "Permaina_n Baru"
 
-#: ../src/gnome-mastermind.c:2027
+#: ../src/gnome-mastermind.c:2041
 msgid "Start a new game"
 msgstr "Mulai permainan baru"
 
-#: ../src/gnome-mastermind.c:2031
+#: ../src/gnome-mastermind.c:2045
 msgid "_Undo Move"
 msgstr "Batalkan _Langkah"
 
-#: ../src/gnome-mastermind.c:2032
+#: ../src/gnome-mastermind.c:2046
 msgid "Undo last move"
 msgstr "Batalkan langkah terakhir"
 
-#: ../src/gnome-mastermind.c:2036
+#: ../src/gnome-mastermind.c:2050
 msgid "_Redo Move"
 msgstr "_Ulangi Langkah"
 
-#: ../src/gnome-mastermind.c:2037
+#: ../src/gnome-mastermind.c:2051
 msgid "Redo last move"
 msgstr "Jalankan lagi langkah terakhir"
 
-#: ../src/gnome-mastermind.c:2041
+#: ../src/gnome-mastermind.c:2055
 msgid "_Quit"
 msgstr "_Keluar"
 
-#: ../src/gnome-mastermind.c:2042
+#: ../src/gnome-mastermind.c:2056
 msgid "Quit the game"
 msgstr "Keluar dari permainan"
 
-#: ../src/gnome-mastermind.c:2045
+#: ../src/gnome-mastermind.c:2059
 msgid "_Settings"
 msgstr "Penga_turan"
 
-#: ../src/gnome-mastermind.c:2048
+#: ../src/gnome-mastermind.c:2062
 msgid "_Preferences"
 msgstr "_Preferensi"
 
-#: ../src/gnome-mastermind.c:2049
+#: ../src/gnome-mastermind.c:2063
 msgid "Change game settings"
 msgstr "Ubah pengaturan permainan"
 
-#: ../src/gnome-mastermind.c:2052
+#: ../src/gnome-mastermind.c:2066
 msgid "_Help"
 msgstr "_Bantuan"
 
-#: ../src/gnome-mastermind.c:2055
+#: ../src/gnome-mastermind.c:2069
 msgid "_About"
 msgstr "Ihw_al"
 
-#: ../src/gnome-mastermind.c:2057
+#: ../src/gnome-mastermind.c:2071
 msgid "About"
 msgstr "Ihwal"
 
-#: ../src/gnome-mastermind.c:2061 ../src/gnome-mastermind.c:2063
+#: ../src/gnome-mastermind.c:2075 ../src/gnome-mastermind.c:2077
 msgid "_Contents"
 msgstr "_Isi"
 
-#: ../src/gnome-mastermind.c:2080
+#: ../src/gnome-mastermind.c:2094
 msgid "_Show Toolbar"
 msgstr "_Tampilkan Toolbar"
 
-#: ../src/gnome-mastermind.c:2080
+#: ../src/gnome-mastermind.c:2094
 msgid "Show or hide the toolbar"
 msgstr "Tampilkan atau sembunyikan toolbar"
 
