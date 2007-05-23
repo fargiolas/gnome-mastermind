@@ -1,21 +1,20 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# translation of Gnome Mastermind.
+# Copyright (C) 2007 Andika Triwidada
+# This file is distributed under the same license as the Gnome Mastermind package.
+# Andika Triwidada <andika@gmail.com>, 2007.
+# 
+# 
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-mastermind 0.3\n"
+"Project-Id-Version: gnome mastermind 0.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-05-23 18:10+0200\n"
-"PO-Revision-Date: 2007-05-23 17:12+0100\n"
-"Last-Translator: Tomasz Dominikowski <dominikowski@gmail.com>\n"
-"Language-Team: Tomasz Dominikowski <dominikowski@gmail.com>\n"
+"PO-Revision-Date: 2007-05-23 22:20+0700\n"
+"Last-Translator: Andika Triwidada <andika@gmail.com>\n"
+"Language-Team: Indonesian <id@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: POLISH\n"
-"X-Poedit-Country: Poland\n"
 
 #: ../src/gnome-mastermind.c:186
 msgid ""
@@ -26,12 +25,12 @@ msgid ""
 "\n"
 "Start a new game?"
 msgstr ""
-"<span size=\"medium\" weight=\"bold\">Ustawienia zostały zmienione!</span>\n"
+"<span size=\"medium\" weight=\"bold\">Setting telah diubah!</span>\n"
 "\n"
-"Maksymalna ilość prób została zmieniona.\n"
-"Gra musi zostać uruchomiona ponownie.\n"
+"Cacah coba-coba maksimum telah diubah.\n"
+"Permainan harus diulangi dari awal agar perubahan ini diterapkan\n"
 "\n"
-"Uruchomić nową grę?"
+"Mulai permainan baru?"
 
 #: ../src/gnome-mastermind.c:221 ../src/gnome-mastermind.c:303
 #, c-format
@@ -42,15 +41,15 @@ msgid ""
 "\n"
 "Default theme will be loaded instead."
 msgstr ""
-"<span size=\"medium\" weight=\"bold\">Wczytanie motywu niemożliwe!</span>\n"
+"<span size=\"medium\" weight=\"bold\">Tidak dapat memuat tema!</span>\n"
 "\n"
-"<i>\"%s\"</i> nie istnieje!\n"
+"<i>'%s'</i> tidak ada!!\n"
 "\n"
-"Zostanie wczytany motyw domyślny."
+"Sebagai gantinya, tema default akan dimuat."
 
 #: ../src/gnome-mastermind.c:733
 msgid "Ready for a new game!"
-msgstr "Gotów na nową grę!"
+msgstr "Bersiap untuk permainan baru!"
 
 #: ../src/gnome-mastermind.c:796
 #, c-format
@@ -59,13 +58,13 @@ msgid ""
 "You found the solution with <b>%d</b> tries!\n"
 "Do you want to play again?"
 msgstr ""
-"<span size=\"large\" weight=\"bold\">Wspaniale!</span>\n"
-"Rozwiązanie odnalezione po <b>%d</b> próbach!\n"
-"Czy chcesz zagrać ponownie?"
+"<span size=\"large\" weight=\"bold\">Hebat!!!</span>\n"
+"Anda menemukan solusinya dengan <b>%d</b> percobaan!\n"
+"Anda ingin bermain lagi?"
 
 #: ../src/gnome-mastermind.c:801 ../src/gnome-mastermind.c:832
 msgid "Play again"
-msgstr "Ponowna gra"
+msgstr "Main lagi"
 
 #: ../src/gnome-mastermind.c:827
 #, c-format
@@ -74,14 +73,13 @@ msgid ""
 "With just <b>%d</b> tries you didn't find the solution yet?!\n"
 "Do you want to play again?"
 msgstr ""
-"<span size=\"large\" weight=\"bold\">Przykro mi, ale nie udało ci się wygrać!"
-"</span>\n"
-"Po <b>%d</b> próbach nadal rozwiązanie nie zostało odnalezione?!\n"
-"Czy chcesz zagrać ponownie?"
+"<span size=\"large\" weight=\"bold\">Maaf, anda kalah!</span>\n"
+"Hanya dengan <b>%d</b> coba-coba anda belum menemukan solusinya?!\n"
+"Apakah anda ingin bermain lagi?"
 
 #: ../src/gnome-mastermind.c:836
 msgid "This was the right solution:"
-msgstr "To rozwiązanie było poprawne:"
+msgstr "Ini adalah solusi yang benar:"
 
 #. Note for translators: the following tells the number of
 #. *  right color and position guesses (bulls) and right color
@@ -92,148 +90,141 @@ msgstr "To rozwiązanie było poprawne:"
 #: ../src/gnome-mastermind.c:1035
 #, c-format
 msgid "%d bulls, %d cows!"
-msgstr "%d czarnych, %d białych!"
+msgstr "%d bull, %d cow!"
 
 #: ../src/gnome-mastermind.c:1418 ../src/gnome-mastermind.c:1490
 #: ../src/gnome-mastermind.c:1599 ../src/gnome-mastermind.c:2221
 msgid "Select a color!"
-msgstr "Wybierz kolor!"
+msgstr "Pilih sebuah warna!"
 
 #: ../src/gnome-mastermind.c:1430 ../src/gnome-mastermind.c:1502
 msgid "Select a valid place!"
-msgstr "Wybierz poprawne miejsce!"
+msgstr "Pilih tempat yang valid!"
 
 #. Note for translators: Replace this
 #. * string with your name and email
 #. * address
 #: ../src/gnome-mastermind.c:1741
 msgid "Filippo Argiolas <filippo.argiolas@gmail.com>"
-msgstr "Tomasz Dominikowski <dominikowski@gmail.com>"
+msgstr "Andika Triwidada <andika@gmail.com>"
 
 #: ../src/gnome-mastermind.c:1742
 msgid "A Mastermind clone for gnome"
-msgstr "Klon gry Mastermind dla GNOME"
+msgstr "Klon Mastermind bagi Gnome"
 
 #. GtkWidget *hbox;
 #: ../src/gnome-mastermind.c:1856
 msgid "Preferences"
-msgstr "Preferencje"
+msgstr "Preferensi"
 
 #: ../src/gnome-mastermind.c:1873
 msgid "<b>Tileset theme</b>"
-msgstr "<b>Motyw</b>"
+msgstr "<b>Tema tileset</b>"
 
 #: ../src/gnome-mastermind.c:1885
 msgid "Theme:"
-msgstr "Motyw:"
+msgstr "Tema:"
 
 #: ../src/gnome-mastermind.c:1908
 msgid "<b>Color settings</b>"
-msgstr "<b>Ustawienia kolorów</b>"
+msgstr "<b>Pengaturan warna</b>"
 
 #: ../src/gnome-mastermind.c:1920
 msgid "Foreground Color:"
-msgstr "Kolor na pierwszym planie:"
+msgstr "Warna Latar Depan:"
 
 #: ../src/gnome-mastermind.c:1932
 msgid "Background Color:"
-msgstr "Kolor tła:"
+msgstr "Warna Latar Belakang:"
 
 #: ../src/gnome-mastermind.c:1944
 msgid "Try to get colors from system theme"
-msgstr "Pobieranie kolorów z motywu systemowego"
+msgstr "Mencoba memperoleh warna dari tema sistem"
 
 #: ../src/gnome-mastermind.c:1971
 msgid "<b>Game settings</b>"
-msgstr "<b>Ustawienia gry</b>"
+msgstr "<b>Pengaturan permainan</b>"
 
 #: ../src/gnome-mastermind.c:1983
 msgid "Maximum number of tries allowed:"
-msgstr "Maksymalna dozwolona liczba prób:"
+msgstr "Cacah coba-coba maksimum yang diijinkan:"
 
 #: ../src/gnome-mastermind.c:2022
 msgid "_Game"
-msgstr "_Gra"
+msgstr "_Main"
 
 #: ../src/gnome-mastermind.c:2026
 msgid "_New game"
-msgstr "_Nowa gra"
+msgstr "Permaina_n Baru"
 
 #: ../src/gnome-mastermind.c:2027
 msgid "Start a new game"
-msgstr "Rozpoczęcie nowej gry"
+msgstr "Mulai permainan baru"
 
 #: ../src/gnome-mastermind.c:2031
 msgid "_Undo Move"
-msgstr "_Cofnij ruch"
+msgstr "Batalkan _Langkah"
 
 #: ../src/gnome-mastermind.c:2032
 msgid "Undo last move"
-msgstr "Cofnij ostatni ruch"
+msgstr "Batalkan langkah terakhir"
 
 #: ../src/gnome-mastermind.c:2036
 msgid "_Redo Move"
-msgstr "_Powtórz ruch"
+msgstr "_Ulangi Langkah"
 
 #: ../src/gnome-mastermind.c:2037
 msgid "Redo last move"
-msgstr "Powtórz ostatni ruch"
+msgstr "Jalankan lagi langkah terakhir"
 
 #: ../src/gnome-mastermind.c:2041
 msgid "_Quit"
-msgstr "_Zakończ"
+msgstr "_Keluar"
 
 #: ../src/gnome-mastermind.c:2042
 msgid "Quit the game"
-msgstr "Zakończenie gry"
+msgstr "Keluar dari permainan"
 
 #: ../src/gnome-mastermind.c:2045
 msgid "_Settings"
-msgstr "_Ustawienia"
+msgstr "Penga_turan"
 
 #: ../src/gnome-mastermind.c:2048
 msgid "_Preferences"
-msgstr "_Preferencje"
+msgstr "_Preferensi"
 
 #: ../src/gnome-mastermind.c:2049
 msgid "Change game settings"
-msgstr "Zmiany ustawień gry"
+msgstr "Ubah pengaturan permainan"
 
 #: ../src/gnome-mastermind.c:2052
 msgid "_Help"
-msgstr "P_omoc"
+msgstr "_Bantuan"
 
 #: ../src/gnome-mastermind.c:2055
 msgid "_About"
-msgstr "O p_rogramie"
+msgstr "Ihw_al"
 
 #: ../src/gnome-mastermind.c:2057
 msgid "About"
-msgstr "Informacje o programie"
+msgstr "Ihwal"
 
 #: ../src/gnome-mastermind.c:2061 ../src/gnome-mastermind.c:2063
 msgid "_Contents"
-msgstr "_Zawartość"
+msgstr "_Isi"
 
 #: ../src/gnome-mastermind.c:2080
 msgid "_Show Toolbar"
-msgstr "_Wyświetlanie paska narzędzi"
+msgstr "_Tampilkan Toolbar"
 
 #: ../src/gnome-mastermind.c:2080
 msgid "Show or hide the toolbar"
-msgstr "Wyświetlenie lub ukrycie paska narzędzi"
+msgstr "Tampilkan atau sembunyikan toolbar"
 
 #: ../desktop/gnome-mastermind.desktop.in.h:1
 msgid "Break the hidden code!"
-msgstr "Złam ukryty kod!"
+msgstr "Pecahkan kode tersembunyi!"
 
 #: ../desktop/gnome-mastermind.desktop.in.h:2
 msgid "Mastermind"
 msgstr "Mastermind"
-
-#~ msgid "Now click on the right place!"
-#~ msgstr "Teraz kliknij na odpowiednim miejscu!"
-
-#, fuzzy
-#~ msgid "A mastermind-like game for Gnome"
-#~ msgstr "Klon gry Mastermind dla GNOME"
