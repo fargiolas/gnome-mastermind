@@ -7,13 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-mastermind\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-23 22:32+0200\n"
-"PO-Revision-Date: 2007-05-01 19:06+0100\n"
+"POT-Creation-Date: 2007-05-25 13:14+0200\n"
+"PO-Revision-Date: 2007-05-25 11:38+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../src/gnome-mastermind.c:186
 msgid ""
@@ -51,7 +52,7 @@ msgid "Ready for a new game!"
 msgstr "Redo för ett nytt spel!"
 
 #: ../src/gnome-mastermind.c:797
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "<span size=\"large\" weight=\"bold\">Great!!!</span>\n"
 "You found the solution with <b>%d</b> try!\n"
@@ -61,7 +62,7 @@ msgid_plural ""
 "You found the solution with <b>%d</b> tries!\n"
 "Do you want to play again?"
 msgstr[0] ""
-"<span size=\"large\" weight=\"bold\">Bra!</span>\n"
+"<span size=\"large\" weight=\"bold\">Bra!!!</span>\n"
 "Du hittade lösningen på <b>%d</b> försök!\n"
 "Vill du spela igen?"
 msgstr[1] ""
@@ -71,10 +72,10 @@ msgstr[1] ""
 
 #: ../src/gnome-mastermind.c:805 ../src/gnome-mastermind.c:841
 msgid "Play again"
-msgstr ""
+msgstr "Spela igen"
 
 #: ../src/gnome-mastermind.c:832
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "<span size=\"large\" weight=\"bold\">I'm sorry, you lose!</span>\n"
 "With just <b>%d</b> try you didn't find the solution yet?!\n"
@@ -93,7 +94,6 @@ msgstr[1] ""
 "Vill du spela igen?"
 
 #: ../src/gnome-mastermind.c:845
-#, fuzzy
 msgid "This was the right solution:"
 msgstr "Det var den rätta lösningen:"
 
@@ -107,15 +107,15 @@ msgstr "Det var den rätta lösningen:"
 #, c-format
 msgid "%d bull, "
 msgid_plural "%d bulls, "
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d vit, "
+msgstr[1] "%d vita, "
 
 #: ../src/gnome-mastermind.c:1045
 #, c-format
 msgid "%d cow!"
 msgid_plural "%d cows!"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d svart!"
+msgstr[1] "%d svarta!"
 
 #: ../src/gnome-mastermind.c:1432 ../src/gnome-mastermind.c:1504
 #: ../src/gnome-mastermind.c:1613 ../src/gnome-mastermind.c:2235
@@ -189,19 +189,19 @@ msgstr "Starta ett nytt spel"
 
 #: ../src/gnome-mastermind.c:2045
 msgid "_Undo Move"
-msgstr ""
+msgstr "_Ångra drag"
 
 #: ../src/gnome-mastermind.c:2046
 msgid "Undo last move"
-msgstr ""
+msgstr "Ångra senaste draget"
 
 #: ../src/gnome-mastermind.c:2050
 msgid "_Redo Move"
-msgstr ""
+msgstr "_Gör om drag"
 
 #: ../src/gnome-mastermind.c:2051
 msgid "Redo last move"
-msgstr ""
+msgstr "Gör om senaste draget"
 
 #: ../src/gnome-mastermind.c:2055
 msgid "_Quit"
