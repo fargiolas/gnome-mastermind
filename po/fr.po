@@ -6,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-mastermind 0.2\n"
+"Project-Id-Version: gnome-mastermind 0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-25 13:14+0200\n"
-"PO-Revision-Date: 2007-04-25 20:51+0200\n"
+"POT-Creation-Date: 2007-05-25 20:46+0200\n"
+"PO-Revision-Date: 2007-05-25 19:43+0200\n"
 "Last-Translator: Robert-André Mauchin <zebob.m@gmail.com>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +28,7 @@ msgid ""
 msgstr ""
 "<span size=\"medium\" weight=\"bold\">Les réglages ont été modifiés.</span>\n"
 "\n"
-"Vous avez changé le nombre maximal de tentatives.\n"
+"Vous avez modifié le nombre maximal de tentatives.\n"
 "La partie doit être redémarrée pour que cette modification soit appliquée\n"
 "\n"
 "Voulez-vous démarrer une nouvelle partie ?"
@@ -54,7 +54,7 @@ msgid "Ready for a new game!"
 msgstr "Prêt pour une nouvelle partie !"
 
 #: ../src/gnome-mastermind.c:797
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "<span size=\"large\" weight=\"bold\">Great!!!</span>\n"
 "You found the solution with <b>%d</b> try!\n"
@@ -65,7 +65,7 @@ msgid_plural ""
 "Do you want to play again?"
 msgstr[0] ""
 "<span size=\"large\" weight=\"bold\">Génial !!!</span>\n"
-"Vous avez trouvé la solution en <b>%d</b> coups !\n"
+"Vous avez trouvé la solution en <b>%d</b> coup !\n"
 "Voulez-vous jouer de nouveau ?"
 msgstr[1] ""
 "<span size=\"large\" weight=\"bold\">Génial !!!</span>\n"
@@ -74,10 +74,10 @@ msgstr[1] ""
 
 #: ../src/gnome-mastermind.c:805 ../src/gnome-mastermind.c:841
 msgid "Play again"
-msgstr ""
+msgstr "Rejouer"
 
 #: ../src/gnome-mastermind.c:832
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "<span size=\"large\" weight=\"bold\">I'm sorry, you lose!</span>\n"
 "With just <b>%d</b> try you didn't find the solution yet?!\n"
@@ -88,7 +88,7 @@ msgid_plural ""
 "Do you want to play again?"
 msgstr[0] ""
 "<span size=\"large\" weight=\"bold\">Désolé, vous avez perdu !</span>\n"
-"Avec seulement <b>%d</b> tentatives, vous n'avez pas encore trouvé la "
+"Avec seulement <b>%d</b> tentative, vous n'avez pas encore trouvé la "
 "solution ?!\n"
 "Voulez-vous jouer de nouveau ?"
 msgstr[1] ""
@@ -98,9 +98,8 @@ msgstr[1] ""
 "Voulez-vous jouer de nouveau ?"
 
 #: ../src/gnome-mastermind.c:845
-#, fuzzy
 msgid "This was the right solution:"
-msgstr "Voici la bonne solution :"
+msgstr "La bonne solution était :"
 
 #. Note for translators: the following tells the number of
 #. *  right color and position guesses (bulls) and right color
@@ -112,15 +111,15 @@ msgstr "Voici la bonne solution :"
 #, c-format
 msgid "%d bull, "
 msgid_plural "%d bulls, "
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d taureau, "
+msgstr[1] "%d taureaux, "
 
 #: ../src/gnome-mastermind.c:1045
 #, c-format
 msgid "%d cow!"
 msgid_plural "%d cows!"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d vache !"
+msgstr[1] "%d vaches !"
 
 #: ../src/gnome-mastermind.c:1432 ../src/gnome-mastermind.c:1504
 #: ../src/gnome-mastermind.c:1613 ../src/gnome-mastermind.c:2235
@@ -149,7 +148,7 @@ msgstr "Préferences"
 
 #: ../src/gnome-mastermind.c:1887
 msgid "<b>Tileset theme</b>"
-msgstr "<b>Thème des plots</b>"
+msgstr "<b>Thème des pions</b>"
 
 #: ../src/gnome-mastermind.c:1899
 msgid "Theme:"
@@ -169,7 +168,7 @@ msgstr "Couleur d'arrière plan :"
 
 #: ../src/gnome-mastermind.c:1958
 msgid "Try to get colors from system theme"
-msgstr "Tentative d'obtenir les couleurs depuis le thème du système"
+msgstr "Essayer d'obtenir les couleurs depuis le thème du système"
 
 #: ../src/gnome-mastermind.c:1985
 msgid "<b>Game settings</b>"
@@ -193,19 +192,19 @@ msgstr "Démarre une nouvelle partie"
 
 #: ../src/gnome-mastermind.c:2045
 msgid "_Undo Move"
-msgstr ""
+msgstr "_Annuler le coup"
 
 #: ../src/gnome-mastermind.c:2046
 msgid "Undo last move"
-msgstr ""
+msgstr "Annule le dernier coup"
 
 #: ../src/gnome-mastermind.c:2050
 msgid "_Redo Move"
-msgstr ""
+msgstr "_Rétablir le coup"
 
 #: ../src/gnome-mastermind.c:2051
 msgid "Redo last move"
-msgstr ""
+msgstr "Rétablit le dernier coup"
 
 #: ../src/gnome-mastermind.c:2055
 msgid "_Quit"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-mastermind 0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-25 13:14+0200\n"
+"POT-Creation-Date: 2007-05-25 20:46+0200\n"
 "PO-Revision-Date: 2007-02-19 10:49+0100\n"
 "Last-Translator:  <pippolino@anche.no>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -109,15 +109,15 @@ msgstr "Questa era la soluzione corretta:"
 #, c-format
 msgid "%d bull, "
 msgid_plural "%d bulls, "
-msgstr[0] "toro"
-msgstr[1] "tori"
+msgstr[0] "%d toro, "
+msgstr[1] "%d tori, "
 
 #: ../src/gnome-mastermind.c:1045
 #, c-format
 msgid "%d cow!"
 msgid_plural "%d cows!"
-msgstr[0] "mucca"
-msgstr[1] "mucche"
+msgstr[0] "%d mucca!"
+msgstr[1] "%d mucche!"
 
 #: ../src/gnome-mastermind.c:1432 ../src/gnome-mastermind.c:1504
 #: ../src/gnome-mastermind.c:1613 ../src/gnome-mastermind.c:2235
