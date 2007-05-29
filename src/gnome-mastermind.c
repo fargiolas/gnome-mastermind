@@ -802,7 +802,7 @@ void win_dialog (int tries) {
 
 
 	gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_QUIT, GTK_RESPONSE_NO);
-	button = gtk_dialog_add_button (GTK_DIALOG (dialog), _("Play again"), GTK_RESPONSE_YES);
+	button = gtk_dialog_add_button (GTK_DIALOG (dialog), _("Play Again"), GTK_RESPONSE_YES);
 	gtk_button_set_image (GTK_BUTTON (button), gtk_image_new_from_stock (GTK_STOCK_YES, GTK_ICON_SIZE_BUTTON)); 
 
 	

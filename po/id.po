@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome mastermind 0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-25 20:46+0200\n"
+"POT-Creation-Date: 2007-05-29 09:08+0200\n"
 "PO-Revision-Date: 2007-05-23 22:20+0700\n"
 "Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <id@li.org>\n"
@@ -70,8 +70,8 @@ msgstr[1] ""
 "Anda menemukan solusinya dengan <b>%d</b> percobaan!\n"
 "Anda ingin bermain lagi?"
 
-#: ../src/gnome-mastermind.c:805 ../src/gnome-mastermind.c:841
-msgid "Play again"
+#: ../src/gnome-mastermind.c:805
+msgid "Play Again"
 msgstr "Main lagi"
 
 #: ../src/gnome-mastermind.c:832
@@ -92,6 +92,10 @@ msgstr[1] ""
 "<span size=\"large\" weight=\"bold\">Maaf, anda kalah!</span>\n"
 "Hanya dengan <b>%d</b> coba-coba anda belum menemukan solusinya?!\n"
 "Apakah anda ingin bermain lagi?"
+
+#: ../src/gnome-mastermind.c:841
+msgid "Play again"
+msgstr "Main lagi"
 
 #: ../src/gnome-mastermind.c:845
 msgid "This was the right solution:"

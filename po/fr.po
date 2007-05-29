@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-mastermind 0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-25 20:46+0200\n"
+"POT-Creation-Date: 2007-05-29 09:08+0200\n"
 "PO-Revision-Date: 2007-05-25 19:43+0200\n"
 "Last-Translator: Robert-André Mauchin <zebob.m@gmail.com>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
@@ -72,8 +72,8 @@ msgstr[1] ""
 "Vous avez trouvé la solution en <b>%d</b> coups !\n"
 "Voulez-vous jouer de nouveau ?"
 
-#: ../src/gnome-mastermind.c:805 ../src/gnome-mastermind.c:841
-msgid "Play again"
+#: ../src/gnome-mastermind.c:805
+msgid "Play Again"
 msgstr "Rejouer"
 
 #: ../src/gnome-mastermind.c:832
@@ -96,6 +96,10 @@ msgstr[1] ""
 "Avec seulement <b>%d</b> tentatives, vous n'avez pas encore trouvé la "
 "solution ?!\n"
 "Voulez-vous jouer de nouveau ?"
+
+#: ../src/gnome-mastermind.c:841
+msgid "Play again"
+msgstr "Rejouer"
 
 #: ../src/gnome-mastermind.c:845
 msgid "This was the right solution:"

@@ -1,22 +1,20 @@
-# Arabic translations for gnome-mastermind package.
-# Copyright (C) 2007 THE gnome-mastermind'S COPYRIGHT HOLDER
+# Portuguese Portuguese translation of gnome-mastermind package.
+# Copyright (C) 2007 Filippo Argiolas <filippo.argiolas@gmail.com>.
 # This file is distributed under the same license as the gnome-mastermind package.
-# Djihed Afifi <djihed@gmail.com>, 2007.
+# Leonardo Ferreira Fontenelle <leo.fontenelle@gmail.com>, 2007.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-mastermind 0.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-05-29 09:08+0200\n"
-"PO-Revision-Date: 2007-05-23 20:45+0100\n"
-"Last-Translator: Djihed Afifi <djihed@gmail.com>\n"
-"Language-Team: Arabic <doc@arabeyes.org>\n"
+"PO-Revision-Date: 2007-05-27 18:48-0300\n"
+"Last-Translator:  <leo.fontenelle@gmail.com>\n"
+"Language-Team: Brazilian Portuguese\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Arabic\n"
-"Plural-Forms: nplurals=4; plural=n==1 ? 0 : n==2 ? 1 : n>=3 && n<=10 ? 2 : "
-"3\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: ../src/gnome-mastermind.c:186
 msgid ""
@@ -27,12 +25,13 @@ msgid ""
 "\n"
 "Start a new game?"
 msgstr ""
-"<span size=\"medium\" weight=\"bold\">تم تغيير الإعدادات!</span>\n"
+"<span size=\"medium\" weight=\"bold\">As configurações foram alteradas!</"
+"span>\n"
 "\n"
-"تم تغيير العدد الأكبر للمحاولات.\n"
-"يجب اعادة تشغيل اللعبة لتطبيق التغيرات\n"
+"O número máximo de tentativas foi alterado.\n"
+"O jogo tem que ser reiniciado para a alteração ser aplicada.\n"
 "\n"
-"هل تريد بدأ لعبة جديدة؟"
+"Iniciar um novo jogo?"
 
 #: ../src/gnome-mastermind.c:221 ../src/gnome-mastermind.c:303
 #, c-format
@@ -43,15 +42,16 @@ msgid ""
 "\n"
 "Default theme will be loaded instead."
 msgstr ""
-"<span size=\"medium\" weight=\"bold\">لا يمكن تحميل النسق!</span>\n"
+"<span size=\"medium\" weight=\"bold\">Não foi possível carregar jogo!</"
+"span>\n"
 "\n"
-"<i>'%s'</i> غير موجود!!\n"
+"<i>\"%s\"</i> não existe!!!\n"
 "\n"
-"سيتم تحميل النسق الإفتراضي."
+"O tema padrão será carregado no lugar."
 
 #: ../src/gnome-mastermind.c:733
 msgid "Ready for a new game!"
-msgstr "مستعد لدورة جديدة!"
+msgstr "Pronto para um novo jogo!"
 
 #: ../src/gnome-mastermind.c:797
 #, c-format
@@ -64,25 +64,17 @@ msgid_plural ""
 "You found the solution with <b>%d</b> tries!\n"
 "Do you want to play again?"
 msgstr[0] ""
-"<span size=\"large\" weight=\"bold\">جيد!!!</span>\n"
-"لقد وجدت الحل بتجريب <b>%d</b> فقط\n"
-"هل تريد اللعب مجددا؟"
+"<span size=\"large\" weight=\"bold\">Ótimo!!!</span>\n"
+"Você encontrou a solução com <b>%d</b> tentativa!\n"
+"Deseja jogar novamente?"
 msgstr[1] ""
-"<span size=\"large\" weight=\"bold\">جيد!!!</span>\n"
-"لقد وجدت الحل بتجريبان <b>%d</b> فقط\n"
-"هل تريد اللعب مجددا؟"
-msgstr[2] ""
-"<span size=\"large\" weight=\"bold\">جيد!!!</span>\n"
-"لقد وجدت الحل بـ <b>%d</b> تجريبات فقط\n"
-"هل تريد اللعب مجددا؟"
-msgstr[3] ""
-"<span size=\"large\" weight=\"bold\">جيد!!!</span>\n"
-"لقد وجدت الحل بـ <b>%d</b> تجريب فقط\n"
-"هل تريد اللعب مجددا؟"
+"<span size=\"large\" weight=\"bold\">Ótimo!!!</span>\n"
+"Você encontrou a solução com <b>%d</b> tentativas!\n"
+"Deseja jogar novamente?"
 
 #: ../src/gnome-mastermind.c:805
 msgid "Play Again"
-msgstr "العب مرة أخرى"
+msgstr "Jogar Novamente"
 
 #: ../src/gnome-mastermind.c:832
 #, c-format
@@ -95,29 +87,21 @@ msgid_plural ""
 "With just <b>%d</b> tries you didn't find the solution yet?!\n"
 "Do you want to play again?"
 msgstr[0] ""
-"<span size=\"large\" weight=\"bold\">عفوا، لقد خسرت!</span>\n"
-"بـتجريب <b>%d</b>  فقط لم تعثر على الحل؟!\n"
-"هل تريد اللعب مجددا؟"
+"<span size=\"large\" weight=\"bold\">Desculpe-me, você perdeu!</span>\n"
+"Com apenas <b>%d</b> tentativa, você ainda não descobriu a solução?!\n"
+"Você deseja jogar novamente?"
 msgstr[1] ""
-"<span size=\"large\" weight=\"bold\">عفوا، لقد خسرت!</span>\n"
-"بـتجريبان <b>%d</b>  فقط لم تعثر على الحل؟!\n"
-"هل تريد اللعب مجددا؟"
-msgstr[2] ""
-"<span size=\"large\" weight=\"bold\">عفوا، لقد خسرت!</span>\n"
-"بـ <b>%d</b> تجريبات فقط لم تعثر على الحل؟!\n"
-"هل تريد اللعب مجددا؟"
-msgstr[3] ""
-"<span size=\"large\" weight=\"bold\">عفوا، لقد خسرت!</span>\n"
-"بـ <b>%d</b> تجريت فقط لم تعثر على الحل؟!\n"
-"هل تريد اللعب مجددا؟"
+"<span size=\"large\" weight=\"bold\">Desculpe-me, você perdeu!</span>\n"
+"Com apenas <b>%d</b> tentativas, você ainda não descobriu a solução?!\n"
+"Você deseja jogar novamente?"
 
 #: ../src/gnome-mastermind.c:841
 msgid "Play again"
-msgstr "العب مرة أخرى"
+msgstr "Jogar Novamente"
 
 #: ../src/gnome-mastermind.c:845
 msgid "This was the right solution:"
-msgstr "كان هذا الحل المناسب:"
+msgstr "Essa era a solução correta:"
 
 #. Note for translators: the following tells the number of
 #. *  right color and position guesses (bulls) and right color
@@ -129,153 +113,149 @@ msgstr "كان هذا الحل المناسب:"
 #, c-format
 msgid "%d bull, "
 msgid_plural "%d bulls, "
-msgstr[0] "ثور %d ،"
-msgstr[1] "ثوران %d،"
-msgstr[2] "%d ثيران"
-msgstr[3] "%d ثورا،"
+msgstr[0] "%d branco, "
+msgstr[1] "%d brancos, "
 
 #: ../src/gnome-mastermind.c:1045
 #, c-format
 msgid "%d cow!"
 msgid_plural "%d cows!"
-msgstr[0] "بقرة %d!"
-msgstr[1] "بقرتان %d!"
-msgstr[2] "%d قرات!"
-msgstr[3] "%d بقرة!"
+msgstr[0] "%d preto!"
+msgstr[1] "%d pretos!"
 
 #: ../src/gnome-mastermind.c:1432 ../src/gnome-mastermind.c:1504
 #: ../src/gnome-mastermind.c:1613 ../src/gnome-mastermind.c:2235
 msgid "Select a color!"
-msgstr "انتقِ لونا!"
+msgstr "Selecione uma cor!"
 
 #: ../src/gnome-mastermind.c:1444 ../src/gnome-mastermind.c:1516
 msgid "Select a valid place!"
-msgstr "انتقِ مكانا مناسبا!"
+msgstr "Selecione um local válido!"
 
 #. Note for translators: Replace this
 #. * string with your name and email
 #. * address
 #: ../src/gnome-mastermind.c:1755
 msgid "Filippo Argiolas <filippo.argiolas@gmail.com>"
-msgstr "جهاد عفيفي <djihed@gmail.com>"
+msgstr "Leonardo Ferreira Fontenelle <leo.fontenelle@gmail.com>"
 
 #: ../src/gnome-mastermind.c:1756
 msgid "A Mastermind clone for gnome"
-msgstr "لعبة العقل الموجّه مايند لجنم"
+msgstr "Um clone do jogo Senha (Mastermind)"
 
 #. GtkWidget *hbox;
 #: ../src/gnome-mastermind.c:1870
 msgid "Preferences"
-msgstr "تفضيلات"
+msgstr "Preferências"
 
 #: ../src/gnome-mastermind.c:1887
 msgid "<b>Tileset theme</b>"
-msgstr "<b>سمة الواجهة</b>"
+msgstr "<b>Tema do tabuleiro</b>"
 
 #: ../src/gnome-mastermind.c:1899
 msgid "Theme:"
-msgstr "السمة:"
+msgstr "Tema:"
 
 #: ../src/gnome-mastermind.c:1922
 msgid "<b>Color settings</b>"
-msgstr "إعدادات"
+msgstr "<b>Configurações de cor</b>"
 
 #: ../src/gnome-mastermind.c:1934
 msgid "Foreground Color:"
-msgstr "اللون الأمامي:"
+msgstr "Cor de Primeiro Plano:"
 
 #: ../src/gnome-mastermind.c:1946
 msgid "Background Color:"
-msgstr "اللون الخلفي:"
+msgstr "Cor de Plano de Fundo"
 
 #: ../src/gnome-mastermind.c:1958
 msgid "Try to get colors from system theme"
-msgstr "جرب استيراد الوان من نسق النظام"
+msgstr "Tentar obter cores do tema do sistema"
 
 #: ../src/gnome-mastermind.c:1985
 msgid "<b>Game settings</b>"
-msgstr "<b>اعدادات اللعبة</b>"
+msgstr "<b>Configurações do jogo</b>"
 
 #: ../src/gnome-mastermind.c:1997
 msgid "Maximum number of tries allowed:"
-msgstr "عدد التجريبات الأكبر المسموح به"
+msgstr "Número máximo de tentativas:"
 
 #: ../src/gnome-mastermind.c:2036
 msgid "_Game"
-msgstr "_لعبة"
+msgstr "_Jogo"
 
 #: ../src/gnome-mastermind.c:2040
 msgid "_New game"
-msgstr "_لعبة جديدة"
+msgstr "_Novo Jogo"
 
 #: ../src/gnome-mastermind.c:2041
 msgid "Start a new game"
-msgstr "ابدء لعبةٍ جديدة"
+msgstr "Inicia um novo jogo"
 
 #: ../src/gnome-mastermind.c:2045
 msgid "_Undo Move"
-msgstr "ت_راجع عن الحركة اﻷخيرة"
+msgstr "Desfa_zer Jogada"
 
 #: ../src/gnome-mastermind.c:2046
 msgid "Undo last move"
-msgstr "تراجع عن الحركة اﻷخيرة"
+msgstr "Desfaz a última jogada"
 
 #: ../src/gnome-mastermind.c:2050
 msgid "_Redo Move"
-msgstr "_كَرِّر النقلة"
+msgstr "_Refazer Jogada"
 
 #: ../src/gnome-mastermind.c:2051
 msgid "Redo last move"
-msgstr "_كَرِّر النقلة الأخيرة"
+msgstr "Refaz a última jogada"
 
 #: ../src/gnome-mastermind.c:2055
 msgid "_Quit"
-msgstr "إ_خرج"
+msgstr "Sai_r"
 
 #: ../src/gnome-mastermind.c:2056
 msgid "Quit the game"
-msgstr "اخرج من اللعبة"
+msgstr "Sai do jogo"
 
 #: ../src/gnome-mastermind.c:2059
 msgid "_Settings"
-msgstr "إ_عدادات"
+msgstr "_Configurações"
 
 #: ../src/gnome-mastermind.c:2062
 msgid "_Preferences"
-msgstr "ت_فضيلات"
+msgstr "_Preferences"
 
 #: ../src/gnome-mastermind.c:2063
 msgid "Change game settings"
-msgstr "غير إعدادات اللعبة"
+msgstr "Altera as configurações do jogo"
 
 #: ../src/gnome-mastermind.c:2066
 msgid "_Help"
-msgstr "_مساعدة"
+msgstr "Aj_uda"
 
 #: ../src/gnome-mastermind.c:2069
 msgid "_About"
-msgstr "_حول"
+msgstr "_Sobre"
 
 #: ../src/gnome-mastermind.c:2071
 msgid "About"
-msgstr "حول"
+msgstr "Sobre"
 
 #: ../src/gnome-mastermind.c:2075 ../src/gnome-mastermind.c:2077
 msgid "_Contents"
-msgstr "ال_محتويات"
+msgstr "_Conteúdo"
 
 #: ../src/gnome-mastermind.c:2094
 msgid "_Show Toolbar"
-msgstr "اعرض شريط الأدوات"
+msgstr "_Mostrar Barra de Ferramentas"
 
 #: ../src/gnome-mastermind.c:2094
 msgid "Show or hide the toolbar"
-msgstr "اعرض أو إخف شريط الأدوات"
+msgstr "Mostra ou oculta a barra de ferramentas"
 
 #: ../desktop/gnome-mastermind.desktop.in.h:1
 msgid "Break the hidden code!"
-msgstr "كسّر الرمز المخفي!"
+msgstr "Quebre o código secreto!"
 
 #: ../desktop/gnome-mastermind.desktop.in.h:2
 msgid "Mastermind"
-msgstr "العقل الموجّه"
+msgstr "Senha"

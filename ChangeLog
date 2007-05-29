@@ -1,10 +1,14 @@
+29 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* themes/shapes.svg: Added new shape based tileset for color-blind
+	people.
+
 23 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
 	* src/gnome-mastermind.c: fixed window resizing when changing
 	max_tries. Fixed Undo sensitiveness when starting a new game.
 	Added SSHOT define to obtain a finished game to include screenshots
 	for docbook help.
 	* help/C/figures: Updated screenshots with new features and new
-	simple.svg them
+	simple.svg theme
 
 20 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
 	* src/gnome-mastermind.c: don't start d-n-d if no color has been

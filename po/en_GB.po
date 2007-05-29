@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-mastermind\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-25 20:46+0200\n"
-"PO-Revision-Date: 2007-05-06 16:49-0000\n"
+"POT-Creation-Date: 2007-05-29 09:08+0200\n"
+"PO-Revision-Date: 2007-05-29 06:50-0000\n"
 "Last-Translator: David Lodge <dave@cirt.net>\n"
 "Language-Team: en_GB <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -51,7 +51,7 @@ msgid "Ready for a new game!"
 msgstr "Ready for a new game!"
 
 #: ../src/gnome-mastermind.c:797
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "<span size=\"large\" weight=\"bold\">Great!!!</span>\n"
 "You found the solution with <b>%d</b> try!\n"
@@ -61,20 +61,20 @@ msgid_plural ""
 "You found the solution with <b>%d</b> tries!\n"
 "Do you want to play again?"
 msgstr[0] ""
-"<span size=\"large\" weight=\"bold\">Great!</span>\n"
-"You found the solution with <b>%d</b> tries!\n"
+"<span size=\"large\" weight=\"bold\">Great!!!</span>\n"
+"You found the solution with <b>%d</b> try!\n"
 "Do you want to play again?"
 msgstr[1] ""
-"<span size=\"large\" weight=\"bold\">Great!</span>\n"
+"<span size=\"large\" weight=\"bold\">Great!!!</span>\n"
 "You found the solution with <b>%d</b> tries!\n"
 "Do you want to play again?"
 
-#: ../src/gnome-mastermind.c:805 ../src/gnome-mastermind.c:841
-msgid "Play again"
-msgstr ""
+#: ../src/gnome-mastermind.c:805
+msgid "Play Again"
+msgstr "Play Again"
 
 #: ../src/gnome-mastermind.c:832
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "<span size=\"large\" weight=\"bold\">I'm sorry, you lose!</span>\n"
 "With just <b>%d</b> try you didn't find the solution yet?!\n"
@@ -84,16 +84,19 @@ msgid_plural ""
 "With just <b>%d</b> tries you didn't find the solution yet?!\n"
 "Do you want to play again?"
 msgstr[0] ""
-"<span size=\"large\" weight=\"bold\">I'm sorry, you lost!</span>\n"
-"With just <b>%d</b> tries you didn't find the solution!\n"
+"<span size=\"large\" weight=\"bold\">I'm sorry, you lose!</span>\n"
+"With just <b>%d</b> try you haven't found the solution yet?!\n"
 "Do you want to play again?"
 msgstr[1] ""
-"<span size=\"large\" weight=\"bold\">I'm sorry, you lost!</span>\n"
-"With just <b>%d</b> tries you didn't find the solution!\n"
+"<span size=\"large\" weight=\"bold\">I'm sorry, you lose!</span>\n"
+"With just <b>%d</b> tries you haven't found the solution yet?!\n"
 "Do you want to play again?"
 
+#: ../src/gnome-mastermind.c:841
+msgid "Play again"
+msgstr "Play again"
+
 #: ../src/gnome-mastermind.c:845
-#, fuzzy
 msgid "This was the right solution:"
 msgstr "This was the right solution:"
 
@@ -107,15 +110,15 @@ msgstr "This was the right solution:"
 #, c-format
 msgid "%d bull, "
 msgid_plural "%d bulls, "
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d bull, "
+msgstr[1] "%d bulls, "
 
 #: ../src/gnome-mastermind.c:1045
 #, c-format
 msgid "%d cow!"
 msgid_plural "%d cows!"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d cow!"
+msgstr[1] "%d cows!"
 
 #: ../src/gnome-mastermind.c:1432 ../src/gnome-mastermind.c:1504
 #: ../src/gnome-mastermind.c:1613 ../src/gnome-mastermind.c:2235
@@ -188,19 +191,19 @@ msgstr "Start a new game"
 
 #: ../src/gnome-mastermind.c:2045
 msgid "_Undo Move"
-msgstr ""
+msgstr "_Undo Move"
 
 #: ../src/gnome-mastermind.c:2046
 msgid "Undo last move"
-msgstr ""
+msgstr "Undo last move"
 
 #: ../src/gnome-mastermind.c:2050
 msgid "_Redo Move"
-msgstr ""
+msgstr "_Redo Move"
 
 #: ../src/gnome-mastermind.c:2051
 msgid "Redo last move"
-msgstr ""
+msgstr "Redo last move"
 
 #: ../src/gnome-mastermind.c:2055
 msgid "_Quit"
