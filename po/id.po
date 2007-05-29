@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome mastermind 0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-29 10:29+0200\n"
-"PO-Revision-Date: 2007-05-23 22:20+0700\n"
+"POT-Creation-Date: 2007-05-29 14:44+0200\n"
+"PO-Revision-Date: 2007-05-29 18:51+0700\n"
 "Last-Translator: Andika Triwidada <andika@gmail.com>\n"
-"Language-Team: Indonesian <id@li.org>\n"
+"Language-Team: Indonesian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -52,7 +52,7 @@ msgid "Ready for a new game!"
 msgstr "Bersiap untuk permainan baru!"
 
 #: ../src/gnome-mastermind.c:797
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "<span size=\"large\" weight=\"bold\">Great!!!</span>\n"
 "You found the solution with <b>%d</b> try!\n"
@@ -75,7 +75,7 @@ msgid "Play Again"
 msgstr "Main lagi"
 
 #: ../src/gnome-mastermind.c:832
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "<span size=\"large\" weight=\"bold\">I'm sorry, you lose!</span>\n"
 "With just <b>%d</b> try you didn't find the solution yet?!\n"
@@ -104,7 +104,7 @@ msgstr "Ini adalah solusi yang benar:"
 #. *  italian. Translate it if you want or leave it untranslated
 #. *  or feel free to ask my opinion
 #: ../src/gnome-mastermind.c:1044
-#, fuzzy, c-format
+#, c-format
 msgid "%d bull, "
 msgid_plural "%d bulls, "
 msgstr[0] "%d bull, "
@@ -253,6 +253,3 @@ msgstr "Pecahkan kode tersembunyi!"
 #: ../desktop/gnome-mastermind.desktop.in.h:2
 msgid "Mastermind"
 msgstr "Mastermind"
-
-#~ msgid "Play again"
-#~ msgstr "Main lagi"
