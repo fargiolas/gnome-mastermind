@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-mastermind\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-29 09:08+0200\n"
+"POT-Creation-Date: 2007-05-29 10:29+0200\n"
 "PO-Revision-Date: 2007-05-25 11:38+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -70,7 +70,7 @@ msgstr[1] ""
 "Du hittade lösningen på <b>%d</b> försök!\n"
 "Vill du spela igen?"
 
-#: ../src/gnome-mastermind.c:805
+#: ../src/gnome-mastermind.c:805 ../src/gnome-mastermind.c:841
 msgid "Play Again"
 msgstr "Spela igen"
 
@@ -92,10 +92,6 @@ msgstr[1] ""
 "<span size=\"large\" weight=\"bold\">Tyvärr, du förlorade!</span>\n"
 "Du lyckades inte hitta lösningen efter <b>%d</b> försök!\n"
 "Vill du spela igen?"
-
-#: ../src/gnome-mastermind.c:841
-msgid "Play again"
-msgstr "Spela igen"
 
 #: ../src/gnome-mastermind.c:845
 msgid "This was the right solution:"
@@ -258,6 +254,9 @@ msgstr "Hitta den rätta koden!"
 #: ../desktop/gnome-mastermind.desktop.in.h:2
 msgid "Mastermind"
 msgstr "Mastermind"
+
+#~ msgid "Play again"
+#~ msgstr "Spela igen"
 
 #~ msgid "Now click on the right place!"
 #~ msgstr "Klicka nu på den rätta platsen!"

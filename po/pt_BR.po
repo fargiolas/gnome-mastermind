@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-mastermind 0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-29 09:08+0200\n"
+"POT-Creation-Date: 2007-05-29 10:29+0200\n"
 "PO-Revision-Date: 2007-05-27 18:48-0300\n"
 "Last-Translator:  <leo.fontenelle@gmail.com>\n"
 "Language-Team: Brazilian Portuguese\n"
@@ -72,7 +72,7 @@ msgstr[1] ""
 "Você encontrou a solução com <b>%d</b> tentativas!\n"
 "Deseja jogar novamente?"
 
-#: ../src/gnome-mastermind.c:805
+#: ../src/gnome-mastermind.c:805 ../src/gnome-mastermind.c:841
 msgid "Play Again"
 msgstr "Jogar Novamente"
 
@@ -94,10 +94,6 @@ msgstr[1] ""
 "<span size=\"large\" weight=\"bold\">Desculpe-me, você perdeu!</span>\n"
 "Com apenas <b>%d</b> tentativas, você ainda não descobriu a solução?!\n"
 "Você deseja jogar novamente?"
-
-#: ../src/gnome-mastermind.c:841
-msgid "Play again"
-msgstr "Jogar Novamente"
 
 #: ../src/gnome-mastermind.c:845
 msgid "This was the right solution:"
@@ -259,3 +255,6 @@ msgstr "Quebre o código secreto!"
 #: ../desktop/gnome-mastermind.desktop.in.h:2
 msgid "Mastermind"
 msgstr "Senha"
+
+#~ msgid "Play again"
+#~ msgstr "Jogar Novamente"

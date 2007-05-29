@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-mastermind 0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-29 09:08+0200\n"
+"POT-Creation-Date: 2007-05-29 10:29+0200\n"
 "PO-Revision-Date: 2007-02-19 10:49+0100\n"
 "Last-Translator:  <pippolino@anche.no>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -72,7 +72,7 @@ msgstr[1] ""
 "Hai trovato la soluzione in <b>%d</b> tentativi!\n"
 "Vuoi giocare ancora?"
 
-#: ../src/gnome-mastermind.c:805
+#: ../src/gnome-mastermind.c:805 ../src/gnome-mastermind.c:841
 msgid "Play Again"
 msgstr "Gioca Ancora"
 
@@ -94,10 +94,6 @@ msgstr[1] ""
 "<span size=\"large\" weight=\"bold\">Mi dispiace, hai perso!</span>\n"
 "Dopo ben <b>%d</b> tentativi ancora non hai trovato la soluzione?!\n"
 "Vuoi giocare ancora?"
-
-#: ../src/gnome-mastermind.c:841
-msgid "Play again"
-msgstr "Gioca ancora"
 
 #: ../src/gnome-mastermind.c:845
 msgid "This was the right solution:"
@@ -259,6 +255,9 @@ msgstr "Scopri la combinazione di colori!"
 #: ../desktop/gnome-mastermind.desktop.in.h:2
 msgid "Mastermind"
 msgstr "Mastermind"
+
+#~ msgid "Play again"
+#~ msgstr "Gioca ancora"
 
 #~ msgid "Now click on the right place!"
 #~ msgstr "Ora clicca su una casella!"

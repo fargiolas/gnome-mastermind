@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-mastermind 0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-29 09:08+0200\n"
+"POT-Creation-Date: 2007-05-29 10:29+0200\n"
 "PO-Revision-Date: 2007-05-23 20:18+0100\n"
 "Last-Translator: ThiloPfennig <thilopfennig@foresightlinux.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -73,7 +73,7 @@ msgstr[1] ""
 "Sie haben die Lösung gefunden mit <b>%d</b> Versuchen!\n"
 "Möchten Sie noch einmal spielen?"
 
-#: ../src/gnome-mastermind.c:805
+#: ../src/gnome-mastermind.c:805 ../src/gnome-mastermind.c:841
 msgid "Play Again"
 msgstr "Noch einmal spielen"
 
@@ -97,10 +97,6 @@ msgstr[1] ""
 "span>\n"
 "Mit nur <b>%d</b> Versuchen haben Sie bisher keine Lösung gefunden?!\n"
 "Möchten Sie noch einmal spielen?"
-
-#: ../src/gnome-mastermind.c:841
-msgid "Play again"
-msgstr "Noch einmal spielen"
 
 #: ../src/gnome-mastermind.c:845
 msgid "This was the right solution:"
@@ -262,6 +258,9 @@ msgstr "Brechen Sie den verborgenen Code!"
 #: ../desktop/gnome-mastermind.desktop.in.h:2
 msgid "Mastermind"
 msgstr "Mastermind"
+
+#~ msgid "Play again"
+#~ msgstr "Noch einmal spielen"
 
 #~ msgid "Now click on the right place!"
 #~ msgstr "Nun klicken Sie auf den richtigen Ort!"
