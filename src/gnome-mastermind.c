@@ -274,9 +274,6 @@ toolbar_notify_func (GConfClient *client,
 	g_free(key);
 	
 	gtk_window_get_size (GTK_WINDOW (window), &cw, &ch);
-		gm_debug("OOOOOOOOO\n\n");
-	
-	gm_debug("%d taw\n",toolbar->allocation.height);
 	
 	vis = GTK_WIDGET_VISIBLE(toolbar);
 
@@ -1752,7 +1749,7 @@ static void about_action (void) {
 	gchar *authors[] = { "Filippo Argiolas <filippo.argiolas@gmail.com>", NULL };
 	gchar *artists[] = { 
 		"Filippo Argiolas <filippo.argiolas@gmail.com>, me ;)",
-		"Ulisse Perusin <uli.peru@gmail.com>, for that beautiful icon!", "and..",
+		"Ulisse Perusin <uli.peru@gmail.com>, for that beautiful icon and tango sets!", "Sean Wilson <suseux@gmail.com>, for the new fruity tileset","and..",
 		"..some other people for their hints and suggestions", 
 		"Isabella Piredda, grazie amore mio!", 
 		"Enrica Argiolas, my lil sister and beta tester", NULL };
