@@ -5,7 +5,8 @@ theme_DATA =	    \
 	simple-glossy.svg \
 	shapes.svg  \
 	star.svg    \
-	tango.svg  \
+	fruit.svg   \
+	tango.svg   \
 	tango-flat.svg 
 	
 EXTRA_DIST = $(theme_DATA)
