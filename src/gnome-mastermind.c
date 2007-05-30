@@ -266,6 +266,7 @@ toolbar_notify_func (GConfClient *client,
 	GConfValue *value;
 	gchar *key;
 	gint cw, ch;
+	gboolean vis = FALSE;
 
 	key = g_strdup ( gconf_entry_get_key (entry) );
 	value = gconf_entry_get_value (entry);
@@ -273,14 +274,17 @@ toolbar_notify_func (GConfClient *client,
 	g_free(key);
 	
 	gtk_window_get_size (GTK_WINDOW (window), &cw, &ch);
+		gm_debug("OOOOOOOOO\n\n");
 	
 	gm_debug("%d taw\n",toolbar->allocation.height);
+	
+	vis = GTK_WIDGET_VISIBLE(toolbar);
 
-	if (gc_show_toolbar) {
+	if (gc_show_toolbar && !vis) {
 		gtk_widget_show (toolbar);
 		ch += toolbar->allocation.height;
 	}
-	else {
+	else if (!gc_show_toolbar && vis) {
 		gtk_widget_hide (toolbar);
 		ch -= toolbar->allocation.height;
 	}
