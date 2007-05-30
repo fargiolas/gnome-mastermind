@@ -265,18 +265,27 @@ toolbar_notify_func (GConfClient *client,
 {
 	GConfValue *value;
 	gchar *key;
+	gint cw, ch;
 
 	key = g_strdup ( gconf_entry_get_key (entry) );
 	value = gconf_entry_get_value (entry);
 	gc_show_toolbar = gconf_value_get_bool (value);
 	g_free(key);
 	
-	if (gc_show_toolbar)
-		gtk_widget_show (toolbar);
-	else
-		gtk_widget_hide (toolbar);
+	gtk_window_get_size (GTK_WINDOW (window), &cw, &ch);
+	
+	gm_debug("%d taw\n",toolbar->allocation.height);
 
-	gtk_window_resize (GTK_WINDOW(window), 1, 1);
+	if (gc_show_toolbar) {
+		gtk_widget_show (toolbar);
+		ch += toolbar->allocation.height;
+	}
+	else {
+		gtk_widget_hide (toolbar);
+		ch -= toolbar->allocation.height;
+	}
+	
+	gtk_window_resize (GTK_WINDOW (window), cw, ch);
 }
 
 void init_gconf (void) {

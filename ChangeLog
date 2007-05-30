@@ -2,6 +2,7 @@
 	* themes/fruit.svg: Added new fruity tileset from Sean Wilson. Best
 	viewed at big size, it can be seen even by color-blind people since
 	each fruit has a different shape.
+	* src/gnome-mastermind.c: fixed resizing when showing/hiding toolbar.
 
 29 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
 	* themes/shapes.svg: Added new shape based tileset for color-blind
