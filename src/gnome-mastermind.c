@@ -4,7 +4,7 @@
  * GNOME Mastermind
  *
  * Authors:
- *  Filippo Argiolas <filippo.argiolas@gmail.com>  (2007)
+ *  Filippo Argiolas <filippo.argiolas@gmail.com>  (2008)
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -497,35 +497,36 @@ void draw_main_grid (GtkWidget *widget) {
 	
 	gdk_cairo_set_source_color (cr, &fgcolor);
 	cairo_set_antialias (cr, CAIRO_ANTIALIAS_NONE);
-	cairo_set_line_cap (cr, CAIRO_LINE_CAP_SQUARE);
-	cairo_set_line_join (cr, CAIRO_LINE_JOIN_MITER);
+//	cairo_set_line_cap (cr, CAIRO_LINE_CAP_SQUARE);
 	cairo_set_line_width (cr, 1);
 	for (i = 0; i <= GRID_COLS; i++) {
 		cairo_move_to (cr, 
-			       grid_xpad+grid_sz*i+1,
+			       grid_xpad+grid_sz*i,
 			       grid_ypad);
 		cairo_line_to (cr,
-			       grid_xpad+grid_sz*i+1,
+			       grid_xpad+grid_sz*i,
 			       grid_ypad+grid_sz*grid_rows);
 	}
 	for (i = 0; i <= 2; i++) {
 		cairo_move_to (cr,
-			       grid_xpad+grid_sz*(GRID_COLS+1)+grid_sz*i/2+1,
+			       grid_xpad+grid_sz*(GRID_COLS+1)+grid_sz*i/2,
 			       grid_ypad);
 		cairo_line_to (cr,
-			       grid_xpad+grid_sz* (GRID_COLS+1)+grid_sz*i/2+1,
+			       grid_xpad+grid_sz* (GRID_COLS+1)+grid_sz*i/2,
 			       grid_ypad+grid_sz*grid_rows);
 
 	}
+
+/* ci siamo la chiave sta tutta in quel 0.5!!!! */
 
 	cairo_stroke (cr);
 	cairo_set_line_width (cr, 2);
 	for (j = 0; j <= grid_rows; j++) {
 		cairo_move_to (cr, 
-			       grid_xpad+1,
+			       grid_xpad-0.5,
 			       grid_ypad+grid_sz*j);
 		cairo_line_to (cr,
-			       grid_xpad+grid_sz*GRID_COLS,
+			       grid_xpad+grid_sz*GRID_COLS+0.5,
 			       grid_ypad+grid_sz*j);
 
 			       }
@@ -537,10 +538,10 @@ void draw_main_grid (GtkWidget *widget) {
 		else
 			cairo_set_line_width (cr, 2);
 		cairo_move_to (cr, 
-			       grid_xpad+grid_sz* (GRID_COLS+1)+1,
+			       grid_xpad+grid_sz* (GRID_COLS+1)-0.5,
 			       grid_ypad+grid_sz*j/2);
 		cairo_line_to (cr,
-			       grid_xpad+grid_sz* (GRID_COLS+2),
+			       grid_xpad+grid_sz* (GRID_COLS+2)+0.5,
 			       grid_ypad+grid_sz*j/2);
 		cairo_stroke (cr);
 	}
@@ -548,8 +549,8 @@ void draw_main_grid (GtkWidget *widget) {
 
 	cairo_set_operator (cr, CAIRO_OPERATOR_XOR);
 	cairo_set_line_width (cr, 0);
-	cairo_rectangle (cr, grid_xpad+1, grid_ypad+1, grid_sz*GRID_COLS-1, grid_sz* (grid_rows)-2);
-	cairo_rectangle (cr, grid_xpad+grid_sz* (GRID_COLS+1)+1, grid_ypad+1, grid_sz-1, grid_sz* (grid_rows)-2);
+	cairo_rectangle (cr, grid_xpad+0.5, grid_ypad+1, grid_sz*GRID_COLS-1, grid_sz* (grid_rows)-2);
+	cairo_rectangle (cr, grid_xpad+grid_sz* (GRID_COLS+1)+0.5, grid_ypad+1, grid_sz-1, grid_sz* (grid_rows)-2);
 	cairo_set_source_rgba (cr, 1, 1, 1, 0.3);
 	cairo_fill (cr);
 	cairo_stroke (cr);
@@ -558,8 +559,8 @@ void draw_main_grid (GtkWidget *widget) {
 
 	cairo_set_operator (cr, CAIRO_OPERATOR_ADD);
 	cairo_set_line_width (cr, 0);
-	cairo_rectangle (cr, grid_xpad+1, grid_ypad+ (grid_sz* (grid_rows- (grid_rows-ypos)))+1, grid_sz*GRID_COLS-1, grid_sz-2);
-	cairo_rectangle (cr, grid_xpad+grid_sz* (GRID_COLS+1)+1, grid_ypad+ (grid_sz* (grid_rows- (grid_rows-ypos)))+1, grid_sz-1, grid_sz-2);
+	cairo_rectangle (cr, grid_xpad+0.5, grid_ypad+ (grid_sz* (grid_rows- (grid_rows-ypos)))+1, grid_sz*GRID_COLS-1, grid_sz-2);
+	cairo_rectangle (cr, grid_xpad+grid_sz* (GRID_COLS+1)+0.5, grid_ypad+ (grid_sz* (grid_rows- (grid_rows-ypos)))+1, grid_sz-1, grid_sz-2);
 	cairo_set_source_rgba (cr, 1, 1, 1, 0.35);
 	cairo_fill (cr);
 	cairo_stroke (cr); 
@@ -705,6 +706,7 @@ gboolean start_new_gameboard (GtkWidget *widget) {
 					 -1);
 
 		cr = gdk_cairo_create (pixmap);
+		cairo_set_antialias (cr, CAIRO_ANTIALIAS_NONE);
 
 		gdk_cairo_set_source_color (cr, &bgcolor);
 		cairo_rectangle (cr, 0, 0, widget->allocation.width, widget->allocation.height);
@@ -956,6 +958,7 @@ void draw_score_pegs (int line, int b, int c, GtkWidget *widget) {
 
 		g_object_unref (tmp);
 
+// anche qui?
 		x = grid_xpad + grid_sz * (GRID_COLS+1) + (grid_sz/2 * (i%2));
 
 		y = grid_ypad + grid_sz * line + ((int)i/2)*grid_sz/2;
@@ -978,34 +981,36 @@ void draw_score_pegs (int line, int b, int c, GtkWidget *widget) {
 static gboolean clean_next_row (void) {
 	cairo_t *cr;
 	cr = gdk_cairo_create (pixmap);
+	cairo_set_antialias (cr, CAIRO_ANTIALIAS_NONE);
 	cairo_set_operator (cr, CAIRO_OPERATOR_ADD);
 	cairo_set_line_width (cr, 0);
 	cairo_save (cr);
 	cairo_rectangle (cr, 
-			 grid_xpad+1,
+			 grid_xpad+0.5,
 			 grid_ypad+ (grid_sz* (grid_rows- (grid_rows-ypos+1)))+1,
 			 grid_sz*GRID_COLS-1,
 			 grid_sz-2);
 
-	rect.x = grid_xpad+1;
+	rect.x = grid_xpad;
 	rect.y = grid_ypad+ (grid_sz* (grid_rows- (grid_rows-ypos+1)))+1;
-	rect.width =  grid_sz*GRID_COLS-1;
+	rect.width =  grid_sz*GRID_COLS;
 	rect.height = grid_sz-2;
 
-	gdk_window_invalidate_rect (drawing_area->window, &rect, FALSE);
+	gdk_window_invalidate_rect (drawing_area->window, FALSE, FALSE);
 
 	cairo_rectangle (cr, 
-			 grid_xpad+grid_sz* (GRID_COLS+1)+1,
+			 grid_xpad+grid_sz* (GRID_COLS+1)+0.5,
 			 grid_ypad+ (grid_sz* (grid_rows- (grid_rows-ypos+1)))+1, 
-			 grid_sz-1, grid_sz-2);
+			 grid_sz-1, 
+			 grid_sz-2);
 	cairo_set_source_rgba (cr, 1, 1, 1, 0.35);
 	cairo_fill_preserve (cr);
 	cairo_stroke (cr); 
 	cairo_destroy (cr);
 
-	rect.x = grid_xpad+grid_sz* (GRID_COLS+1)+1;
+	rect.x = grid_xpad+grid_sz* (GRID_COLS+1);
 	rect.y = grid_ypad+ (grid_sz* (grid_rows- (grid_rows-ypos+1)))+1;
-	rect.width = grid_sz - 1;
+	rect.width = grid_sz;
 	rect.height = grid_sz - 2;
 
 	gdk_window_invalidate_rect (drawing_area->window, &rect, FALSE);
@@ -1764,7 +1769,7 @@ static void about_action (void) {
 				* address */
 			       "translator-credits", _("Filippo Argiolas <filippo.argiolas@gmail.com>"),
 			       "comments", _("A Mastermind clone for gnome"),
-			       "copyright", "gnome-mastermind, copyright (c) 2007 Filippo Argiolas\n"
+			       "copyright", "gnome-mastermind, copyright (c) 2008 Filippo Argiolas\n"
 			       "mastermind, copyright (c) 1971 Invicta Plastics, Ltd. UK",
 			       "version", VERSION,
 			       "logo-icon-name", "gnome-mastermind",

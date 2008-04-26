@@ -1,3 +1,17 @@
+26 Apr 2008  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* src/gnome-mastermind.c: so much time without a commit eh?
+	Fixed a annoying bug that affected grid drawing with recent cairo
+	versions (>= 1.5.8 ?). Note that old cairo versions were affected by
+	some issue when rendering with ANTIALIAS_NONE. So gnome-mastermind
+	will appear a little different with those ones (pegs will be placed
+	half-pixel uncentered to the right). AFAICT it is not my fault and I
+	couldn't find a way to fix this with both new and old cairo versions.
+	So consider switching to new cairo since this was a cairo issue and
+	cairo devs already fixed it in 1.5.8
+	I'll will not raise cairo dependency to that version since the game
+	is pretty usable even with that small issue.
+	* configure.ac: 0.3.1 bugfix release
+
 30 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
 	* themes/fruit.svg: Added new fruity tileset from Sean Wilson. Best
 	viewed at big size, it can be seen even by color-blind people since
