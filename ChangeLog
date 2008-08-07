@@ -1,3 +1,8 @@
+2008-08-07  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* MAINTAINERS: 
+	  first revision in gnome svn, adding MAINTAINERS file
+
 26 Apr 2008  Filippo Argiolas <filippo.argiolas@gmail.com>
 	* src/gnome-mastermind.c: so much time without a commit eh?
 	Fixed a annoying bug that affected grid drawing with recent cairo
