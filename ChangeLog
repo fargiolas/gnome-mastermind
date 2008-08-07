@@ -1,5 +1,12 @@
 2008-08-07  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* aclocal.m4,
+	  config.status.lineno,
+	  help/Makefile.in: 
+	  remove unneeded files from vc
+
+2008-08-07  Filippo Argiolas <filippo.argiolas@gmail.com>
+
 	* MAINTAINERS: 
 	  first revision in gnome svn, adding MAINTAINERS file
 
