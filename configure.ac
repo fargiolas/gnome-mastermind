@@ -77,6 +77,8 @@ AC_SUBST([GM_DEFINES])
 dnl CFLAGS
 CFLAGS="$CFLAGS -Wall -pedantic -std=c99 -fno-strict-aliasing -fmessage-length=0 -D_FORTIFY_SOURCE=2"
 
+AM_PROG_CC_C_O
+
 #AM_GNU_GETTEXT
 #AM_GNU_GETTEXT_VERSION([0.16.1])
 AC_PROG_INTLTOOL([0.23])
