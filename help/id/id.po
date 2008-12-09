@@ -1,0 +1,399 @@
+# Andika Triwidada <andika@gmail.com>, 2007
+# 
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome mastermind 0.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-05-24 02:38+0700\n"
+"PO-Revision-Date: 2007-06-05 08:02+0700\n"
+"Last-Translator: Andika Triwidada <andika@gmail.com>\n"
+"Language-Team: Indonesian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/gnome-mastermind.xml:207(None) 
+msgid "@@image: 'figures/mainwindow.png'; md5=1c430515dc21f1ce6797ad8e4cf3f595"
+msgstr "@@image: 'figures/mainwindow.png'; md5=1c430515dc21f1ce6797ad8e4cf3f595"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/gnome-mastermind.xml:333(None) 
+msgid "@@image: 'figures/row1.png'; md5=a49c9713912c1336db7acd1470913549"
+msgstr "@@image: 'figures/row1.png'; md5=a49c9713912c1336db7acd1470913549"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/gnome-mastermind.xml:355(None) 
+msgid "@@image: 'figures/row2.png'; md5=960e50a21f39d51f52117d1db1c71b99"
+msgstr "@@image: 'figures/row2.png'; md5=960e50a21f39d51f52117d1db1c71b99"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/gnome-mastermind.xml:377(None) 
+msgid "@@image: 'figures/row3.png'; md5=84989ae0869e980e2f27bf849abfba5c"
+msgstr "@@image: 'figures/row3.png'; md5=84989ae0869e980e2f27bf849abfba5c"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/gnome-mastermind.xml:399(None) 
+msgid "@@image: 'figures/row4.png'; md5=014a173d1e4e93527536e4fab6aa9c53"
+msgstr "@@image: 'figures/row4.png'; md5=014a173d1e4e93527536e4fab6aa9c53"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/gnome-mastermind.xml:421(None) 
+msgid "@@image: 'figures/row5.png'; md5=7c5b3fd5673b3bb20581695afbb627b1"
+msgstr "@@image: 'figures/row5.png'; md5=7c5b3fd5673b3bb20581695afbb627b1"
+
+#: C/gnome-mastermind.xml:40(title) 
+msgid "<application>GNOME Mastermind</application> Manual"
+msgstr "Manual <application>GNOME Mastermind</application>"
+
+#: C/gnome-mastermind.xml:42(para) 
+msgid "<application>GNOME Mastermind</application> is a <trademark class=\"trade\">Mastermind</trademark> like game for GNOME Desktop."
+msgstr "<application>GNOME Mastermind</application> adalah sebuah permainan serupa <trademark class=\"trade\">Mastermind</trademark> untuk Desktop GNOME."
+
+#: C/gnome-mastermind.xml:47(year) 
+msgid "2007"
+msgstr "2007"
+
+#: C/gnome-mastermind.xml:48(holder) C/gnome-mastermind.xml:53(publishername) C/gnome-mastermind.xml:71(corpauthor) C/gnome-mastermind.xml:93(para) C/gnome-mastermind.xml:97(para) 
+msgid "Filippo Argiolas"
+msgstr "Filippo Argiolas"
+
+#: C/gnome-mastermind.xml:63(firstname) 
+msgid "Filippo"
+msgstr "Filippo"
+
+#: C/gnome-mastermind.xml:64(surname) 
+msgid "Argiolas"
+msgstr "Argiolas"
+
+#: C/gnome-mastermind.xml:67(email) 
+msgid "filippo.argiolas@gmail.com&gt;"
+msgstr "filippo.argiolas@gmail.com&gt;"
+
+#: C/gnome-mastermind.xml:90(revnumber) 
+msgid "GNOME Mastermind Manual V0.2"
+msgstr "Manual GNOME Mastermind V0.3"
+
+#: C/gnome-mastermind.xml:102(releaseinfo) 
+msgid "This manual describes version 0.3 of GNOME Mastermind."
+msgstr "Manual ini menjelaskan GNOME Mastermind versi 0.3."
+
+#: C/gnome-mastermind.xml:105(title) 
+msgid "Feedback"
+msgstr "Umpan balik"
+
+#: C/gnome-mastermind.xml:106(para) C/gnome-mastermind.xml:463(para) 
+msgid "Please report any bug at <ulink url=\"https://gna.org/bugs/?func=additem&amp;group=gnome-mastermind\">Bug tracker at gna.org</ulink> or sign-up to the public mailing-list listed in the project homepage to give us feedback."
+msgstr "Mohon laporkan bug ke <ulink url=\"https://gna.org/bugs/?func=additem&amp;group=gnome-mastermind\">Bug tracker at gna.org</ulink> atau mendaftar ke milis publik yang tercantum di halaman web projek untuk memberikan masukan ke kami."
+
+#: C/gnome-mastermind.xml:126(title) 
+msgid "Introduction"
+msgstr "Perkenalan"
+
+#: C/gnome-mastermind.xml:128(title) 
+msgid "The Game"
+msgstr "Permainan"
+
+#: C/gnome-mastermind.xml:129(para) 
+msgid "At first here's a brief introduction about the classic game that this one resembles (source: wikipedia)."
+msgstr "Pada awalnya inilah pengenalan singkat tentang permainan klasis yang ditiru oleh ini (sumber: wikipedia)."
+
+#: C/gnome-mastermind.xml:133(para) 
+msgid "<trademark class=\"trade\">Mastermind</trademark> is a code-breaking game for two players, invented in 1970 by Mordecai Meirowitz, that has been very popular during the 80s."
+msgstr "<trademark class=\"trade\">Mastermind</trademark> adalah permainan pemecahan kode untuk dua pemain, diciptakan pada tahun 1970 oleh Mordecai Meirowitz, yang telah sangat populer pada tahun 80an."
+
+#: C/gnome-mastermind.xml:139(para) 
+msgid "The game is played by 2 players: the <emphasis>codemaker</emphasis> and the <emphasis>codebreaker</emphasis>. The codemaker, places in its side of the board (hidden from the other), a combination of 4 colors. The codebreaker has to guess that pattern (both order and colors) with the least number of tries. At each turn (12 in the most common version), the codebreaker tries a pattern and the codemaker gives him feedback placing a white peg for each right color with wrong position and a colored peg for each both color and position right item of the combination guessed, in the score grid."
+msgstr "Permainan ini dimainkan oleh 2 pihak: <emphasis>pembuat kode</emphasis> dan <emphasis>pemecah kode</emphasis>. Pembuat kode, meletakkan sebuah kombinasi dari 4 warna di sisinya (tersembunyi dari lawannya). Pemecah kode harus menebak pola tersebut (baik urutan maupun warna) dengan coba-coba sesedikit mungkin. Pada setiap giliran (12 pada versi paling umum), pemecah kode mencoba sebuah pola dan pembuat kode memberikan masukan dengan menempatkan sebuah peg putih bagis setiap warna yang benar dengan posisi salah dan peg berwarna untuk setiap item yang warna dan posisinya ditebak dengan tepat, pada grid skor."
+
+#: C/gnome-mastermind.xml:153(para) 
+msgid "Once he got feedback, the codebreaker tries another guess following codemaker hints. Obviously the game is won by codemaker if the codebreaker fails every guess."
+msgstr "Sekali dia memperoleh masukan, pemecah kode mencoba tebakan lain dengan mengikuti petunjuk pembuat kode. Jelas bahwa permainan dimenangkan oleh pembuat kode bila pemecah kode gagal dalam setiap tebakan."
+
+#: C/gnome-mastermind.xml:160(title) 
+msgid "This Game"
+msgstr "Permainan Ini"
+
+#: C/gnome-mastermind.xml:161(para) 
+msgid "<application>GNOME Mastermind</application> is a solitaire version that resembles the classic game. The codemaker role is taken by computer."
+msgstr "<application>GNOME Mastermind</application> adalah versi bermain sendiri yang mirip dengan permainan klasik. Peran pembuat kode diambil oleh komputer."
+
+#: C/gnome-mastermind.xml:165(para) 
+msgid "The player has to guess a four color combination (note that each color can be repeated). Computer prints (with default theme selected) a red peg for each right color in the right position and a white peg for each right color misplaced."
+msgstr "Pemain harus menebak suatu kombinasi empat warna (perhatikan bahwa tiap warna boleh diulang). Komputer mencetak (dengan tema default yang dipilih) sebuah peg merah bagi setiap warna yang benar pada posisi yang benar dan peg putih bagi setiap warna benar yang salah posisi."
+
+#: C/gnome-mastermind.xml:173(title) 
+msgid "Getting Started"
+msgstr "Memulai"
+
+#: C/gnome-mastermind.xml:174(para) 
+msgid "You can start <application>GNOME Mastermind</application> in the following ways:"
+msgstr "Anda dapat memulai <application>GNOME Mastermind</application> dengan cara berikut:"
+
+#: C/gnome-mastermind.xml:178(term) 
+msgid "From <guimenu>Applications</guimenu> menu,"
+msgstr "Dari menu <guimenu>Aplikasi</guimenu>,"
+
+#: C/gnome-mastermind.xml:180(para) 
+msgid "Choose <menuchoice><guisubmenu>Games</guisubmenu><guimenuitem>Mastermind</guimenuitem></menuchoice>."
+msgstr "Pilih <menuchoice><guisubmenu>Permainan</guisubmenu><guimenuitem>Mastermind</guimenuitem></menuchoice>."
+
+#: C/gnome-mastermind.xml:188(term) 
+msgid "Command line"
+msgstr "Baris perintah"
+
+#: C/gnome-mastermind.xml:190(para) 
+msgid "To start <application>GNOME Mastermind</application> from a command line, type the following command, then press <keycap>Return</keycap>:"
+msgstr "Untuk memulai <application>GNOME Mastermind</application> dari baris perintah, ketikkan perintah berikut lalu tekan <keycap>Return</keycap>:"
+
+#: C/gnome-mastermind.xml:193(command) 
+msgid "gnome-mastermind"
+msgstr "gnome-mastermind"
+
+#: C/gnome-mastermind.xml:199(para) 
+msgid "Here follows a screenshot of <application>GNOME Mastermind</application>, typical play session"
+msgstr "Berikut adalah screenshot dari <application>GNOME Mastermind</application>, sesi permainan biasa"
+
+#: C/gnome-mastermind.xml:203(title) 
+msgid "<application>GNOME Mastermind</application> Start Up Window"
+msgstr "<application>GNOME Mastermind</application> Start Up Window"
+
+#: C/gnome-mastermind.xml:216(phrase) 
+msgid "Shows <application>GNOME Mastermind</application> main window. Contains titlebar, menubar, toolbar, display area, and scrollbars. Menubar contains File, View, Settings, and Help menus."
+msgstr "Menampilkan jendela utama <application>GNOME Mastermind</application>. Memuat kotak judul, kotak menu, kotak peralatan, wilayah penampilan, dan kotak penggeser. Kotak menu memuat menu Berkas, Tampil, Pengaturan, dan Bantuan."
+
+#. for example, the items on the menubar and on the toolbar. This section is optional.
+#: C/gnome-mastermind.xml:227(para) 
+msgid "At first let's investigate on the game interface. From top to bottom:"
+msgstr "Pertama mari kita periksa antar muka permainan. Dari puncak ke dasar:"
+
+#: C/gnome-mastermind.xml:231(term) 
+msgid "Menubar."
+msgstr "Menubar."
+
+#: C/gnome-mastermind.xml:233(para) 
+msgid "The menus on the menubar contain all of the commands you need to work with <application>GNOME Mastermind</application>."
+msgstr "Menu pada kotak peralatan memuat semua perintah yang anda perlukan untuk bekerja dengan <application>GNOME Mastermind</application>."
+
+#: C/gnome-mastermind.xml:238(term) 
+msgid "Toolbar."
+msgstr "Toolbar."
+
+#: C/gnome-mastermind.xml:240(para) 
+msgid "The toolbar contains a subset of the commands that you usually will access more often."
+msgstr "Kotak peralatam memuat sebagian perintah yang biasanya lebih sering anda pakai."
+
+#: C/gnome-mastermind.xml:244(term) 
+msgid "Main game area."
+msgstr "Ruang permainan utama."
+
+#: C/gnome-mastermind.xml:246(para) 
+msgid "From left to right you can see main grid where pegs are placed, and score grid where computer gives us feedback"
+msgstr "Dari kiri ke kanan anda dapat melihat grid utama dimana peg ditempatkan, dan grid nilai dimana komputer memberi kita umpan balik"
+
+#: C/gnome-mastermind.xml:251(term) 
+msgid "Tray area."
+msgstr "Ruang baki."
+
+#: C/gnome-mastermind.xml:253(para) 
+msgid "That's the colored pegs tray. Click here with first mouse button to select a ball. Click then in a main grid active cell to place the peg."
+msgstr "Itu adalah baki peg berwarna. Klik disini dengan tombol tetikus pertama untuk memilih bola. Lalu klik di sebuah sel aktif grid utama untuk menempatkan peg."
+
+#: C/gnome-mastermind.xml:256(para) 
+msgid "Middle click on a peg in the tray area places it in the first available cell."
+msgstr "Klik tengah pada peg di wilayah baki menempatkannya pada sel pertama yang tersedia."
+
+#: C/gnome-mastermind.xml:262(title) 
+msgid "Shortcuts"
+msgstr "Shortcut"
+
+#: C/gnome-mastermind.xml:266(guilabel) 
+msgid "First button click"
+msgstr "Klik tombol pertama"
+
+#: C/gnome-mastermind.xml:267(para) 
+msgid "Select peg if done in tray area. Place it if done in main grid cells."
+msgstr "Pilih peg bila anda telah selesai di wilayah baki. Tempatkan dia ketika selesai di sel grid utama."
+
+#: C/gnome-mastermind.xml:272(guilabel) 
+msgid "First button Drag and Drop"
+msgstr "Seret dan Taruh tombol pertama"
+
+#: C/gnome-mastermind.xml:273(para) 
+msgid "Place peg moving it from the tray area to an active cell."
+msgstr "Menempatkan peg memindahkannya dari wilayah baki ke suatu sel aktif."
+
+#: C/gnome-mastermind.xml:276(para) 
+msgid "<guilabel>First button double click</guilabel> or <guilabel>Middle button single click</guilabel>"
+msgstr "<guilabel>Klik ganda tombol pertama</guilabel> atau <guilabel>Klik tunggal tombol tengah</guilabel>"
+
+#: C/gnome-mastermind.xml:279(para) 
+msgid "Available only in tray area, place ball to first free active cell."
+msgstr "Hanya tersedia di wilayah baki, tempatkan bola ke sel aktif bebas pertama."
+
+#: C/gnome-mastermind.xml:284(guilabel) 
+msgid "Ctrl + Z"
+msgstr "Ctrl + Z"
+
+#: C/gnome-mastermind.xml:285(para) 
+msgid "Undo last move."
+msgstr "Batalkan langkah terakhir."
+
+#: C/gnome-mastermind.xml:289(guilabel) 
+msgid "Shift + Ctrl + Z"
+msgstr "Shift + Ctrl + Z"
+
+#: C/gnome-mastermind.xml:290(para) 
+msgid "Repeat last undone move."
+msgstr "Ulangi langkah terakhir yang dibatalkan."
+
+#: C/gnome-mastermind.xml:294(guilabel) 
+msgid "Ctrl + N"
+msgstr "Ctrl + N"
+
+#: C/gnome-mastermind.xml:295(para) 
+msgid "Start a new game."
+msgstr "Memulai permainan baru."
+
+#: C/gnome-mastermind.xml:299(guilabel) 
+msgid "Ctrl + Q"
+msgstr "Ctrl + Q"
+
+#: C/gnome-mastermind.xml:300(para) 
+msgid "Quit game window."
+msgstr "Keluar dari jendela permainan."
+
+#: C/gnome-mastermind.xml:304(guilabel) 
+msgid "Ctrl + P"
+msgstr "Ctrl + P"
+
+#: C/gnome-mastermind.xml:305(para) 
+msgid "Open preferences dialog."
+msgstr "Buka dialog preferensi."
+
+#: C/gnome-mastermind.xml:309(guilabel) 
+msgid "F1"
+msgstr "F1"
+
+#: C/gnome-mastermind.xml:310(para) 
+msgid "Show this manual."
+msgstr "Tampilkan manual ini."
+
+#: C/gnome-mastermind.xml:316(para) 
+msgid "You can also place pegs <emphasis>over</emphasis> already placed pegs (on the current row)."
+msgstr "Anda juga dapat menempatkan peg <emphasis>di atas</emphasis> peg yang telah ditempatkan "
+"(pada baris kini)."
+
+#: C/gnome-mastermind.xml:319(para) 
+msgid "Placing the last peg of a row starts current guess validation (with no chance to undo or replace it) so be careful if you are not sure."
+msgstr "Menempatkan peg terakhir pada suatu baris mengawali validasi tebakan kini (tanpa kesempatan untuk membatalkan atau menggantinya) maka berhati-hatilah bila anda tidak yakin."
+
+#: C/gnome-mastermind.xml:325(title) 
+msgid "Walk through a game session"
+msgstr "Walk trough suatu sesi permainan"
+
+#: C/gnome-mastermind.xml:326(para) 
+msgid "Let's now take a look at the previous session screen step by step:"
+msgstr "Mari kita lihat layar sesi sebelumnya selangkah demi selangkah:"
+
+#: C/gnome-mastermind.xml:329(title) 
+msgid "<application>GNOME Mastermind</application> First row"
+msgstr "<application>GNOME Mastermind</application> Baris pertama"
+
+#: C/gnome-mastermind.xml:342(phrase) 
+msgid "First row"
+msgstr "Baris pertama"
+
+#. ==== End of Figure ====
+#: C/gnome-mastermind.xml:348(para) 
+msgid "This is the first guess. As you can see the score grid is empty because no right peg has been chosen."
+msgstr "Ini adalah tebakan pertama. Seperti dapat anda lihat, grid nilai kosong karena tidak ada peg kanan yang telah dipilih."
+
+#: C/gnome-mastermind.xml:351(title) 
+msgid "<application>GNOME Mastermind</application> Second row"
+msgstr "<application>GNOME Mastermind</application> Baris kedua"
+
+#: C/gnome-mastermind.xml:364(phrase) 
+msgid "Second row"
+msgstr "Baris kedua"
+
+#. ==== End of Figure ====
+#: C/gnome-mastermind.xml:370(para) 
+msgid "Here we have 3 white score pegs. It means that we catched 3 right colors but placed them in wrong order. We are following the good path."
+msgstr "Disini kita punya 3 peg nilai putih. Ini berarti bahwa kita menemukan 3 warna yang tepat tapi pada tempat yang salah. Kita mengikuti alur yang bagus."
+
+#: C/gnome-mastermind.xml:373(title) 
+msgid "<application>GNOME Mastermind</application> Third row"
+msgstr "<application>GNOME Mastermind</application> Baris ketiga"
+
+#: C/gnome-mastermind.xml:386(phrase) 
+msgid "Third row"
+msgstr "Baris ketiga"
+
+#. ==== End of Figure ====
+#: C/gnome-mastermind.xml:392(para) 
+msgid "Leaving the same color combination and changing order leads us to the solution. But we still have to understand which one is wrong!"
+msgstr "Membiarkan kombinasi warna yang sama dan mengganti urutan menuntun kita ke jawaban. Tapi kita masih harus memahami yang mana yang salah!"
+
+#: C/gnome-mastermind.xml:395(title) 
+msgid "<application>GNOME Mastermind</application> Fourth row"
+msgstr "<application>GNOME Mastermind</application> Baris keempat"
+
+#: C/gnome-mastermind.xml:408(phrase) 
+msgid "Fourth row"
+msgstr "Baris keempat"
+
+#. ==== End of Figure ====
+#: C/gnome-mastermind.xml:414(para) 
+msgid "Inserting a random color make a white score peg come out. Since we didn't change other color pegs order we've just found the missing color!"
+msgstr "Menyisipkan sebuah warna acak menyebabkan sebuah peg nilai putih keluar. Karena kita tidak mengganti urutan peg warna yang lain maka kita baru saja menemukan warna yang hilang!"
+
+#: C/gnome-mastermind.xml:417(title) 
+msgid "<application>GNOME Mastermind</application> Last row"
+msgstr "<application>GNOME Mastermind</application> Baris terakhir"
+
+#: C/gnome-mastermind.xml:430(phrase) 
+msgid "Last row"
+msgstr "Baris terakhir"
+
+#. ==== End of Figure ====
+#: C/gnome-mastermind.xml:436(para) 
+msgid "Yeah! Restoring removed peg and replacing another one with the new right color makes everything turn right. We won :D!"
+msgstr "Yeah! Mengembalikan peg yang dibuang dan mengganti satu lagi dengan warna baru yang benar membuat semuanya menjadi benar. Kita menang :D!"
+
+#: C/gnome-mastermind.xml:439(title) 
+msgid "Coming Soon"
+msgstr "Segera Hadir"
+
+#: C/gnome-mastermind.xml:440(para) 
+msgid "Next releases will hopefully contain a more detailed manual that better explains each settings in the preferences menu. It will also contain a simple guide to draw and submit new themes."
+msgstr "Rilis berikutnya semoga memuat manual yang lebih terinci yang menjelaskan lebih baik setiap pengaturan di menu preferensi. Itu juga akan memuat petunjuk sederhana untuk menggambar dan mengirimkan tema baru."
+
+#: C/gnome-mastermind.xml:455(title) 
+msgid "About <application>GNOME Mastermind</application>"
+msgstr "Tentang <application>GNOME Mastermind</application>"
+
+#: C/gnome-mastermind.xml:456(para) 
+msgid "<application>GNOME Mastermind</application> was written by Filippo Argiolas (<email>filippo.argiolas@gmail.com</email>). To find more information about <application>GNOME Mastermind</application>, please visit the <ulink url=\"http://www.autistici.org/gnome-mastermind\" type=\"http\"><application>GNOME Mastermind</application> webpage</ulink>."
+msgstr "<application>GNOME Mastermimd</application> ditulis oleh Filippo Argiolas (<email>filippo.argiolas@gmail.com</email>). Untuk memperoleh informasi tentang <application>GNOME Mastermind</application>, silahkan kunjungi <ulink url=\"http://www.autistici.org/gnome-mastermind\" type=\"http\">halaman web <application>GNOME Mastermind</application></ulink>."
+
+#: C/gnome-mastermind.xml:460(para) 
+msgid "For copyright issues check the about dialog and, most of all, copyright and copyright-artwork files in source tree or in the package data dir (usually /usr/share/gnome-mastermind)."
+msgstr "Untuk masalah hak cipta periksalah dialog ihwal dan, terutama, berkas-berkas hak cipta dan hak cipta artwork di pohon sumber atau di dir data paket (biasanya /usr/share/gnome-mastermind)."
+
+#: C/gnome-mastermind.xml:468(para) 
+msgid "This program is distributed under the terms of the GNU General Public license as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version. A <ulink url=\"ghelp:gpl\" type=\"help\">copy of this license</ulink> is included with this documentation; another can be found in the file COPYING included with the source code of this program."
+msgstr "Program ini didistribusikan di bawah syarat-syarat GNU General Public License sebagaimana dipublikasikan oleh Free Software Foundation; mungkin Lisensi versi 2, atau (sesuai pilihan anda) sebarang versi selanjutnya. Sebuah <ulink url=\"ghelp:gpl\" type=\"help\">salinan lisensi ini</ulink> disertakan dengan dokumentasi ini; lainnya dapat ditemukan pada berkas COPYING yang disertakan pada kode sumber program ini."
+
+#. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2.
+#: C/gnome-mastermind.xml:0(None) 
+msgid "translator-credits"
+msgstr "Andika Triwidada <andika@gmail.com>, 2007"
+
