@@ -5,7 +5,7 @@
          xmlns="http://usefulinc.com/ns/doap#">
 
   <name xml:lang="en">GNOME Mastermind</name>
-  <shortdesc xml:lang="en">Mastermind™ solitaire clone for GNOME</shortdesc>
+  <shortdesc xml:lang="en">Mastermind solitaire clone for GNOME</shortdesc>
   <homepage rdf:resource="http://www.autistici.org/gnome-mastermind" />
 
   <maintainer>
