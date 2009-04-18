@@ -1,0 +1,18 @@
+<Project xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:foaf="http://xmlns.com/foaf/0.1/"
+         xmlns:gnome="http://api.gnome.org/doap-extensions#"
+         xmlns="http://usefulinc.com/ns/doap#">
+
+  <name xml:lang="en">GNOME Mastermind</name>
+  <shortdesc xml:lang="en">Mastermind™ solitaire clone for GNOME</shortdesc>
+  <homepage rdf:resource="http://www.autistici.org/gnome-mastermind" />
+
+  <maintainer>
+    <foaf:Person>
+      <foaf:name>Filippo Argiolas</foaf:name>
+      <foaf:mbox rdf:resource="filippo.argiolas@gmail.com" />
+      <gnome:userid>fargiolas</gnome:userid>
+    </foaf:Person>
+  </maintainer>
+</Project>
