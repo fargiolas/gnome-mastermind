@@ -18,4 +18,5 @@ gnome_mastermind_CFLAGS = \
 	-D_XOPEN_SOURCE=600
 
 gnome_mastermind_SOURCES = \
+	gnome-mastermind.h \
 	gnome-mastermind.c 

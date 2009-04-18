@@ -32,17 +32,9 @@
 #include <gdk/gdkkeysyms.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gconf/gconf-client.h>
+#include <cairo/cairo.h>
 
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif /* HAVE_CONFIG_H */
-
-#ifdef ENABLE_NLS
-#include <glib/gi18n.h>
-#else /* !ENABLE_NLS */
-#define _(String) (String)
-#define N_(String) (String)
-#endif /* ENABLE__NLS */
+#include "gnome-mastermind.h"
 
 #define TRAY_ROWS 1
 #define TRAY_COLS 8

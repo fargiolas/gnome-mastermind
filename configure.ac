@@ -8,39 +8,18 @@ AC_CANONICAL_TARGET
 
 AM_INIT_AUTOMAKE([1.8])
 
-AC_CONFIG_HEADERS([config.h])
+AM_CONFIG_HEADER([config.h])
 
 dnl Check for C compiler
 AC_LANG([C])
+AC_PROG_CC
+AM_PROG_CC_STDC
 AC_ISC_POSIX
 
 dnl Checks for various programs
 AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
-
-dnl Various checks just so we're really sane checking (proposed by AzaToth)
-AC_C_VOLATILE
-
-AC_TYPE_MODE_T
-AC_TYPE_PID_T
-
-AC_CHECK_HEADERS([ctype.h fcntl.h math.h stdio.h errno.h])
-
-AC_CHECK_FUNCS([dup2])
-AC_CHECK_FUNCS([floor])
-AC_CHECK_FUNCS([mkdir])
-AC_CHECK_FUNCS([rmdir])
-AC_CHECK_FUNCS([strchr])
-AC_CHECK_FUNCS([strcspn])
-AC_CHECK_FUNCS([strncasecmp])
-AC_CHECK_FUNCS([strstr])
-AC_CHECK_FUNCS([strtol])
-
-AC_FUNC_FORK
-AC_FUNC_MALLOC
-AC_FUNC_REALLOC
-AC_FUNC_STAT
 
 dnl Next four lines is a hack to prevent libtool checking for C++/F77
 m4_undefine([AC_PROG_CXX])
@@ -52,6 +31,10 @@ dnl Libtool
 AC_DISABLE_STATIC
 AC_ENABLE_SHARED
 AC_PROG_LIBTOOL
+
+AM_MAINTAINER_MODE
+GNOME_MAINTAINER_MODE_DEFINES
+GNOME_COMPILE_WARNINGS
 
 dnl pkg-config
 PKG_PROG_PKG_CONFIG
@@ -70,7 +53,6 @@ PKG_CHECK_MODULES([GTK_DEP],
 	 gdk-pixbuf-2.0 >= 2.8.0])
 PKG_CHECK_MODULES([GCONF], [gconf-2.0 >= 2.0.0])
 
-dnl CLOCK defines
 GM_DEFINES='-DDATA_DIR="\"$(datadir)\"" -DPKGDATA_DIR="\"$(pkgdatadir)\""'
 AC_SUBST([GM_DEFINES])
 
@@ -93,8 +75,8 @@ AM_GLIB_GNU_GETTEXT
 gmlocaledir='${prefix}/${DATADIRNAME}/locale'
 AC_SUBST(gmlocaledir)
 
-ALL_LINGUAS="it pl fr sv de en_GB eu id ar pt_BR es"
-AC_SUBST(ALL_LINGUAS)
+#ALL_LINGUAS="it pl fr sv de en_GB eu id ar pt_BR es"
+#AC_SUBST(ALL_LINGUAS)
 
 GNOME_DOC_INIT
 
