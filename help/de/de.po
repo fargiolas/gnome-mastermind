@@ -1,0 +1,620 @@
+# German translation of the gnome-mastermind manual.
+# Mario Blättermann <mariobl@gnome.org>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-mastermind help\n"
+"POT-Creation-Date: 2009-09-30 22:05+0200\n"
+"PO-Revision-Date: 2009-09-30 22:30+0200\n"
+"Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
+"Language-Team: German <gnome-de@gnome.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/gnome-mastermind.xml:207(None)
+msgid "@@image: 'figures/mainwindow.png'; md5=1c430515dc21f1ce6797ad8e4cf3f595"
+msgstr ""
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/gnome-mastermind.xml:333(None)
+msgid "@@image: 'figures/row1.png'; md5=a49c9713912c1336db7acd1470913549"
+msgstr "a"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/gnome-mastermind.xml:355(None)
+msgid "@@image: 'figures/row2.png'; md5=960e50a21f39d51f52117d1db1c71b99"
+msgstr "a"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/gnome-mastermind.xml:377(None)
+msgid "@@image: 'figures/row3.png'; md5=84989ae0869e980e2f27bf849abfba5c"
+msgstr "a"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/gnome-mastermind.xml:399(None)
+msgid "@@image: 'figures/row4.png'; md5=014a173d1e4e93527536e4fab6aa9c53"
+msgstr "a"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/gnome-mastermind.xml:421(None)
+msgid "@@image: 'figures/row5.png'; md5=7c5b3fd5673b3bb20581695afbb627b1"
+msgstr "a"
+
+#: C/gnome-mastermind.xml:40(title)
+msgid "<application>GNOME Mastermind</application> Manual"
+msgstr "<application>GNOME Mastermind</application>-Handbuch"
+
+#: C/gnome-mastermind.xml:42(para)
+msgid ""
+"<application>GNOME Mastermind</application> is a <trademark class=\"trade"
+"\">Mastermind</trademark> like game for GNOME Desktop."
+msgstr ""
+"<application>GNOME Mastermind</application> ist ein <trademark class=\"trade"
+"\">Mastermind</trademark>-ähnliches Spiel für die GNOME-Arbeitsumgebung."
+
+#: C/gnome-mastermind.xml:47(year)
+msgid "2007"
+msgstr "2007"
+
+#: C/gnome-mastermind.xml:48(holder) C/gnome-mastermind.xml:53(publishername)
+#: C/gnome-mastermind.xml:71(corpauthor) C/gnome-mastermind.xml:93(para)
+#: C/gnome-mastermind.xml:97(para)
+msgid "Filippo Argiolas"
+msgstr "Filippo Argiolas"
+
+#: C/gnome-mastermind.xml:63(firstname)
+msgid "Filippo"
+msgstr "Filippo"
+
+#: C/gnome-mastermind.xml:64(surname)
+msgid "Argiolas"
+msgstr "Argiolas"
+
+#: C/gnome-mastermind.xml:67(email)
+msgid "filippo.argiolas@gmail.com&gt;"
+msgstr "filippo.argiolas@gmail.com&gt;"
+
+#: C/gnome-mastermind.xml:90(revnumber)
+msgid "GNOME Mastermind Manual V0.2"
+msgstr "GNOME Mastermind-Handbuch V0.2"
+
+#: C/gnome-mastermind.xml:102(releaseinfo)
+msgid "This manual describes version 0.3 of GNOME Mastermind."
+msgstr "Diese Handbuch beschreibt Version 0.3 von GNOME Mastermind."
+
+#: C/gnome-mastermind.xml:105(title)
+msgid "Feedback"
+msgstr "Rückmeldungen"
+
+#: C/gnome-mastermind.xml:106(para) C/gnome-mastermind.xml:463(para)
+msgid ""
+"Please report any bug at <ulink url=\"https://gna.org/bugs/?func=additem&amp;"
+"group=gnome-mastermind\">Bug tracker at gna.org</ulink> or sign-up to the "
+"public mailing-list listed in the project homepage to give us feedback."
+msgstr ""
+
+#: C/gnome-mastermind.xml:126(title)
+msgid "Introduction"
+msgstr "Einführung"
+
+#: C/gnome-mastermind.xml:128(title)
+msgid "The Game"
+msgstr "Das Spiel"
+
+#: C/gnome-mastermind.xml:129(para)
+msgid ""
+"At first here's a brief introduction about the classic game that this one "
+"resembles (source: wikipedia)."
+msgstr ""
+
+#: C/gnome-mastermind.xml:133(para)
+msgid ""
+"<trademark class=\"trade\">Mastermind</trademark> is a code-breaking game for "
+"two players, invented in 1970 by Mordecai Meirowitz, that has been very "
+"popular during the 80s."
+msgstr ""
+
+#: C/gnome-mastermind.xml:139(para)
+msgid ""
+"The game is played by 2 players: the <emphasis>codemaker</emphasis> and the "
+"<emphasis>codebreaker</emphasis>. The codemaker, places in its side of the "
+"board (hidden from the other), a combination of 4 colors. The codebreaker has "
+"to guess that pattern (both order and colors) with the least number of tries. "
+"At each turn (12 in the most common version), the codebreaker tries a pattern "
+"and the codemaker gives him feedback placing a white peg for each right color "
+"with wrong position and a colored peg for each both color and position right "
+"item of the combination guessed, in the score grid."
+msgstr ""
+
+#: C/gnome-mastermind.xml:153(para)
+msgid ""
+"Once he got feedback, the codebreaker tries another guess following codemaker "
+"hints. Obviously the game is won by codemaker if the codebreaker fails every "
+"guess."
+msgstr ""
+
+#: C/gnome-mastermind.xml:160(title)
+msgid "This Game"
+msgstr "Dieses Spiel"
+
+#: C/gnome-mastermind.xml:161(para)
+msgid ""
+"<application>GNOME Mastermind</application> is a solitaire version that "
+"resembles the classic game. The codemaker role is taken by computer."
+msgstr ""
+
+#: C/gnome-mastermind.xml:165(para)
+msgid ""
+"The player has to guess a four color combination (note that each color can be "
+"repeated). Computer prints (with default theme selected) a red peg for each "
+"right color in the right position and a white peg for each right color "
+"misplaced."
+msgstr ""
+
+#: C/gnome-mastermind.xml:173(title)
+msgid "Getting Started"
+msgstr "Erste Schritte"
+
+#: C/gnome-mastermind.xml:174(para)
+msgid ""
+"You can start <application>GNOME Mastermind</application> in the following "
+"ways:"
+msgstr ""
+"Sie können <application>GNOME Mastermind</application> auf folgende Arten "
+"starten:"
+
+#: C/gnome-mastermind.xml:178(term)
+msgid "From <guimenu>Applications</guimenu> menu,"
+msgstr "Aus dem <guimenu>Anwendungsmenü</guimenu>,"
+
+#: C/gnome-mastermind.xml:180(para)
+msgid ""
+"Choose <menuchoice><guisubmenu>Games</guisubmenu><guimenuitem>Mastermind</"
+"guimenuitem></menuchoice>."
+msgstr ""
+"Wählen Sie <menuchoice><guisubmenu>Spiele</"
+"guisubmenu><guimenuitem>Mastermind</guimenuitem></menuchoice>."
+
+#: C/gnome-mastermind.xml:188(term)
+msgid "Command line"
+msgstr "Befehlszeile"
+
+#: C/gnome-mastermind.xml:190(para)
+msgid ""
+"To start <application>GNOME Mastermind</application> from a command line, "
+"type the following command, then press <keycap>Return</keycap>:"
+msgstr ""
+"Zum Starten von <application>GNOME Mastermind</application> über die "
+"Befehlszeile geben Sie folgenden Befehl ein und bestätigen ihn mit der "
+"<keycap>Eingabetaste</keycap>:"
+
+#: C/gnome-mastermind.xml:193(command)
+msgid "gnome-mastermind"
+msgstr "gnome-mastermind"
+
+#: C/gnome-mastermind.xml:199(para)
+msgid ""
+"Here follows a screenshot of <application>GNOME Mastermind</application>, "
+"typical play session"
+msgstr ""
+"Hier ein Bildschirmfoto von <application>GNOME Mastermind</application> mit "
+"einem typischen Spiel"
+
+#: C/gnome-mastermind.xml:203(title)
+msgid "<application>GNOME Mastermind</application> Start Up Window"
+msgstr "Startfenster von <application>GNOME Mastermind</application>"
+
+#: C/gnome-mastermind.xml:216(phrase)
+msgid ""
+"Shows <application>GNOME Mastermind</application> main window. Contains "
+"titlebar, menubar, toolbar, display area, and scrollbars. Menubar contains "
+"File, View, Settings, and Help menus."
+msgstr ""
+"Zeigt das <application>GNOME Mastermind</application>-Hauptfenster. Enthält "
+"Titelleiste, Menüleiste, Werkzeugleiste, Anzeigebereich und Rollbalken. Die "
+"Menüleiste enthält die Menüs <guimenu>Datei</guimenu>, <guimenu>Ansicht</"
+"guimenu>, <guimenu>Einstellungen</guimenu> und <guimenu>Hilfe</guimenu>."
+
+#. for example, the items on the menubar and on the toolbar. This section is optional.
+#: C/gnome-mastermind.xml:227(para)
+msgid "At first let's investigate on the game interface. From top to bottom:"
+msgstr ""
+"Zunächst ein Blick auf die Benutzeroberfläche des Spiels. Von oben nach unten:"
+
+#: C/gnome-mastermind.xml:231(term)
+msgid "Menubar."
+msgstr "Menüleiste."
+
+#: C/gnome-mastermind.xml:233(para)
+msgid ""
+"The menus on the menubar contain all of the commands you need to work with "
+"<application>GNOME Mastermind</application>."
+msgstr ""
+"Die Menüs in der Menüleiste enthalten alle Befehle, die Sie für die Bedienung "
+"von <application>GNOME Mastermind</application> benötigen."
+
+#: C/gnome-mastermind.xml:238(term)
+msgid "Toolbar."
+msgstr "Werkzeugleiste."
+
+#: C/gnome-mastermind.xml:240(para)
+msgid ""
+"The toolbar contains a subset of the commands that you usually will access "
+"more often."
+msgstr ""
+"Die Werkzeugleiste enthält eine Auswahl an Befehlen, die Sie häufiger "
+"benötigen werden."
+
+#: C/gnome-mastermind.xml:244(term)
+msgid "Main game area."
+msgstr "Spielbereich."
+
+#: C/gnome-mastermind.xml:246(para)
+msgid ""
+"From left to right you can see main grid where pegs are placed, and score "
+"grid where computer gives us feedback"
+msgstr ""
+
+#: C/gnome-mastermind.xml:251(term)
+msgid "Tray area."
+msgstr "Informationsbereich."
+
+#: C/gnome-mastermind.xml:253(para)
+msgid ""
+"That's the colored pegs tray. Click here with first mouse button to select a "
+"ball. Click then in a main grid active cell to place the peg."
+msgstr ""
+
+#: C/gnome-mastermind.xml:256(para)
+msgid ""
+"Middle click on a peg in the tray area places it in the first available cell."
+msgstr ""
+
+#: C/gnome-mastermind.xml:262(title)
+msgid "Shortcuts"
+msgstr "Kürzel"
+
+#: C/gnome-mastermind.xml:266(guilabel)
+msgid "First button click"
+msgstr ""
+
+#: C/gnome-mastermind.xml:267(para)
+msgid "Select peg if done in tray area. Place it if done in main grid cells."
+msgstr ""
+
+#: C/gnome-mastermind.xml:272(guilabel)
+msgid "First button Drag and Drop"
+msgstr ""
+
+#: C/gnome-mastermind.xml:273(para)
+msgid "Place peg moving it from the tray area to an active cell."
+msgstr ""
+
+#: C/gnome-mastermind.xml:276(para)
+msgid ""
+"<guilabel>First button double click</guilabel> or <guilabel>Middle button "
+"single click</guilabel>"
+msgstr ""
+
+#: C/gnome-mastermind.xml:279(para)
+msgid "Available only in tray area, place ball to first free active cell."
+msgstr ""
+
+#: C/gnome-mastermind.xml:284(guilabel)
+msgid "Ctrl + Z"
+msgstr "Strg + Z"
+
+#: C/gnome-mastermind.xml:285(para)
+msgid "Undo last move."
+msgstr "Macht den letzten Zug rückgängig."
+
+#: C/gnome-mastermind.xml:289(guilabel)
+msgid "Shift + Ctrl + Z"
+msgstr "Umschalttaste + Strg + Z"
+
+#: C/gnome-mastermind.xml:290(para)
+msgid "Repeat last undone move."
+msgstr "Wiederholt den letzten rückgängig gemachten Zug."
+
+#: C/gnome-mastermind.xml:294(guilabel)
+msgid "Ctrl + N"
+msgstr "Strg + N"
+
+#: C/gnome-mastermind.xml:295(para)
+msgid "Start a new game."
+msgstr "Startet ein neues Spiel."
+
+#: C/gnome-mastermind.xml:299(guilabel)
+msgid "Ctrl + Q"
+msgstr "Strg + Q"
+
+#: C/gnome-mastermind.xml:300(para)
+msgid "Quit game window."
+msgstr "Beendet das Spiel und schließt das Fenster."
+
+#: C/gnome-mastermind.xml:304(guilabel)
+msgid "Ctrl + P"
+msgstr "Strg + P"
+
+#: C/gnome-mastermind.xml:305(para)
+msgid "Open preferences dialog."
+msgstr "Öffnet den Einstellungsdialog."
+
+#: C/gnome-mastermind.xml:309(guilabel)
+msgid "F1"
+msgstr "F1"
+
+#: C/gnome-mastermind.xml:310(para)
+msgid "Show this manual."
+msgstr "Zeigt dieses Handbuch an."
+
+#: C/gnome-mastermind.xml:316(para)
+msgid ""
+"You can also place pegs <emphasis>over</emphasis> already placed pegs (on the "
+"current row)."
+msgstr ""
+
+#: C/gnome-mastermind.xml:319(para)
+msgid ""
+"Placing the last peg of a row starts current guess validation (with no chance "
+"to undo or replace it) so be careful if you are not sure."
+msgstr ""
+
+#: C/gnome-mastermind.xml:325(title)
+msgid "Walk through a game session"
+msgstr ""
+
+#: C/gnome-mastermind.xml:326(para)
+msgid "Let's now take a look at the previous session screen step by step:"
+msgstr ""
+
+#: C/gnome-mastermind.xml:329(title)
+msgid "<application>GNOME Mastermind</application> First row"
+msgstr ""
+
+#: C/gnome-mastermind.xml:342(phrase)
+msgid "First row"
+msgstr ""
+
+#. ==== End of Figure ====
+#: C/gnome-mastermind.xml:348(para)
+msgid ""
+"This is the first guess. As you can see the score grid is empty because no "
+"right peg has been chosen."
+msgstr ""
+
+#: C/gnome-mastermind.xml:351(title)
+msgid "<application>GNOME Mastermind</application> Second row"
+msgstr ""
+
+#: C/gnome-mastermind.xml:364(phrase)
+msgid "Second row"
+msgstr ""
+
+#. ==== End of Figure ====
+#: C/gnome-mastermind.xml:370(para)
+msgid ""
+"Here we have 3 white score pegs. It means that we catched 3 right colors but "
+"placed them in wrong order. We are following the good path."
+msgstr ""
+
+#: C/gnome-mastermind.xml:373(title)
+msgid "<application>GNOME Mastermind</application> Third row"
+msgstr ""
+
+#: C/gnome-mastermind.xml:386(phrase)
+msgid "Third row"
+msgstr ""
+
+#. ==== End of Figure ====
+#: C/gnome-mastermind.xml:392(para)
+msgid ""
+"Leaving the same color combination and changing order leads us to the "
+"solution. But we still have to understand which one is wrong!"
+msgstr ""
+
+#: C/gnome-mastermind.xml:395(title)
+msgid "<application>GNOME Mastermind</application> Fourth row"
+msgstr ""
+
+#: C/gnome-mastermind.xml:408(phrase)
+msgid "Fourth row"
+msgstr ""
+
+#. ==== End of Figure ====
+#: C/gnome-mastermind.xml:414(para)
+msgid ""
+"Inserting a random color make a white score peg come out. Since we didn't "
+"change other color pegs order we've just found the missing color!"
+msgstr ""
+
+#: C/gnome-mastermind.xml:417(title)
+msgid "<application>GNOME Mastermind</application> Last row"
+msgstr ""
+
+#: C/gnome-mastermind.xml:430(phrase)
+msgid "Last row"
+msgstr ""
+
+#. ==== End of Figure ====
+#: C/gnome-mastermind.xml:436(para)
+msgid ""
+"Yeah! Restoring removed peg and replacing another one with the new right "
+"color makes everything turn right. We won :D!"
+msgstr ""
+
+#: C/gnome-mastermind.xml:439(title)
+msgid "Coming Soon"
+msgstr "Demnächst"
+
+#: C/gnome-mastermind.xml:440(para)
+msgid ""
+"Next releases will hopefully contain a more detailed manual that better "
+"explains each settings in the preferences menu. It will also contain a simple "
+"guide to draw and submit new themes."
+msgstr ""
+"Die nächsten Veröffentlichungen werden hoffentlich ein ausführlicheres "
+"Handbuch enthalten, welches die Anpassungsmöglichkeiten im Einstellungsmenü "
+"besser erklärt. Außerdem wird ein einfacher Leitfaden zum Erstellen und "
+"Veröffentlichen neuer Themen enthalten sein."
+
+#: C/gnome-mastermind.xml:455(title)
+msgid "About <application>GNOME Mastermind</application>"
+msgstr "Info zu <application>GNOME Mastermind</application>"
+
+#: C/gnome-mastermind.xml:456(para)
+msgid ""
+"<application>GNOME Mastermind</application> was written by Filippo Argiolas "
+"(<email>filippo.argiolas@gmail.com</email>). To find more information about "
+"<application>GNOME Mastermind</application>, please visit the <ulink url="
+"\"http://www.autistici.org/gnome-mastermind\" type=\"http"
+"\"><application>GNOME Mastermind</application> webpage</ulink>."
+msgstr ""
+"<application>GNOME Mastermind</application> wurde von Filippo Argiolas "
+"(<email>filippo.argiolas@gmail.com</email>) geschrieben. Weitere "
+"Informationen über <application>GNOME Mastermind</application> finden Sie auf "
+"der <ulink url=\"http://www.autistici.org/gnome-mastermind\" type=\"http"
+"\"><application>GNOME Mastermind</application>-Webseite</ulink>."
+
+#: C/gnome-mastermind.xml:460(para)
+msgid ""
+"For copyright issues check the about dialog and, most of all, copyright and "
+"copyright-artwork files in source tree or in the package data dir (usually /"
+"usr/share/gnome-mastermind)."
+msgstr ""
+
+#: C/gnome-mastermind.xml:468(para)
+msgid ""
+"This program is distributed under the terms of the GNU General Public license "
+"as published by the Free Software Foundation; either version 2 of the "
+"License, or (at your option) any later version. A <ulink url=\"ghelp:gpl\" "
+"type=\"help\">copy of this license</ulink> is included with this "
+"documentation; another can be found in the file COPYING included with the "
+"source code of this program."
+msgstr ""
+"Dieses Programm ist freie Software, Sie können sie weitergeben und/oder\n"
+" verändern solange Sie sich an die Regeln der GNU General Public License\n"
+" halten, so wie sie von der Free Software Foundation festgelegt wurden;\n"
+" entweder in Version 2 der Lizenz oder (nach Ihrem Ermessen) in jeder "
+"folgenden Lizenz. Eine <ulink url=\"ghelp:gpl\" type=\"help\">Kopie dieser "
+"Lizenz</ulink> ist mit dieser Dokumentation geliefert, eine weitere finden "
+"Sie in der Datei COPYING, die im Quellcode dieses Programms enthalten ist."
+
+#: C/legal.xml:2(para)
+msgid ""
+"Permission is granted to copy, distribute and/or modify this document under "
+"the terms of the GNU Free Documentation License (GFDL), Version 1.1 or any "
+"later version published by the Free Software Foundation with no Invariant "
+"Sections, no Front-Cover Texts, and no Back-Cover Texts. You can find a copy "
+"of the GFDL at this <ulink type=\"help\" url=\"ghelp:fdl\">link</ulink> or in "
+"the file COPYING-DOCS distributed with this manual."
+msgstr ""
+"Das vorliegende Dokument kann gemäß den Bedingungen der GNU Free "
+"Documentation License (GFDL), Version 1.1 oder jeder späteren, von der Free "
+"Software Foundation veröffentlichten Version ohne unveränderbare Abschnitte "
+"sowie ohne Texte auf dem vorderen und hinteren Buchdeckel kopiert, verteilt "
+"und/oder modifiziert werden. Eine Kopie der GFDL finden Sie unter diesem "
+"<ulink type=\"help\" url=\"ghelp:fdl\">Link</ulink> oder in der mit diesem "
+"Handbuch gelieferten Datei COPYING-DOCS."
+
+#: C/legal.xml:12(para)
+msgid ""
+"This manual is part of a collection of GNOME manuals distributed under the "
+"GFDL. If you want to distribute this manual separately from the collection, "
+"you can do so by adding a copy of the license to the manual, as described in "
+"section 6 of the license."
+msgstr ""
+"Das vorliegende Handbuch ist Teil einer Reihe von GNOME-Handbüchern, die "
+"unter der GFDL verteilt werden. Wenn Sie dieses Handbuch separat verteilen "
+"möchten, können Sie dies tun, indem Sie dem Handbuch eine Kopie der Lizenz, "
+"wie in Abschnitt 6 der Lizenz beschrieben, hinzufügen."
+
+#: C/legal.xml:19(para)
+msgid ""
+"Many of the names used by companies to distinguish their products and "
+"services are claimed as trademarks. Where those names appear in any GNOME "
+"documentation, and the members of the GNOME Documentation Project are made "
+"aware of those trademarks, then the names are in capital letters or initial "
+"capital letters."
+msgstr ""
+"Bei vielen der von Firmen zur Unterscheidung ihrer Produkte und "
+"Dienstleistungen verwendeten Namen handelt es sich um Marken. An den Stellen, "
+"an denen derartige Namen in einer GNOME-Dokumentation vorkommen und wenn die "
+"Mitglieder des GNOME Documentation Project über diese Marken informiert "
+"wurden, sind die Namen in Grossbuchstaben oder mit großen Anfangsbuchstaben "
+"geschrieben."
+
+#: C/legal.xml:35(para)
+msgid ""
+"DOCUMENT IS PROVIDED ON AN \"AS IS\" BASIS, WITHOUT WARRANTY OF ANY KIND, "
+"EITHER EXPRESSED OR IMPLIED, INCLUDING, WITHOUT LIMITATION, WARRANTIES THAT "
+"THE DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT IS FREE OF DEFECTS "
+"MERCHANTABLE, FIT FOR A PARTICULAR PURPOSE OR NON-INFRINGING. THE ENTIRE RISK "
+"AS TO THE QUALITY, ACCURACY, AND PERFORMANCE OF THE DOCUMENT OR MODIFIED "
+"VERSION OF THE DOCUMENT IS WITH YOU. SHOULD ANY DOCUMENT OR MODIFIED VERSION "
+"PROVE DEFECTIVE IN ANY RESPECT, YOU (NOT THE INITIAL WRITER, AUTHOR OR ANY "
+"CONTRIBUTOR) ASSUME THE COST OF ANY NECESSARY SERVICING, REPAIR OR "
+"CORRECTION. THIS DISCLAIMER OF WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS "
+"LICENSE. NO USE OF ANY DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT IS "
+"AUTHORIZED HEREUNDER EXCEPT UNDER THIS DISCLAIMER; AND UNDER NO CIRCUMSTANCES "
+"AND UNDER NO LEGAL THEORY, WHETHER IN TORT (INCLUDING NEGLIGENCE), CONTRACT, "
+"OR OTHERWISE, SHALL THE AUTHOR, INITIAL WRITER, ANY CONTRIBUTOR, OR ANY "
+"DISTRIBUTOR OF THE DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT, OR ANY "
+"SUPPLIER OF ANY OF SUCH PARTIES, BE LIABLE TO ANY PERSON FOR ANY DIRECT, "
+"INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES OF ANY CHARACTER "
+"INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF GOODWILL, WORK STOPPAGE, "
+"COMPUTER FAILURE OR MALFUNCTION, OR ANY AND ALL OTHER DAMAGES OR LOSSES "
+"ARISING OUT OF OR RELATING TO USE OF THE DOCUMENT AND MODIFIED VERSIONS OF "
+"THE DOCUMENT, EVEN IF SUCH PARTY SHALL HAVE BEEN INFORMED OF THE POSSIBILITY "
+"OF SUCH DAMAGES."
+msgstr ""
+"DAS DOKUMENT WIRD »WIE VORLIEGEND« GELIEFERT, OHNE JEGLICHE GEWÄHRLEISTUNG, "
+"WEDER AUSDRÜCKLICH NOCH STILLSCHWEIGEND, EINSCHLIESSLICH, ABER NICHT "
+"BESCHRÄNKT AUF, GEWÄHRLEISTUNGEN, DASS DAS DOKUMENT ODER EINE MODIFIZIERTE "
+"VERSION DES DOKUMENTS FREI VON HANDELSÜBLICHEN FEHLERN UND FÜR EINEN "
+"BESTIMMTEN ZWECK GEEIGNET IST UND KEINE RECHTE DRITTER VERLETZT. JEGLICHES "
+"RISIKO IN BEZUG AUF DIE QUALITÄT, GENAUIGKEIT UND LEISTUNG DES DOKUMENTS ODER "
+"EINER MODIFIZIERTEN VERSION DES DOKUMENTS TRAGEN SIE. SOLLTE SICH EIN "
+"DOKUMENT ODER EINE MODIFIZIERTE VERSION DAVON IN IRGENDEINER WEISE ALS "
+"FEHLERHAFT ERWEISEN, TRAGEN SIE (NICHT DER URSPRÜNGLICHE VERFASSER, AUTOR "
+"ODER EIN MITWIRKENDER) DIE KOSTEN FÜR JEGLICHE ERFORDERLICHE SERVICE-, "
+"REPARATUR- UND KORREKTURMASSNAHMEN: DIESE BESCHRÄNKUNG DER GEWÄHRLEISTUNG IST "
+"WESENTLICHER BESTANDTEIL DIESER LIZENZ. JEDE VERWENDUNG EINES DOKUMENTS ODER "
+"EINER MODIFIZIERTEN VERSION DES DOKUMENTS UNTERLIEGT DIESER BESCHRÄNKUNG; UND "
+"UNTER KEINEN UMSTÄNDEN UND GEMÄSS KEINER RECHTSLEHRE, WEDER AUFGRUND VON "
+"UNERLAUBTEN HANDLUNGEN (EINSCHLIESSLICH FAHRLÄSSIGKEIT), VERTRÄGEN ODER "
+"SONSTIGEM, KANN DER AUTOR, DER URSPRÜNGLICHE VERFASSER, EIN MITWIRKENDER ODER "
+"EIN VERTEILER DES DOKUMENTS ODER EINER MODIFIZIERTEN VERSION DES DOKUMENTS "
+"ODER EIN LIEFERANT EINER DIESER PARTEIEN VON EINER PERSON FÜR DIREKTE, "
+"INDIREKTE, BESONDERE, ZUFÄLLIGE ODER ALS FOLGE AUFGETRETENE SCHÄDEN "
+"IRGENDEINER ART, EINSCHLIESSLICH, ABER NICHT BESCHRÄNKT AUF, SCHÄDEN DURCH "
+"GESCHÄFTSWERTVERLUSTE, ARBEITSAUSFÄLLE, COMPUTERAUSFÄLLE ODER "
+"FUNKTIONSSTÖRUNGEN ODER JEGLICHE ANDERE SCHÄDEN ODER VERLUSTE, DIE DURCH ODER "
+"IM ZUSAMMENHANG MIT DER VERWENDUNG DES DOKUMENTS ODER EINER MODIFIZIERTEN "
+"VERSION DES DOKUMENTS ENTSTANDEN SIND, SELBST WENN DIESE PARTEI ÜBER MÖGLICHE "
+"SCHÄDEN INFORMIERT WORDEN SEIN SOLLTE, HAFTBAR GEMACHT WERDEN."
+
+#: C/legal.xml:28(para)
+msgid ""
+"DOCUMENT AND MODIFIED VERSIONS OF THE DOCUMENT ARE PROVIDED UNDER THE TERMS "
+"OF THE GNU FREE DOCUMENTATION LICENSE WITH THE FURTHER UNDERSTANDING THAT: "
+"<placeholder-1/>"
+msgstr ""
+"DAS DOKUMENT UND MODIFIZIERTE VERSIONEN DES DOKUMENTS WERDEN GEMÄSS DEN "
+"BEDINGUNGEN DER GNU FREE DOCUMENTATION LICENSE MIT DER FOLGENDEN VEREINBARUNG "
+"BEREITGESTELLT: <placeholder-1/>"
+
+#. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2
+#: C/legal.xml:0(None)
+msgid "translator-credits"
+msgstr "Mario Blättermann <mariobl@gnome.org>, 2009"
