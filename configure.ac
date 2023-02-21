@@ -78,7 +78,7 @@ AC_SUBST(gmlocaledir)
 #ALL_LINGUAS="it pl fr sv de en_GB eu id ar pt_BR es"
 #AC_SUBST(ALL_LINGUAS)
 
-GNOME_DOC_INIT
+YELP_HELP_INIT
 
 AC_CONFIG_FILES([  po/Makefile.in
     Makefile
