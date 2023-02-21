@@ -29,7 +29,6 @@
 #include <gdk/gdk.h>
 #include <gdk/gdkkeysyms.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
-#include <gconf/gconf-client.h>
 #include <cairo/cairo.h>
 
 #include "gnome-mastermind.h"
@@ -122,7 +121,7 @@ GdkColor fgcolor;
 GdkColor bgcolor;
 GdkColor savedcolor;
 
-GConfClient *settings;
+GSettings *settings;
 
 GtkWidget *pref_dialog;
 
@@ -144,29 +143,13 @@ gint gm_debug (const gchar *format, ...) {
   return 0;
 }
 
-void reset_default_settings (void) {
-  gconf_client_set_string (settings, "/apps/gnome-mastermind/theme", "simple.svg", NULL);
-/* gconf_client_set_int (settings, "/apps/gnome-mastermind/big_ball_size", 38, NULL);
-   gconf_client_set_int (settings, "/apps/gnome-mastermind/small_ball_size", 30, NULL); */
-  gconf_client_set_int (settings, "/apps/gnome-mastermind/maximum_tries", 10, NULL);
-	
-  gconf_client_set_bool (settings, "/apps/gnome-mastermind/gtkstyle_colors", TRUE, NULL);
-  gconf_client_set_string (settings, "/apps/gnome-mastermind/bgcolor", "#e4dfed", NULL);
-  gconf_client_set_string (settings, "/apps/gnome-mastermind/fgcolor", "#3d2b78", NULL);
-  gconf_client_set_bool (settings, "/apps/gnome-mastermind/show_toolbar", TRUE, NULL);
-}
-
-
 static void
-max_tries_notify_func (GConfClient *client,
-		       guint cnxn_id,
-		       GConfEntry *entry,
+max_tries_notify_func (GSettings *settings,
+		       gchar *key,
 		       gpointer user_data)
 {
-  GConfValue *value;
   GtkWidget *dialog;
-  value = gconf_entry_get_value (entry);
-  gc_max_tries = gconf_value_get_int (value);
+  gc_max_tries = g_settings_get_int (settings, key);
   if (gc_max_tries != grid_rows) {
     gm_debug ("maximum tries are changed to %d\n", gc_max_tries);
     dialog = gtk_message_dialog_new_with_markup (GTK_WINDOW (window),
@@ -192,15 +175,15 @@ max_tries_notify_func (GConfClient *client,
 }
 
 static void
-theme_notify_func (GConfClient *client,
-		   guint cnxn_id,
-		   GConfEntry *entry,
+theme_notify_func (GSettings *settings,
+		   gchar *key,
 		   gpointer user_data)
 {
   GtkWidget *dialog;
-  GConfValue *value;
-  value = gconf_entry_get_value (entry);
-  gc_theme = g_strdup_printf ("%s%s%s", PKGDATA_DIR, "/themes/", gconf_value_get_string (value));
+  gchar *value;
+  value = g_settings_get_string (settings, key);
+  gc_theme = g_strdup_printf ("%s%s%s", PKGDATA_DIR, "/themes/", value);
+  g_free (value);
   gm_debug ("theme changed\n");
 
   if (!g_file_test (gc_theme, G_FILE_TEST_EXISTS)) {
@@ -213,7 +196,8 @@ theme_notify_func (GConfClient *client,
 						   "Default theme will be loaded instead."), gc_theme);
     gtk_dialog_run (GTK_DIALOG (dialog));
     gtk_widget_destroy (dialog);
-    gconf_client_set_string (settings, "/apps/gnome-mastermind/theme", "simple.svg", NULL);
+    g_settings_set_string (settings, "theme", "simple.svg");
+    g_free (gc_theme);
     gc_theme = g_strdup_printf ("%s%s", PKGDATA_DIR, "/themes/simple.svg");
   }
 
@@ -224,23 +208,20 @@ theme_notify_func (GConfClient *client,
 }
 
 static void
-color_notify_func (GConfClient *client,
-		   guint cnxn_id,
-		   GConfEntry *entry,
+color_notify_func (GSettings *settings,
+		   gchar *key,
 		   gpointer user_data)
 {
-  GConfValue *value;
-  gchar *key;
-  key = g_strdup ( gconf_entry_get_key (entry) );
-  value = gconf_entry_get_value (entry);
-  if (!g_ascii_strcasecmp ("/apps/gnome-mastermind/bgcolor", key)) 
-    gc_bgcolor = g_strdup (gconf_value_get_string (value));
-  else if (!g_ascii_strcasecmp ("/apps/gnome-mastermind/fgcolor", key)) 
-    gc_fgcolor = g_strdup (gconf_value_get_string (value));
-  else if (!g_ascii_strcasecmp ("/apps/gnome-mastermind/gtkstyle_colors", key)) 
-    gc_gtkstyle_colors = gconf_value_get_bool (value);
-
-  g_free(key);
+  if (!g_ascii_strcasecmp ("bgcolor", key)) {
+    g_free (gc_bgcolor);
+    gc_bgcolor = g_settings_get_string (settings, key);
+  }
+  else if (!g_ascii_strcasecmp ("fgcolor", key)) {
+    g_free (gc_fgcolor);
+    gc_fgcolor = g_settings_get_string (settings, key);
+  }
+  else if (!g_ascii_strcasecmp ("gtkstyle-colors", key))
+    gc_gtkstyle_colors = g_settings_get_boolean (settings, key);
 
   old_xpos = xpos;
   old_ypos = ypos;
@@ -248,20 +229,14 @@ color_notify_func (GConfClient *client,
 }
 
 static void
-toolbar_notify_func (GConfClient *client,
-		     guint cnxn_id,
-		     GConfEntry *entry,
+toolbar_notify_func (GSettings *settings,
+		     gchar *key,
 		     gpointer user_data)
 {
-  GConfValue *value;
-  gchar *key;
   gint cw, ch;
   gboolean vis = FALSE;
 
-  key = g_strdup ( gconf_entry_get_key (entry) );
-  value = gconf_entry_get_value (entry);
-  gc_show_toolbar = gconf_value_get_bool (value);
-  g_free(key);
+  gc_show_toolbar = g_settings_get_boolean (settings, key);
 	
   gtk_window_get_size (GTK_WINDOW (window), &cw, &ch);
 	
@@ -284,69 +259,56 @@ void init_gconf (void) {
   gchar *tmp2;
   GtkWidget *dialog;
  
-  settings = gconf_client_get_default();
+  settings = g_settings_new ("org.fargiolas.gnome-mastermind");
 
-  if (gconf_client_dir_exists (settings, "/apps/gnome-mastermind", NULL)) {
-    gm_debug ("dir exists\n");
-    tmp = gconf_client_get_string (settings, "/apps/gnome-mastermind/theme", NULL);
-    tmp2 = g_strdup_printf ("%s%s%s", PKGDATA_DIR, "/themes/", tmp);
-    gm_debug ("checking %s\n", tmp2);
-    if (g_file_test (tmp2, G_FILE_TEST_EXISTS)) {
-      gm_debug ("seems to exist\n");
-      gc_theme = g_strdup (tmp2);
-    }
-    else { 
-      dialog = gtk_message_dialog_new_with_markup (GTK_WINDOW (window),
-						   GTK_DIALOG_DESTROY_WITH_PARENT,
-						   GTK_MESSAGE_WARNING,
-						   GTK_BUTTONS_OK,
-						   _("<span size=\"medium\" weight=\"bold\">Unable to load theme!</span>\n\n"
-						     "<i>'%s'</i> does not exist!!\n\n"
-						     "Default theme will be loaded instead."), tmp2);
-      gtk_dialog_run (GTK_DIALOG (dialog));
-      gtk_widget_destroy (dialog);
-      gconf_client_set_string (settings, "/apps/gnome-mastermind/theme", "simple.svg", NULL);
-      gc_theme = g_strdup_printf ("%s%s", PKGDATA_DIR, "/themes/simple.svg");
-    }
-    g_free (tmp);
-    g_free (tmp2);
-	 
-/*	 gc_small_size = gconf_client_get_int (settings, "/apps/gnome-mastermind/small_ball_size", NULL);
-	 gc_big_size = gconf_client_get_int (settings, "/apps/gnome-mastermind/big_ball_size", NULL); */
-    gc_max_tries = gconf_client_get_int (settings, "/apps/gnome-mastermind/maximum_tries", NULL);
-    gc_gtkstyle_colors = gconf_client_get_bool (settings, "/apps/gnome-mastermind/gtkstyle_colors", NULL);
-    gc_bgcolor = gconf_client_get_string (settings, "/apps/gnome-mastermind/bgcolor", NULL);
-    gc_fgcolor = gconf_client_get_string (settings, "/apps/gnome-mastermind/fgcolor", NULL);
-    gc_show_toolbar = gconf_client_get_bool (settings, "/apps/gnome-mastermind/show_toolbar", NULL);
-    gm_debug ("settings: \n");
-    gm_debug ("theme: %s\n", gc_theme);
-    gm_debug ("gc_max_tries: %d\n", gc_max_tries);
-    gm_debug ("gc_gtkstyle_colors: %d\n", gc_gtkstyle_colors);
-    gm_debug ("gc_fgcolor: %s\n", gc_fgcolor);
-    gm_debug ("gc_bgcolor: %s\n", gc_bgcolor);
-    gm_debug ("gc_show_toolbar: %d\n", gc_show_toolbar);
-    gconf_client_add_dir (settings,
-			  "/apps/gnome-mastermind",
-			  GCONF_CLIENT_PRELOAD_NONE,
-			  NULL);
-    gconf_client_notify_add (settings, "/apps/gnome-mastermind/maximum_tries",
-			     max_tries_notify_func, NULL, NULL, NULL);
-    gconf_client_notify_add (settings, "/apps/gnome-mastermind/theme",
-			     theme_notify_func, NULL, NULL, NULL);
-    gconf_client_notify_add (settings, "/apps/gnome-mastermind/gtkstyle_colors",
-			     color_notify_func, NULL, NULL, NULL);
-    gconf_client_notify_add (settings, "/apps/gnome-mastermind/bgcolor",
-			     color_notify_func, NULL, NULL, NULL);
-    gconf_client_notify_add (settings, "/apps/gnome-mastermind/fgcolor",
-			     color_notify_func, NULL, NULL, NULL);
-    gconf_client_notify_add (settings, "/apps/gnome-mastermind/show_toolbar",
-			     toolbar_notify_func, NULL, NULL, NULL);
+  tmp = g_settings_get_string (settings, "theme");
+  tmp2 = g_strdup_printf ("%s%s%s", PKGDATA_DIR, "/themes/", tmp);
+  gm_debug ("checking %s\n", tmp2);
+  if (g_file_test (tmp2, G_FILE_TEST_EXISTS)) {
+    gm_debug ("seems to exist\n");
+    gc_theme = g_strdup (tmp2);
   }
   else {
-    gm_debug ("dir not exists\n");
-    reset_default_settings();
-    init_gconf();
+    dialog = gtk_message_dialog_new_with_markup (GTK_WINDOW (window),
+							     GTK_DIALOG_DESTROY_WITH_PARENT,
+							     GTK_MESSAGE_WARNING,
+							     GTK_BUTTONS_OK,
+							     _("<span size=\"medium\" weight=\"bold\">Unable to load theme!</span>\n\n"
+							       "<i>'%s'</i> does not exist!!\n\n"
+							       "Default theme will be loaded instead."), tmp2);
+    gtk_dialog_run (GTK_DIALOG (dialog));
+    gtk_widget_destroy (dialog);
+    g_settings_set_string (settings, "theme", "simple.svg");
+    gc_theme = g_strdup_printf ("%s%s", PKGDATA_DIR, "/themes/simple.svg");
   }
+  g_free (tmp);
+  g_free (tmp2);
+/*	 gc_small_size = gconf_client_get_int (settings, "/apps/gnome-mastermind/small_ball_size", NULL);
+	 gc_big_size = gconf_client_get_int (settings, "/apps/gnome-mastermind/big_ball_size", NULL); */
+  gc_max_tries = g_settings_get_int (settings, "maximum-tries");
+  gc_gtkstyle_colors = g_settings_get_boolean (settings, "gtkstyle-colors");
+  gc_bgcolor = g_settings_get_string (settings, "bgcolor");
+  gc_fgcolor = g_settings_get_string (settings, "fgcolor");
+  gc_show_toolbar = g_settings_get_boolean (settings, "show-toolbar");
+  gm_debug ("settings: \n");
+  gm_debug ("theme: %s\n", gc_theme);
+  gm_debug ("gc_max_tries: %d\n", gc_max_tries);
+  gm_debug ("gc_gtkstyle_colors: %d\n", gc_gtkstyle_colors);
+  gm_debug ("gc_fgcolor: %s\n", gc_fgcolor);
+  gm_debug ("gc_bgcolor: %s\n", gc_bgcolor);
+  gm_debug ("gc_show_toolbar: %d\n", gc_show_toolbar);
+  g_signal_connect (settings, "changed::maximum-tries",
+			  G_CALLBACK (max_tries_notify_func), NULL);
+  g_signal_connect (settings, "changed::theme",
+			  G_CALLBACK (theme_notify_func), NULL);
+  g_signal_connect (settings, "changed::gtkstyle-colors",
+			  G_CALLBACK (color_notify_func), NULL);
+  g_signal_connect (settings, "changed::bgcolor",
+			  G_CALLBACK (color_notify_func), NULL);
+  g_signal_connect (settings, "changed::fgcolor",
+			  G_CALLBACK (color_notify_func), NULL);
+  g_signal_connect (settings, "changed::show-toolbar",
+			  G_CALLBACK (toolbar_notify_func), NULL);
 }
 
 gint * init_lastmove (void) {
@@ -1770,7 +1732,7 @@ static void theme_changed (GtkWidget *widget, void *data) {
   theme_item = g_list_nth (theme_list,
 			   gtk_combo_box_get_active (GTK_COMBO_BOX (widget)));
 
-  gconf_client_set_string (settings, "/apps/gnome-mastermind/theme", theme_item->data, NULL);
+  g_settings_set_string (settings, "theme", theme_item->data);
 }
 
 static void populate_theme_combo (GtkWidget *combo) {
@@ -1830,7 +1792,7 @@ static void use_style_toggled (GtkWidget *toggle, GtkWidget *table) {
   gboolean state;
   state = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (toggle));
   gtk_widget_set_sensitive (table, !state);
-  gconf_client_set_bool (settings, "/apps/gnome-mastermind/gtkstyle_colors", state, NULL);
+  g_settings_set_boolean (settings, "gtkstyle-colors", state);
 }
 
 static void fgcolorbutton_set (GtkWidget *widget, gpointer data) {
@@ -1841,7 +1803,8 @@ static void fgcolorbutton_set (GtkWidget *widget, gpointer data) {
 
   color_string = g_strdup_printf ("#%04x%04x%04x", color.red,
 				  color.green, color.blue);
-  gconf_client_set_string (settings, "/apps/gnome-mastermind/fgcolor", color_string, NULL);
+  g_settings_set_string (settings, "fgcolor", color_string);
+  g_free (color_string);
 }
 
 static void bgcolorbutton_set (GtkWidget *widget, gpointer data) {
@@ -1851,7 +1814,8 @@ static void bgcolorbutton_set (GtkWidget *widget, gpointer data) {
   gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &color);
   color_string = g_strdup_printf ("#%04x%04x%04x", color.red, color.green, color.blue);
 
-  gconf_client_set_string (settings, "/apps/gnome-mastermind/bgcolor", color_string, NULL);
+  g_settings_set_string (settings, "bgcolor", color_string);
+  g_free (color_string);
 }
 
 static void preferences_action (void){
@@ -2016,10 +1980,9 @@ static void preferences_action (void){
 
   gtk_dialog_run (GTK_DIALOG (pref_dialog));
 
-  gconf_client_set_int (settings, "/apps/gnome-mastermind/maximum_tries",
+  g_settings_set_int (settings, "maximum-tries",
 			gtk_spin_button_get_value (
-			  GTK_SPIN_BUTTON (max_tries_spin)),
-			NULL);
+			  GTK_SPIN_BUTTON (max_tries_spin)));
 
 /*
   else if (response == GTK_RESPONSE_YES) {
@@ -2087,7 +2050,7 @@ static void show_tb_callback (void) {
 	
   gm_debug ("gc_show_toolbar: %d state: %d\n", gc_show_toolbar, state);
  
-  gconf_client_set_bool (settings, "/apps/gnome-mastermind/show_toolbar", state , NULL);
+  g_settings_set_boolean (settings, "show-toolbar", state);
 }
 
 
@@ -2241,7 +2204,7 @@ int main ( int argc, char *argv[] )
 
   gtk_widget_show_all (window);
 
-  if (!gconf_client_get_bool (settings, "/apps/gnome-mastermind/show_toolbar", NULL)) 
+  if (!g_settings_get_boolean (settings, "show-toolbar"))
   {
     gtk_widget_hide (toolbar);
     gtk_window_resize (GTK_WINDOW(window), 1, 1);
