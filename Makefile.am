@@ -25,14 +25,7 @@ DISTCLEANFILES = \
 
 DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper
 
-pkgdata_DATA =  AUTHORS    \
-	   	BUGS       \
-	COPYING    \
-	copyright  \
-	copyright-artwork \
-	NEWS       \
-	README     \
-	TODO       
+doc_DATA = TODO
 
 ACLOCAL_AMFLAGS = -I m4
 
