@@ -16,7 +16,7 @@ A solitaire clone of the [Mastermind&trade; board game](https://en.wikipedia.org
 
 ## Contribute
 
-The project is quiteold and in great need of some fresh contributions! Patches, PR and bug reports more than welcome!
+The project is quite old and in great need of some fresh contributions! Patches, PR and bug reports more than welcome!
 
 ## Contacts
 
