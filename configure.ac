@@ -51,7 +51,8 @@ PKG_CHECK_MODULES([GTK_DEP],
          pango >= 1.10.0
 	 gdk-2.0 >= 2.8.0
 	 gdk-pixbuf-2.0 >= 2.8.0])
-PKG_CHECK_MODULES([GCONF], [gconf-2.0 >= 2.0.0])
+
+GLIB_GSETTINGS
 
 GM_DEFINES='-DDATA_DIR="\"$(datadir)\"" -DPKGDATA_DIR="\"$(pkgdatadir)\""'
 AC_SUBST([GM_DEFINES])
@@ -63,6 +64,7 @@ AM_PROG_CC_C_O
 
 #AM_GNU_GETTEXT
 #AM_GNU_GETTEXT_VERSION([0.16.1])
+AC_PROG_INTLTOOL([0.50.1])
 IT_PROG_INTLTOOL([0.35.0])
 
 AC_DEFINE([GETTEXT_PACKAGE], [], [gnome-mastermind])

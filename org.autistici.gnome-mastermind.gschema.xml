@@ -1,0 +1,33 @@
+<schemalist gettext-domain="gnome-mastermind">
+  <schema id="org.autistici.gnome-mastermind"
+          path="/org/autistici/gnome-mastermind/">
+    <key name="bgcolor" type="s">
+      <default>'#e4dfed'</default>
+      <summary>Background color</summary>
+    </key>
+    <key name="fgcolor" type="s">
+      <default>'#3d2b78'</default>
+      <summary>Foreground color</summary>
+    </key>
+    <key name="gtkstyle-colors" type="b">
+      <default>true</default>
+      <summary>Obtain colors from the GTK+ theme</summary>
+    </key>
+    <key name="maximum-tries" type="i">
+      <range min="2" max="14"/>
+      <default>10</default>
+      <summary>Number of tries to guess until the end of the
+      game</summary>
+      <description>Determines the number of rows in the game
+      window.</description>
+    </key>
+    <key name="show-toolbar" type="b">
+      <default>true</default>
+      <summary>Toolbar visibility</summary>
+    </key>
+    <key name="theme" type="s">
+      <default>'simple.svg'</default>
+      <summary>Theme to use</summary>
+    </key>
+  </schema>
+</schemalist>

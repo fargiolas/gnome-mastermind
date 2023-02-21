@@ -29,6 +29,10 @@ doc_DATA = TODO
 
 ACLOCAL_AMFLAGS = -I m4
 
+gsettings_SCHEMAS = org.autistici.gnome-mastermind.gschema.xml
+EXTRA_DIST += $(gsettings_SCHEMAS)
+@GSETTINGS_RULES@
+
 #autogenerate ChangeLog for distribution
 dist-hook:
 	@if test -d "$(srcdir)/.git"; \
