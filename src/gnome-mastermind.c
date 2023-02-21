@@ -49,9 +49,11 @@ GtkWidget *vbox; //main vbox
 
 GtkWidget *drawing_area = NULL;
 GtkWidget *toolbar;
-GtkAction *show_toolbar_action;
-GtkAction *undo_action;
-GtkAction *redo_action;
+GAction *new_action;
+GAction *quit;
+GAction *show_toolbar_action;
+GAction *undo_action;
+GAction *redo_action;
 
 gboolean gm_debug_on;
 
@@ -92,8 +94,6 @@ gboolean gc_show_toolbar = TRUE;
 
 gint confcount = 0;
 
-guint timeout_id = 0;
-
 gint movecount;
 
 gint **movearray = NULL;
@@ -104,10 +104,10 @@ GList *current = NULL;
 
 
 /* Backing pixmap for drawing area */
-static GdkPixmap *pixmap = NULL;
-static GdkPixmap *traymapbk = NULL; // quick way to store clean tray
-static GdkPixmap *motionbk = NULL; // save pixmap to redrawing it after motion
-static GdkPixmap *cellbk = NULL;
+static cairo_surface_t *pixmap = NULL;
+static cairo_surface_t *traymapbk = NULL; // quick way to store clean tray
+static cairo_surface_t *motionbk = NULL; // save pixmap to redrawing it after motion
+static cairo_surface_t *cellbk = NULL;
 static GdkPixbuf *pixbuf = NULL;
 static GdkRectangle rect;
 static GError *error = 0;
@@ -117,9 +117,8 @@ static GdkPixbuf *tileset_sm = NULL; /* small tileset */
 
 GList *theme_list = NULL;
 
-GdkColor fgcolor;
-GdkColor bgcolor;
-GdkColor savedcolor;
+GdkRGBA fgcolor;
+GdkRGBA bgcolor;
 
 GSettings *settings;
 
@@ -130,7 +129,7 @@ GtkWidget *bg_colorbutton = NULL;
 
 static gboolean redraw_current_game();
 gboolean start_new_gameboard (GtkWidget *widget);
-void new_game (void);
+void new_game (GSimpleAction *action, GVariant *param, gpointer data);
 
 gint gm_debug (const gchar *format, ...) {
   va_list args;
@@ -162,7 +161,7 @@ max_tries_notify_func (GSettings *settings,
 						   "Start a new game?"));
     gint response = gtk_dialog_run (GTK_DIALOG (dialog));
     if ( response == GTK_RESPONSE_YES) {
-      new_game();
+      g_action_activate (new_action, NULL);
       frame_min_w = GRID_SZ* (GRID_COLS+2) + GRID_XPAD*2;
       frame_min_h = GRID_SZ*grid_rows+2*GRID_YPAD+TRAY_ROWS*TRAY_SZ+TRAY_PAD*2;
       gtk_widget_set_size_request (drawing_area, frame_min_w, frame_min_h);
@@ -237,18 +236,20 @@ toolbar_notify_func (GSettings *settings,
   gboolean vis = FALSE;
 
   gc_show_toolbar = g_settings_get_boolean (settings, key);
+  g_simple_action_set_state (G_SIMPLE_ACTION (show_toolbar_action),
+				   g_variant_new_boolean (gc_show_toolbar));
 	
   gtk_window_get_size (GTK_WINDOW (window), &cw, &ch);
 	
-  vis = GTK_WIDGET_VISIBLE(toolbar);
+  vis = gtk_widget_get_visible (toolbar);
 
   if (gc_show_toolbar && !vis) {
     gtk_widget_show (toolbar);
-    ch += toolbar->allocation.height;
+    ch += gtk_widget_get_allocated_height (toolbar);
   }
   else if (!gc_show_toolbar && vis) {
     gtk_widget_hide (toolbar);
-    ch -= toolbar->allocation.height;
+    ch -= gtk_widget_get_allocated_height (toolbar);
   }
 	
   gtk_window_resize (GTK_WINDOW (window), cw, ch);
@@ -350,8 +351,8 @@ void init_game (void) {
 
   gtk_widget_set_size_request (GTK_WIDGET (drawing_area), frame_min_w, frame_min_h);
 
-  gtk_action_set_sensitive (GTK_ACTION (undo_action), FALSE);
-  gtk_action_set_sensitive (GTK_ACTION (redo_action), FALSE);
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (undo_action), FALSE);
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (redo_action), FALSE);
 
   selectedcolor = -1;
 // gc_theme = g_strdup_printf ("%s%s", PKGDATA_DIR, "/themes/simple");
@@ -373,8 +374,10 @@ void init_game (void) {
 
 
 void traycl2xy (int c, int l, int *x, int *y, GtkWidget *widget) {
-  *x = widget->allocation.width/2 -tray_sz*TRAY_COLS/2+tray_sz*c+1; // questo +1 mi sa che serve perchè 
-  *y = widget->allocation.height - tray_h/2-tray_sz*TRAY_ROWS/2+tray_sz*l; // le palline non sono centrate
+  *x = gtk_widget_get_allocated_width (widget) / 2
+		- tray_sz*TRAY_COLS/2+tray_sz*c+1; // questo +1 mi sa che serve perchè
+  *y = gtk_widget_get_allocated_height (widget)
+		- tray_h/2-tray_sz*TRAY_ROWS/2+tray_sz*l; // le palline non sono centrate
 }
 
 void gridcl2xy (int c, int l, int *x, int *y, GtkWidget *widget) {
@@ -385,8 +388,10 @@ void gridcl2xy (int c, int l, int *x, int *y, GtkWidget *widget) {
 
 void trayxy2cl (int x, int y, int *c, int *l, GtkWidget *widget) {
   int x1, y1;
-  x1 = x - (widget->allocation.width/2-tray_sz*TRAY_COLS/2);
-  y1 = y - (widget->allocation.height - tray_h/2-tray_sz*TRAY_ROWS/2);
+  x1 = x - (gtk_widget_get_allocated_width (widget)/2
+		  - tray_sz*TRAY_COLS/2);
+  y1 = y - (gtk_widget_get_allocated_height (widget)
+		  - tray_h/2-tray_sz*TRAY_ROWS/2);
   if ((x1 >= 0) &&
       (x1 <= tray_sz*TRAY_COLS) &&
       (y1 >= 0) && 
@@ -416,19 +421,25 @@ void gridxy2cl (int x, int y, int *c, int *l, GtkWidget *widget) {
 }
 
 static gboolean clean_tray (GtkWidget *widget) {
+  GdkWindow *window;
+  cairo_t *cr;
+  gint width, height;
+
   if(!pixmap || !traymapbk)
     return FALSE;
-  gdk_draw_drawable(pixmap,
-		    widget->style->white_gc,
-		    traymapbk,
-		    0, 0,
-		    0, widget->allocation.height - tray_h,
-		    -1, -1);
+  width = gtk_widget_get_allocated_width (widget);
+  height = gtk_widget_get_allocated_height (widget);
+  cr = cairo_create (pixmap);
+  cairo_set_source_surface (cr, traymapbk, 0, height - tray_h);
+  cairo_rectangle (cr, 0, height - tray_h, width, tray_h);
+  cairo_fill (cr);
+  cairo_destroy (cr);
   rect.x = 0;
-  rect.y = widget->allocation.height - tray_h;
-  rect.width = widget->allocation.width;
+  rect.y = height - tray_h;
+  rect.width = width;
   rect.height = tray_h;
-  gdk_window_invalidate_rect (widget->window, &rect, FALSE);
+  window = gtk_widget_get_window (widget);
+  gdk_window_invalidate_rect (window, &rect, FALSE);
   return FALSE;
 }
 
@@ -437,17 +448,19 @@ void draw_main_grid (GtkWidget *widget) {
   gint i, j;
   gint x, y;
   cairo_t *cr;
+  GdkWindow *window;
 
   gdouble wah, waw;
 
-  waw = widget->allocation.width;
-  wah = widget->allocation.height;
+  waw = gtk_widget_get_allocated_width (widget);
+  wah = gtk_widget_get_allocated_height (widget);
 	
-  cr = gdk_cairo_create (pixmap);
+  cr = cairo_create (pixmap);
+  window = gtk_widget_get_window (widget);
 
   cairo_save (cr);
 	
-  gdk_cairo_set_source_color (cr, &fgcolor);
+  gdk_cairo_set_source_rgba (cr, &fgcolor);
   cairo_set_antialias (cr, CAIRO_ANTIALIAS_NONE);
 //	cairo_set_line_cap (cr, CAIRO_LINE_CAP_SQUARE);
   cairo_set_line_width (cr, 1);
@@ -499,7 +512,7 @@ void draw_main_grid (GtkWidget *widget) {
   }
   /* brighten grid */
 
-  cairo_set_operator (cr, CAIRO_OPERATOR_XOR);
+  cairo_set_operator (cr, CAIRO_OPERATOR_DIFFERENCE);
   cairo_set_line_width (cr, 0);
   cairo_rectangle (cr, grid_xpad+0.5, grid_ypad+1, grid_sz*GRID_COLS-1, grid_sz* (grid_rows)-2);
   cairo_rectangle (cr, grid_xpad+grid_sz* (GRID_COLS+1)+0.5, grid_ypad+1, grid_sz-1, grid_sz* (grid_rows)-2);
@@ -515,7 +528,7 @@ void draw_main_grid (GtkWidget *widget) {
   cairo_rectangle (cr, grid_xpad+grid_sz* (GRID_COLS+1)+0.5, grid_ypad+ (grid_sz* (grid_rows- (grid_rows-ypos)))+1, grid_sz-1, grid_sz-2);
   cairo_set_source_rgba (cr, 1, 1, 1, 0.35);
   cairo_fill (cr);
-  cairo_stroke (cr); 
+  cairo_stroke (cr);
 
   /* new tray drawings */
 
@@ -523,11 +536,11 @@ void draw_main_grid (GtkWidget *widget) {
   cairo_save (cr);
 
   cairo_set_line_width (cr, 0);
-  gdk_cairo_set_source_color (cr, &bgcolor);
+  gdk_cairo_set_source_rgba (cr, &bgcolor);
   cairo_rectangle (cr, 
 		   grid_xpad-grid_sz, 
 		   wah - tray_h,
-		   widget->allocation.width-grid_xpad*2+grid_sz*2, tray_h);
+		   waw-grid_xpad*2+grid_sz*2, tray_h);
   cairo_fill_preserve (cr);
 
   cairo_set_fill_rule (cr, CAIRO_FILL_RULE_EVEN_ODD);
@@ -539,13 +552,13 @@ void draw_main_grid (GtkWidget *widget) {
 		      0, 0,
 		      0, tray_h / 2,
 		      30, tray_h / 2);
-  cairo_rel_line_to (cr, widget->allocation.width-66-grid_xpad*2+grid_sz*2, 0);
+  cairo_rel_line_to (cr, waw-66-grid_xpad*2+grid_sz*2, 0);
   cairo_rel_curve_to (cr,
 		      0, 0,
 		      30, 0,
 		      30, - tray_h / 2);
   cairo_rel_line_to (cr, 0, tray_h - 5);
-  cairo_rel_line_to (cr, -widget->allocation.width+6+grid_xpad*2-grid_sz*2, 0);
+  cairo_rel_line_to (cr, -waw+6+grid_xpad*2-grid_sz*2, 0);
   cairo_close_path (cr);
 
   cairo_fill (cr);
@@ -553,59 +566,58 @@ void draw_main_grid (GtkWidget *widget) {
 
   /* draw border */
   cairo_restore (cr);
-  gdk_cairo_set_source_color (cr, &fgcolor);
+  gdk_cairo_set_source_rgba (cr, &fgcolor);
   cairo_rectangle (cr, 1 + grid_xpad - grid_sz, 
 		   wah - tray_h, 
-		   widget->allocation.width - 2 - grid_xpad*2 + grid_sz*2,
+		   waw - 2 - grid_xpad*2 + grid_sz*2,
 		   tray_h - 1);
   cairo_set_line_width (cr, 2);
   cairo_stroke (cr);
 
-  cairo_destroy (cr);
-
   for (j = 0; j < TRAY_ROWS; j++)
     for (i = 0; i < TRAY_COLS; i++) {
       traycl2xy (i, j, &x, &y, widget);
-      gdk_draw_pixbuf (pixmap,
-		       NULL,
-		       tileset_sm,
-		       ballsm * (i+ ((j)*TRAY_COLS)), 0,
-		       x, y,
-		       ballsm, ballsm, 
-		       GDK_RGB_DITHER_MAX, 0, 0);
+      gdk_cairo_set_source_pixbuf (cr, tileset_sm,
+						     x - ballsm
+						     * (i + (j * TRAY_COLS)),
+						     y);
+      cairo_rectangle (cr, x, y, ballsm, ballsm);
+      cairo_fill (cr);
     }
-  if (traymapbk) g_object_unref (traymapbk);
-  traymapbk = gdk_pixmap_new (drawing_area->window,
-			      drawing_area->allocation.width,
-			      tray_h,
-			      -1);
-  gdk_draw_drawable (traymapbk,
-		     drawing_area->style->white_gc,
-		     pixmap,
-		     0, drawing_area->allocation.height - tray_h,
-		     0, 0,
-		     -1, tray_h);
-	
+  cairo_destroy (cr);
+  if (traymapbk) cairo_surface_destroy (traymapbk);
+
+  traymapbk
+		= gdk_window_create_similar_surface (window,
+						     CAIRO_CONTENT_COLOR_ALPHA,
+						     waw, tray_h);
+  cr = cairo_create (traymapbk);
+  cairo_set_source_surface (cr, pixmap, 0, tray_h - wah);
+  cairo_paint (cr);
+  cairo_destroy (cr);
+
   gridcl2xy (0, grid_rows-1, &x, &y, drawing_area);
 
-  if (cellbk) g_object_unref (cellbk);
-  cellbk = gdk_pixmap_new (widget->window,
-			   ballmed-2,
-			   ballmed-2,
+  if (cellbk) cairo_surface_destroy (cellbk);
+  cellbk = gdk_window_create_similar_surface (window,
+						    CAIRO_CONTENT_COLOR_ALPHA,
+						    ballmed - 2, ballmed - 2);
 
-			   -1);
-	
-  gdk_draw_drawable (cellbk,
-		     widget->style->white_gc,
-		     pixmap,
-		     x + 1, y + 1,
-		     0, 0,
-		     ballmed - 1, ballmed -1);
+  cr = cairo_create (cellbk);
+  cairo_set_source_surface (cr, pixmap, -x - 1, -y - 1);
+  cairo_rectangle (cr, 0, 0, ballmed - 1, ballmed - 1);
+  cairo_fill (cr);
+  cairo_destroy (cr);
 }
 
 gboolean start_new_gameboard (GtkWidget *widget) {
 
   cairo_t *cr;
+  GdkWindow *window;
+  GtkStyleContext *ctxt;
+  gint w, h;
+
+  window = gtk_widget_get_window (widget);
 	
   if (tileset_sm) g_object_unref (tileset_sm);
   if (tileset_bg) g_object_unref (tileset_bg);
@@ -623,59 +635,62 @@ gboolean start_new_gameboard (GtkWidget *widget) {
   if (gc_gtkstyle_colors) {
     /* sfondo della finestra di gioco */
 
-    bgcolor = widget->style->base[GTK_STATE_SELECTED];
-    bgcolor.red = (bgcolor.red + (widget->style->white).red * 6.2 ) / 8;
-    bgcolor.green = (bgcolor.green + (widget->style->white).green * 6.2 ) / 8;
-    bgcolor.blue = (bgcolor.blue + (widget->style->white).blue * 6.2 ) / 8;
+    ctxt = gtk_widget_get_style_context (widget);
+    gtk_style_context_get_color (ctxt, GTK_STATE_FLAG_SELECTED,
+					     &bgcolor);
+
+    fgcolor = bgcolor;
+    bgcolor.red =  (bgcolor.red + 6.2) / 8;
+    bgcolor.green = (bgcolor.green + 6.2) / 8;
+    bgcolor.blue = (bgcolor.blue +  6.2) / 8;
 	 
     /* bordo delle griglie */
 	 
-    fgcolor = widget->style->base[GTK_STATE_SELECTED];
-    fgcolor.red = (fgcolor.red + (widget->style->black).red ) / 2;
-    fgcolor.green = (fgcolor.green + (widget->style->black).green ) / 2;
-    fgcolor.blue = (fgcolor.blue + (widget->style->black).blue ) / 2;
-
+    fgcolor.red = fgcolor.red / 2 ;
+    fgcolor.green = fgcolor.green / 2;
+    fgcolor.blue = fgcolor.blue / 2;
   } else {
-    gdk_color_parse (gc_bgcolor, &bgcolor);
-    gdk_color_parse (gc_fgcolor, &fgcolor); 
+    gdk_rgba_parse (&bgcolor, gc_bgcolor);
+    gdk_rgba_parse (&fgcolor, gc_fgcolor);
   }
   if (GTK_IS_WIDGET (pref_dialog)) {
-    gtk_color_button_set_color (GTK_COLOR_BUTTON (fg_colorbutton), &fgcolor);
-    gtk_color_button_set_color (GTK_COLOR_BUTTON (bg_colorbutton), &bgcolor);
+    gtk_color_chooser_set_rgba (GTK_COLOR_CHOOSER (fg_colorbutton), &fgcolor);
+    gtk_color_chooser_set_rgba (GTK_COLOR_CHOOSER (bg_colorbutton), &bgcolor);
   }
 
   xpos = 0;
   ypos = grid_rows-1;
   if ((newgame != 0) && pixmap) {
-    g_object_unref (pixmap);
+    cairo_surface_destroy (pixmap);
     gm_debug ("unreferencing pixmap\n");
     pixmap = NULL;
   }
   if ((!pixmap) || newgame != 0) {
-    pixmap = gdk_pixmap_new (widget->window,
-			     widget->allocation.width,
-			     widget->allocation.height,
-			     -1);
+    w = gtk_widget_get_allocated_width (widget);
+		h = gtk_widget_get_allocated_height (widget);
+		pixmap = gdk_window_create_similar_surface (window,
+							    CAIRO_CONTENT_COLOR_ALPHA,
+							    w, h);
 
-    cr = gdk_cairo_create (pixmap);
+    cr = cairo_create (pixmap);
     cairo_set_antialias (cr, CAIRO_ANTIALIAS_NONE);
 
-    gdk_cairo_set_source_color (cr, &bgcolor);
-    cairo_rectangle (cr, 0, 0, widget->allocation.width, widget->allocation.height);
+    gdk_cairo_set_source_rgba (cr, &bgcolor);
+    cairo_rectangle (cr, 0, 0, w, h);
     cairo_fill (cr);
     cairo_destroy (cr);
 
     draw_main_grid (widget);
   }
 
-  gdk_window_invalidate_rect (widget->window, NULL, FALSE); // ogni tanto va bene anche ridisegnare tutto
+  gdk_window_invalidate_rect (window, NULL, FALSE); // ogni tanto va bene anche ridisegnare tutto
 
   return TRUE;
 }
 
 
 
-void new_game (void) {
+void new_game (GSimpleAction *action, GVariant *param, gpointer data) {
   gint i;
   newgame = 1;
   for (i = 0; i < grid_rows; i++) 
@@ -746,13 +761,15 @@ void new_game (void) {
 }
 
 /* Create callbacks that implement our Actions */
-static void quit_action (void) {
-  gtk_main_quit();
+static void quit_action (GSimpleAction *action, GVariant *par, gpointer data) {
+  GApplication *app = data;
+
+  g_object_unref (settings);
+  g_application_quit (app);
 }
 
 void win_dialog (int tries) {
   GtkWidget *dialog;
-  GtkWidget *button;
  
   dialog = gtk_message_dialog_new_with_markup (GTK_WINDOW (window),
 					       GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -766,22 +783,20 @@ void win_dialog (int tries) {
 						 ), tries);
 
 
-  gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_QUIT, GTK_RESPONSE_NO);
-  button = gtk_dialog_add_button (GTK_DIALOG (dialog), _("Play Again"), GTK_RESPONSE_YES);
-  gtk_button_set_image (GTK_BUTTON (button), gtk_image_new_from_stock (GTK_STOCK_YES, GTK_ICON_SIZE_BUTTON)); 
+  gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Quit"), GTK_RESPONSE_NO);
+  gtk_dialog_add_button (GTK_DIALOG (dialog), _("Play Again"), GTK_RESPONSE_YES);
 
 	
   gint response = gtk_dialog_run (GTK_DIALOG (dialog));
   if ( response == GTK_RESPONSE_YES)
-    new_game();
-  else quit_action();
+    g_action_activate (new_action, NULL);
+  else g_action_activate (quit, NULL);
   gtk_widget_destroy (dialog);
 }
 
 static void 
 lose_dialog (int tries) {
   GtkWidget *dialog;
-  GtkWidget *button;
   GtkWidget *image[4];
   GtkWidget *shbox;
   GdkPixbuf *sbuf = NULL;
@@ -802,11 +817,10 @@ lose_dialog (int tries) {
 						 "Do you want to play again?", tries
 						 ), tries);
 
-  gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_QUIT, GTK_RESPONSE_NO);
-  button = gtk_dialog_add_button (GTK_DIALOG (dialog), _("Play Again"), GTK_RESPONSE_YES);
-  gtk_button_set_image (GTK_BUTTON (button), gtk_image_new_from_stock (GTK_STOCK_YES, GTK_ICON_SIZE_BUTTON)); 
+  gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Quit"), GTK_RESPONSE_NO);
+  gtk_dialog_add_button (GTK_DIALOG (dialog), _("Play Again"), GTK_RESPONSE_YES);
 
-  shbox = gtk_hbox_new (FALSE, 0);
+  shbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
   slabel = gtk_label_new (_("This was the right solution:"));
   gtk_box_pack_start (GTK_BOX (shbox), slabel, FALSE, FALSE, 20);
   for (i = 0; i < 4; i++) {
@@ -818,13 +832,13 @@ lose_dialog (int tries) {
     g_object_unref (sbuf);
     gtk_box_pack_start (GTK_BOX (shbox), image[i], FALSE, FALSE, 0);
   }
-  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), shbox, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), shbox, FALSE, FALSE, 0);
   gtk_widget_show (shbox);
   gtk_widget_show_all (dialog);
   gint response = gtk_dialog_run (GTK_DIALOG (dialog));
   if ( response == GTK_RESPONSE_YES)
-    new_game();
-  else quit_action();
+    g_action_activate (new_action, NULL);
+  else g_action_activate (quit, NULL);
   gtk_widget_destroy (dialog);
 }
 
@@ -835,12 +849,15 @@ static gboolean configure_event ( GtkWidget *widget,
      g_object_unref (pixmap); */
   // new_game = 0;
   gdouble gr1, gr2;
+  gint width, height;
 //	grid_xpad = (widget->allocation.width-GRID_SZ*(GRID_COLS+2))/2;
 //	grid_ypad = (widget->allocation.height - tray_h - grid_sz*(grid_rows))/2;
+  width = gtk_widget_get_allocated_width (widget);
+  height = gtk_widget_get_allocated_height (widget);
   grid_ypad = GRID_YPAD;
   grid_xpad = GRID_XPAD;
-  gr1 = (widget->allocation.height - (GRID_YPAD)*2) / (grid_rows+0.8);
-  gr2 = (widget->allocation.width - GRID_XPAD*2) / (GRID_COLS+2);
+  gr1 = (height - (GRID_YPAD)*2) / (grid_rows+0.8);
+  gr2 = (width - GRID_XPAD*2) / (GRID_COLS+2);
   if (gr1 < gr2) {
     grid_sz = gr1;
   } else  {
@@ -850,8 +867,8 @@ static gboolean configure_event ( GtkWidget *widget,
   tray_sz = grid_sz*0.8;
   tray_h = TRAY_ROWS*tray_sz+TRAY_PAD*2;
 
-  grid_xpad = (widget->allocation.width - grid_sz * (GRID_COLS+2)) / 2;	
-  grid_ypad = (widget->allocation.height - tray_h - grid_sz*grid_rows) / 2;
+  grid_xpad = (width - grid_sz * (GRID_COLS+2)) / 2;
+  grid_ypad = (height - tray_h - grid_sz*grid_rows) / 2;
 	
   ballmed = grid_sz;
   ballsm = ballmed*0.75;
@@ -863,7 +880,7 @@ static gboolean configure_event ( GtkWidget *widget,
 
 	
   if (confcount == 0) {
-    new_game();
+    g_action_activate (new_action, NULL);
   }
   else {
     old_xpos = xpos;
@@ -888,6 +905,9 @@ void draw_score_pegs (int line, int b, int c, GtkWidget *widget) {
   int offset;
 
   GdkPixbuf *tmp;
+  cairo_t *cr;
+
+  cr = cairo_create (pixmap);
 
   for (i = 0; i< b+c; i++) {
     if (pixbuf) 
@@ -920,20 +940,17 @@ void draw_score_pegs (int line, int b, int c, GtkWidget *widget) {
 
     gm_debug ("line: %d, i:%d\n",line,i);
 
-    gdk_draw_pixbuf (pixmap,
-		     NULL,
-		     pixbuf,
-		     0, 0,
-		     x+1,
-		     y+1,
-		     -1, -1, GDK_RGB_DITHER_MAX, 0, 0);
+    gdk_cairo_set_source_pixbuf (cr, pixbuf, x + 1, y + 1);
+    cairo_paint (cr);
     gtk_widget_queue_draw_area (widget, x, y, grid_sz/2, grid_sz/2);
   }
+  cairo_destroy (cr);
 }
 
 static gboolean clean_next_row (void) {
   cairo_t *cr;
-  cr = gdk_cairo_create (pixmap);
+  GdkWindow *window;
+  cr = cairo_create (pixmap);
   cairo_set_antialias (cr, CAIRO_ANTIALIAS_NONE);
   cairo_set_operator (cr, CAIRO_OPERATOR_ADD);
   cairo_set_line_width (cr, 0);
@@ -949,7 +966,8 @@ static gboolean clean_next_row (void) {
   rect.width =  grid_sz*GRID_COLS;
   rect.height = grid_sz-2;
 
-  gdk_window_invalidate_rect (drawing_area->window, FALSE, FALSE);
+  window = gtk_widget_get_window (drawing_area);
+  gdk_window_invalidate_rect (window, FALSE, FALSE);
 
   cairo_rectangle (cr, 
 		   grid_xpad+grid_sz* (GRID_COLS+1)+0.5,
@@ -966,7 +984,7 @@ static gboolean clean_next_row (void) {
   rect.width = grid_sz;
   rect.height = grid_sz - 2;
 
-  gdk_window_invalidate_rect (drawing_area->window, &rect, FALSE);
+  gdk_window_invalidate_rect (window, &rect, FALSE);
 
   return TRUE;
 }
@@ -1002,7 +1020,6 @@ static gboolean checkscores() {
       }
     }
   draw_score_pegs (ypos, bulls, cows, drawing_area);
-  gdk_window_process_all_updates(); 
   /* Note for translators: the following tells the number of
    *  right color and position guesses (bulls) and right color
    *  only guessed (cows). "Bulls and cows" is a pen and paper
@@ -1055,51 +1072,47 @@ static gboolean checkscores() {
 
   undolist = g_list_append (undolist, init_lastmove());
 
-  gtk_action_set_sensitive (GTK_ACTION (undo_action), FALSE);
-  gtk_action_set_sensitive (GTK_ACTION (redo_action), FALSE);
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (undo_action), FALSE);
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (redo_action), FALSE);
 	
   return TRUE;
 }
 
 static gboolean place_grid_color (int c, int l) {
+  cairo_t *cr;
   gint x, y;
 	
   gm_debug ("placing c:%d l:%d s:%d\n", c, l, selectedcolor);
   gm_debug ("movecount: %d\n", movecount);
   gridcl2xy (c, l, &x, &y, drawing_area);
 
-  gdk_draw_drawable(pixmap,
-		    drawing_area->style->white_gc,
-		    cellbk,
-		    0, 0,
-		    x + 1, y + 1,
-		    -1, -1);
-
+  cr = cairo_create (pixmap);
+  cairo_set_source_surface (cr, cellbk, x + 1, y + 1);
+  cairo_paint (cr);
 
   if (selectedcolor >=0 ) {
-    gdk_draw_pixbuf (pixmap,
-		     NULL,
-		     tileset_bg,
-		     ballmed*selectedcolor, 0,
-		     x, y,
-		     ballmed, ballmed, 
-		     GDK_RGB_DITHER_MAX, 0, 0);
+    gdk_cairo_set_source_pixbuf (cr, tileset_bg,
+					     x - ballmed * selectedcolor, y);
+    cairo_rectangle (cr, x, y, ballmed, ballmed);
+    cairo_fill (cr);
   }
 	
-  gtk_action_set_sensitive (GTK_ACTION (undo_action), TRUE);
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (undo_action), TRUE);
 
   rect.x = x;
   rect.y = y;
   rect.width = ballmed;
   rect.height = ballmed;
-  gdk_window_invalidate_rect (drawing_area->window, &rect, TRUE);
+  gdk_window_invalidate_rect (gtk_widget_get_window (drawing_area),
+				    &rect, TRUE);
+  cairo_destroy (cr);
 
   return TRUE;
 }
 
 
 static void 
-undo_action_cb (void) {
+undo_action_cb (GSimpleAction *action, GVariant *param, gpointer data) {
 
   if ((movecount == 0) || (xpos == 0)) {
     return;
@@ -1127,14 +1140,14 @@ undo_action_cb (void) {
 
   xpos = old_xpos;
 	
-  gtk_action_set_sensitive (GTK_ACTION (redo_action), TRUE);
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (redo_action), TRUE);
 	
   if ((movecount == 0) || (xpos == 0))
-    gtk_action_set_sensitive (GTK_ACTION (undo_action), FALSE);
+    g_simple_action_set_enabled (action, FALSE);
 }
 
 static void 
-redo_action_cb (void) {
+redo_action_cb (GSimpleAction *action, GVariant *param, gpointer data) {
 
   current = g_list_next (undolist);
   if (!current) {
@@ -1166,7 +1179,7 @@ redo_action_cb (void) {
   current = g_list_next (undolist);
   if (!current) {
     gm_debug ("end of the list\n");
-    gtk_action_set_sensitive (GTK_ACTION (redo_action), FALSE);
+    g_simple_action_set_enabled (action, FALSE);
   }
 
   gm_debug ("XPOS is %d\n", xpos);
@@ -1234,6 +1247,7 @@ static gboolean parse_tray_event (GdkEventButton *event, GtkWidget *widget)
 {
   int x, y;
   int c, l;
+  cairo_t *cr;
 
   trayxy2cl (event->x, event->y, &c, &l, widget); //rescaling operations
   traycl2xy (c, l, &x, &y, widget);
@@ -1245,13 +1259,16 @@ static gboolean parse_tray_event (GdkEventButton *event, GtkWidget *widget)
     selectedcolor = c+ (l*TRAY_COLS);
     if (selectedcolor >= 0) 
       clean_tray(widget);
-    gdk_draw_pixbuf (pixmap,
-		     NULL,
-		     tileset_bg,
-		     ballmed * selectedcolor, 0,
-		     x+ballsm/2-ballmed/2, y+ballsm/2-ballmed/2,
-		     ballmed, ballmed, 
-		     GDK_RGB_DITHER_MAX, 0, 0);
+    cr = cairo_create (pixmap);
+    gdk_cairo_set_source_pixbuf (cr, tileset_bg,
+					     x + ballsm / 2 - ballmed / 2
+					     - ballmed * selectedcolor,
+					     y + ballsm / 2 - ballmed / 2);
+    cairo_rectangle (cr, x + ballsm / 2 - ballmed / 2,
+				 y + ballsm / 2 - ballmed / 2,
+				 ballmed, ballmed);
+    cairo_fill (cr);
+    cairo_destroy (cr);
 //		gdk_window_invalidate_rect (widget->window, NULL, FALSE); 
 
     gm_debug ("type: %d\n", event->type);
@@ -1266,15 +1283,17 @@ static gboolean parse_tray_event (GdkEventButton *event, GtkWidget *widget)
 }
 
 static gboolean motion_event (GtkWidget *widget,
-			      GdkEventButton *event) {
+			      GdkEventMotion *event) {
+  GdkWindow *window;
+  cairo_t *cr;
 
   if (selectedcolor < 0)
     return TRUE;
   if (pressed && !mstarted) {
     gint x,y;
     traycl2xy(selectedcolor, 0, &x, &y, widget);
-    motion_x_shift =  (x - event->x) - (ballmed - ballsm)/2;
-    motion_y_shift = (y - event->y) - (ballmed - ballsm)/2;
+    motion_x_shift = (x - (int) event->x) - (ballmed - ballsm)/2;
+    motion_y_shift = (y - (int) event->y) - (ballmed - ballsm)/2;
     gm_debug("motion start\n");
 /*
   gtk_statusbar_pop (GTK_STATUSBAR (status), gtk_statusbar_get_context_id (GTK_STATUSBAR (status), "mmind"));
@@ -1284,48 +1303,47 @@ static gboolean motion_event (GtkWidget *widget,
     clean_tray(widget);
   }
   if (pressed) {
+    window = gtk_widget_get_window (widget);
     if (motionbk) {
-      gdk_draw_drawable(pixmap,
-			widget->style->white_gc,
-			motionbk,
-			0, 0,
-			xbk, ybk,
-			ballmed, ballmed);
+      cr = cairo_create (pixmap);
+      cairo_set_source_surface (cr, motionbk, xbk, ybk);
+      cairo_paint (cr);
+      cairo_destroy (cr);
       rect.x = xbk;
       rect.y = ybk;
       rect.width = ballmed;
       rect.height = ballmed;
-      gdk_window_invalidate_rect (widget->window, &rect, FALSE);
-      g_object_unref (motionbk);
+      gdk_window_invalidate_rect (window, &rect, FALSE);
+      cairo_surface_destroy (motionbk);
       motionbk = NULL;
     }
-    motionbk = gdk_pixmap_new (widget->window,
-			       ballmed,
-			       ballmed,
-			       -1);
-    gdk_draw_drawable(motionbk,
-		      widget->style->white_gc,
-		      pixmap,
-		      event->x+motion_x_shift, event->y+motion_y_shift,
-		      0, 0,
-		      ballmed, ballmed);
-    xbk = event->x+motion_x_shift;
-    ybk = event->y+motion_y_shift;
+    motionbk = gdk_window_create_similar_surface (window,
+							      CAIRO_CONTENT_COLOR_ALPHA,
+							      ballmed,
+							      ballmed);
+    cr = cairo_create (motionbk);
+    cairo_set_source_surface (cr, pixmap,
+					  (int) -event->x - motion_x_shift,
+					  (int) -event->y - motion_y_shift);
+    cairo_paint (cr);
+    cairo_destroy (cr);
+
+    xbk = (int) event->x + motion_x_shift;
+    ybk = (int) event->y + motion_y_shift;
 		
     mstarted = 1;
-    gdk_draw_pixbuf (pixmap,
-		     NULL,
-		     tileset_bg,
-		     ballmed * selectedcolor, 0,
-		     event->x+motion_x_shift, event->y+motion_y_shift,
-		     ballmed, ballmed, 
-		     GDK_RGB_DITHER_MAX, 0, 0);
+    cr = cairo_create (pixmap);
+    gdk_cairo_set_source_pixbuf (cr, tileset_bg,
+					     xbk - ballmed * selectedcolor,
+					     ybk);
+    cairo_rectangle (cr, xbk, ybk, ballmed, ballmed);
+    cairo_fill (cr);
+    cairo_destroy (cr);
     rect.x = xbk;
     rect.y = ybk;
     rect.width = ballmed;
     rect.height = ballmed;
-    gdk_window_invalidate_rect (widget->window, &rect, FALSE);
-//		gdk_window_invalidate_rect (widget->window, NULL, FALSE); 
+    gdk_window_invalidate_rect (window, &rect, FALSE);
   }
 
   return FALSE;
@@ -1334,6 +1352,7 @@ static gboolean motion_event (GtkWidget *widget,
 static gboolean button_press_event ( GtkWidget *widget,
 				     GdkEventButton *event )
 {
+  cairo_t *cr;
   gint c, l;
   gint i;
 
@@ -1343,17 +1362,18 @@ static gboolean button_press_event ( GtkWidget *widget,
     pressed = 0;
     if (mstarted) {
       if (motionbk) {
-	gdk_draw_drawable(pixmap,
-			  widget->style->white_gc,
-			  motionbk,
-			  0, 0, xbk, ybk, ballmed, ballmed);
-	rect.x = xbk;
-	rect.y = ybk;
-	rect.width = ballmed;
-	rect.height = ballmed;
-	gdk_window_invalidate_rect (widget->window, &rect, FALSE);
-	g_object_unref (motionbk);
-	motionbk = NULL;
+        cr = cairo_create (pixmap);
+        cairo_set_source_surface (cr, motionbk,
+							  xbk, ybk);
+        cairo_paint (cr);
+        cairo_destroy (cr);
+        rect.x = xbk;
+        rect.y = ybk;
+        rect.width = ballmed;
+        rect.height = ballmed;
+        gdk_window_invalidate_rect (gtk_widget_get_window (widget), &rect, FALSE);
+        cairo_surface_destroy (motionbk);
+        motionbk = NULL;
       }
 			
       // FIXME  (duplicated code - move to function) //
@@ -1379,7 +1399,7 @@ static gboolean button_press_event ( GtkWidget *widget,
 	  undolist = g_list_remove_link (undolist, current);
 	}
 
-	gtk_action_set_sensitive (GTK_ACTION (redo_action), FALSE);
+	g_simple_action_set_enabled (G_SIMPLE_ACTION (redo_action), FALSE);
 				
 	undolist = g_list_append (undolist, init_lastmove ());
 	undolist = g_list_last (undolist);
@@ -1421,7 +1441,7 @@ static gboolean button_press_event ( GtkWidget *widget,
   if ((event->type != GDK_BUTTON_PRESS && event->type != GDK_2BUTTON_PRESS) || pixmap == NULL) 
     return TRUE;
 	
-  if (event->y > (widget->allocation.height - tray_h)) {
+  if (event->y > (gtk_widget_get_allocated_height (widget) - tray_h)) {
     stx = event->x;
     sty = event->y;
     parse_tray_event (event, widget);
@@ -1451,7 +1471,7 @@ static gboolean button_press_event ( GtkWidget *widget,
 	undolist = g_list_remove_link (undolist, current);
       }
 
-      gtk_action_set_sensitive (GTK_ACTION (redo_action), FALSE);
+      g_simple_action_set_enabled (G_SIMPLE_ACTION (redo_action), FALSE);
 						
       undolist = g_list_append (undolist, init_lastmove ());
       undolist = g_list_last (undolist);
@@ -1493,35 +1513,35 @@ static gboolean key_press_event ( GtkWidget *widget,
   if (pressed)
     return TRUE;
   switch (event->keyval) {
-  case GDK_1: 
+  case GDK_KEY_1: 
     selectedcolor = 0;
     tray_mid_click ();
     break;
-  case GDK_2: 
+  case GDK_KEY_2: 
     selectedcolor = 1;
     tray_mid_click ();
     break;
-  case GDK_3: 
+  case GDK_KEY_3: 
     selectedcolor = 2;
     tray_mid_click ();
     break;
-  case GDK_4: 
+  case GDK_KEY_4: 
     selectedcolor = 3;
     tray_mid_click ();
     break;
-  case GDK_5: 
+  case GDK_KEY_5: 
     selectedcolor = 4;
     tray_mid_click ();
     break;
-  case GDK_6: 
+  case GDK_KEY_6: 
     selectedcolor = 5;
     tray_mid_click ();
     break;
-  case GDK_7: 
+  case GDK_KEY_7: 
     selectedcolor = 6;
     tray_mid_click ();
     break;
-  case GDK_8: 
+  case GDK_KEY_8: 
     selectedcolor = 7;
     tray_mid_click ();
     break;
@@ -1546,13 +1566,8 @@ static gboolean tray_mid_click(){
 
 //	 gm_debug ("i:%d ypos:%d c: %d l:%d\n", i, ypos, c, l);
 
-      if (timeout_id > 0) {
-	g_source_remove (timeout_id);
-      }
-      timeout_id = g_timeout_add (200, 
-				  (GSourceFunc) clean_tray, 
-				  drawing_area);
-
+      g_timeout_add (200, (GSourceFunc) clean_tray,
+				       drawing_area);
       place_grid_color (c, ypos);
 
       gm_debug ("POSITION: %d\n", g_list_position (g_list_first (undolist), undolist));
@@ -1562,7 +1577,7 @@ static gboolean tray_mid_click(){
 	undolist = g_list_remove_link (undolist, current);
       }
 
-      gtk_action_set_sensitive (GTK_ACTION (redo_action), FALSE);
+      g_simple_action_set_enabled (G_SIMPLE_ACTION (redo_action), FALSE);
 
       undolist = g_list_append (undolist, init_lastmove ());
       undolist = g_list_last (undolist);
@@ -1594,42 +1609,35 @@ static gboolean tray_mid_click(){
 
 /* Redraw the screen from the backing pixmap */
 static gboolean expose_event ( GtkWidget *widget,
-			       GdkEventExpose *event )
+			       cairo_t *cr )
 {
-  gdk_draw_drawable (widget->window,
-		     widget->style->fg_gc[GTK_WIDGET_STATE (widget)],
-		     pixmap,
-		     event->area.x, event->area.y,
-		     event->area.x, event->area.y,
-		     event->area.width, event->area.height);
-
-
+  cairo_set_source_surface (cr, pixmap, 0, 0);
+  cairo_paint (cr);
 
   return FALSE;
 }
 
 static gboolean delete_event (GtkWidget *widget, GdkEvent *event, gpointer data) {
   if (pixmap)
-    g_object_unref (pixmap);
+    cairo_surface_destroy (pixmap);
   if (traymapbk)
-    g_object_unref (traymapbk);
+    cairo_surface_destroy (traymapbk);
   if (cellbk)
-    g_object_unref (cellbk);
+    cairo_surface_destroy (cellbk);
   if (motionbk)
-    g_object_unref (motionbk);
+    cairo_surface_destroy (motionbk);
 
-  gtk_main_quit();
   return FALSE;
 }
 
 static void destroy (GtkWidget *widget, gpointer data) {
-  gtk_main_quit();
+  g_action_activate (quit, NULL);
 }
 
-static void help_action (void) {
+static void help_action (GSimpleAction *action, GVariant *par, gpointer data) {
   GError *error = NULL;
 
-  gtk_show_uri (NULL, "help:gnome-mastermind",
+  gtk_show_uri_on_window (GTK_WINDOW (window), "help:gnome-mastermind",
 		        gtk_get_current_event_time (), &error);
   if (error) 
   {
@@ -1639,66 +1647,8 @@ static void help_action (void) {
   }
 }
 
-void about_url_show (GtkAboutDialog *about,
-		     const gchar *link,
-		     gpointer data) {
-  GError *error = NULL;
-  gchar *launcher = NULL;
-
-  if ((launcher = g_find_program_in_path("xdg-open"))) {} 
-  else if ((launcher = g_find_program_in_path("gnome-open"))) {} 
-  else if ((launcher = g_find_program_in_path("epiphany"))) {} 
-  else if ((launcher = g_find_program_in_path("firefox"))) {} 
-  else if ((launcher = g_find_program_in_path("konqueror"))) {} 
-  else return;
-		
-  gchar   *argv[] = { launcher,
-		      g_strdup(link),
-		      NULL };
-
-  gm_debug("%s: %s\n", launcher, link);
-
-  g_spawn_async (NULL, argv, NULL, 
-		 G_SPAWN_STDOUT_TO_DEV_NULL | G_SPAWN_STDERR_TO_DEV_NULL,
-		 NULL, NULL, NULL, &error);
-  if (error) 
-  {
-    g_message ("Error while launching gnome-open %s", error->message);
-    g_error_free (error);
-    error = NULL;
-  }
-}
-
-void about_email_show (GtkAboutDialog *about,
-		       const gchar *link,
-		       gpointer data) {
-  GError *error = NULL;
-  gchar *launcher = NULL;
-
-  if ((launcher = g_find_program_in_path("xdg-open"))) {} 
-  else if ((launcher = g_find_program_in_path("gnome-open"))) {} 
-  else if ((launcher = g_find_program_in_path("evolution"))) {} 
-  else if ((launcher = g_find_program_in_path("kmail"))) {} 
-  else return;
-		
-  gchar   *argv[] = { launcher,
-		      g_strdup_printf("mailto:%s",link),
-		      NULL };
-
-  gm_debug("%s: mailto:%s\n", launcher, link);
-
-  g_spawn_async (NULL, argv, NULL, 
-		 G_SPAWN_STDOUT_TO_DEV_NULL | G_SPAWN_STDERR_TO_DEV_NULL,
-		 NULL, NULL, NULL, &error);
-  if (error) 
-  {
-    g_message ("Error while launching gnome-open %s", error->message);
-    g_error_free (error);
-    error = NULL;
-  }
-}
-
-static void about_action (void) {
+static void about_action (GSimpleAction *action,
+                          GVariant *param, gpointer data) {
   gchar *authors[] = { "Filippo Argiolas <filippo.argiolas@gmail.com>", NULL };
   gchar *artists[] = { 
     "Filippo Argiolas <filippo.argiolas@gmail.com>, me ;)",
@@ -1776,7 +1726,8 @@ static void populate_theme_combo (GtkWidget *combo) {
 
     gm_debug ("%s\n", item);
 
-    gtk_combo_box_append_text (GTK_COMBO_BOX (combo), item);
+    gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo),
+						item);
 	 
     index++;
   }
@@ -1795,37 +1746,38 @@ static void use_style_toggled (GtkWidget *toggle, GtkWidget *table) {
   g_settings_set_boolean (settings, "gtkstyle-colors", state);
 }
 
-static void fgcolorbutton_set (GtkWidget *widget, gpointer data) {
-  GdkColor color;
+static void fgcolorbutton_set (GtkColorButton *widget, gpointer data) {
+  GdkRGBA color;
   gchar *color_string;
  
-  gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &color);
+  gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER (widget), &color);
 
-  color_string = g_strdup_printf ("#%04x%04x%04x", color.red,
-				  color.green, color.blue);
+  color_string = gdk_rgba_to_string (&color);
   g_settings_set_string (settings, "fgcolor", color_string);
   g_free (color_string);
 }
 
-static void bgcolorbutton_set (GtkWidget *widget, gpointer data) {
+static void bgcolorbutton_set (GtkColorButton *widget, gpointer data) {
+  GdkRGBA color;
   GdkColor color;
   gchar *color_string;
  
-  gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &color);
-  color_string = g_strdup_printf ("#%04x%04x%04x", color.red, color.green, color.blue);
+  gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER (widget), &color);
+  color_string = gdk_rgba_to_string (&color);
 
   g_settings_set_string (settings, "bgcolor", color_string);
   g_free (color_string);
 }
 
-static void preferences_action (void){
+static void preferences_action (GSimpleAction *action,
+                                GVariant *param, gpointer data) {
   GtkWidget *table;
   GtkWidget *label;
   GtkWidget *theme_combo;
   GtkWidget *color_table;
   GtkWidget *color_vbox;
   GtkWidget *frame;
-  GtkWidget *align;
+  GtkWidget *carea;
   GtkWidget *pango_label;
 
   GtkWidget *use_style_check;
@@ -1835,15 +1787,13 @@ static void preferences_action (void){
   pref_dialog = gtk_dialog_new_with_buttons (_("Preferences"),
 					     GTK_WINDOW (window),
 					     GTK_DIALOG_MODAL|GTK_DIALOG_DESTROY_WITH_PARENT,
+					     _("_Close"),
+						 GTK_RESPONSE_CLOSE,
 					     NULL);
 
-  gtk_dialog_set_has_separator (GTK_DIALOG (pref_dialog), FALSE);
-
-  gtk_dialog_add_button (GTK_DIALOG (pref_dialog),
-			 GTK_STOCK_CLOSE,
-			 GTK_RESPONSE_CLOSE);
+  carea = gtk_dialog_get_content_area (GTK_DIALOG (pref_dialog));
   gtk_container_set_border_width (GTK_CONTAINER (pref_dialog), 4);
-  gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (pref_dialog)->vbox), 2);
+  gtk_box_set_spacing (GTK_BOX (carea), 2);
 
   frame = gtk_frame_new (NULL);
   gtk_container_set_border_width (GTK_CONTAINER (frame), 2);
@@ -1853,32 +1803,28 @@ static void preferences_action (void){
  
   gtk_frame_set_label_widget (GTK_FRAME (frame), pango_label);
  
-  align = gtk_alignment_new (0.5, 0.5, 1, 1);
-  gtk_alignment_set_padding (GTK_ALIGNMENT (align), 0, 0, 10, 0);
-
-  table = gtk_table_new (1, 2, FALSE);
+  table = gtk_grid_new ();
   gtk_container_set_border_width (GTK_CONTAINER (table), 10);
-  gtk_table_set_row_spacings (GTK_TABLE (table), 6);
-  gtk_table_set_col_spacings (GTK_TABLE (table), 12);
+  gtk_grid_set_row_spacing (GTK_GRID (table), 6);
+  gtk_grid_set_column_spacing (GTK_GRID (table), 12);
+  gtk_widget_set_halign (table, GTK_ALIGN_CENTER);
+  gtk_widget_set_valign (table, GTK_ALIGN_CENTER);
+  gtk_widget_set_margin_start (table, 10);
 
   label = gtk_label_new (_("Theme:"));
-  gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-
-  gtk_table_attach (GTK_TABLE (table), label, 0, 1, 0, 1,
-		    (GtkAttachOptions) GTK_FILL, (GtkAttachOptions) 0, 0, 0);
-  theme_combo = gtk_combo_box_new_text();
+  gtk_grid_attach (GTK_GRID (table), label, 0, 0, 1, 1);
+  
+  theme_combo = gtk_combo_box_text_new ();
   populate_theme_combo (theme_combo);
 
   g_signal_connect (G_OBJECT (theme_combo), "changed",
 		    G_CALLBACK (theme_changed), NULL);
 
-  gtk_table_attach_defaults (GTK_TABLE (table), theme_combo, 1, 2, 0, 1);
+  gtk_grid_attach (GTK_GRID (table), theme_combo, 1, 0, 1, 1);
 
-  gtk_container_add (GTK_CONTAINER (align), table);
-  gtk_container_add (GTK_CONTAINER (frame), align);
+  gtk_container_add (GTK_CONTAINER (frame), table);
 
-  gtk_box_pack_start_defaults (GTK_BOX (GTK_DIALOG (pref_dialog)->vbox),
-			       frame);
+  gtk_box_pack_start (GTK_BOX (carea), frame, TRUE, TRUE, 0);
 
   frame = gtk_frame_new (NULL);
   gtk_container_set_border_width (GTK_CONTAINER (frame), 2);
@@ -1888,37 +1834,32 @@ static void preferences_action (void){
  
   gtk_frame_set_label_widget (GTK_FRAME (frame), pango_label);
 
-  align = gtk_alignment_new (0.5, 0.5, 1, 1);
-  gtk_alignment_set_padding (GTK_ALIGNMENT (align), 0, 0, 10, 0);
-
-  color_table = gtk_table_new (2, 2, FALSE);
+  color_table = gtk_grid_new ();
   gtk_container_set_border_width (GTK_CONTAINER (color_table), 10);
-  gtk_table_set_row_spacings (GTK_TABLE (color_table), 2);
-  gtk_table_set_col_spacings (GTK_TABLE (color_table), 12);
+  gtk_grid_set_row_spacing (GTK_GRID (color_table), 2);
+  gtk_grid_set_column_spacing (GTK_GRID (color_table), 12);
 
   label = gtk_label_new (_("Foreground Color:"));
-  gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+  gtk_grid_attach (GTK_GRID (color_table), label, 0, 0, 1, 1);
 
-  gtk_table_attach (GTK_TABLE (color_table), label, 0, 1, 0, 1,
-		    (GtkAttachOptions) GTK_FILL, (GtkAttachOptions) 0, 0, 0);
-  fg_colorbutton = gtk_color_button_new_with_color (&fgcolor);
+  fg_colorbutton = gtk_color_button_new_with_rgba (&fgcolor);
+  gtk_widget_set_size_request (fg_colorbutton, 150, -1);
 
   g_signal_connect (G_OBJECT (fg_colorbutton), "color-set",
 		    G_CALLBACK (fgcolorbutton_set), &fgcolor);
 
-  gtk_table_attach_defaults (GTK_TABLE (color_table), fg_colorbutton, 1, 2, 0, 1);
+  gtk_grid_attach (GTK_GRID (color_table), fg_colorbutton, 1, 0, 1, 1);
  
   label = gtk_label_new (_("Background Color:"));
-  gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+  gtk_grid_attach (GTK_GRID (color_table), label, 0, 1, 1, 1);
 
-  gtk_table_attach (GTK_TABLE (color_table), label, 0, 1, 1, 2,
-		    (GtkAttachOptions) GTK_FILL, (GtkAttachOptions) 0, 0, 0);
-  bg_colorbutton = gtk_color_button_new_with_color (&bgcolor);
+  bg_colorbutton = gtk_color_button_new_with_rgba (&bgcolor);
+  gtk_widget_set_size_request (bg_colorbutton, 150, -1);
 
   g_signal_connect (G_OBJECT (bg_colorbutton), "color-set",
 		    G_CALLBACK (bgcolorbutton_set), &bgcolor);
 
-  gtk_table_attach_defaults (GTK_TABLE (color_table), bg_colorbutton, 1, 2, 1, 2);
+  gtk_grid_attach (GTK_GRID (color_table), bg_colorbutton, 1, 1, 1, 1);
 
   use_style_check = gtk_check_button_new_with_label (_("Try to get colors from system theme"));
 
@@ -1931,17 +1872,18 @@ static void preferences_action (void){
 				gc_gtkstyle_colors);
  
 
-  color_vbox = gtk_vbox_new (FALSE, 0);
-  gtk_box_pack_start_defaults (GTK_BOX (color_vbox),
-			       color_table);
-  gtk_box_pack_start_defaults (GTK_BOX (color_vbox),
-			       use_style_check);
+  color_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+  gtk_widget_set_halign (color_vbox, GTK_ALIGN_CENTER);
+  gtk_widget_set_valign (color_vbox, GTK_ALIGN_CENTER);
+  gtk_widget_set_margin_start (color_vbox, 10);
+  gtk_box_pack_start (GTK_BOX (color_vbox),
+			    color_table, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (color_vbox),
+			    use_style_check, TRUE, TRUE, 0);
 
-  gtk_container_add (GTK_CONTAINER (align), color_vbox);
-  gtk_container_add (GTK_CONTAINER (frame), align);
+  gtk_container_add (GTK_CONTAINER (frame), color_vbox);
 
-  gtk_box_pack_start_defaults (GTK_BOX (GTK_DIALOG (pref_dialog)->vbox),
-			       frame);
+  gtk_box_pack_start (GTK_BOX (carea), frame, TRUE, TRUE, 0);
 
   frame = gtk_frame_new (NULL);
   gtk_container_set_border_width (GTK_CONTAINER (frame), 2);
@@ -1951,30 +1893,25 @@ static void preferences_action (void){
  
   gtk_frame_set_label_widget (GTK_FRAME (frame), pango_label);
 
-  align = gtk_alignment_new (0.5, 0.5, 1, 1);
-  gtk_alignment_set_padding (GTK_ALIGNMENT (align), 0, 0, 10, 0);
-
-  table = gtk_table_new (1, 2, FALSE);
+  table = gtk_grid_new ();
   gtk_container_set_border_width (GTK_CONTAINER (table), 10);
-  gtk_table_set_row_spacings (GTK_TABLE (table), 6);
-  gtk_table_set_col_spacings (GTK_TABLE (table), 12);
+  gtk_grid_set_row_spacing (GTK_GRID (table), 6);
+  gtk_grid_set_column_spacing (GTK_GRID (table), 12);
+  gtk_widget_set_halign (table, GTK_ALIGN_CENTER);
+  gtk_widget_set_valign (table, GTK_ALIGN_CENTER);
+  gtk_widget_set_margin_start (table, 10);
 
   label = gtk_label_new (_("Maximum number of tries allowed:"));
-  gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-
-  gtk_table_attach (GTK_TABLE (table), label, 0, 1, 0, 1,
-		    (GtkAttachOptions) GTK_FILL, (GtkAttachOptions) 0, 0, 0);
+  gtk_grid_attach (GTK_GRID (table), label, 0, 0, 1, 1);
 
   max_tries_spin = gtk_spin_button_new_with_range (2, 14, 1);
   gtk_spin_button_set_value (GTK_SPIN_BUTTON (max_tries_spin), gc_max_tries);
 
-  gtk_table_attach_defaults (GTK_TABLE (table), max_tries_spin, 1, 2, 0, 1);
+  gtk_grid_attach (GTK_GRID (table), max_tries_spin, 1, 0, 1, 1);
 
-  gtk_container_add (GTK_CONTAINER (align), table);
-  gtk_container_add (GTK_CONTAINER (frame), align);
+  gtk_container_add (GTK_CONTAINER (frame), table);
 
-  gtk_box_pack_start_defaults (GTK_BOX (GTK_DIALOG (pref_dialog)->vbox),
-			       frame);
+  gtk_box_pack_start (GTK_BOX (carea), frame, TRUE, TRUE, 0);
 
   gtk_widget_show_all (pref_dialog);
 
@@ -1993,110 +1930,46 @@ static void preferences_action (void){
   gtk_widget_destroy (pref_dialog);
 }
 
-/* Create a list of entries which are passed to the Action constructor. 
- * This is a huge convenience over building Actions by hand. */
-static GtkActionEntry entries[] = 
-{
-  { "GameMenuAction", NULL, N_("_Game") }, /* name, stock id, label */
-
- 
-  { "NewAction", GTK_STOCK_NEW,
-    N_("_New game"), "<control>N", 
-    N_("Start a new game"),
-    G_CALLBACK (new_game) },
-
-  { "UndoAction", GTK_STOCK_UNDO,
-    N_("_Undo Move"), "<control>Z", 
-    N_("Undo last move"),
-    G_CALLBACK (undo_action_cb) },
-	
-  { "RedoAction", GTK_STOCK_REDO,
-    N_("_Redo Move"), "<shift><control>Z", 
-    N_("Redo last move"),
-    G_CALLBACK (redo_action_cb) },
- 
-  { "QuitAction", GTK_STOCK_QUIT,
-    N_("_Quit"), "<control>Q", 
-    N_("Quit the game"),
-    G_CALLBACK (quit_action) },
-
-  { "SettingsMenuAction", NULL, N_("_Settings") },
-
-  { "PrefAction", GTK_STOCK_PREFERENCES,
-    N_("_Preferences"), "<control>P", 
-    N_("Change game settings"),
-    G_CALLBACK (preferences_action) },
-
-  { "HelpMenuAction", NULL, N_("_Help") },
- 
-  { "AboutAction", GTK_STOCK_ABOUT,
-    N_("_About"), 
-    NULL,
-    N_("About"),
-    G_CALLBACK (about_action) },
-
-  { "HelpAction", GTK_STOCK_HELP, 
-    N_("_Contents"),
-    "F1",
-    N_("_Contents"),
-    G_CALLBACK (help_action) }
-};
-
-static void show_tb_callback (void) {
+static void show_tb_callback (GSimpleAction *action, GVariant *param,
+                              gpointer data) {
   gboolean state;
 
-  state =
-    gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (show_toolbar_action));
+  state = g_variant_get_boolean (param);
 	
   gm_debug ("gc_show_toolbar: %d state: %d\n", gc_show_toolbar, state);
  
   g_settings_set_boolean (settings, "show-toolbar", state);
+  g_simple_action_set_state (action, param);
 }
 
 
-static const GtkToggleActionEntry toggle_actions[] = {
-  {"ShowToolbarAction", NULL, N_("_Show Toolbar"), NULL, N_("Show or hide the toolbar"),
-   G_CALLBACK (show_tb_callback)}
+/* Create a list of entries which are passed to the Action constructor.
+ * This is a huge convenience over building Actions by hand. */
+static GActionEntry entries[] =
+{
+	{ "new", new_game, NULL, NULL, NULL },
+	{ "undo", undo_action_cb, NULL, NULL, NULL },
+	{ "redo", redo_action_cb, NULL, NULL, NULL },
+	{ "quit", quit_action, NULL, NULL, NULL },
+	{ "show-toolbar", NULL, NULL, "true", show_tb_callback },
+	{ "prefs", preferences_action, NULL, NULL, NULL },
+	{ "help", help_action, NULL, NULL, NULL },
+	{ "about", about_action, NULL, NULL, NULL }
 };
 
 static guint n_entries = G_N_ELEMENTS (entries);
 
-/* Implement a handler for GtkUIManager's "add_widget" signal. The UI manager
- * will emit this signal whenever it needs you to place a new widget it has. */
 static void
-menu_add_widget (GtkUIManager *ui, GtkWidget *widget, GtkContainer *container)
-{
-  gtk_box_pack_start (GTK_BOX (container), widget, FALSE, FALSE, 0);
-  gtk_widget_show (widget);
-}
-
-int main ( int argc, char *argv[] )
+activate (GApplication *app)
 {
   int i;
 
   GtkWidget *gridframe;
-  GtkActionGroup *action_group; 
-  GtkUIManager *menu_manager; 
-  GtkAccelGroup *accel_group;
-  const gchar *debug_env = NULL;
+  GtkBuilder *builder;
 
-  bindtextdomain (GETTEXT_PACKAGE, GMLOCALEDIR);
-  bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-  textdomain (GETTEXT_PACKAGE); 
-
-  debug_env = g_getenv ("GM_DEBUG");
-  if (debug_env && !g_ascii_strcasecmp(debug_env, "yes")) {
-    gm_debug_on = TRUE; 
-    gm_debug("*** DEBUG MODE ON ***\n");
-  } else {
-    gm_debug_on = FALSE;
-  }
-
-  gtk_init (&argc, &argv);
- 
   gtk_window_set_default_icon_name("gnome-mastermind");
 	
-  window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+  window = gtk_application_window_new (GTK_APPLICATION (app));
   gtk_window_set_title(GTK_WINDOW(window), "GNOME Mastermind");
  
   g_signal_connect (G_OBJECT (window), "delete_event",
@@ -2104,51 +1977,30 @@ int main ( int argc, char *argv[] )
   g_signal_connect (G_OBJECT (window), "destroy",
 		    G_CALLBACK (destroy), NULL); 
 
-  vbox = gtk_vbox_new (FALSE, 0); 
-// gtk_box_set_homogeneous (GTK_BOX (vbox), FALSE);
-  action_group = gtk_action_group_new ("TestActions");
-  gtk_action_group_set_translation_domain (action_group, NULL);
-  menu_manager = gtk_ui_manager_new();
+  vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 
   gtk_container_add (GTK_CONTAINER (window), vbox);
-  gtk_action_group_add_actions (action_group, entries, n_entries, NULL);
-  gtk_action_group_add_toggle_actions (action_group, toggle_actions,
-				       G_N_ELEMENTS (toggle_actions), NULL);
-
-  gtk_ui_manager_insert_action_group (menu_manager, action_group, 0);
-
-  gtk_ui_manager_add_ui_from_file (menu_manager, PKGDATA_DIR "/ui/ui.xml", &error);
-
-  if (error)
-  {
-    g_message ("building menus failed: %s", error->message);
-    g_error_free (error);
-    error = NULL;
-  }
-  g_signal_connect 
-    ( 
-      menu_manager, 
-      "add_widget", 
-      G_CALLBACK (menu_add_widget), 
-      vbox
-      );
 
   init_gconf();
 
-  toolbar = gtk_ui_manager_get_widget (menu_manager, "/MainMenuBar");
+  builder = gtk_builder_new_from_resource ("/org/autistici/gnome-mastermind/ui.ui");
+  toolbar = GTK_WIDGET (gtk_builder_get_object (builder, "toolbar"));
+  gtk_box_pack_start (GTK_BOX (vbox), toolbar, FALSE, FALSE, 0);
+  g_object_unref (builder);
 
-  show_toolbar_action = gtk_action_group_get_action (action_group, "ShowToolbarAction");
-  gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (show_toolbar_action), gc_show_toolbar);
+  show_toolbar_action = g_action_map_lookup_action (G_ACTION_MAP (app),
+							  "show-toolbar");
+  g_simple_action_set_state (G_SIMPLE_ACTION (show_toolbar_action),
+				   g_variant_new_boolean (gc_show_toolbar));
 
-  undo_action = gtk_action_group_get_action (action_group, "UndoAction");
-  redo_action = gtk_action_group_get_action (action_group, "RedoAction");
-
-  accel_group = gtk_ui_manager_get_accel_group (menu_manager);
-  gtk_window_add_accel_group (GTK_WINDOW (window), accel_group);
+  new_action = g_action_map_lookup_action (G_ACTION_MAP (app), "new");
+  quit = g_action_map_lookup_action (G_ACTION_MAP (app), "quit");
+  undo_action = g_action_map_lookup_action (G_ACTION_MAP (app), "undo");
+  redo_action = g_action_map_lookup_action (G_ACTION_MAP (app), "redo");
 
   drawing_area = gtk_drawing_area_new();
 
-  g_signal_connect (G_OBJECT (drawing_area), "expose_event",
+  g_signal_connect (G_OBJECT (drawing_area), "draw",
 		    G_CALLBACK (expose_event), NULL);
   g_signal_connect (G_OBJECT (drawing_area), "configure_event",
 		    G_CALLBACK (configure_event), NULL);
@@ -2169,7 +2021,7 @@ int main ( int argc, char *argv[] )
   g_signal_connect (G_OBJECT (drawing_area), "motion-notify-event",
 		    G_CALLBACK (motion_event), NULL);
 
-  GTK_WIDGET_SET_FLAGS (drawing_area, GTK_CAN_FOCUS);
+  gtk_widget_set_can_focus (drawing_area, TRUE);
 
   gridframe = gtk_frame_new (NULL);
 
@@ -2191,7 +2043,6 @@ int main ( int argc, char *argv[] )
   gtk_container_add (GTK_CONTAINER (gridframe), drawing_area);
 
   status = gtk_statusbar_new();
-  gtk_statusbar_set_has_resize_grip (GTK_STATUSBAR (status), FALSE);
 
   gtk_box_pack_end (GTK_BOX (vbox), status, FALSE, FALSE, 0);
 
@@ -2209,14 +2060,59 @@ int main ( int argc, char *argv[] )
     gtk_widget_hide (toolbar);
     gtk_window_resize (GTK_WINDOW(window), 1, 1);
   }
-
-  gtk_about_dialog_set_url_hook (about_url_show, NULL, NULL);
-  gtk_about_dialog_set_email_hook (about_email_show, NULL, NULL);
  
   gtk_widget_grab_focus (drawing_area);
-
-  gtk_main();
-
-  return 0;
 }
 
+static void
+startup (GApplication *app)
+{
+  gint i;
+  const gchar *debug_env = NULL;
+  struct {
+    const gchar *action;
+    const gchar *accel[2];
+  } accels[] = {
+		{ "app.new", { "<Primary>n", NULL } },
+		{ "app.undo", { "<Primary>z", NULL } },
+		{ "app.redo", { "<Shift><Control>Z", NULL } },
+		{ "app.quit", { "<Primary>q", NULL } },
+		{ "app.prefs", { "<Primary>p", NULL } },
+		{ "app.help", { "F1", NULL } }
+  };
+
+  bindtextdomain (GETTEXT_PACKAGE, GMLOCALEDIR);
+  bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+  textdomain (GETTEXT_PACKAGE);
+
+  debug_env = g_getenv ("GM_DEBUG");
+  if (debug_env && !g_ascii_strcasecmp(debug_env, "yes")) {
+    gm_debug_on = TRUE;
+    gm_debug("*** DEBUG MODE ON ***\n");
+  } else {
+    gm_debug_on = FALSE;
+  }
+
+  g_action_map_add_action_entries (G_ACTION_MAP (app), entries,
+					 n_entries, app);
+
+  for (i = 0; i < G_N_ELEMENTS (accels); i++)
+    gtk_application_set_accels_for_action (GTK_APPLICATION (app),
+						       accels[i].action,
+						       accels[i].accel);
+}
+
+int main ( int argc, char *argv[] )
+{
+  GtkApplication *app;
+  int status;
+
+  app = gtk_application_new ("org.autistici.gnome-mastermind",
+				   G_APPLICATION_FLAGS_NONE);
+  g_signal_connect (app, "startup", G_CALLBACK (startup), NULL);
+  g_signal_connect (app, "activate", G_CALLBACK (activate), NULL);
+  status = g_application_run (G_APPLICATION (app), argc, argv);
+  g_object_unref (app);
+
+  return status;
+}

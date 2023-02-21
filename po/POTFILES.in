@@ -1,3 +1,5 @@
 src/gnome-mastermind.c
 desktop/gnome-mastermind.desktop.in
 [type: gettext/gsettings]org.autistici.gnome-mastermind.gschema.xml
+ui/menus.ui
+ui/ui.ui

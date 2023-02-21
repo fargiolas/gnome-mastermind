@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+GNOME Mastermind - Mastermind clone for GNOME
+Copyright (C) Yavor Doganov <yavor@gnu.org>
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+02110-1301, USA.
+-->
+<interface domain="gnome-mastermind">
+  <menu id="app-menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">_New Game</attribute>
+        <attribute name="action">app.new</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">_Undo Move</attribute>
+        <attribute name="action">app.undo</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Redo Move</attribute>
+        <attribute name="action">app.redo</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">_Quit</attribute>
+        <attribute name="action">app.quit</attribute>
+      </item>
+    </section>
+  </menu>
+  <menu id="menubar">
+    <submenu>
+      <attribute name="label" translatable="yes">_Settings</attribute>
+      <section>
+        <item>
+          <attribute name="label" translatable="yes">_Show Toolbar</attribute>
+          <attribute name="action">app.show-toolbar</attribute>
+        </item>
+        <item>
+          <attribute name="label" translatable="yes">_Preferences</attribute>
+          <attribute name="action">app.prefs</attribute>
+        </item>
+      </section>
+    </submenu>
+    <submenu>
+      <attribute name="label" translatable="yes">_Help</attribute>
+      <section>
+        <item>
+          <attribute name="label" translatable="yes">_Contents</attribute>
+          <attribute name="action">app.help</attribute>
+        </item>
+        <item>
+          <attribute name="label" translatable="yes">_About</attribute>
+          <attribute name="action">app.about</attribute>
+        </item>
+      </section>
+    </submenu>
+  </menu>
+</interface>
