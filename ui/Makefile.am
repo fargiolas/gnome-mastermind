@@ -1,5 +1,12 @@
-uidir = $(pkgdatadir)/ui
+RESOURCES = \
+	ui.gresource.xml \
+	menus.ui \
+	ui.ui
 
-ui_DATA = ui.xml
+all: resources.c
+resources.c: $(RESOURCES)
+	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --generate $<
 
-EXTRA_DIST = $(ui_DATA)
+CLEANFILES = resources.c
+
+EXTRA_DIST = $(RESOURCES)

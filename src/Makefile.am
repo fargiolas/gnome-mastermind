@@ -14,3 +14,5 @@ gnome_mastermind_CFLAGS = \
 gnome_mastermind_SOURCES = \
 	gnome-mastermind.h \
 	gnome-mastermind.c 
+
+nodist_gnome_mastermind_SOURCES = $(top_srcdir)/ui/resources.c
