@@ -6,7 +6,7 @@ AC_CANONICAL_BUILD
 AC_CANONICAL_HOST
 AC_CANONICAL_TARGET
 
-AM_INIT_AUTOMAKE([1.8])
+AM_INIT_AUTOMAKE([subdir-objects])
 
 AM_CONFIG_HEADER([config.h])
 
@@ -40,8 +40,9 @@ dnl pkg-config
 PKG_PROG_PKG_CONFIG
 
 dnl GTK
-PKG_CHECK_MODULES([GTK], [gtk+-2.0 >= 2.8.0])
+PKG_CHECK_MODULES([GTK], [gtk+-3.0 >= 3.21.4])
 
+AM_PATH_GLIB_2_0
 GLIB_GSETTINGS
 
 GM_DEFINES='-DDATA_DIR="\"$(datadir)\"" -DPKGDATA_DIR="\"$(pkgdatadir)\""'
