@@ -1,18 +1,15 @@
 # First off
-include $(top_srcdir)/gnome-doc-utils.make
-dist-hook: doc-dist-hook
 #
 # # The basename of the docbook file.  Generally, you want it to be the same 
 # # as your app name 
-DOC_MODULE = gnome-mastermind
+HELP_ID = gnome-mastermind
 # #Any entities you use (?)
-DOC_ENTITIES = legal.xml
+HELP_FILES = gnome-mastermind.xml legal.xml index.docbook
 # # If your file is split into different files, list all the files that
 # # are included here.  Paths are relative to the C/ subdir
-DOC_INCLUDES = legal.xml
 #
 # # List of figures to include.  Paths are relative to the C/ subdir
-DOC_FIGURES = \
+HELP_MEDIA = \
               figures/mainwindow.png \
 	      figures/row1.png \
 	      figures/row2.png \
@@ -20,4 +17,5 @@ DOC_FIGURES = \
 	      figures/row4.png \
 	      figures/row5.png
 
-DOC_LINGUAS = de fr it id
+HELP_LINGUAS = de fr it id
+@YELP_HELP_RULES@

@@ -1665,21 +1665,16 @@ static void destroy (GtkWidget *widget, gpointer data) {
 }
 
 static void help_action (void) {
-#ifndef G_OS_WIN32
-  gchar   *argv[] = { "yelp",
-		      "ghelp:gnome-mastermind",
-		      NULL };
   GError *error = NULL;
 
-  g_spawn_async (NULL, argv, NULL, G_SPAWN_SEARCH_PATH,
-		 NULL, NULL, NULL, &error);
+  gtk_show_uri (NULL, "help:gnome-mastermind",
+		        gtk_get_current_event_time (), &error);
   if (error) 
   {
     g_message ("Error while launching yelp %s", error->message);
     g_error_free (error);
     error = NULL;
   }
-#endif
 }
 
 void about_url_show (GtkAboutDialog *about,
