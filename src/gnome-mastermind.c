@@ -1759,7 +1759,6 @@ static void fgcolorbutton_set (GtkColorButton *widget, gpointer data) {
 
 static void bgcolorbutton_set (GtkColorButton *widget, gpointer data) {
   GdkRGBA color;
-  GdkColor color;
   gchar *color_string;
  
   gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER (widget), &color);
