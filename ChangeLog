@@ -1,4 +1,200 @@
-2009-04-21  Filippo Argiolas <filippo.argiolas@gmail.com>
+2023-02-27  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* everything: first release since almost 15 years! Apparently
+	there were some important changes in Debian that were never
+	upstreamed. At some point (2018?) they actually tried to contact
+	me but as always life got in the way.
+	Now we finally managed to coordinate with the new maintainer Josef
+	Schneider, move everything to GitHub and import all the patches
+	upstream.
 
-	* *: The ChangeLog is auto-generated when releasing. If you
-	are seeing this, use 'git log' for a detailed list of changes.
+	Among the big changes from Yavor Doganov <yavor@gnu.org>:
+	- Migrate docs from gnome-doc to yelp
+	- Migrate from gconf to gsettings
+	- Port to GTK3 (yay!!!)
+
+	Thanks a lot to Josef Schneider <josef81sch@gmail.com> for his
+	amazing effort to upstream everything!
+
+2008-08-07  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* aclocal.m4,
+	  config.status.lineno,
+	  help/Makefile.in:
+	  remove unneeded files from vc
+
+2008-08-07  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* MAINTAINERS:
+	  first revision in gnome svn, adding MAINTAINERS file
+
+26 Apr 2008  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* src/gnome-mastermind.c: so much time without a commit eh?
+	Fixed a annoying bug that affected grid drawing with recent cairo
+	versions (>= 1.5.8 ?). Note that old cairo versions were affected by
+	some issue when rendering with ANTIALIAS_NONE. So gnome-mastermind
+	will appear a little different with those ones (pegs will be placed
+	half-pixel uncentered to the right). AFAICT it is not my fault and I
+	couldn't find a way to fix this with both new and old cairo versions.
+	So consider switching to new cairo since this was a cairo issue and
+	cairo devs already fixed it in 1.5.8
+	I'll will not raise cairo dependency to that version since the game
+	is pretty usable even with that small issue.
+	* configure.ac: 0.3.1 bugfix release
+
+30 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* themes/fruit.svg: Added new fruity tileset from Sean Wilson. Best
+	viewed at big size, it can be seen even by color-blind people since
+	each fruit has a different shape.
+	* src/gnome-mastermind.c: fixed resizing when showing/hiding toolbar.
+
+29 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* themes/shapes.svg: Added new shape based tileset for color-blind
+	people.
+
+23 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* src/gnome-mastermind.c: fixed window resizing when changing
+	max_tries. Fixed Undo sensitiveness when starting a new game.
+	Added SSHOT define to obtain a finished game to include screenshots
+	for docbook help.
+	* help/C/figures: Updated screenshots with new features and new
+	simple.svg theme
+
+20 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* src/gnome-mastermind.c: don't start d-n-d if no color has been
+	selected!
+	Simple key bindings, GDK_1 places first ball, GDK_2 second and so on..
+
+16 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* themes/*: restyling of simple and simple-glossy themes.
+	* icons/Makefile.am: added gtk-update-icon-cache as uninstall-hook.
+	* src/gnome-mastermind.c: now the tray rectangle keeps the same aspect
+	ratio when resizing instead of growing to window width. Fixed a
+	graphic bug caused by an integer division supposed to return a double.
+	Hide toolbar now makes the window shrink.
+
+15 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* src/gnome-mastermind.c: Added some variations on simple tileset.
+	Updated score pegs on simple tileset series.
+	Added updated shiny icons from Ulisse Perusin.
+	Size request bug fix.
+
+14 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* src/gnome-masterminc.c: Made everything resizeable keeping grid
+	aspect ratio. Removed all those gdk_invalidate_rect with NULL
+	rectangle that were slowing everything down at big sizes.
+	* themes/simple.svg: Replaced the tileset based on media-record.svg
+	from tango-icon-theme and made a new similar but quite different gpl
+	one. (There was an incompatibility between cc-by-sa license of
+	media-record.svg and gpl).
+	* themes/star.svg: Updated metadata.
+	* copyright-artwork: Removed disclaimer for simple.svg since now is
+	gpl and compatible with the game licensing.
+
+12 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* src/gnome-mastermind.c: Fixed a bug causing the code validated being
+	different from the displayed one after undos. Added Redo last move
+	feature (still testing but seems to work).
+	Fixed little bug causing drawing errors if show_toolbar unset. 
+
+11 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* src/gnome-mastermind.c: Added Undo last move feature (still needs
+	some deep testing)
+
+10 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* src/gnome-mastermind.c: Removed Apply button from preferences and
+	apply settings on quit. Changed yes and no buttons on lose and win
+	dialogs to "Quit" and "Play again". Added double click to quickly
+	place pegs.
+
+09 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* src/gnome-mastermind.c:
+	Removed gtk drawing area for the tray and moved everything in the main
+	drawing area drawing stuff. Moved redraw current game calls to
+	configure_event. Added button release and button motion sensitivity.
+	Implemented a first draft of drag and drop :D. Replaced colored
+	selection square with a cleaner zoom effect. Removed a ugly hack using
+	taking color from a gdkimage pixel to clean cell when placing balls.
+
+06 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* configure.ac: switch to 0.3
+	* po/: Added more translations 
+	* themes/tango2.svg: Added new shiny tango-ish tileset. (Thanks again
+	to Ulisse Perusin)
+
+05 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* all: 0.2 release
+
+02 May 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* po/: Added more translations 
+
+28 Apr 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* src/gnome-mastermind.c: added email and url hook for about dialog,
+	at the moment i don't want to rely on libgnome or gnome_vfs so I'm
+	looking in the path for xdg-open or gnome-open and some other
+	fallback.
+
+27 Apr 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* src/gnome-mastermind.c: fixed little bug that caused printing a
+	wrong number of tries taken to guess the code.
+
+26 Apr 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* help/: added french and italian translations
+
+25 Apr 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* src/gnome-mastermind.c: rewritten a bit button press callbacks to
+	not clean next row if the game is won or over.
+	Moved part of redundant code from tray_mid_click and
+	button_press_event to checkscores().
+	* configure.ac: Added fr to ALL_LINGUAS
+
+24 Apr 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* src/gnome-mastermind.c: Added the code to replace a color peg
+	already placed with a new one. Obviously when 4 pegs are placed
+	there's no more chance to change pattern.
+	* configure.ac: Added pl to ALL_LINGUAS
+
+23 Apr 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* src/gnome-mastermind.c: Changed theme image format to 320x40 (8 pegs
+	of 40x40 and 2 of 20x20)
+	* themes/: Added new tileset tango.svg from Ulisse Perusin (thanks!);
+	Removed old style themes and replaced them with new versions following
+	the previous described format.
+	* autogen.sh: moved gnome autogen.sh
+	* help/Makefile.am: fixed everything to have a proper distcheck
+	* help: fixed xml files to pass make check and fixed omf file name
+	typo to work with gnome-doc-utils and scrollkeeper. Maybe fixed
+	something else i don't remember (thanks ebassi for your hints on irc)
+	* desktop/Makefile.am: fixed everything to have a proper distcheck
+
+22 Apr 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* help/: Added a manual to use with yelp system. Using gnome-doc-utils
+	to do the installing and scrollkeeper stuff.
+	* src/gnome-mastermind.c: Restored previous colors because i liked
+	them much.
+
+21 Apr 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* src/gnome-mastermind.c: Use less bright color to better fit current
+	gtk theme.
+	* src/gnome-mastermind.c: Rewrite of "show_toolbar" stuff to make it
+	persistent. Added new gconf entry to store toolbar status.
+
+20 Apr 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* icons/ and subdirs: Thanks to Ulisse Perusin now gnome-mastermind
+	has a beautiful icon :D
+	* desktop/: Now that we have an icon we can also ship desktop files :D
+	* po/: Added stuff to translate .desktop item comments.
+	* src/gnome-mastermind.c: added icon to about dialog and application
+	default icon. Updated "artwork" section of about dialog.
+
+19 Apr 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* configure.ac: Version set to 0.2 to not conflict with previous
+	release when testing svn checkouts.
+	* src/gnome-mastermind.c: Added #else fall back to disable i18n if
+	ENABLE_NLS is not set, so building will not fail even if intltool is
+	not found.
+	* po/Changelog
+	* po/pl.po: Added Polish translation
+
+18 Apr 2007  Filippo Argiolas <filippo.argiolas@gmail.com>
+	
+	* Everything: First public release 0.1
