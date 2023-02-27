@@ -152,7 +152,7 @@ msgstr "Preferenze"
 
 #: ../src/gnome-mastermind.c:1800
 msgid "_Close"
-msgstr ""
+msgstr "_Chiudi"
 
 #: ../src/gnome-mastermind.c:1812
 msgid "<b>Tileset theme</b>"
@@ -199,35 +199,32 @@ msgid "mastermind;code-break;guess;"
 msgstr ""
 
 #: ../org.fargiolas.gnome-mastermind.gschema.xml.h:1
-#, fuzzy
 msgid "Background color"
-msgstr "Colore dello sfondo:"
+msgstr "Colore dello sfondo"
 
 #: ../org.fargiolas.gnome-mastermind.gschema.xml.h:2
-#, fuzzy
 msgid "Foreground color"
-msgstr "Colore dei bordi:"
+msgstr "Colore dei bordi"
 
 #: ../org.fargiolas.gnome-mastermind.gschema.xml.h:3
-#, fuzzy
 msgid "Obtain colors from the GTK+ theme"
 msgstr "Prova a usare i colori del tema di sistema"
 
 #: ../org.fargiolas.gnome-mastermind.gschema.xml.h:4
 msgid "Number of tries to guess until the end of the game"
-msgstr ""
+msgstr "Numero di tentativi a disposizione per scovare la combinazione"
 
 #: ../org.fargiolas.gnome-mastermind.gschema.xml.h:5
 msgid "Determines the number of rows in the game window."
-msgstr ""
+msgstr "Imposta il numero di righe a disposizione nella griglia di gioco"
 
 #: ../org.fargiolas.gnome-mastermind.gschema.xml.h:6
 msgid "Toolbar visibility"
-msgstr ""
+msgstr "Mostra o nasconde la barra degli strumenti"
 
 #: ../org.fargiolas.gnome-mastermind.gschema.xml.h:7
 msgid "Theme to use"
-msgstr ""
+msgstr "Tema di colori"
 
 #: ../ui/menus.ui.h:1
 msgid "_New game"
@@ -270,16 +267,14 @@ msgid "Start a new game"
 msgstr "Inizia un nuovo gioco"
 
 #: ../ui/ui.ui.h:2
-#, fuzzy
 msgid "New game"
-msgstr "_Nuovo gioco"
+msgstr "Nuovo gioco"
 
 #: ../ui/ui.ui.h:3
 msgid "Undo last move"
 msgstr "Annulla l'ultima mossa"
 
 #: ../ui/ui.ui.h:4
-#, fuzzy
 msgid "Undo Move"
 msgstr "Annulla Mossa"
 
@@ -288,7 +283,6 @@ msgid "Redo last move"
 msgstr "Ripeti l'ultima mossa annullata"
 
 #: ../ui/ui.ui.h:6
-#, fuzzy
 msgid "Redo Move"
 msgstr "Ripeti Mossa"
 
