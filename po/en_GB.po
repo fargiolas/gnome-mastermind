@@ -6,16 +6,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-mastermind\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-29 14:44+0200\n"
+"POT-Creation-Date: 2023-02-27 18:30+0100\n"
 "PO-Revision-Date: 2007-05-29 06:50-0000\n"
 "Last-Translator: David Lodge <dave@cirt.net>\n"
 "Language-Team: en_GB <en@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../src/gnome-mastermind.c:186
+#: ../src/gnome-mastermind.c:160
 msgid ""
 "<span size=\"medium\" weight=\"bold\">Settings have changed!</span>\n"
 "\n"
@@ -31,7 +32,7 @@ msgstr ""
 "\n"
 "Start a new game?"
 
-#: ../src/gnome-mastermind.c:221 ../src/gnome-mastermind.c:303
+#: ../src/gnome-mastermind.c:195 ../src/gnome-mastermind.c:279
 #, c-format
 msgid ""
 "<span size=\"medium\" weight=\"bold\">Unable to load theme!</span>\n"
@@ -46,11 +47,11 @@ msgstr ""
 "\n"
 "The default theme will be loaded instead."
 
-#: ../src/gnome-mastermind.c:733
+#: ../src/gnome-mastermind.c:717
 msgid "Ready for a new game!"
 msgstr "Ready for a new game!"
 
-#: ../src/gnome-mastermind.c:797
+#: ../src/gnome-mastermind.c:784
 #, c-format
 msgid ""
 "<span size=\"large\" weight=\"bold\">Great!!!</span>\n"
@@ -69,11 +70,16 @@ msgstr[1] ""
 "You found the solution with <b>%d</b> tries!\n"
 "Do you want to play again?"
 
-#: ../src/gnome-mastermind.c:805 ../src/gnome-mastermind.c:841
+#: ../src/gnome-mastermind.c:791 ../src/gnome-mastermind.c:825
+#: ../ui/menus.ui.h:4
+msgid "_Quit"
+msgstr "_Quit"
+
+#: ../src/gnome-mastermind.c:792 ../src/gnome-mastermind.c:826
 msgid "Play Again"
 msgstr "Play Again"
 
-#: ../src/gnome-mastermind.c:832
+#: ../src/gnome-mastermind.c:817
 #, c-format
 msgid ""
 "<span size=\"large\" weight=\"bold\">I'm sorry, you lose!</span>\n"
@@ -92,7 +98,7 @@ msgstr[1] ""
 "With just <b>%d</b> tries you haven't found the solution yet?!\n"
 "Do you want to play again?"
 
-#: ../src/gnome-mastermind.c:845
+#: ../src/gnome-mastermind.c:829
 msgid "This was the right solution:"
 msgstr "This was the right solution:"
 
@@ -102,156 +108,201 @@ msgstr "This was the right solution:"
 #. *  game similar to mastermind. I've leaved it untranslated in
 #. *  italian. Translate it if you want or leave it untranslated
 #. *  or feel free to ask my opinion
-#: ../src/gnome-mastermind.c:1044
+#: ../src/gnome-mastermind.c:1034
 #, c-format
 msgid "%d bull, "
 msgid_plural "%d bulls, "
 msgstr[0] "%d bull, "
 msgstr[1] "%d bulls, "
 
-#: ../src/gnome-mastermind.c:1045
+#: ../src/gnome-mastermind.c:1035
 #, c-format
 msgid "%d cow!"
 msgid_plural "%d cows!"
 msgstr[0] "%d cow!"
 msgstr[1] "%d cows!"
 
-#: ../src/gnome-mastermind.c:1432 ../src/gnome-mastermind.c:1504
-#: ../src/gnome-mastermind.c:1613 ../src/gnome-mastermind.c:2235
+#: ../src/gnome-mastermind.c:1425 ../src/gnome-mastermind.c:1497
+#: ../src/gnome-mastermind.c:1607 ../src/gnome-mastermind.c:2061
 msgid "Select a color!"
 msgstr "Select a colour!"
 
-#: ../src/gnome-mastermind.c:1444 ../src/gnome-mastermind.c:1516
+#: ../src/gnome-mastermind.c:1437 ../src/gnome-mastermind.c:1509
 msgid "Select a valid place!"
 msgstr "Select a valid place!"
 
 #. Note for translators: Replace this
 #. * string with your name and email
 #. * address
-#: ../src/gnome-mastermind.c:1755
+#: ../src/gnome-mastermind.c:1679
 msgid "Filippo Argiolas <filippo.argiolas@gmail.com>"
 msgstr "David Lodge <dave@cirt.net>"
 
-#: ../src/gnome-mastermind.c:1756
+#: ../src/gnome-mastermind.c:1680
 msgid "A Mastermind clone for gnome"
 msgstr "A Mastermind clone for gnome"
 
 #. GtkWidget *hbox;
-#: ../src/gnome-mastermind.c:1870
+#: ../src/gnome-mastermind.c:1797
 msgid "Preferences"
 msgstr "Preferences"
 
-#: ../src/gnome-mastermind.c:1887
+#: ../src/gnome-mastermind.c:1800
+msgid "_Close"
+msgstr ""
+
+#: ../src/gnome-mastermind.c:1812
 msgid "<b>Tileset theme</b>"
 msgstr "<b>Tileset theme</b>"
 
-#: ../src/gnome-mastermind.c:1899
+#: ../src/gnome-mastermind.c:1824
 msgid "Theme:"
 msgstr "Theme:"
 
-#: ../src/gnome-mastermind.c:1922
+#: ../src/gnome-mastermind.c:1843
 msgid "<b>Color settings</b>"
 msgstr "<b>Colour settings</b>"
 
-#: ../src/gnome-mastermind.c:1934
+#: ../src/gnome-mastermind.c:1852
 msgid "Foreground Color:"
 msgstr "Foreground Colour:"
 
-#: ../src/gnome-mastermind.c:1946
+#: ../src/gnome-mastermind.c:1863
 msgid "Background Color:"
 msgstr "Background Colour:"
 
-#: ../src/gnome-mastermind.c:1958
+#: ../src/gnome-mastermind.c:1874
 msgid "Try to get colors from system theme"
 msgstr "Try to get colours from system theme"
 
-#: ../src/gnome-mastermind.c:1985
+#: ../src/gnome-mastermind.c:1902
 msgid "<b>Game settings</b>"
 msgstr "<b>Game settings</b>"
 
-#: ../src/gnome-mastermind.c:1997
+#: ../src/gnome-mastermind.c:1914
 msgid "Maximum number of tries allowed:"
 msgstr "Maximum number of tries allowed:"
 
-#: ../src/gnome-mastermind.c:2036
-msgid "_Game"
-msgstr "_Game"
-
-#: ../src/gnome-mastermind.c:2040
-msgid "_New game"
-msgstr "_New game"
-
-#: ../src/gnome-mastermind.c:2041
-msgid "Start a new game"
-msgstr "Start a new game"
-
-#: ../src/gnome-mastermind.c:2045
-msgid "_Undo Move"
-msgstr "_Undo Move"
-
-#: ../src/gnome-mastermind.c:2046
-msgid "Undo last move"
-msgstr "Undo last move"
-
-#: ../src/gnome-mastermind.c:2050
-msgid "_Redo Move"
-msgstr "_Redo Move"
-
-#: ../src/gnome-mastermind.c:2051
-msgid "Redo last move"
-msgstr "Redo last move"
-
-#: ../src/gnome-mastermind.c:2055
-msgid "_Quit"
-msgstr "_Quit"
-
-#: ../src/gnome-mastermind.c:2056
-msgid "Quit the game"
-msgstr "Quit the game"
-
-#: ../src/gnome-mastermind.c:2059
-msgid "_Settings"
-msgstr "_Settings"
-
-#: ../src/gnome-mastermind.c:2062
-msgid "_Preferences"
-msgstr "_Preferences"
-
-#: ../src/gnome-mastermind.c:2063
-msgid "Change game settings"
-msgstr "Change game settings"
-
-#: ../src/gnome-mastermind.c:2066
-msgid "_Help"
-msgstr "_Help"
-
-#: ../src/gnome-mastermind.c:2069
-msgid "_About"
-msgstr "_About"
-
-#: ../src/gnome-mastermind.c:2071
-msgid "About"
-msgstr "About"
-
-#: ../src/gnome-mastermind.c:2075 ../src/gnome-mastermind.c:2077
-msgid "_Contents"
-msgstr "_Contents"
-
-#: ../src/gnome-mastermind.c:2094
-msgid "_Show Toolbar"
-msgstr "_Show Toolbar"
-
-#: ../src/gnome-mastermind.c:2094
-msgid "Show or hide the toolbar"
-msgstr "Show or hide the toolbar"
-
 #: ../desktop/gnome-mastermind.desktop.in.h:1
+msgid "Mastermind"
+msgstr "Mastermind"
+
+#: ../desktop/gnome-mastermind.desktop.in.h:2
 msgid "Break the hidden code!"
 msgstr "Break the hidden code!"
 
-#: ../desktop/gnome-mastermind.desktop.in.h:2
-msgid "Mastermind"
-msgstr "Mastermind"
+#: ../desktop/gnome-mastermind.desktop.in.h:3
+msgid "mastermind;code-break;guess;"
+msgstr ""
+
+#: ../org.fargiolas.gnome-mastermind.gschema.xml.h:1
+#, fuzzy
+msgid "Background color"
+msgstr "Background Colour:"
+
+#: ../org.fargiolas.gnome-mastermind.gschema.xml.h:2
+#, fuzzy
+msgid "Foreground color"
+msgstr "Foreground Colour:"
+
+#: ../org.fargiolas.gnome-mastermind.gschema.xml.h:3
+#, fuzzy
+msgid "Obtain colors from the GTK+ theme"
+msgstr "Try to get colours from system theme"
+
+#: ../org.fargiolas.gnome-mastermind.gschema.xml.h:4
+msgid "Number of tries to guess until the end of the game"
+msgstr ""
+
+#: ../org.fargiolas.gnome-mastermind.gschema.xml.h:5
+msgid "Determines the number of rows in the game window."
+msgstr ""
+
+#: ../org.fargiolas.gnome-mastermind.gschema.xml.h:6
+msgid "Toolbar visibility"
+msgstr ""
+
+#: ../org.fargiolas.gnome-mastermind.gschema.xml.h:7
+msgid "Theme to use"
+msgstr ""
+
+#: ../ui/menus.ui.h:1
+msgid "_New game"
+msgstr "_New game"
+
+#: ../ui/menus.ui.h:2
+msgid "_Undo Move"
+msgstr "_Undo Move"
+
+#: ../ui/menus.ui.h:3
+msgid "_Redo Move"
+msgstr "_Redo Move"
+
+#: ../ui/menus.ui.h:5
+msgid "_Settings"
+msgstr "_Settings"
+
+#: ../ui/menus.ui.h:6
+msgid "_Show Toolbar"
+msgstr "_Show Toolbar"
+
+#: ../ui/menus.ui.h:7
+msgid "_Preferences"
+msgstr "_Preferences"
+
+#: ../ui/menus.ui.h:8
+msgid "_Help"
+msgstr "_Help"
+
+#: ../ui/menus.ui.h:9
+msgid "_Contents"
+msgstr "_Contents"
+
+#: ../ui/menus.ui.h:10
+msgid "_About"
+msgstr "_About"
+
+#: ../ui/ui.ui.h:1
+msgid "Start a new game"
+msgstr "Start a new game"
+
+#: ../ui/ui.ui.h:2
+#, fuzzy
+msgid "New game"
+msgstr "_New game"
+
+#: ../ui/ui.ui.h:3
+msgid "Undo last move"
+msgstr "Undo last move"
+
+#: ../ui/ui.ui.h:4
+#, fuzzy
+msgid "Undo Move"
+msgstr "_Undo Move"
+
+#: ../ui/ui.ui.h:5
+msgid "Redo last move"
+msgstr "Redo last move"
+
+#: ../ui/ui.ui.h:6
+#, fuzzy
+msgid "Redo Move"
+msgstr "_Redo Move"
+
+#~ msgid "_Game"
+#~ msgstr "_Game"
+
+#~ msgid "Quit the game"
+#~ msgstr "Quit the game"
+
+#~ msgid "Change game settings"
+#~ msgstr "Change game settings"
+
+#~ msgid "About"
+#~ msgstr "About"
+
+#~ msgid "Show or hide the toolbar"
+#~ msgstr "Show or hide the toolbar"
 
 #~ msgid "Play again"
 #~ msgstr "Play again"
