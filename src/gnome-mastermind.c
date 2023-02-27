@@ -2,7 +2,7 @@
  * GNOME Mastermind
  *
  * Authors:
- *  Filippo Argiolas <filippo.argiolas@gmail.com>  (2008)
+ *  Filippo Argiolas <filippo.argiolas@gmail.com>  (2008-2023)
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -1665,8 +1665,8 @@ static void about_action (GSimpleAction *action,
     "Filippo Argiolas <filippo.argiolas@gmail.com>, me ;)",
     "Ulisse Perusin <uli.peru@gmail.com>, for that beautiful icon and tango sets!", "Sean Wilson <suseux@gmail.com>, for the new fruity tileset","and..",
     "..some other people for their hints and suggestions",
-    "Isabella Piredda, grazie amore mio!",
-    "Enrica Argiolas, my lil sister and beta tester", NULL };
+    "Isa, grazie amore mio!",
+    "Kikka, my lil sister and beta tester", NULL };
 
 
   gtk_show_about_dialog (GTK_WINDOW (window),
@@ -1678,11 +1678,11 @@ static void about_action (GSimpleAction *action,
                           * address */
                          "translator-credits", _("Filippo Argiolas <filippo.argiolas@gmail.com>"),
                          "comments", _("A Mastermind clone for gnome"),
-                         "copyright", "gnome-mastermind, copyright (c) 2008 Filippo Argiolas\n"
+                         "copyright", "gnome-mastermind, copyright (c) 2008-2023 Filippo Argiolas\n"
                          "mastermind, copyright (c) 1971 Invicta Plastics, Ltd. UK",
                          "version", VERSION,
                          "logo-icon-name", "gnome-mastermind",
-                         "website", "http://www.autistici.org/gnome-mastermind/",
+                         "website", "https://github.com/fargiolas/gnome-mastermind",
                          NULL);
 }
 
