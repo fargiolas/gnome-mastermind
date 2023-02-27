@@ -124,7 +124,7 @@ GdkRGBA bgcolor;
 
 GSettings *settings;
 
-GtkWidget *pref_dialog;
+GtkWidget *pref_dialog = NULL;
 
 GtkWidget *fg_colorbutton = NULL;
 GtkWidget *bg_colorbutton = NULL;
@@ -657,7 +657,8 @@ gboolean start_new_gameboard (GtkWidget *widget) {
     gdk_rgba_parse (&bgcolor, gc_bgcolor);
     gdk_rgba_parse (&fgcolor, gc_fgcolor);
   }
-  if (GTK_IS_WIDGET (pref_dialog)) {
+
+  if (pref_dialog) {
     gtk_color_chooser_set_rgba (GTK_COLOR_CHOOSER (fg_colorbutton), &fgcolor);
     gtk_color_chooser_set_rgba (GTK_COLOR_CHOOSER (bg_colorbutton), &bgcolor);
   }
@@ -1937,6 +1938,7 @@ static void preferences_action (GSimpleAction *action,
 */ 
 
   gtk_widget_destroy (pref_dialog);
+  pref_dialog = NULL;
 }
 
 static void show_tb_callback (GSimpleAction *action, GVariant *param,
