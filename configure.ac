@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT([gnome-mastermind], [0.3.1])
+AC_INIT([gnome-mastermind], [0.4.0])
 AC_PREREQ([2.5])
 AC_CANONICAL_BUILD
 AC_CANONICAL_HOST
