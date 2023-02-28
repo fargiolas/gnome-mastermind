@@ -19,9 +19,8 @@ EXTRA_DIST = \
 DISTCLEANFILES = \
 	         intltool-extract \
 	         intltool-merge \
-	         intltool-update
-
-DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper
+	         intltool-update \
+		 po/.intltool-merge-cache.lock
 
 doc_DATA = TODO
 

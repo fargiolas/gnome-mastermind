@@ -3,9 +3,9 @@ RESOURCES = \
 	menus.ui \
 	ui.ui
 
-all: resources.c
+all-local: resources.c
 resources.c: $(RESOURCES)
-	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --generate $<
+	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --sourcedir=$(srcdir) --target=$@ --generate $<
 
 CLEANFILES = resources.c
 
